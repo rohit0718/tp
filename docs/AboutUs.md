@@ -32,3 +32,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/rohit0718)]
 
 * Role: Documentation
+
+### TAN JUN RONG, BENJAMIN
+
+<img src="images/bentanjunrong.png" width="200px">
+
+[[github](https://github.com/bentanjunrong)]
+
+* Role: Code Quality
