@@ -254,75 +254,254 @@ _{Explain here how the data archiving feature will be implemented}_
 ## **Appendix: Requirements**
 
 ### Product scope
+**Target user profile:**
 
-**Target user profile**:
-
-* has a need to manage a significant number of contacts
+* has a need to manage modules and lessons related to the modules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage modules faster NUSMods
 
 ### User stories
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+| Priority | As a...     | I want to...                        | So that I can                                          |
+| -------- | ----------- | ----------------------------------- | ------------------------------------------------------ |
+| `***`    | new user    | see usage instructions              | refer to instructions when I forget how to use the App |
+| `***`    | NUS student | add modules to a module list            | keep track of my daily schedule                        |
+| `***`    | NUS student | edit my modules             | update changes in my curriculum plan                   |
+| `***`    | NUS student | delete modules  | update any withdrawal from modules  |
+| `***`    | NUS student | see a list of my modules | have an overview of all my schoolwork |
+| `***`    | NUS student | add lessons to a lesson list | keep track of my lesson schedule   |
+| `***`    | NUS student | edit my lessons             | update changes in the lesson schedule                   |
+| `***`    | NUS student | delete my lessons             | update if any lessons are cancelled                |
+| `***`    | NUS student | see a list of upcoming lessons      | plan my week ahead                                     |
+| `***`    | NUS student | add examinations to a examination list | keep track of my examination schedule   |
+| `***`    | NUS student | edit my examinations  | update any changes in the examinations  |
+| `***`    | NUS student | delete my examinations | update if any examinations are cancelled   |
+| `***`    | NUS student | see a list of upcoming examinations | plan my revision nearing the examination period        |
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ModBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a module**
 
 **MSS**
+1. User types in code and name of module
+2. ModBook adds that module into the list
+3. ModBook displays the added module
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1
 
-* 2a. The list is empty.
+**Use case: Add a lesson**  
 
-  Use case ends.
+**MSS**
+1. User types in module code, day of week, start time, end time, and optionally link and venue details
+2. ModBook adds the lesson to the specified module
+3. ModBook displays the added lesson
 
-* 3a. The given index is invalid.
+Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
 
-      Use case resumes at step 2.
+**Use case: Add an exam**  
 
-*{More to be added}*
+**MSS**  
+1. User types in exam code, name, time and optionally link and venue
+2. ModBook adds the exam to the specified module
+3. ModBook displays the added exam
+
+Use case ends.
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+**Use case: List all modules**  
+
+**MSS**
+1. User requests to see a list of all modules
+2. ModBook displays a list of all modules
+
+Use case ends.
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+**Use case: List all lessons across modules**  
+
+**MSS**
+1. User requests to see a list of all lessons
+2. ModBook displays a list of all lessons, sorted by Day and Time
+
+Use case ends.
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+**Use case: List all exams across modules**
+
+**MSS**
+1. User requests to see a list of all exams
+2. ModBook displays a list of all exams, sorted by Date and Time
+
+Use case ends.
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+**Use case: List lessons and exams for one module**  
+
+**MSS**
+1. User requests to see list of all lessons and exams of the specified module
+2. ModBook displays a list of all Exams and Lessons of the specified module
+
+Use case ends.
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1
+
+**Use case: Delete a module**  
+
+**MSS**
+1. User requests to delete a module
+2. ModBook deletes the module and returns success
+
+Use case ends.
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+**Use case: Delete a lesson**  
+
+**MSS**
+1. User requests to delete a lesson
+2. ModBook deletes the module and returns success
+
+Use case ends.
+
+**Use case: Delete an exam**  
+
+**MSS**
+1. User requests to delete an exam associated with a module
+2. ModBook deletes the module and returns success
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+Use case ends.
+
+**Use case: Edit a module**  
+
+**MSS**
+1. User requests to edit a module
+2. ModBook edits the module at the specified index
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+Use case ends.
+
+**Use case: Edit a lesson**
+
+**MSS**
+1. User requests to edit a lesson
+2. Modbook edits the lesson and returns success message
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+Use case ends.
+
+**Use case: Edit an exam**  
+
+**MSS**
+1. User requests to edit an exam
+2. ModBook edits the exam and returns success message
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+Use case ends.
+
+**Use case: Display help**  
+
+**MSS**
+1. User requests for help
+2. ModBook presents a link to a help page
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+Use case ends.
+
+**Use case: Clear all modules**  
+
+**MSS**
+1. User requests to clear all modules
+2. ModBook clears all modules
+
+**Extensions**  
+1a. User types in a wrong parameter  
+&nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
+&nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1  
+
+Use case ends.
 
 ### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any *mainstream OS* as long as it has **`Java 11`** or above installed.
+1. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
