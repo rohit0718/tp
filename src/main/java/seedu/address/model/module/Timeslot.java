@@ -8,8 +8,10 @@ import java.time.LocalTime;
  */
 public class Timeslot implements Comparable<Timeslot> {
 
-    public final LocalTime startTime;
-    public final LocalTime endTime;
+    public static final String MESSAGE_CONSTRAINTS =
+            "Start time should be before end time";
+    public final ModBookTime startTime;
+    public final ModBookTime endTime;
 
     /**
      * Constructs a {@code Timeslot}
@@ -17,7 +19,7 @@ public class Timeslot implements Comparable<Timeslot> {
      * @param startTime the starting time of the timeslot
      * @param endTime the ending time of the timeslot
      */
-    public Timeslot(LocalTime startTime, LocalTime endTime) {
+    public Timeslot(ModBookTime startTime, ModBookTime endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
