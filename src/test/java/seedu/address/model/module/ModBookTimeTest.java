@@ -14,7 +14,7 @@ class ModBookTimeTest {
     }
 
     @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
+    public void constructor_invalidTime_throwsIllegalArgumentException() {
         String invalidTime = "";
         assertThrows(IllegalArgumentException.class, () -> new ModBookTime(invalidTime));
     }
