@@ -60,4 +60,9 @@ public class Timeslot implements Comparable<Timeslot> {
     public int compareTo(Timeslot other) {
         return startTime.compareTo(other.startTime);
     }
+
+    @Override
+    public int hashCode() {
+        return startTime.hashCode() + endTime.hashCode();
+    }
 }

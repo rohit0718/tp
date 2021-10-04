@@ -64,4 +64,9 @@ public class ModBookTime implements Comparable<ModBookTime> {
     public int compareTo(ModBookTime other) {
         return time.compareTo(other.time);
     }
+
+    @Override
+    public int hashCode() {
+        return time.hashCode();
+    }
 }
