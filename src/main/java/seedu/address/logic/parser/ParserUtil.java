@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -126,7 +125,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String time} into a {@code }
+     * Parses a {@code String time} into a {@code ModBookTime}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code time} is invalid.
@@ -138,5 +137,19 @@ public class ParserUtil {
             throw new ParseException(ModBookTime.MESSAGE_CONSTRAINTS);
         }
         return new ModBookTime(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String startTime} and {@code String endTime} into a {@code Timeslot}
+     *
+     * @throws ParseException if the given startTime and endTime are invalid.
+     */
+    public static Timeslot parseTimeslot(String startTime, String endTime) throws ParseException {
+        ModBookTime start = parseTime(startTime);
+        ModBookTime end = parseTime(endTime);
+        if (!Timeslot.isValidTimeslot(start, end)) {
+            throw new ParseException(Timeslot.MESSAGE_CONSTRAINTS);
+        }
+        return new Timeslot(start, end);
     }
 }
