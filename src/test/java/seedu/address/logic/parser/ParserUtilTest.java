@@ -232,7 +232,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTimeSLOT_invalidValue_throwsParseException() {
+    public void parseTimeSlot_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTimeslot(VALID_TIME_1, VALID_TIME_1));
         assertThrows(ParseException.class, () -> ParserUtil.parseTimeslot(VALID_TIME_2, VALID_TIME_1));
     }
