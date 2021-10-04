@@ -32,6 +32,8 @@ public class Timeslot implements Comparable<Timeslot> {
      * Returns true if the given startTime is before the given endTime.
      */
     public static boolean isValidTimeslot(ModBookTime startTime, ModBookTime endTime) {
+        requireNonNull(startTime);
+        requireNonNull(endTime);
         return startTime.compareTo(endTime) < 0;
     }
 

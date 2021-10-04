@@ -32,9 +32,10 @@ public class ModBookTime implements Comparable<ModBookTime> {
     /**
      * Returns true if a given string is a valid time
      */
-    public static boolean isValidTime(String timeString) {
+    public static boolean isValidTime(String test) {
+        requireNonNull(test);
         try {
-            LocalTime.parse(timeString);
+            LocalTime.parse(test);
             return true;
         } catch (DateTimeParseException e) {
             return false;
