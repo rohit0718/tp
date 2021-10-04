@@ -54,6 +54,7 @@ public class Timeslot implements Comparable<Timeslot> {
     /**
      * Compares between two Timeslot objects.
      * Will compare based on startTime - i.e. earlier startTime will be ordered first.
+     * If startTimes are the same, will compare based on endTime.
      *
      * @param other the Timeslot to compare with
      * @return a negative integer, zero or a positive integer as this Timeslot is before, at the same starting time
@@ -61,7 +62,11 @@ public class Timeslot implements Comparable<Timeslot> {
      */
     @Override
     public int compareTo(Timeslot other) {
-        return startTime.compareTo(other.startTime);
+        int startOrder = startTime.compareTo(other.startTime);
+        if (startOrder == 0) {
+            return endTime.compareTo(other.startTime);
+        }
+        return startOrder;
     }
 
     @Override
