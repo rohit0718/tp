@@ -64,7 +64,7 @@ public class Timeslot implements Comparable<Timeslot> {
     public int compareTo(Timeslot other) {
         int startOrder = startTime.compareTo(other.startTime);
         if (startOrder == 0) {
-            return endTime.compareTo(other.startTime);
+            return endTime.compareTo(other.endTime);
         }
         return startOrder;
     }
