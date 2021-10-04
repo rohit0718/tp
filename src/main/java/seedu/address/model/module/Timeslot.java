@@ -1,6 +1,7 @@
 package seedu.address.model.module;
 
-import java.time.LocalTime;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a timeslot in the ModBook.
@@ -9,7 +10,7 @@ import java.time.LocalTime;
 public class Timeslot implements Comparable<Timeslot> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Start time should be before end time";
+            "Start time of the Timeslot should be before the end time";
     public final ModBookTime startTime;
     public final ModBookTime endTime;
 
@@ -20,8 +21,18 @@ public class Timeslot implements Comparable<Timeslot> {
      * @param endTime the ending time of the timeslot
      */
     public Timeslot(ModBookTime startTime, ModBookTime endTime) {
+        requireNonNull(startTime);
+        requireNonNull(endTime);
+        checkArgument(isValidTimeslot(startTime, endTime), MESSAGE_CONSTRAINTS);
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    /**
+     * Returns true if the given startTime is before the given endTime.
+     */
+    public static boolean isValidTimeslot(ModBookTime startTime, ModBookTime endTime) {
+        return startTime.compareTo(endTime) < 0;
     }
 
     @Override
