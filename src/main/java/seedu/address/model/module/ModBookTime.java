@@ -15,6 +15,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Times should be in the format of hh:mm in 24 hour time";
+    public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public final LocalTime time;
 
@@ -26,7 +27,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
     public ModBookTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time);
+        this.time = LocalTime.parse(time, PARSE_FORMATTER);
     }
 
     /**
@@ -35,7 +36,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
     public static boolean isValidTime(String test) {
         requireNonNull(test);
         try {
-            LocalTime.parse(test);
+            LocalTime.parse(test, PARSE_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;

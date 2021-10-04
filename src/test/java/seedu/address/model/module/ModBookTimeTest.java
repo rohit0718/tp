@@ -35,6 +35,8 @@ class ModBookTimeTest {
         assertFalse(ModBookTime.isValidTime("16")); // no minutes
         assertFalse(ModBookTime.isValidTime("25:00")); // hours out of range
         assertFalse(ModBookTime.isValidTime("14:98")); // minutes out of range
+        assertFalse(ModBookTime.isValidTime("16:00:01")); // including seconds value
+        assertFalse(ModBookTime.isValidTime("16:00:01.1234")); // including seconds and decimal value
 
         // valid times
         assertTrue(ModBookTime.isValidTime("16:00"));
