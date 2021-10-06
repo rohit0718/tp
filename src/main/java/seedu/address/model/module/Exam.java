@@ -1,12 +1,13 @@
 package seedu.address.model.module;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Optional;
 
 import seedu.address.model.person.Name;
 
 
 public class Exam implements Comparable<Exam>{
-
     private final Name name;
     private final ModBookDate date;
     private final Timeslot timeslot;
@@ -15,6 +16,7 @@ public class Exam implements Comparable<Exam>{
 
 
     public Exam(Name name, ModBookDate date, Timeslot timeslot, Optional<Venue> venue, Optional<Link> link) {
+        requireAllNonNull(name, date, timeslot, venue, link);
         this.name = name;
         this.date = date;
         this.timeslot = timeslot;
