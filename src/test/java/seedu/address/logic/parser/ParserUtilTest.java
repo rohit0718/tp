@@ -9,14 +9,20 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Link;
+import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
 import seedu.address.model.module.Timeslot;
+import seedu.address.model.module.Venue;
+import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.exam.ExamName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +37,9 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LINK = " ";
     private static final String INVALID_TIME = "3:00PM";
+    private static final String INVALID_DATE = "20/15/2022";
+    private static final String INVALID_VENUE = " ";
+    private static final String INVALID_EXAM_NAME = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -43,6 +52,9 @@ public class ParserUtilTest {
     private static final String VALID_TIME_2 = "11:00";
     private static final ModBookTime VALID_MBTIME_1 = new ModBookTime(VALID_TIME_1);
     private static final ModBookTime VALID_MBTIME_2 = new ModBookTime(VALID_TIME_2);
+    private static final String VALID_DATE = "13/12/2021";
+    private static final String VALID_VENUE = "University Sports Centre";
+    private static final String VALID_EXAM_NAME = "Midterms";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -199,7 +211,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
@@ -275,5 +287,85 @@ public class ParserUtilTest {
         String timeWithWhitespaceTwo = WHITESPACE + VALID_TIME_2 + WHITESPACE;
         Timeslot expectedTimeslot = new Timeslot(VALID_MBTIME_1, VALID_MBTIME_2);
         assertEquals(expectedTimeslot, ParserUtil.parseTimeslot(timeWithWhitespaceOne, timeWithWhitespaceTwo));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        ModBookDate expectedDate = new ModBookDate(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        ModBookDate expectedDate = new ModBookDate(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseVenue_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVenue(null));
+    }
+
+    @Test
+    public void parseVenue_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVenue(INVALID_VENUE));
+    }
+
+    @Test
+    public void parseVenue_validValueWithoutWhitespace_returnsVenue() throws Exception {
+        Venue expectedVenue = new Venue(VALID_VENUE);
+        assertEquals(expectedVenue, ParserUtil.parseVenue(VALID_VENUE));
+    }
+
+    @Test
+    public void parseVenue_validValueWithWhitespace_returnsVenue() throws Exception {
+        String venueWithWhiteSpace = WHITESPACE + VALID_VENUE + WHITESPACE;
+        Venue expectedVenue = new Venue(VALID_VENUE);
+        assertEquals(expectedVenue, ParserUtil.parseVenue(venueWithWhiteSpace));
+    }
+
+    @Test
+    public void parseExamName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExamName(null));
+    }
+
+    @Test
+    public void parseExamName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExamName(INVALID_EXAM_NAME));
+    }
+
+    @Test
+    public void parseExamName_validValueWithoutWhitespace_returnsExamName() throws Exception {
+        ExamName expectedExamName = new ExamName(VALID_EXAM_NAME);
+        assertEquals(expectedExamName, ParserUtil.parseExamName(VALID_EXAM_NAME));
+    }
+
+    @Test
+    public void parseExamName_validValueWithWhitespace_returnsExamName() throws Exception {
+        String examNameWithWhiteSpace = WHITESPACE + VALID_EXAM_NAME + WHITESPACE;
+        ExamName expectedExamName = new ExamName(VALID_EXAM_NAME);
+        assertEquals(expectedExamName, ParserUtil.parseExamName(examNameWithWhiteSpace));
+    }
+
+    @Test
+    public void parseExam_null_throwsNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class, () -> new Exam(
+                new ExamName(VALID_EXAM_NAME), new ModBookDate(VALID_DATE), null, null, null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Exam(
+                new ExamName(VALID_EXAM_NAME), null, null,
+                Optional.of(new Venue(VALID_VENUE)), Optional.of(new Link(VALID_LINK))));
+        Assertions.assertThrows(NullPointerException.class, () -> new Exam(
+                null, null, null, null, null));
     }
 }
