@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModBookTime;
+import seedu.address.model.module.Timeslot;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +122,34 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code ModBookTime}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static ModBookTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!ModBookTime.isValidTime(trimmedTime)) {
+            throw new ParseException(ModBookTime.MESSAGE_CONSTRAINTS);
+        }
+        return new ModBookTime(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String startTime} and {@code String endTime} into a {@code Timeslot}
+     *
+     * @throws ParseException if the given startTime and endTime are invalid.
+     */
+    public static Timeslot parseTimeslot(String startTime, String endTime) throws ParseException {
+        ModBookTime start = parseTime(startTime);
+        ModBookTime end = parseTime(endTime);
+        if (!Timeslot.isValidTimeslot(start, end)) {
+            throw new ParseException(Timeslot.MESSAGE_CONSTRAINTS);
+        }
+        return new Timeslot(start, end);
     }
 }

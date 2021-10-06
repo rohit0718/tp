@@ -52,4 +52,12 @@ public class TestUtil {
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
     }
+
+    /**
+     * Returns true if the first {@code Comparable} given is before the second {@code Comparable} given
+     * Used for testing {@code compareTo()}
+     */
+    public static <T> boolean isBefore(Comparable<T> before, T after) {
+        return before.compareTo(after) < 0;
+    }
 }
