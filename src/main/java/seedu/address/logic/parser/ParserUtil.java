@@ -131,6 +131,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String link} into a {@code Link}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code link} is invalid.
+     */
+    public static Link parseLink(String link) throws ParseException {
+        requireNonNull(link);
+        String trimmedLink = link.trim();
+        if (!Link.isValidLink(trimmedLink)) {
+            throw new ParseException(Link.MESSAGE_CONSTRAINTS);
+        }
+        return new Link(trimmedLink);
+    }
+
+    /**
      * Parses a {@code String time} into a {@code ModBookTime}
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -220,7 +235,7 @@ public class ParserUtil {
                 ? Optional.of(parseVenue(venueName.get()))
                 : Optional.empty();
         Optional<Link> link = linkString.isPresent()
-                ? Optional.ofNullable(parseLink(linkString.get()))
+                ? Optional.of(parseLink(linkString.get()))
                 : Optional.empty();
         return new Exam(examName, modBookDate, timeslot, venue, link);
     }
