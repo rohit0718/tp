@@ -1,10 +1,14 @@
-package seedu.address.model.module;
+package seedu.address.model.module.exam;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.model.module.Link;
+import seedu.address.model.module.ModBookDate;
+import seedu.address.model.module.Timeslot;
+import seedu.address.model.module.Venue;
 import seedu.address.model.person.Name;
 
 
