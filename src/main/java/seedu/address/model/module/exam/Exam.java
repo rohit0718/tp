@@ -13,14 +13,14 @@ import seedu.address.model.person.Name;
 
 
 public class Exam implements Comparable<Exam>{
-    private final Name name;
+    private final ExamName name;
     private final ModBookDate date;
     private final Timeslot timeslot;
     private final Optional<Venue> venue;
     private final Optional<Link> link;
 
 
-    public Exam(Name name, ModBookDate date, Timeslot timeslot, Optional<Venue> venue, Optional<Link> link) {
+    public Exam(ExamName name, ModBookDate date, Timeslot timeslot, Optional<Venue> venue, Optional<Link> link) {
         requireAllNonNull(name, date, timeslot, venue, link);
         this.name = name;
         this.date = date;
@@ -29,7 +29,7 @@ public class Exam implements Comparable<Exam>{
         this.link = link;
     }
 
-    public Name getName() {
+    public ExamName getName() {
         return name;
     }
 
