@@ -3,7 +3,7 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -13,10 +13,10 @@ import java.time.format.DateTimeParseException;
  */
 public class ModBookDate implements Comparable<ModBookDate> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format of dd/mm/yyyy";
+            "Dates should be in the format of dd/MM/yyyy";
     public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public final LocalTime date;
+    public final LocalDate date;
 
     /**
      * Constructs a {@code ModBookDate}
@@ -26,7 +26,7 @@ public class ModBookDate implements Comparable<ModBookDate> {
     public ModBookDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalTime.parse(date, PARSE_FORMATTER);
+        this.date = LocalDate.parse(date, PARSE_FORMATTER);
     }
 
     /**
@@ -35,7 +35,7 @@ public class ModBookDate implements Comparable<ModBookDate> {
     public static boolean isValidDate(String test) {
         requireNonNull(test);
         try {
-            LocalTime.parse(test, PARSE_FORMATTER);
+            LocalDate.parse(test, PARSE_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;

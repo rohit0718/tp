@@ -14,7 +14,7 @@ import seedu.address.model.module.Venue;
  * Represents an exam in the ModBook.
  * Guarantees: immutable.
  */
-public class Exam implements Comparable<Exam>{
+public class Exam implements Comparable<Exam> {
     private final ExamName name;
     private final ModBookDate date;
     private final Timeslot timeslot;
@@ -100,7 +100,6 @@ public class Exam implements Comparable<Exam>{
         return Objects.hash(name, date, timeslot, venue, link);
     }
 
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -108,12 +107,15 @@ public class Exam implements Comparable<Exam>{
                 .append("; Date: ")
                 .append(getDate())
                 .append("; Timeslot: ")
-                .append(getTimeslot())
-                .append("; Venue: ")
-                .append(getVenue())
-                .append("; Link: ")
-                .append(getLink());
-
+                .append(getTimeslot());
+        if (venue.isPresent()) {
+            builder.append("; Venue: ")
+                    .append(getVenue());
+        }
+        if (link.isPresent()) {
+            builder.append("; Link: ")
+                    .append(getLink());
+        }
         return builder.toString();
     }
 
