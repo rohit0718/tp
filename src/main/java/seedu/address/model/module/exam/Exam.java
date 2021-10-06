@@ -9,7 +9,6 @@ import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
-import seedu.address.model.person.Name;
 
 
 public class Exam implements Comparable<Exam>{

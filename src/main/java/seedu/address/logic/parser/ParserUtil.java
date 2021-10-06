@@ -9,8 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
 import seedu.address.model.module.Timeslot;
+import seedu.address.model.module.Venue;
+import seedu.address.model.module.exam.ExamName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -151,5 +154,50 @@ public class ParserUtil {
             throw new ParseException(Timeslot.MESSAGE_CONSTRAINTS);
         }
         return new Timeslot(start, end);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code ModBookDate}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static ModBookDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!ModBookDate.isValidDate(trimmedDate)) {
+            throw new ParseException(ModBookDate.MESSAGE_CONSTRAINTS);
+        }
+        return new ModBookDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String examName} into a {@code ExamName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code examName} is invalid.
+     */
+    public static ExamName parseExamName(String examName) throws ParseException {
+        requireNonNull(examName);
+        String trimmedExamName = examName.trim();
+        if (!ExamName.isValidExamName(trimmedExamName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new ExamName(trimmedExamName);
+    }
+
+    /**
+     * Parses a {@code String venueName} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venueName} is invalid.
+     */
+    public static Venue parseVenue(String venueName) throws ParseException {
+        requireNonNull(venueName);
+        String trimmedVenueName = venueName.trim();
+        if (!ExamName.isValidExamName(trimmedVenueName)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedVenueName);
     }
 }
