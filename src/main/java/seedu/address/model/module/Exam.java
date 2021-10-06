@@ -2,6 +2,7 @@ package seedu.address.model.module;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.model.person.Name;
@@ -79,6 +80,12 @@ public class Exam implements Comparable<Exam>{
                 && otherPerson.getVenue().equals(getVenue())
                 && otherPerson.getLink().equals(getLink());
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, date, timeslot, venue, link);
+    }
+
 
     @Override
     public String toString() {
