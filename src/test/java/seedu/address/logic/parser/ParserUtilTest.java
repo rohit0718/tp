@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookTime;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.person.Address;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_LINK = " ";
     private static final String INVALID_TIME = "3:00PM";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -36,6 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_LINK = "https://www.google.com/";
     private static final String VALID_TIME_1 = "09:00";
     private static final String VALID_TIME_2 = "11:00";
     private static final ModBookTime VALID_MBTIME_1 = new ModBookTime(VALID_TIME_1);
@@ -199,6 +202,29 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseLink_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLink(null));
+    }
+
+    @Test
+    public void parseLink_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLink(INVALID_LINK));
+    }
+
+    @Test
+    public void parseLink_validValueWithoutWhitespace_returnsLink() throws Exception {
+        Link expectedLink = new Link(VALID_LINK);
+        assertEquals(expectedLink, ParserUtil.parseLink(VALID_LINK));
+    }
+
+    @Test
+    public void parseLink_validValueWithWhitespace_returnsLink() throws Exception {
+        String linkWithWhiteSpace = WHITESPACE + VALID_LINK + WHITESPACE;
+        Link expectedLink = new Link(VALID_LINK);
+        assertEquals(expectedLink, ParserUtil.parseLink(linkWithWhiteSpace));
     }
 
     @Test
