@@ -10,7 +10,10 @@ import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 
-
+/**
+ * Represents an exam in the ModBook.
+ * Guarantees: immutable.
+ */
 public class Exam implements Comparable<Exam>{
     private final ExamName name;
     private final ModBookDate date;
@@ -18,7 +21,15 @@ public class Exam implements Comparable<Exam>{
     private final Optional<Venue> venue;
     private final Optional<Link> link;
 
-
+    /**
+     * Constructs a {@code Exam}
+     *
+     * @param name Name of exam
+     * @param date Date of exam
+     * @param timeslot Timeslot of the exam
+     * @param venue Optional venue for the exam
+     * @param link Optional link for the exam
+     */
     public Exam(ExamName name, ModBookDate date, Timeslot timeslot, Optional<Venue> venue, Optional<Link> link) {
         requireAllNonNull(name, date, timeslot, venue, link);
         this.name = name;
@@ -106,6 +117,15 @@ public class Exam implements Comparable<Exam>{
         return builder.toString();
     }
 
+    /**
+     * Compares between two Exam objects.
+     * Will compare based on date - i.e. earlier date will be ordered first.
+     * If dates are the same, will compare based on timeslot.
+     *
+     * @param otherExam the Exam to compare with
+     * @return a negative integer, zero or a positive integer as this Exam is before, at the same starting time
+     *         or after the given Exam respectively.
+     */
     @Override
     public int compareTo(Exam otherExam) {
         int dateOrder = date.compareTo(otherExam.date);

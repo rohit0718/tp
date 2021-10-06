@@ -3,6 +3,10 @@ package seedu.address.model.module.exam;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the name of an Exam in the ModBook.
+ * Guarantees: immutable; is valid as declared in {@link #isValidExamName(String)}
+ */
 public class ExamName {
     public static final String MESSAGE_CONSTRAINTS =
             "Exam name should not be blank";
@@ -15,7 +19,7 @@ public class ExamName {
     public final String fullExamName;
 
     /**
-     * Constructs a {@code ExamName}.
+     * Constructs an {@code ExamName}.
      *
      * @param examName A valid exam name.
      */

@@ -7,6 +7,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a date in the ModBook.
+ * Guarantees: immutable.
+ */
 public class ModBookDate implements Comparable<ModBookDate> {
     public static final String MESSAGE_CONSTRAINTS =
             "Dates should be in the format of dd/mm/yyyy";

@@ -3,6 +3,10 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Venue in the ModBook.
+ * Guarantees: immutable; is valid as declared in {@link #isValidVenue(String)}
+ */
 public class Venue {
 
     public static final String MESSAGE_CONSTRAINTS =
