@@ -125,9 +125,42 @@ public class Lesson implements Comparable<Lesson> {
      */
     @Override
     public int compareTo(Lesson otherLesson) {
-        int dateOrder = day.compareTo(otherLesson.day);
+        Day.DayComparator dayComp = new Day.DayComparator();
+        int dateOrder = dayComp.compare(day, otherLesson.day);
+
         if (dateOrder == 0) {
+            // Both lessons today
+            if (day.isToday()) {
+                // Current lesson finished, other lesson hasn't so this lesson is after other lesson
+                if (timeslot.hasFinished() && !otherLesson.timeslot.hasFinished()) {
+                    return 1;
+                }
+                // Current lesson hasn't finished, other lesson has so this lesson is before other lesson
+                if (!timeslot.hasFinished() && otherLesson.timeslot.hasFinished()) {
+                    return -1;
+                }
+                // Either both lessons have passed or not passed  compare the timeslots
+                // optional, but left it here for clarity
+                return timeslot.compareTo(otherLesson.timeslot);
+            }
             return timeslot.compareTo(otherLesson.timeslot);
+        }
+
+        // this lesson today, other lesson another day
+        // don't have to check if other lesson is not today because above case takes care of that already
+        if (day.isToday()) {
+            // if this lesson has finished, then it is now ordered after the other lesson
+            if (timeslot.hasFinished()) {
+                return 1;
+            }
+        }
+
+        // other lesson today, this lesson another day
+        if (otherLesson.day.isToday()) {
+            // if other lesson has finished, then this lesson is now ordered before other lesson
+            if (otherLesson.timeslot.hasFinished()) {
+                return -1;
+            }
         }
         return dateOrder;
     }
