@@ -225,7 +225,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name}, {@code String date}, {@code String startTime}, {@code String endTime},
-     * {@code Optional<String> venue}, {@code Optional<String> link} into an {@code Exam}
+     * {@code Optional<String> venueName}, {@code Optional<String> linkString} into an {@code Exam}
      *
      * @throws ParseException if any of the data strings are invalid.
      */
@@ -276,7 +276,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name}, {@code String dayString}, {@code String startTime}, {@code String endTime},
-     * {@code Optional<String> venue}, {@code Optional<String> link} into an {@code Lesson}
+     * {@code Optional<String> venueName}, {@code Optional<String> linkString} into an {@code Lesson}
      *
      * @throws ParseException if any of the data strings are invalid.
      */
