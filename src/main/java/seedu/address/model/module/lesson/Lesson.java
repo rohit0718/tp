@@ -1,10 +1,13 @@
-package seedu.address.model.module;
+package seedu.address.model.module.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.model.module.Day;
+import seedu.address.model.module.Link;
+import seedu.address.model.module.Timeslot;
 import seedu.address.model.person.Name;
 
 public class Lesson implements Comparable<Lesson> {
