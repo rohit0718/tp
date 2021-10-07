@@ -213,7 +213,7 @@ public class ParserUtil {
     public static Venue parseVenue(String venueName) throws ParseException {
         requireNonNull(venueName);
         String trimmedVenueName = venueName.trim();
-        if (!ExamName.isValidExamName(trimmedVenueName)) {
+        if (!Venue.isValidVenue(trimmedVenueName)) {
             throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
         }
         return new Venue(trimmedVenueName);
