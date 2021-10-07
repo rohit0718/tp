@@ -392,9 +392,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseLessonName_validValueWithWhitespace_returnsExamName() throws Exception {
-        String examNameWithWhiteSpace = WHITESPACE + VALID_LESSON_NAME + WHITESPACE;
+        String lessonNameWithWhiteSpace = WHITESPACE + VALID_LESSON_NAME + WHITESPACE;
         LessonName expectedLessonName = new LessonName(VALID_LESSON_NAME);
-        assertEquals(expectedLessonName, ParserUtil.parseLessonName(examNameWithWhiteSpace));
+        assertEquals(expectedLessonName, ParserUtil.parseLessonName(lessonNameWithWhiteSpace));
     }
 
     @Test
