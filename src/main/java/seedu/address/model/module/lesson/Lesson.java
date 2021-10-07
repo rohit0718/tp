@@ -8,13 +8,13 @@ import java.util.Optional;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.Timeslot;
-import seedu.address.model.person.Name;
+import seedu.address.model.module.Venue;
 
 public class Lesson implements Comparable<Lesson> {
-    private final Name name;
+    private final LessonName name;
     private final Day day;
     private final Timeslot timeslot;
-    private final Optional<String> venue;
+    private final Optional<Venue> venue;
     private final Optional<Link> link;
 
     /**
@@ -26,7 +26,7 @@ public class Lesson implements Comparable<Lesson> {
      * @param venue    Optional venue for the lesson
      * @param link     Optional link for the lesson
      */
-    public Lesson(Name name, Day day, Timeslot timeslot, Optional<String> venue, Optional<Link> link) {
+    public Lesson(LessonName name, Day day, Timeslot timeslot, Optional<Venue> venue, Optional<Link> link) {
         requireAllNonNull(name, day, timeslot, venue, link);
         this.name = name;
         this.day = day;
@@ -35,7 +35,7 @@ public class Lesson implements Comparable<Lesson> {
         this.link = link;
     }
 
-    public Name getName() {
+    public LessonName getName() {
         return name;
     }
 
@@ -47,7 +47,7 @@ public class Lesson implements Comparable<Lesson> {
         return timeslot;
     }
 
-    public Optional<String> getVenue() {
+    public Optional<Venue> getVenue() {
         return venue;
     }
 
