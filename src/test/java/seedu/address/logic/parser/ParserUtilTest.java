@@ -385,13 +385,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLessonName_validValueWithoutWhitespace_returnsExamName() throws Exception {
+    public void parseLessonName_validValueWithoutWhitespace_returnsLessonName() throws Exception {
         LessonName expectedLessonName = new LessonName(VALID_LESSON_NAME);
         assertEquals(expectedLessonName, ParserUtil.parseLessonName(VALID_LESSON_NAME));
     }
 
     @Test
-    public void parseLessonName_validValueWithWhitespace_returnsExamName() throws Exception {
+    public void parseLessonName_validValueWithWhitespace_returnsLessonName() throws Exception {
         String lessonNameWithWhiteSpace = WHITESPACE + VALID_LESSON_NAME + WHITESPACE;
         LessonName expectedLessonName = new LessonName(VALID_LESSON_NAME);
         assertEquals(expectedLessonName, ParserUtil.parseLessonName(lessonNameWithWhiteSpace));
@@ -406,5 +406,17 @@ public class ParserUtilTest {
                 Optional.of(new Venue(VALID_VENUE)), Optional.of(new Link(VALID_LINK))));
         Assertions.assertThrows(NullPointerException.class, () -> new Lesson(
                 null, null, null, null, null));
+    }
+
+    @Test
+    public void parseLesson_validValues_returnsLesson() throws Exception {
+        LessonName lessonName = new LessonName("Lecture");
+        Day day = Day.MONDAY;
+        Timeslot timeslot = new Timeslot(VALID_MBTIME_1, VALID_MBTIME_2);
+        Lesson expectedLesson = new Lesson(lessonName, day, timeslot, Optional.of(new Venue(VALID_VENUE)),
+                Optional.of(new Link(VALID_LINK)));
+        assertEquals(expectedLesson, ParserUtil.parseLesson(
+                "Lecture", "Monday", "09:00", "11:00",
+                Optional.of(VALID_VENUE), Optional.of(VALID_LINK)));
     }
 }

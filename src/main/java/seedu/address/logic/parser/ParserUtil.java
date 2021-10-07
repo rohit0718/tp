@@ -283,7 +283,7 @@ public class ParserUtil {
     public static Lesson parseLesson(String name, String dayString, String startTime, String endTime,
                                      Optional<String> venueName, Optional<String> linkString) throws ParseException {
         LessonName lessonName = parseLessonName(name);
-        Day day = parseDay(dayString);
+        Day day = parseDay(dayString.toUpperCase());
         Timeslot timeslot = parseTimeslot(startTime, endTime);
 
         Optional<Venue> venue = venueName.isPresent()
