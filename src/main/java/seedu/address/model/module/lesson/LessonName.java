@@ -3,8 +3,6 @@ package seedu.address.model.module.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.module.exam.ExamName;
-
 /**
  * Represents the name of a Lesson in the ModBook.
  * Guarantees: immutable; is valid as declared in {@link #isValidLessonName(String)}
