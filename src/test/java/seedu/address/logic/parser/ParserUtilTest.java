@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
@@ -23,6 +24,8 @@ import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.exam.ExamName;
+import seedu.address.model.module.lesson.Lesson;
+import seedu.address.model.module.lesson.LessonName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,6 +43,7 @@ public class ParserUtilTest {
     private static final String INVALID_DATE = "20/15/2022";
     private static final String INVALID_VENUE = " ";
     private static final String INVALID_EXAM_NAME = " ";
+    private static final String INVALID_LESSON_NAME = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -55,6 +59,7 @@ public class ParserUtilTest {
     private static final String VALID_DATE = "13/12/2021";
     private static final String VALID_VENUE = "University Sports Centre";
     private static final String VALID_EXAM_NAME = "Midterms";
+    private static final String VALID_LESSON_NAME = "Lecture";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -366,6 +371,40 @@ public class ParserUtilTest {
                 new ExamName(VALID_EXAM_NAME), null, null,
                 Optional.of(new Venue(VALID_VENUE)), Optional.of(new Link(VALID_LINK))));
         Assertions.assertThrows(NullPointerException.class, () -> new Exam(
+                null, null, null, null, null));
+    }
+
+    @Test
+    public void parseLessonName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonName(null));
+    }
+
+    @Test
+    public void parseLessonName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonName(INVALID_LESSON_NAME));
+    }
+
+    @Test
+    public void parseLessonName_validValueWithoutWhitespace_returnsExamName() throws Exception {
+        LessonName expectedLessonName = new LessonName(VALID_LESSON_NAME);
+        assertEquals(expectedLessonName, ParserUtil.parseLessonName(VALID_LESSON_NAME));
+    }
+
+    @Test
+    public void parseLessonName_validValueWithWhitespace_returnsExamName() throws Exception {
+        String examNameWithWhiteSpace = WHITESPACE + VALID_LESSON_NAME + WHITESPACE;
+        LessonName expectedLessonName = new LessonName(VALID_LESSON_NAME);
+        assertEquals(expectedLessonName, ParserUtil.parseLessonName(examNameWithWhiteSpace));
+    }
+
+    @Test
+    public void parseLesson_null_throwsNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class, () -> new Lesson(
+                new LessonName(VALID_LESSON_NAME), Day.MONDAY, null, null, null));
+        Assertions.assertThrows(NullPointerException.class, () -> new Lesson(
+                new LessonName(VALID_LESSON_NAME), null, null,
+                Optional.of(new Venue(VALID_VENUE)), Optional.of(new Link(VALID_LINK))));
+        Assertions.assertThrows(NullPointerException.class, () -> new Lesson(
                 null, null, null, null, null));
     }
 }
