@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import javafx.scene.image.Image;
 import seedu.address.MainApp;
 
+import java.util.List;
+
 /**
  * A container for App specific utility functions
  */
@@ -38,5 +40,17 @@ public class AppUtil {
         if (!condition) {
             throw new IllegalArgumentException(errorMessage);
         }
+    }
+
+    public static <T> boolean areListsEqual(List<T> first, List<T> second) {
+        if (first.size() != second.size()) {
+            return false;
+        }
+        for (int i = 0; i < first.size(); ++i) {
+            if (!first.get(i).equals(second.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
