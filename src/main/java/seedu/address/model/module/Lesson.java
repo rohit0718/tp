@@ -1,5 +1,7 @@
 package seedu.address.model.module;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,7 +14,17 @@ public class Lesson implements Comparable<Lesson> {
     private final Optional<String> venue;
     private final Optional<Link> link;
 
+    /**
+     * Constructs a {@code Lesson}
+     *
+     * @param name     Name of lesson
+     * @param day      Date of lesson
+     * @param timeslot Timeslot of the lesson
+     * @param venue    Optional venue for the lesson
+     * @param link     Optional link for the lesson
+     */
     public Lesson(Name name, Day day, Timeslot timeslot, Optional<String> venue, Optional<Link> link) {
+        requireAllNonNull(name, day, timeslot, venue, link);
         this.name = name;
         this.day = day;
         this.timeslot = timeslot;
@@ -52,7 +64,6 @@ public class Lesson implements Comparable<Lesson> {
         return otherLesson != null
                 && otherLesson.getName().equals(getName());
     }
-
 
     /**
      * Returns true if both Lessons have the same identity and data fields.
