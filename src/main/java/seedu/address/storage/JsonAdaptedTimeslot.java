@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalTime;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
