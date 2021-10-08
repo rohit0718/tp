@@ -78,7 +78,7 @@ public class JsonAdaptedLesson {
         if (!Day.isValidDay(day)) {
             throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
         }
-        final Day modelDay = ParserUtil.parseDay(day);
+        final Day modelDay = Day.valueOf(day.toUpperCase());
 
         if (venue != null && venue.isPresent()) {
             if (!venue.map(Venue::isValidVenue).orElse(false)) {
