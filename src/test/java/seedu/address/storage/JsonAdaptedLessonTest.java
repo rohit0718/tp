@@ -35,7 +35,7 @@ class JsonAdaptedLessonTest {
     @Test
     public void toModelType_validLessonDetails_returnsLesson() throws Exception {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(CS2103T_LECTURE);
-        assertTrue(CS2103T_LECTURE.equals(lesson.toModelType()));
+        assertEquals(CS2103T_LECTURE, lesson.toModelType());
     }
 
     @Test
