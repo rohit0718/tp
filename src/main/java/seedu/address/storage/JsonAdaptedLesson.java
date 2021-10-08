@@ -90,7 +90,7 @@ public class JsonAdaptedLesson {
             if (!link.map(Link::isValidLink).orElse(false)) {
                 throw new IllegalValueException(Link.MESSAGE_CONSTRAINTS);
             }
-            modelLink = venue.map(Link::new);
+            modelLink = link.map(Link::new);
         }
 
         return new Lesson(modelName, modelDay, modelTimeslot, modelVenue, modelLink);

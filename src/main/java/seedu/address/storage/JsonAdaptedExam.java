@@ -83,7 +83,7 @@ public class JsonAdaptedExam {
             if (!link.map(Link::isValidLink).orElse(false)) {
                 throw new IllegalValueException(Link.MESSAGE_CONSTRAINTS);
             }
-            modelLink = venue.map(Link::new);
+            modelLink = link.map(Link::new);
         }
 
         return new Exam(modelName, modelDate, modelTimeslot, modelVenue, modelLink);
