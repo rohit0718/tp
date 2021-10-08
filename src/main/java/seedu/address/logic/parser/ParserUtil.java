@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
@@ -17,6 +18,8 @@ import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.exam.ExamName;
+import seedu.address.model.module.lesson.Lesson;
+import seedu.address.model.module.lesson.LessonName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,6 +36,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -221,7 +225,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name}, {@code String date}, {@code String startTime}, {@code String endTime},
-     * {@code Optional<String> venue}, {@code Optional<String> link} into an {@code Exam}
+     * {@code Optional<String> venueName}, {@code Optional<String> linkString} into an {@code Exam}
      *
      * @throws ParseException if any of the data strings are invalid.
      */
@@ -238,5 +242,56 @@ public class ParserUtil {
                 ? Optional.of(parseLink(linkString.get()))
                 : Optional.empty();
         return new Exam(examName, modBookDate, timeslot, venue, link);
+    }
+
+    /**
+     * Parses a {@code String lessonName} into a {@code LessonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonName} is invalid.
+     */
+    public static LessonName parseLessonName(String lessonName) throws ParseException {
+        requireNonNull(lessonName);
+        String trimmedLessonName = lessonName.trim();
+        if (!LessonName.isValidLessonName(trimmedLessonName)) {
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonName(trimmedLessonName);
+    }
+
+    /**
+     * Parses a {@code String dayString} into a {@code Day}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dayString} is invalid.
+     */
+    public static Day parseDay(String dayString) throws ParseException {
+        requireNonNull(dayString);
+        String trimmedDay = dayString.trim();
+        if (!Day.isValidDay(trimmedDay)) {
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
+        }
+        return Day.valueOf(trimmedDay);
+    }
+
+    /**
+     * Parses a {@code String name}, {@code String dayString}, {@code String startTime}, {@code String endTime},
+     * {@code Optional<String> venueName}, {@code Optional<String> linkString} into an {@code Lesson}
+     *
+     * @throws ParseException if any of the data strings are invalid.
+     */
+    public static Lesson parseLesson(String name, String dayString, String startTime, String endTime,
+                                     Optional<String> venueName, Optional<String> linkString) throws ParseException {
+        LessonName lessonName = parseLessonName(name);
+        Day day = parseDay(dayString.toUpperCase());
+        Timeslot timeslot = parseTimeslot(startTime, endTime);
+
+        Optional<Venue> venue = venueName.isPresent()
+                ? Optional.of(parseVenue(venueName.get()))
+                : Optional.empty();
+        Optional<Link> link = linkString.isPresent()
+                ? Optional.of(parseLink(linkString.get()))
+                : Optional.empty();
+        return new Lesson(lessonName, day, timeslot, venue, link);
     }
 }
