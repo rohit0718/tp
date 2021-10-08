@@ -17,9 +17,9 @@ public class ModuleCode {
      */
     public static final String VALIDATION_REGEX = "^([a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]?)$";
     public static final String MESSAGE_CONSTRAINTS =
-            "Module Code must have a two or three letter prefix that denotes disciple, four digits " +
-                    "which represents the level of the module, and an optional last character that " +
-                    "represents the course of study.";
+            "Module Code must have a two or three letter prefix that denotes disciple, four digits "
+                    + "which represents the level of the module, and an optional last character that "
+                    + "represents the course of study.";
     public final String moduleCode;
 
     /**

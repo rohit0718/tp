@@ -2,10 +2,10 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import javafx.scene.image.Image;
 import seedu.address.MainApp;
-
-import java.util.List;
 
 /**
  * A container for App specific utility functions
@@ -42,6 +42,11 @@ public class AppUtil {
         }
     }
 
+    /**
+     * Checks that lists {@code first} and {@code second} have the same number of elements and that
+     * each element in index i in {@code first} is equal (based on the .equals() function) to the element
+     * in index i in {@code second}.
+     */
     public static <T> boolean areListsEqual(List<T> first, List<T> second) {
         if (first.size() != second.size()) {
             return false;
