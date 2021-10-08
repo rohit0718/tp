@@ -12,6 +12,8 @@ import seedu.address.model.module.Timeslot;
  */
 public class JsonAdaptedTimeslot {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Timeslot's %s field is missing!";
+
     private final JsonAdaptedModBookTime startTime;
     private final JsonAdaptedModBookTime endTime;
 
@@ -39,6 +41,10 @@ public class JsonAdaptedTimeslot {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Timeslot.
      */
     public Timeslot toModelType() throws IllegalValueException {
+        if (startTime == null || endTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModBookTime.class.getSimpleName()));
+        }
         ModBookTime start = startTime.toModelType();
         ModBookTime end = endTime.toModelType();
 
