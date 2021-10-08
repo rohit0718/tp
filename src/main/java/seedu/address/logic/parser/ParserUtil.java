@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
@@ -238,5 +239,20 @@ public class ParserUtil {
                 ? Optional.of(parseLink(linkString.get()))
                 : Optional.empty();
         return new Exam(examName, modBookDate, timeslot, venue, link);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedModuleCode);
     }
 }
