@@ -7,7 +7,7 @@ public enum Day {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Input for Day is not formatted correctly.";
+            "Day should be entered as day of the week e.g. Monday, Tuesday, etc.";
 
     /**
      * Returns true if a given string is a valid Day.
