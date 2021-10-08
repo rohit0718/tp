@@ -1,6 +1,7 @@
 package seedu.address.testutil.builders;
 
 import java.util.Optional;
+
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.Timeslot;
@@ -14,7 +15,7 @@ import seedu.address.model.module.exam.ExamName;
 public class ExamBuilder {
 
     public static final String DEFAULT_NAME = "Finals";
-    public static final String DEFAULT_DATE = "09/09/2021";
+    public static final String DEFAULT_DATE = "09/12/2021";
     public static final Timeslot DEFAULT_TIMESLOT = new TimeslotBuilder().build();
     public static final Optional<String> DEFAULT_VENUE = Optional.of("LT17");
     public static final Optional<String> DEFAULT_LINK = Optional.of("google.com");
