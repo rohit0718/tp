@@ -68,7 +68,7 @@ public class JsonAdaptedExam {
                     ExamName.class.getSimpleName()));
         }
         if (!ExamName.isValidExamName(name)) {
-            throw new IllegalValueException(LessonName.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ExamName.MESSAGE_CONSTRAINTS);
         }
         final ExamName modelName = new ExamName(name);
 
