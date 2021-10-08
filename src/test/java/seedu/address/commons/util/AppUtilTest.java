@@ -1,18 +1,18 @@
 package seedu.address.commons.util;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class AppUtilTest {
-    private static final List<Integer> LIST_ONE = List.of(1,2);
-    private static final List<Integer> LIST_TWO = List.of(1,2,3);
-    private static final List<Integer> LIST_THREE = List.of(2,3,4);
+    private static final List<Integer> LIST_ONE = List.of(1, 2);
+    private static final List<Integer> LIST_TWO = List.of(1, 2, 3);
+    private static final List<Integer> LIST_THREE = List.of(2, 3, 4);
 
     @Test
     public void getImage_exitingImage() {
