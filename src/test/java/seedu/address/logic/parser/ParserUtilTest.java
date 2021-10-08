@@ -20,6 +20,7 @@ import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Timeslot;
@@ -470,5 +471,18 @@ public class ParserUtilTest {
         String moduleNameWithWhitespace = WHITESPACE + VALID_MODULE_NAME + WHITESPACE;
         ModuleName expectedModuleName = new ModuleName(VALID_MODULE_NAME);
         assertEquals(expectedModuleName, ParserUtil.parseModuleName(moduleNameWithWhitespace));
+    }
+
+    @Test
+    public void parseModule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModule(null, null));
+    }
+
+    @Test
+    public void parseModule_validValues_returnsModule() throws Exception {
+        ModuleCode moduleCode = new ModuleCode(VALID_MODULE_CODE);
+        ModuleName moduleName = new ModuleName(VALID_MODULE_NAME);
+        Module expectedModule = new Module(moduleCode, Optional.of(moduleName));
+        assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE_CODE, Optional.of(VALID_MODULE_NAME)));
     }
 }
