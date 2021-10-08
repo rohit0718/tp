@@ -57,7 +57,6 @@ public class JsonAdaptedLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Lesson toModelType() throws IllegalValueException {
-        final Timeslot modelTimeslot = timeslot.toModelType();
         Optional<Venue> modelVenue = Optional.empty();
         Optional<Link> modelLink = Optional.empty();
 
@@ -78,6 +77,12 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
         }
         final Day modelDay = Day.valueOf(day.toUpperCase());
+
+        if (timeslot == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Timeslot.class.getSimpleName()));
+        }
+        final Timeslot modelTimeslot = timeslot.toModelType();
 
         if (venue != null && venue.isPresent()) {
             if (!venue.map(Venue::isValidVenue).orElse(false)) {

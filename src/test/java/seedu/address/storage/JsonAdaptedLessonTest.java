@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
+import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.module.lesson.LessonName;
@@ -69,6 +70,15 @@ class JsonAdaptedLessonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
+
+    @Test
+    public void toModelType_nullTimeslot_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+                new JsonAdaptedLesson(VALID_NAME, VALID_DAY, null, VALID_VENUE, VALID_LINK);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Timeslot.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
 
     @Test
     public void toModelType_invalidVenue_throwsIllegalValueException() {
