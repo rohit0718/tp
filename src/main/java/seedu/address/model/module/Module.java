@@ -1,6 +1,5 @@
 package seedu.address.model.module;
 
-import static seedu.address.commons.util.AppUtil.areListsEqual;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -74,8 +73,8 @@ public class Module {
         Module otherModule = (Module) other;
         return isSameModule(otherModule)
                 && moduleName.equals(otherModule.getName())
-                && areListsEqual(lessons, otherModule.getLessons())
-                && areListsEqual(exams, otherModule.getExams());
+                && lessons.equals(otherModule.getLessons())
+                && exams.equals(otherModule.getExams());
     }
 
     @Override
