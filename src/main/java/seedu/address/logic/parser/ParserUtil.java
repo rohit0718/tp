@@ -248,49 +248,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code moduleCode} is invalid.
-     */
-    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
-        requireNonNull(moduleCode);
-        String trimmedModuleCode = moduleCode.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
-            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
-        }
-        return new ModuleCode(trimmedModuleCode);
-    }
-
-    /**
-     * Parses a {@code String moduleName} into a {@code ModuleName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code moduleName} is invalid.
-     */
-    public static ModuleName parseModuleName(String moduleName) throws ParseException {
-        requireNonNull(moduleName);
-        String trimmedModuleName = moduleName.trim();
-        if (!ModuleName.isValidModuleName(trimmedModuleName)) {
-            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
-        }
-        return new ModuleName(trimmedModuleName);
-    }
-
-    /**
-     * Parses a {@code String code} and a {@code Optional<String> name} into a {@code Module}.
-     *
-     * @throws ParseException if any of the data strings are invalid.
-     */
-    public static Module parseModule(String code, Optional<String> name) throws ParseException {
-        ModuleCode moduleCode = parseModuleCode(code);
-        Optional<ModuleName> moduleName = name.isPresent()
-                ? Optional.of(parseModuleName(name.get()))
-                : Optional.empty();
-        return new Module(moduleCode, moduleName);
-    }
-
-    /**
      * Parses a {@code String lessonName} into a {@code LessonName}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -339,5 +296,48 @@ public class ParserUtil {
                 ? Optional.of(parseLink(linkString.get()))
                 : Optional.empty();
         return new Lesson(lessonName, day, timeslot, venue, link);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedModuleCode);
+    }
+
+    /**
+     * Parses a {@code String moduleName} into a {@code ModuleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleName} is invalid.
+     */
+    public static ModuleName parseModuleName(String moduleName) throws ParseException {
+        requireNonNull(moduleName);
+        String trimmedModuleName = moduleName.trim();
+        if (!ModuleName.isValidModuleName(trimmedModuleName)) {
+            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleName(trimmedModuleName);
+    }
+
+    /**
+     * Parses a {@code String code} and a {@code Optional<String> name} into a {@code Module}.
+     *
+     * @throws ParseException if any of the data strings are invalid.
+     */
+    public static Module parseModule(String code, Optional<String> name) throws ParseException {
+        ModuleCode moduleCode = parseModuleCode(code);
+        Optional<ModuleName> moduleName = name.isPresent()
+                ? Optional.of(parseModuleName(name.get()))
+                : Optional.empty();
+        return new Module(moduleCode, moduleName);
     }
 }
