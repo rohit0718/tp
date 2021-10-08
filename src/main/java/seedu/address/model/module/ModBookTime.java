@@ -12,7 +12,6 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable.
  */
 public class ModBookTime implements Comparable<ModBookTime> {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Times should be in the format of hh:mm in 24 hour time";
     public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
@@ -43,6 +42,13 @@ public class ModBookTime implements Comparable<ModBookTime> {
         }
     }
 
+    /**
+     * Returns true if the ModBookTime is before the current time.
+     */
+    public boolean beforeNow() {
+        return time.compareTo((LocalTime.now())) < 0;
+    }
+
     @Override
     public String toString() {
         return time.format(PRINT_FORMATTER);
@@ -60,7 +66,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
      *
      * @param other the ModBookTime to compare with
      * @return a negative integer, zero or a positive integer as this ModBookTime is before, at the same time
-     *         or after the given ModBookTime respectively.
+     * or after the given ModBookTime respectively.
      */
     @Override
     public int compareTo(ModBookTime other) {

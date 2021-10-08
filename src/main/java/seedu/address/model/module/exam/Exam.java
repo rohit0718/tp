@@ -24,11 +24,11 @@ public class Exam implements Comparable<Exam> {
     /**
      * Constructs a {@code Exam}
      *
-     * @param name Name of exam
-     * @param date Date of exam
+     * @param name     Name of exam
+     * @param date     Date of exam
      * @param timeslot Timeslot of the exam
-     * @param venue Optional venue for the exam
-     * @param link Optional link for the exam
+     * @param venue    Optional venue for the exam
+     * @param link     Optional link for the exam
      */
     public Exam(ExamName name, ModBookDate date, Timeslot timeslot, Optional<Venue> venue, Optional<Link> link) {
         requireAllNonNull(name, date, timeslot, venue, link);
@@ -75,7 +75,7 @@ public class Exam implements Comparable<Exam> {
 
     /**
      * Returns true if both exams have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two exams.
      */
     @Override
     public boolean equals(Object other) {
@@ -87,12 +87,12 @@ public class Exam implements Comparable<Exam> {
             return false;
         }
 
-        Exam otherPerson = (Exam) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getDate().equals(getDate())
-                && otherPerson.getTimeslot().equals(getTimeslot())
-                && otherPerson.getVenue().equals(getVenue())
-                && otherPerson.getLink().equals(getLink());
+        Exam otherExam = (Exam) other;
+        return otherExam.getName().equals(getName())
+                && otherExam.getDate().equals(getDate())
+                && otherExam.getTimeslot().equals(getTimeslot())
+                && otherExam.getVenue().equals(getVenue())
+                && otherExam.getLink().equals(getLink());
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Exam implements Comparable<Exam> {
      *
      * @param otherExam the Exam to compare with
      * @return a negative integer, zero or a positive integer as this Exam is before, at the same starting time
-     *         or after the given Exam respectively.
+     * or after the given Exam respectively.
      */
     @Override
     public int compareTo(Exam otherExam) {
