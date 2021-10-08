@@ -12,7 +12,6 @@ import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.exam.ExamName;
-import seedu.address.model.module.lesson.LessonName;
 
 /**
  * Jackson-friendly version of {@link Exam}
@@ -58,8 +57,6 @@ public class JsonAdaptedExam {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Exam toModelType() throws IllegalValueException {
-        final Timeslot modelTimeslot = timeslot.toModelType();
-        final ModBookDate modelDate = date.toModelType();
         Optional<Venue> modelVenue = Optional.empty();
         Optional<Link> modelLink = Optional.empty();
 
@@ -71,6 +68,18 @@ public class JsonAdaptedExam {
             throw new IllegalValueException(ExamName.MESSAGE_CONSTRAINTS);
         }
         final ExamName modelName = new ExamName(name);
+
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModBookDate.class.getSimpleName()));
+        }
+        final ModBookDate modelDate = date.toModelType();
+
+        if (timeslot == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Timeslot.class.getSimpleName()));
+        }
+        final Timeslot modelTimeslot = timeslot.toModelType();
 
         if (venue != null && venue.isPresent()) {
             if (!venue.map(Venue::isValidVenue).orElse(false)) {
