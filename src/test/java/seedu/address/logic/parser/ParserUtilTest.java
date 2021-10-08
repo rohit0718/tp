@@ -20,6 +20,9 @@ import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.ModBookTime;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
@@ -44,6 +47,8 @@ public class ParserUtilTest {
     private static final String INVALID_VENUE = " ";
     private static final String INVALID_EXAM_NAME = " ";
     private static final String INVALID_LESSON_NAME = " ";
+    private static final String INVALID_MODULE_CODE = "C2030S";
+    private static final String INVALID_MODULE_NAME = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -60,6 +65,8 @@ public class ParserUtilTest {
     private static final String VALID_VENUE = "University Sports Centre";
     private static final String VALID_EXAM_NAME = "Midterms";
     private static final String VALID_LESSON_NAME = "Lecture";
+    private static final String VALID_MODULE_CODE = "CS2103T";
+    private static final String VALID_MODULE_NAME = "Software Engineering";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -418,5 +425,64 @@ public class ParserUtilTest {
         assertEquals(expectedLesson, ParserUtil.parseLesson(
                 "Lecture", "Monday", "09:00", "11:00",
                 Optional.of(VALID_VENUE), Optional.of(VALID_LINK)));
+    }
+
+    @Test
+    public void parseModuleCode_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleCode(null));
+    }
+
+    @Test
+    public void parseModuleCode_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModuleCode(INVALID_MODULE_CODE));
+    }
+
+    @Test
+    public void parseModuleCode_validValueWithoutWhitespace_returnsModuleCode() throws Exception {
+        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
+        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(VALID_MODULE_CODE));
+    }
+
+    @Test
+    public void parseModuleCode_validValueWithWhitespace_returnsTrimmedModuleCode() throws Exception {
+        String moduleCodeWithWhitespace = WHITESPACE + VALID_MODULE_CODE + WHITESPACE;
+        ModuleCode expectedModuleCode = new ModuleCode(VALID_MODULE_CODE);
+        assertEquals(expectedModuleCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
+    }
+
+    @Test
+    public void parseModuleName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModuleName(null));
+    }
+
+    @Test
+    public void parseModuleName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModuleName(INVALID_MODULE_NAME));
+    }
+
+    @Test
+    public void parseModuleName_validValueWithoutWhitespace_returnsModuleName() throws Exception {
+        ModuleName expectedModuleName = new ModuleName(VALID_MODULE_NAME);
+        assertEquals(expectedModuleName, ParserUtil.parseModuleName(VALID_MODULE_NAME));
+    }
+
+    @Test
+    public void parseModuleName_validValueWithWhitespace_returnsTrimmedModuleName() throws Exception {
+        String moduleNameWithWhitespace = WHITESPACE + VALID_MODULE_NAME + WHITESPACE;
+        ModuleName expectedModuleName = new ModuleName(VALID_MODULE_NAME);
+        assertEquals(expectedModuleName, ParserUtil.parseModuleName(moduleNameWithWhitespace));
+    }
+
+    @Test
+    public void parseModule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModule(null, null));
+    }
+
+    @Test
+    public void parseModule_validValues_returnsModule() throws Exception {
+        ModuleCode moduleCode = new ModuleCode(VALID_MODULE_CODE);
+        ModuleName moduleName = new ModuleName(VALID_MODULE_NAME);
+        Module expectedModule = new Module(moduleCode, Optional.of(moduleName));
+        assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE_CODE, Optional.of(VALID_MODULE_NAME)));
     }
 }
