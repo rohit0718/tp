@@ -83,6 +83,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getModBookFilePath() {
+        return userPrefs.getModBookFilePath();
+    }
+
+    @Override
+    public void setModBookFilePath(Path modBookFilePath) {
+        requireNonNull(modBookFilePath);
+        userPrefs.setModBookFilePath(modBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
