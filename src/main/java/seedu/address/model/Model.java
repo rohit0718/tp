@@ -17,6 +17,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -129,4 +132,13 @@ public interface Model {
      * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     void setModule(Module target, Module editedModule);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Module> getFilteredModuleList();
+
+    /**
+     * Updates the filter of the filtered module list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredModuleList(Predicate<Module> predicate);
 }
