@@ -49,10 +49,10 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.module = module;
         id.setText(displayedIndex + ". ");
-        name.setText(module.getName().toString());
-        //phone.setText(module.getPhone().value);
-        //address.setText(person.getAddress().value);
-        //email.setText(person.getEmail().value);
+        name.setText(module.getCode().toString());
+        phone.setText("smthng");
+        address.setText("smthgn");
+        email.setText("smthn");
     }
 
     @Override

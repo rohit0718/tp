@@ -6,12 +6,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Person;
 import seedu.address.model.module.Module;
 
@@ -25,9 +28,12 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    // Temporary modules list
+    // Temporary modules and modules list
+    private Module Module1 = new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Shezad")));
+    private Module Module2 = new Module(new ModuleCode("CS2105"), Optional.of(new ModuleName("Networks")));
+
     private final FilteredList<Module> filteredModules;
-    private final ObservableList<Module> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Module> internalList = FXCollections.observableArrayList(Module1, Module2);
     private final ObservableList<Module> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
