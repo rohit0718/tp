@@ -87,6 +87,25 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the user prefs' address book file path.
+     */
+    Path getModBookFilePath();
+
+    /**
+     * Sets the user prefs' address book file path.
+     */
+    void setModBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setModBook(ReadOnlyModBook addressBook);
+
+    /** Returns the AddressBook */
+    ReadOnlyModBook getModBook();
+
     /**
      * Returns true if a module with the same identity as {@code module} exists in the address book.
      */
