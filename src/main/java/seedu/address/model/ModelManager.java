@@ -4,19 +4,20 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Person;
-import seedu.address.model.module.Module;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,13 +30,13 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     // Temporary modules and modules list
-    private Module Module1 = new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Shezad")));
-    private Module Module2 = new Module(new ModuleCode("CS2105"), Optional.of(new ModuleName("Networks")));
-    private Module Module3 = new Module(new ModuleCode("Cs3333"), Optional.empty());
+    private Module module1 = new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Shezad")));
+    private Module module2 = new Module(new ModuleCode("CS2105"), Optional.of(new ModuleName("Networks")));
+    private Module module3 = new Module(new ModuleCode("Cs3333"), Optional.empty());
 
 
     private final FilteredList<Module> filteredModules;
-    private final ObservableList<Module> internalList = FXCollections.observableArrayList(Module1, Module2, Module3);
+    private final ObservableList<Module> internalList = FXCollections.observableArrayList(module1, module2, module3);
     private final ObservableList<Module> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 

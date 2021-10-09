@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +7,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleName;
 
 
 /**
@@ -51,7 +48,7 @@ public class ModuleCard extends UiPart<Region> {
         String modName;
         String modCode = module.getCode().toString();
 
-        if(module.getName().isPresent()) {
+        if (module.getName().isPresent()) {
             modName = module.getName().get().toString();
         } else {
             modName = "";
