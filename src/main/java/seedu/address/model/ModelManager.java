@@ -151,8 +151,44 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && modBook.equals(other.modBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== ModBook ================================================================================
+
+    @Override
+    public void setModBook(ReadOnlyModBook modBook) {
+        this.modBook.resetData(modBook);
+    }
+
+    @Override
+    public ReadOnlyModBook getModBook() {
+        return modBook;
+    }
+
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modBook.hasModule(module);
+    }
+
+    @Override
+    public void deleteModule(Module target) {
+        modBook.removeModule(target);
+    }
+
+    @Override
+    public void addModule(Module module) {
+        modBook.addModule(module);
+        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+    }
+
+    @Override
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+
+        modBook.setModules(target, editedModule);
+    }
 }
