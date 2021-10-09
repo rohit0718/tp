@@ -31,9 +31,11 @@ public class ModelManager implements Model {
     // Temporary modules and modules list
     private Module Module1 = new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Shezad")));
     private Module Module2 = new Module(new ModuleCode("CS2105"), Optional.of(new ModuleName("Networks")));
+    private Module Module3 = new Module(new ModuleCode("Cs3333"), Optional.empty());
+
 
     private final FilteredList<Module> filteredModules;
-    private final ObservableList<Module> internalList = FXCollections.observableArrayList(Module1, Module2);
+    private final ObservableList<Module> internalList = FXCollections.observableArrayList(Module1, Module2, Module3);
     private final ObservableList<Module> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 

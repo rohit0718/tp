@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 
 
 /**
@@ -34,11 +36,9 @@ public class ModuleCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label nextLesson;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label nextExam;
     @FXML
     private FlowPane tags;
 
@@ -48,11 +48,20 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
         this.module = module;
+        String modName;
+        String modCode = module.getCode().toString();
+
+        if(module.getName().isPresent()) {
+            modName = module.getName().get().toString();
+        } else {
+            modName = "";
+        }
+
+        String moduleHeader = String.format("%s %s", modCode, modName);
         id.setText(displayedIndex + ". ");
-        name.setText(module.getCode().toString());
-        phone.setText("testing");
-        address.setText("bob");
-        email.setText("lesson");
+        name.setText(moduleHeader);
+        nextLesson.setText("next Lesson is cs1234");
+        nextExam.setText("next Exam is waiting ");
     }
 
     @Override
