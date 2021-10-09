@@ -56,4 +56,40 @@ public class ModBook implements ReadOnlyModBook {
         setModules(newData.getModuleList());
     }
 
+    //// module-level operations
+
+    /**
+     * Returns true if a module with the same identity as {@code module} exists in the address book.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modules.contains(module);
+    }
+
+    /**
+     * Adds a module to the address book.
+     * The module must not already exist in the address book.
+     */
+    public void addModule(Module module) {
+        modules.add(module);
+    }
+
+    /**
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedModule} must not be the same as another existing module in the address book.
+     */
+    public void setModules(Module target, Module editedModule) {
+        requireNonNull(editedModule);
+
+        modules.setModule(target, editedModule);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeModule(Module key) {
+        modules.remove(key);
+    }
 }
