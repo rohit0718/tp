@@ -92,4 +92,29 @@ public class ModBook implements ReadOnlyModBook {
     public void removeModule(Module key) {
         modules.remove(key);
     }
+
+    //// util methods
+
+    @Override
+    public String toString() {
+        return modules.asUnmodifiableObservableList().size() + " modules";
+        // TODO: refine later
+    }
+
+    @Override
+    public ObservableList<Module> getModuleList() {
+        return modules.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ModBook // instanceof handles nulls
+                && modules.equals(((ModBook) other).modules));
+    }
+
+    @Override
+    public int hashCode() {
+        return modules.hashCode();
+    }
 }
