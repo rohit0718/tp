@@ -44,15 +44,10 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
         this.module = module;
-        String moduleHeader;
-        String modName;
-        String modCode = module.getCode().toString();
+        String moduleHeader = module.getCode().toString();
 
         if (module.getName().isPresent()) {
-            modName = module.getName().get().toString();
-            moduleHeader = String.format("%s %s", modCode, modName);
-        } else {
-            moduleHeader = modCode;
+            moduleHeader += String.format(" %s", module.getName().get());
         }
 
         id.setText(displayedIndex + ". ");
