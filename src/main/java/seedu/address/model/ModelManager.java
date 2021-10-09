@@ -18,7 +18,6 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Person;
 
-
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -34,11 +33,9 @@ public class ModelManager implements Model {
     private Module module2 = new Module(new ModuleCode("CS2105"), Optional.of(new ModuleName("Networks")));
     private Module module3 = new Module(new ModuleCode("Cs3333"), Optional.empty());
 
-
     private final FilteredList<Module> filteredModules;
-    private final ObservableList<Module> internalList = FXCollections.observableArrayList(module1, module2, module3);
     private final ObservableList<Module> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(module1, module2, module3));
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -138,7 +135,6 @@ public class ModelManager implements Model {
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
-
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
@@ -148,7 +144,6 @@ public class ModelManager implements Model {
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
      * {@code versionedAddressBook}
      */
-
     @Override
     public ObservableList<Module> getFilteredModuleList() {
         return filteredModules;
@@ -178,5 +173,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

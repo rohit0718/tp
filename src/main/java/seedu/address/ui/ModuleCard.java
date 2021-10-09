@@ -8,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
 
-
 /**
  * An UI component that displays information of a {@code Module}.
  */
@@ -45,16 +44,17 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
         this.module = module;
+        String moduleHeader;
         String modName;
         String modCode = module.getCode().toString();
 
         if (module.getName().isPresent()) {
             modName = module.getName().get().toString();
+            moduleHeader = String.format("%s %s", modCode, modName);
         } else {
-            modName = "";
+            moduleHeader = modCode;
         }
 
-        String moduleHeader = String.format("%s %s", modCode, modName);
         id.setText(displayedIndex + ". ");
         name.setText(moduleHeader);
         nextLesson.setText("next Lesson is cs1234");
