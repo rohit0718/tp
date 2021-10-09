@@ -202,4 +202,20 @@ public class ModelManager implements Model {
 
         modBook.setModules(target, editedModule);
     }
+
+    //=========== Filtered Module List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
+        requireNonNull(predicate);
+        filteredModules.setPredicate(predicate);
+    }
 }
