@@ -1,11 +1,17 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.ModBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyModBook;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,12 +46,30 @@ public class SampleDataUtil {
         };
     }
 
+    public static Module[] getSampleModules() {
+        return new Module[] {
+            new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Discrete Structures"))),
+            new Module(new ModuleCode("CS2040S"), Optional.of(new ModuleName("Data Structures and Algorithms"))),
+            new Module(new ModuleCode("CS2030S"), Optional.of(new ModuleName("Programming Methodology II"))),
+            new Module(new ModuleCode("CS2100"), Optional.of(new ModuleName("Computer Organization"))),
+            new Module(new ModuleCode("CS2103T"), Optional.of(new ModuleName("Software Engineering")))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyModBook getSampleModBook() {
+        ModBook sampleMb = new ModBook();
+        for (Module sampleModule : getSampleModules()) {
+            sampleMb.addModule(sampleModule);
+        }
+        return sampleMb;
     }
 
     /**
