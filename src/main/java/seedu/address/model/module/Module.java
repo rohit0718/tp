@@ -34,6 +34,23 @@ public class Module {
         this.exams = new ArrayList<>();
     }
 
+    /**
+     * Constructs a {@code Module} with existing lessons and exams
+     *
+     * @param moduleCode Code of module
+     * @param moduleName Optional name of Module
+     * @param lessons List of lessons
+     * @param exams List of exams
+     */
+    public Module(ModuleCode moduleCode, Optional<ModuleName> moduleName,
+                  List<Lesson> lessons, List<Exam> exams) {
+        requireAllNonNull(moduleCode, moduleName);
+        this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
+        this.lessons = lessons;
+        this.exams = exams;
+    }
+
     public ModuleCode getCode() {
         return moduleCode;
     }
