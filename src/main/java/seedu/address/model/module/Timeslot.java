@@ -19,7 +19,7 @@ public class Timeslot implements Comparable<Timeslot> {
      * Constructs a {@code Timeslot}
      *
      * @param startTime the starting time of the timeslot
-     * @param endTime the ending time of the timeslot
+     * @param endTime   the ending time of the timeslot
      */
     public Timeslot(ModBookTime startTime, ModBookTime endTime) {
         requireAllNonNull(startTime, endTime);
@@ -34,6 +34,13 @@ public class Timeslot implements Comparable<Timeslot> {
     public static boolean isValidTimeslot(ModBookTime startTime, ModBookTime endTime) {
         requireAllNonNull(startTime, endTime);
         return startTime.compareTo(endTime) < 0;
+    }
+
+    /**
+     * Returns true if the end time of this Timeslot is before the current time, i.e. lesson has finished.
+     */
+    public boolean hasFinished() {
+        return endTime.beforeNow();
     }
 
     @Override
@@ -56,7 +63,7 @@ public class Timeslot implements Comparable<Timeslot> {
      *
      * @param other the Timeslot to compare with
      * @return a negative integer, zero or a positive integer as this Timeslot is before, at the same starting time
-     *         or after the given Timeslot respectively.
+     * or after the given Timeslot respectively.
      */
     @Override
     public int compareTo(Timeslot other) {

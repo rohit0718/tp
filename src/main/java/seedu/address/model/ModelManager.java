@@ -4,13 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +27,15 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    // Temporary modules and modules list
+    private Module module1 = new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Shezad")));
+    private Module module2 = new Module(new ModuleCode("CS2105"), Optional.of(new ModuleName("Networks")));
+    private Module module3 = new Module(new ModuleCode("Cs3333"), Optional.empty());
+
+    private final FilteredList<Module> filteredModules;
+    private final ObservableList<Module> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(module1, module2, module3));
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +49,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        // Temp modules list
+        filteredModules = new FilteredList<>(internalUnmodifiableList);
     }
 
     public ModelManager() {
@@ -123,6 +140,15 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -147,5 +173,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }
