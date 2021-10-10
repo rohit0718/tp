@@ -47,6 +47,17 @@ public class ModBook implements ReadOnlyModBook {
     }
 
     /**
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedModule} must not be the same as another existing module in the address book.
+     */
+    public void setModules(Module target, Module editedModule) {
+        requireNonNull(editedModule);
+
+        modules.setModule(target, editedModule);
+    }
+
+    /**
      * Resets the existing data of this {@code ModBook} with {@code newData}.
      */
     public void resetData(ReadOnlyModBook newData) {
@@ -71,17 +82,6 @@ public class ModBook implements ReadOnlyModBook {
      */
     public void addModule(Module module) {
         modules.add(module);
-    }
-
-    /**
-     * Replaces the given module {@code target} in the list with {@code editedModule}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedModule} must not be the same as another existing module in the address book.
-     */
-    public void setModules(Module target, Module editedModule) {
-        requireNonNull(editedModule);
-
-        modules.setModule(target, editedModule);
     }
 
     /**

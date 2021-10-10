@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ModBook;
-import seedu.address.model.module.Module;
 import seedu.address.model.ReadOnlyModBook;
+import seedu.address.model.module.Module;
 
 /**
  * An Immutable ModBook that is serializable to JSON format.
