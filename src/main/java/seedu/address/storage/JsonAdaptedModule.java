@@ -15,6 +15,9 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
 
+/**
+ * Jackson-friendly version of {@link Module}
+ */
 public class JsonAdaptedModule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module's %s field is missing!";
