@@ -17,6 +17,11 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** State of the application.
+     * TODO: move help and exit to state.
+     * */
+    private final STATE state;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,6 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.state = STATE.SUMMARY;
     }
 
     /**
@@ -44,6 +50,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public STATE getState() {
+        return state;
     }
 
     @Override
