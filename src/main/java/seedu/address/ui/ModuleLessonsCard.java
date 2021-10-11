@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,8 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
-
-import java.util.stream.IntStream;
 
 /**
  * A UI component that displays lessons of a {@code Module}.

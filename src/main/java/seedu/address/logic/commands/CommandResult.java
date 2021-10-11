@@ -20,7 +20,7 @@ public class CommandResult {
     /** State of the application.
      * TODO: move help and exit to state.
      * */
-    private final STATE state;
+    private final State state;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -29,7 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.state = STATE.SUMMARY;
+        this.state = State.SUMMARY;
     }
 
     /**
@@ -52,7 +52,7 @@ public class CommandResult {
         return exit;
     }
 
-    public STATE getState() {
+    public State getState() {
         return state;
     }
 

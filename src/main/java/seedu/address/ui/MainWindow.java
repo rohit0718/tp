@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
             case DETAILS:
                 handleDetailList();
                 break;
-            case SUMMARY:
+            default:
                 handleSummaryList();
             }
 
