@@ -1,2 +1,3 @@
-package seedu.address.model.module;public interface ReadOnlyModBook {
+package seedu.address.model.module;
+public interface ReadOnlyModBook {
 }
