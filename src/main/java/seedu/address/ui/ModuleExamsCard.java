@@ -11,11 +11,11 @@ import seedu.address.model.module.Module;
 import java.util.stream.IntStream;
 
 /**
- * A UI component that displays lessons of a {@code Module}.
+ * A UI component that displays exams of a {@code Module}.
  */
-public class ModuleLessonsCard extends UiPart<Region> {
+public class ModuleExamsCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleLessonsCard.fxml";
+    private static final String FXML = "ModuleExamsCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -34,14 +34,14 @@ public class ModuleLessonsCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label lessons;
+    private Label exams;
     @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
      */
-    public ModuleLessonsCard(Module module) {
+    public ModuleExamsCard(Module module) {
         super(FXML);
         this.module = module;
         String moduleHeader = module.getCode().toString();
@@ -49,13 +49,13 @@ public class ModuleLessonsCard extends UiPart<Region> {
             moduleHeader += String.format(" %s", module.getName().get());
         }
         name.setText(moduleHeader);
-        // set Lessons
-        String lessonsString = (module.getLessons().isEmpty())
-                ? "No Lessons available. :("
-                : "Lessons:\n" + String.join("\n", IntStream.range(0, module.getLessons().size())
-                .mapToObj(i -> String.format("%d.%s", i + 1, module.getLessons().get(i)))
+        // set Exams
+        String examsString = (module.getExams().isEmpty())
+                ? "No Exams available. :)"
+                : "Exams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
+                .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
                 .toArray(String[]::new));
-        lessons.setText(lessonsString);
+        exams.setText(examsString);
     }
 
     @Override
@@ -66,12 +66,12 @@ public class ModuleLessonsCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModuleLessonsCard)) {
+        if (!(other instanceof ModuleExamsCard)) {
             return false;
         }
 
         // state check
-        ModuleLessonsCard card = (ModuleLessonsCard) other;
+        ModuleExamsCard card = (ModuleExamsCard) other;
         return id.getText().equals(card.id.getText())
                 && module.equals(card.module);
     }
