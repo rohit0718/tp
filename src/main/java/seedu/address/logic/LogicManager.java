@@ -70,6 +70,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Path getModBookFilePath() {
+        return model.getModBookFilePath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
