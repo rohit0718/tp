@@ -147,6 +147,22 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Shows the Module details view.
+     */
+    @FXML
+    public void handleDetailList() {
+        moduleListPanel.showDetailList();
+    }
+
+    /**
+     * Shows the Module Summary list view.
+     */
+    @FXML
+    public void handleSummaryList() {
+        moduleListPanel.showSummaryList();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -184,6 +200,13 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            switch (commandResult.getState()) {
+            case DETAILS:
+                handleDetailList();
+            case SUMMARY:
+                handleSummaryList();
             }
 
             return commandResult;
