@@ -1,0 +1,13 @@
+{
+  "modules": [ {
+    "code": "CS2030S",
+    "name": "Programming Methodology II",
+    "lessons": [],
+    "exams": []
+  }, {
+    "code": "Z420F",
+    "name": "Software Testing",
+    "lessons": [],
+    "exams": []
+  } ]
+}
