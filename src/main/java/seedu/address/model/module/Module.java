@@ -44,7 +44,7 @@ public class Module {
      */
     public Module(ModuleCode moduleCode, Optional<ModuleName> moduleName,
                   List<Lesson> lessons, List<Exam> exams) {
-        requireAllNonNull(moduleCode, moduleName);
+        requireAllNonNull(moduleCode, moduleName, lessons, exams);
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.lessons = lessons;

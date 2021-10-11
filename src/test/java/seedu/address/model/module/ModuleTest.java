@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,14 @@ public class ModuleTest {
         assertThrows(NullPointerException.class, () -> new Module(null, null));
         assertThrows(NullPointerException.class, () -> new Module(MODULE_CODE, null));
         assertThrows(NullPointerException.class, () -> new Module(null, MODULE_NAME));
+        assertThrows(NullPointerException.class, () -> new Module(MODULE_CODE, null,
+                new ArrayList<>(), new ArrayList<>()));
+        assertThrows(NullPointerException.class, () -> new Module(MODULE_CODE, null,
+                new ArrayList<>(), new ArrayList<>()));
+        assertThrows(NullPointerException.class, () -> new Module(MODULE_CODE, MODULE_NAME,
+                new ArrayList<>(), null));
+        assertThrows(NullPointerException.class, () -> new Module(MODULE_CODE, MODULE_NAME,
+                null, new ArrayList<>()));
     }
 
     @Test

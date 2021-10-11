@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModules.CS2040S;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.builders.AddressBookBuilder;
+import seedu.address.testutil.builders.ModBookBuilder;
 
 public class ModelManagerTest {
 
@@ -98,7 +101,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        ModBook modBook = new ModBook();
+        ModBook modBook = new ModBookBuilder().withModule(CS2103T).withModule(CS2040S).build();
         ModBook differentModBook = new ModBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,6 +121,9 @@ public class ModelManagerTest {
 
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentModBook, userPrefs)));
+
+        // different modBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentModBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
