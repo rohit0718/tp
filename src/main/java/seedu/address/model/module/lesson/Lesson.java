@@ -109,7 +109,7 @@ public class Lesson implements Comparable<Lesson> {
         }
         if (link.isPresent()) {
             builder.append("; Link: ")
-                    .append(getLink());
+                    .append(getLink().get());
         }
         return builder.toString();
     }

@@ -39,6 +39,11 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' Module book file path.
+     */
+    Path getModBookFilePath();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
