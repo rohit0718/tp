@@ -33,7 +33,7 @@ public class JsonAdaptedModule {
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("code") String code, @JsonProperty("name") Optional<String> name,
                            @JsonProperty("lessons") List<JsonAdaptedLesson> lessons,
-                           @JsonProperty("lessons") List<JsonAdaptedExam> exams) {
+                           @JsonProperty("exams") List<JsonAdaptedExam> exams) {
         this.code = code;
         this.name = name;
         if (lessons != null) {

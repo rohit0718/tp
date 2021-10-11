@@ -5,7 +5,7 @@
     "name": "Software Engineering",
     "lessons": [ {
       "name": "CS2103T Lecture",
-      "day": "",
+      "day": "FRIDAY",
       "timeslot": {
         "startTime": "16:00",
         "endTime": "18:00"
@@ -86,34 +86,6 @@
       },
       "venue": null,
       "link": "midterms.com"
-    } ]
-  }, {
-    "code": "CS2030S",
-    "name": "Programming Methodology II",
-    "lessons": [],
-    "exams": []
-  }, {
-    "code": "MA1521",
-    "name": "Calculus for Computing",
-    "lessons": [ {
-      "name": "Lecture",
-      "day": "MONDAY",
-      "timeslot": {
-        "startTime": "09:00",
-        "endTime": "11:00"
-      },
-      "venue": null,
-      "link": null
-    } ],
-    "exams": [ {
-      "name": "Finals",
-      "date": "09/12/2021",
-      "timeslot": {
-        "startTime": "09:00",
-        "endTime": "11:00"
-      },
-      "venue": null,
-      "link": null
     } ]
   } ]
 }

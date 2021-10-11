@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.ModBook;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.ModuleBuilder;
 
 /**
@@ -49,6 +47,6 @@ public class TypicalModules {
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2040S, CS1231S, CS2030S, MA1521));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2040S, CS1231S));
     }
 }

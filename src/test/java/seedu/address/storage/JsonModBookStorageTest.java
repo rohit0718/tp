@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2030S;
-import static seedu.address.testutil.TypicalModules.CS2103T;
+import static seedu.address.testutil.TypicalModules.CS2040S;
 import static seedu.address.testutil.TypicalModules.MA1521;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 
@@ -72,14 +72,14 @@ public class JsonModBookStorageTest {
         assertEquals(original, new ModBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addModule(CS2103T);
-        original.removeModule(CS2030S);
+        original.addModule(MA1521);
+        original.removeModule(CS2040S);
         jsonModBookStorage.saveModBook(original, filePath);
         readBack = jsonModBookStorage.readModBook(filePath).get();
         assertEquals(original, new ModBook(readBack));
 
         // Save and read without specifying file path
-        original.addModule(MA1521);
+        original.addModule(CS2030S);
         jsonModBookStorage.saveModBook(original); // file path not specified
         readBack = jsonModBookStorage.readModBook().get(); // file path not specified
         assertEquals(original, new ModBook(readBack));
