@@ -30,9 +30,12 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code AddressBook} and {@code ModBook} with sample data.
  */
 public class SampleDataUtil {
+    /**
+     * Returns an array of sample persons to be displayed if no other data is found.
+     */
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -56,6 +59,9 @@ public class SampleDataUtil {
         };
     }
 
+    /**
+     * Returns an array of sample modules to be displayed if no other data is found.
+     */
     public static Module[] getSampleModules() {
         return new Module[] {
             new Module(new ModuleCode("CS1231"), Optional.of(new ModuleName("Discrete Structures"))),
