@@ -110,7 +110,7 @@ public class Exam implements Comparable<Exam> {
                 .append(getTimeslot());
         if (venue.isPresent()) {
             builder.append("; Venue: ")
-                    .append(getVenue());
+                    .append(getVenue().get());
         }
         if (link.isPresent()) {
             builder.append("; Link: ")
