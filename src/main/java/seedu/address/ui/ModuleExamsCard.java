@@ -50,10 +50,10 @@ public class ModuleExamsCard extends UiPart<Region> {
         name.setText(moduleHeader);
         // set Exams
         String examsString = (module.getExams().isEmpty())
-                ? "No Exams available. :)"
-                : "Exams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
-                .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
-                .toArray(String[]::new));
+            ? "No Exams available. :)"
+            : "Exams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
+                    .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
+                    .toArray(String[]::new));
         exams.setText(examsString);
     }
 

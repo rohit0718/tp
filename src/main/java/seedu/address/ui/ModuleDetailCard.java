@@ -59,10 +59,10 @@ public class ModuleDetailCard extends UiPart<Region> {
         lessons.setText(lessonsString);
         // set Exams
         String examsString = (module.getExams().isEmpty())
-                ? "\nNo Exams available. :)"
-                : "\nExams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
-                .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
-                .toArray(String[]::new));
+            ? "\nNo Exams available. :)"
+            : "\nExams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
+                    .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
+                    .toArray(String[]::new));
         exams.setText(examsString);
     }
 
