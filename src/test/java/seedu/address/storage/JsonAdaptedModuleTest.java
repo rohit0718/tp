@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedModule.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 
@@ -14,16 +14,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.module.Day;
-import seedu.address.model.module.Link;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.Timeslot;
-import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.module.lesson.LessonName;
 
 public class JsonAdaptedModuleTest {
     private static final String INVALID_CODE = "CS421S";
@@ -83,21 +78,27 @@ public class JsonAdaptedModuleTest {
     }
 
     @Test
-    public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, null, VALID_LESSONS, VALID_EXAMS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                ModuleName.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
+    public void toModelType_nullName_success() {
+        try {
+            JsonAdaptedModule module =
+                    new JsonAdaptedModule(VALID_CODE, null, VALID_LESSONS, VALID_EXAMS);
+            Module readModule = module.toModelType();
+            assertEquals(Optional.empty(), readModule.getName());
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     @Test
-    public void toModelType_nullLessons_throwsIllegalValueException() {
+    public void toModelType_nullLessons_success() {
+        try {
             JsonAdaptedModule module =
                     new JsonAdaptedModule(VALID_CODE, VALID_NAME, null, VALID_EXAMS);
-            String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    List.class.getSimpleName());
-            assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
+            Module readModule = module.toModelType();
+            assertEquals(new ArrayList<Lesson>(), readModule.getLessons());
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     @Test
@@ -113,12 +114,15 @@ public class JsonAdaptedModuleTest {
     }
 
     @Test
-    public void toModelType_nullExams_throwsIllegalValueException() {
-        JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_NAME, VALID_LESSONS, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                List.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
+    public void toModelType_nullExams_success() {
+        try {
+            JsonAdaptedModule module =
+                    new JsonAdaptedModule(VALID_CODE, VALID_NAME, VALID_LESSONS, null);
+            Module readModule = module.toModelType();
+            assertEquals(new ArrayList<Exam>(), readModule.getExams());
+        } catch (Exception e) {
+            Assertions.fail();
+        }
     }
 
     @Test
