@@ -14,8 +14,10 @@ import seedu.address.testutil.builders.ModuleBuilder;
 public class TypicalModules {
     public static final Module DEFAULT_MODULE = new ModuleBuilder().build();
     public static final Module NAMED_MODULE = new ModuleBuilder().withDefaultName().build();
-    public static final Module MODULE_WITH_LESSON = new ModuleBuilder().withDefaultName().withLessons(TypicalLessons.DEFAULT_LESSON).build();
-    public static final Module MODULE_WITH_EXAM = new ModuleBuilder().withDefaultName().withExams(TypicalExams.DEFAULT_EXAM).build();
+    public static final Module MODULE_WITH_LESSON = new ModuleBuilder().withDefaultName()
+            .withLessons(TypicalLessons.DEFAULT_LESSON).build();
+    public static final Module MODULE_WITH_EXAM = new ModuleBuilder().withDefaultName()
+            .withExams(TypicalExams.DEFAULT_EXAM).build();
 
     // Computer Science modules for some real life modules
     public static final Module CS2103T = new ModuleBuilder().withCode("CS2103T").withName("Software Engineering")
