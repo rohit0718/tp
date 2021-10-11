@@ -114,7 +114,7 @@ public class Exam implements Comparable<Exam> {
         }
         if (link.isPresent()) {
             builder.append("; Link: ")
-                    .append(getLink());
+                    .append(getLink().get());
         }
         return builder.toString();
     }
