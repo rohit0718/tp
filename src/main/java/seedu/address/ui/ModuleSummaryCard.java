@@ -41,7 +41,7 @@ public class ModuleSummaryCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
      */
-    public ModuleSummaryCard(Module module, int displayedIndex) {
+    public ModuleSummaryCard(Module module) {
         super(FXML);
         this.module = module;
         String moduleHeader = module.getCode().toString();
@@ -49,8 +49,6 @@ public class ModuleSummaryCard extends UiPart<Region> {
         if (module.getName().isPresent()) {
             moduleHeader += String.format(" %s", module.getName().get());
         }
-
-        id.setText(displayedIndex + ". ");
         name.setText(moduleHeader);
         if (module.getLessons().isEmpty()) {
             nextLesson.setText("No lessons added");
