@@ -4,10 +4,24 @@ import java.time.LocalDate;
 import java.util.Comparator;
 
 public enum Day {
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+    MONDAY ("Monday"),
+    TUESDAY ("Tuesday"),
+    WEDNESDAY ("Wednesday"),
+    THURSDAY ("Thursday"),
+    FRIDAY("Friday"),
+    SATURDAY("Saturday"),
+    SUNDAY("Sunday");
 
     public static final String MESSAGE_CONSTRAINTS =
             "Day should be entered as day of the week e.g. Monday, Tuesday, etc.";
+
+    // Attribute to hold String Name
+    private String string;
+
+    // Constructor to set string attribute
+    Day(String name) {
+        this.string = name;
+    }
 
     /**
      * Returns true if a given string is a valid Day.
@@ -42,5 +56,10 @@ public enum Day {
             // compare both day values
             return dayNum - dayTwoNum;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.string;
     }
 }

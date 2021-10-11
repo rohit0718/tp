@@ -52,8 +52,16 @@ public class ModuleCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         name.setText(moduleHeader);
-        nextLesson.setText("next Lesson is cs1234");
-        nextExam.setText("next Exam is waiting ");
+        if (module.getLessons().isEmpty()) {
+            nextLesson.setText("No lessons added");
+        } else {
+            nextLesson.setText(String.format("Next Lesson: %s", module.getNextLesson()));
+        }
+        if (module.getExams().isEmpty()) {
+            nextExam.setText("No exams added");
+        } else {
+            nextExam.setText(String.format("Next Exam: %s", module.getNextExam()));
+        }
     }
 
     @Override
