@@ -3,6 +3,7 @@ package seedu.address.model.module;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -73,6 +74,20 @@ public class Module {
      */
     public boolean isSameModule(Module otherModule) {
         return otherModule != null && moduleCode.equals(otherModule.getCode());
+    }
+
+    /**
+     * Returns the very next Lesson that occurs.
+     */
+    public Lesson getNextLesson() {
+        return Collections.min(lessons);
+    }
+
+    /**
+     * Returns the very next Exam that occurs.
+     */
+    public Exam getNextExam() {
+        return Collections.min(exams);
     }
 
     /**
