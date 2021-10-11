@@ -171,6 +171,14 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanel.showLessonsList();
     }
 
+    /**
+     * Shows the Module Exams view.
+     */
+    @FXML
+    public void handleExamsList() {
+        moduleListPanel.showExamsList();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -216,6 +224,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case LESSONS:
                 handleLessonsList();
+                break;
+            case EXAMS:
+                handleExamsList();
                 break;
             default:
                 handleSummaryList();
