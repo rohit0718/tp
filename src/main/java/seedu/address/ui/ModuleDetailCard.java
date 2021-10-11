@@ -8,12 +8,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
 
+import java.util.stream.IntStream;
+
 /**
  * An UI component that displays information of a {@code Module}'s details.
  */
 public class ModuleDetailCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleSummaryCard.fxml";
+    private static final String FXML = "ModuleDetailCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,9 +34,9 @@ public class ModuleDetailCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label nextLesson;
+    private Label lessons;
     @FXML
-    private Label nextExam;
+    private Label exams;
     @FXML
     private FlowPane tags;
 
@@ -45,14 +47,24 @@ public class ModuleDetailCard extends UiPart<Region> {
         super(FXML);
         this.module = module;
         String moduleHeader = module.getCode().toString();
-
         if (module.getName().isPresent()) {
             moduleHeader += String.format(" %s", module.getName().get());
         }
-
         name.setText(moduleHeader);
-        nextLesson.setText(String.format("Next Lesson: %s", module.getNextLesson()));
-        nextExam.setText(String.format("Next Exam: %s", module.getNextExam()));
+        // set Lessons
+        String lessonsString = (module.getLessons().isEmpty())
+            ? "No Lessons available. :("
+            : "Lessons:\n" + String.join("\n", IntStream.range(0, module.getLessons().size())
+                    .mapToObj(i -> String.format("%d.%s", i + 1, module.getLessons().get(i)))
+                    .toArray(String[]::new));
+        lessons.setText(lessonsString);
+        // set Exams
+        String examsString = (module.getExams().isEmpty())
+                ? "\nNo Exams available. :)"
+                : "\nExams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
+                .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
+                .toArray(String[]::new));
+        exams.setText(examsString);
     }
 
     @Override
