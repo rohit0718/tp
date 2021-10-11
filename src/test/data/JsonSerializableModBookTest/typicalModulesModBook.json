@@ -1,0 +1,91 @@
+{
+  "_comment": "ModBook save file which contains the same Person values as in TypicalModules#getTypicalModBook()",
+  "modules" : [ {
+    "code": "CS2103T",
+    "name": "Software Engineering",
+    "lessons": [ {
+      "name": "CS2103T Lecture",
+      "day": "FRIDAY",
+      "timeslot": {
+        "startTime": "16:00",
+        "endTime": "18:00"
+      },
+      "venue": null,
+      "link": "profDamith.com"
+    }, {
+      "name": "CS2103T Tutorial",
+      "day": "THURSDAY",
+      "timeslot": {
+        "startTime": "13:00",
+        "endTime": "14:00"
+      },
+      "venue": null,
+      "link": "danny.com"
+    } ],
+    "exams": [ {
+      "name": "CS2103T Practical",
+      "date": "12/11/2021",
+      "timeslot": {
+        "startTime": "16:00",
+        "endTime": "18:00"
+      },
+      "venue": null,
+      "link": "practical.com"
+    }, {
+      "name": "CS2103T Finals",
+      "date": "23/11/2021",
+      "timeslot": {
+        "startTime": "17:00",
+        "endTime": "19:00"
+      },
+      "venue": null,
+      "link": "final.com"
+    } ]
+  }, {
+    "code": "CS2040S",
+    "name": "Data Structures and Algorithms",
+    "lessons": [ {
+      "name": "Lecture",
+      "day": "MONDAY",
+      "timeslot": {
+        "startTime": "09:00",
+        "endTime": "11:00"
+      },
+      "venue": null,
+      "link": "lecture.com"
+    } ],
+    "exams": [ {
+      "name": "Finals",
+      "date": "25/11/2021",
+      "timeslot": {
+        "startTime": "15:00",
+        "endTime": "17:00"
+      },
+      "venue": null,
+      "link": "finals.com"
+    } ]
+  }, {
+    "code": "CS1231S",
+    "name": "Discrete Structures",
+    "lessons": [ {
+      "name": "Tutorial",
+      "day": "TUESDAY",
+      "timeslot": {
+        "startTime": "14:00",
+        "endTime": "15:00"
+      },
+      "venue": null,
+      "link": "tutorial.com"
+    } ],
+    "exams": [ {
+      "name": "Midterms",
+      "date": "05/10/2021",
+      "timeslot": {
+        "startTime": "16:00",
+        "endTime": "17:30"
+      },
+      "venue": null,
+      "link": "midterms.com"
+    } ]
+  } ]
+}

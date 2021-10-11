@@ -18,7 +18,7 @@ import seedu.address.model.module.Venue;
 import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.module.lesson.LessonName;
 
-class JsonAdaptedLessonTest {
+public class JsonAdaptedLessonTest {
     private static final String INVALID_NAME = " ";
     private static final String INVALID_DAY = "today";
     private static final Optional<String> INVALID_VENUE = Optional.of("  ");

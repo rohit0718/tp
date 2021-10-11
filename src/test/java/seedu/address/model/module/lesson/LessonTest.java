@@ -17,7 +17,7 @@ import seedu.address.model.module.Venue;
 
 public class LessonTest {
     private static final LessonName LESSON_NAME = new LessonName("Lecture");
-    private static final Day DAY = Day.TUESDAY;
+    private static final Day DAY = Day.SATURDAY;
     private static final ModBookTime START_TIME = new ModBookTime("09:00");
     private static final ModBookTime END_TIME = new ModBookTime("11:00");
     private static final Timeslot TIMESLOT = new Timeslot(START_TIME, END_TIME);
@@ -53,7 +53,7 @@ public class LessonTest {
 
     @Test
     void compareTo() {
-        Day dayTwo = Day.SATURDAY;
+        Day dayTwo = Day.FRIDAY;
         ModBookTime startTimeTwo = new ModBookTime("09:30");
         ModBookTime endTimeTwo = new ModBookTime("11:30");
         Timeslot timeslotTwo = new Timeslot(startTimeTwo, endTimeTwo);
