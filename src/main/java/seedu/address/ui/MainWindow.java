@@ -205,6 +205,7 @@ public class MainWindow extends UiPart<Stage> {
             switch (commandResult.getState()) {
             case DETAILS:
                 handleDetailList();
+                break;
             case SUMMARY:
                 handleSummaryList();
             }
