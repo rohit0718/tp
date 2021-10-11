@@ -38,6 +38,10 @@ public class ModuleListPanel extends UiPart<Region> {
         moduleListView.setCellFactory(listView -> new ModuleDetailViewCell());
     }
 
+    public void showLessonsList() {
+        moduleListView.setCellFactory(listView -> new ModuleLessonsViewCell());
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleSummaryCard}.
      */
@@ -68,6 +72,23 @@ public class ModuleListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(new ModuleDetailCard(module).getRoot());
+            }
+        }
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleLessonsCard}.
+     */
+    class ModuleLessonsViewCell extends ListCell<Module> {
+        @Override
+        protected void updateItem(Module module, boolean empty) {
+            super.updateItem(module, empty);
+
+            if (empty || module == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ModuleLessonsCard(module).getRoot());
             }
         }
     }
