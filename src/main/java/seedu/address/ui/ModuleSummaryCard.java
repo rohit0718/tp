@@ -11,9 +11,9 @@ import seedu.address.model.module.Module;
 /**
  * An UI component that displays information of a {@code Module}.
  */
-public class ModuleCard extends UiPart<Region> {
+public class ModuleSummaryCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleListCard.fxml";
+    private static final String FXML = "ModuleSummaryCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -41,7 +41,7 @@ public class ModuleCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
      */
-    public ModuleCard(Module module, int displayedIndex) {
+    public ModuleSummaryCard(Module module, int displayedIndex) {
         super(FXML);
         this.module = module;
         String moduleHeader = module.getCode().toString();
@@ -64,12 +64,12 @@ public class ModuleCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModuleCard)) {
+        if (!(other instanceof ModuleSummaryCard)) {
             return false;
         }
 
         // state check
-        ModuleCard card = (ModuleCard) other;
+        ModuleSummaryCard card = (ModuleSummaryCard) other;
         return id.getText().equals(card.id.getText())
                 && module.equals(card.module);
     }
