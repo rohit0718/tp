@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_MODULE_DETAILS_LISTED;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULE_NOT_FOUND;
 
 import seedu.address.model.Model;
-import seedu.address.model.module.ModuleHasModuleCodePredicate;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 /**
  * Lists all lessons and exams of a given Module.
@@ -19,9 +19,9 @@ public class DetailCommand extends Command {
             + "Parameters: c/MODULE_CODE\n"
             + "Example: " + COMMAND_WORD + " c/CS2103T";
 
-    private final ModuleHasModuleCodePredicate predicate;
+    private final HasModuleCodePredicate predicate;
 
-    public DetailCommand(ModuleHasModuleCodePredicate predicate) {
+    public DetailCommand(HasModuleCodePredicate predicate) {
         this.predicate = predicate;
     }
 

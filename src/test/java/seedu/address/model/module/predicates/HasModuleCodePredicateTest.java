@@ -1,13 +1,14 @@
-package seedu.address.model.module;
+package seedu.address.model.module.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.builders.ModuleBuilder;
 
-public class ModuleHasModuleCodePredicateTest {
+public class HasModuleCodePredicateTest {
 
     private static ModuleCode modCode = new ModuleCode(ModuleBuilder.DEFAULT_CODE);
 
@@ -15,14 +16,14 @@ public class ModuleHasModuleCodePredicateTest {
     public void equals() {
         ModuleCode secondModuleCode = new ModuleCode("CS2101");
 
-        ModuleHasModuleCodePredicate firstPredicate = new ModuleHasModuleCodePredicate(modCode);
-        ModuleHasModuleCodePredicate secondPredicate = new ModuleHasModuleCodePredicate(secondModuleCode);
+        HasModuleCodePredicate firstPredicate = new HasModuleCodePredicate(modCode);
+        HasModuleCodePredicate secondPredicate = new HasModuleCodePredicate(secondModuleCode);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ModuleHasModuleCodePredicate firstPredicateCopy = new ModuleHasModuleCodePredicate(modCode);
+        HasModuleCodePredicate firstPredicateCopy = new HasModuleCodePredicate(modCode);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -37,13 +38,13 @@ public class ModuleHasModuleCodePredicateTest {
 
     @Test
     public void test_moduleContainsModuleCode_returnsTrue() {
-        ModuleHasModuleCodePredicate predicate = new ModuleHasModuleCodePredicate(modCode);
+        HasModuleCodePredicate predicate = new HasModuleCodePredicate(modCode);
         assertTrue(predicate.test(new ModuleBuilder().build()));
     }
 
     @Test
     public void test_moduleDoesNotContainModuleCode_returnsFalse() {
-        ModuleHasModuleCodePredicate predicate = new ModuleHasModuleCodePredicate(modCode);
+        HasModuleCodePredicate predicate = new HasModuleCodePredicate(modCode);
         assertFalse(predicate.test(new ModuleBuilder().withCode("CS1101S").build()));
     }
 }

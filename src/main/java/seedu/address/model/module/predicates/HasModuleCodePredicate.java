@@ -1,15 +1,18 @@
-package seedu.address.model.module;
+package seedu.address.model.module.predicates;
 
 import java.util.function.Predicate;
+
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Tests that a {@code Module}'s {@code ModuleCode} is the same as the given {@code ModuleCode}
  */
-public class ModuleHasModuleCodePredicate implements Predicate<Module> {
+public class HasModuleCodePredicate implements Predicate<Module> {
 
     private final ModuleCode code;
 
-    public ModuleHasModuleCodePredicate(ModuleCode code) {
+    public HasModuleCodePredicate(ModuleCode code) {
         this.code = code;
     }
 
@@ -25,7 +28,7 @@ public class ModuleHasModuleCodePredicate implements Predicate<Module> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof ModuleHasModuleCodePredicate // instanceof handles nulls
-            && code.equals(((ModuleHasModuleCodePredicate) other).code)); // state check
+            || (other instanceof HasModuleCodePredicate // instanceof handles nulls
+            && code.equals(((HasModuleCodePredicate) other).code)); // state check
     }
 }

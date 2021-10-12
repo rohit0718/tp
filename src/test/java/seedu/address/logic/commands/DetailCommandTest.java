@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleHasModuleCodePredicate;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code DetailCommand}
@@ -31,10 +31,10 @@ public class DetailCommandTest {
 
     @Test
     public void equals() {
-        ModuleHasModuleCodePredicate firstPredicate =
-                new ModuleHasModuleCodePredicate(new ModuleCode("CS2103T"));
-        ModuleHasModuleCodePredicate secondPredicate =
-                new ModuleHasModuleCodePredicate(new ModuleCode("CS2101"));
+        HasModuleCodePredicate firstPredicate =
+                new HasModuleCodePredicate(new ModuleCode("CS2103T"));
+        HasModuleCodePredicate secondPredicate =
+                new HasModuleCodePredicate(new ModuleCode("CS2101"));
 
         DetailCommand detailFirstCommand = new DetailCommand(firstPredicate);
         DetailCommand detailSecondCommand = new DetailCommand(secondPredicate);
@@ -60,7 +60,7 @@ public class DetailCommandTest {
     public void execute_validKeyword_moduleFound() {
         String expectedMessage = String.format(MESSAGE_MODULE_DETAILS_LISTED, CS2103T.getCode());
         CommandResult expectedResult = new CommandResult(expectedMessage, false, State.DETAILS);
-        ModuleHasModuleCodePredicate predicate = preparePredicate(CS2103T.getCode().toString());
+        HasModuleCodePredicate predicate = preparePredicate(CS2103T.getCode().toString());
         DetailCommand command = new DetailCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
@@ -71,7 +71,7 @@ public class DetailCommandTest {
     public void execute_moduleNotFound_listAllModules() {
         String expectedMessage = String.format(MESSAGE_MODULE_NOT_FOUND, MA1521.getCode());
         CommandResult expectedResult = new CommandResult(expectedMessage, false, State.SUMMARY);
-        ModuleHasModuleCodePredicate predicate = preparePredicate(MA1521.getCode().toString());
+        HasModuleCodePredicate predicate = preparePredicate(MA1521.getCode().toString());
         DetailCommand command = new DetailCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
@@ -81,7 +81,7 @@ public class DetailCommandTest {
     /**
      * Parses {@code userInput} into a {@code ModuleHasModuleCodePredicate}.
      */
-    private ModuleHasModuleCodePredicate preparePredicate(String userInput) {
-        return new ModuleHasModuleCodePredicate(new ModuleCode(userInput));
+    private HasModuleCodePredicate preparePredicate(String userInput) {
+        return new HasModuleCodePredicate(new ModuleCode(userInput));
     }
 }

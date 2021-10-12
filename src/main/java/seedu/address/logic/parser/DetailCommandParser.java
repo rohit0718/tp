@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import seedu.address.logic.commands.DetailCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleHasModuleCodePredicate;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class DetailCommandParser implements Parser<DetailCommand> {
 
@@ -24,6 +24,6 @@ public class DetailCommandParser implements Parser<DetailCommand> {
 
         ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
-        return new DetailCommand(new ModuleHasModuleCodePredicate(code));
+        return new DetailCommand(new HasModuleCodePredicate(code));
     }
 }

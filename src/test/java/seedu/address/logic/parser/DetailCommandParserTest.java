@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DetailCommand;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.ModuleHasModuleCodePredicate;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class DetailCommandParserTest {
 
@@ -37,7 +37,7 @@ public class DetailCommandParserTest {
     public void parse_validArgs_returnsDetailCommand() {
         // no leading and trailing whitespaces
         DetailCommand expectedDetailCommand =
-                new DetailCommand(new ModuleHasModuleCodePredicate(new ModuleCode(VALID_MODULE_CODE)));
+                new DetailCommand(new HasModuleCodePredicate(new ModuleCode(VALID_MODULE_CODE)));
         assertParseSuccess(parser, VALID_MODULE_CODE_DESC, expectedDetailCommand);
 
         // leading and trailing whitespaces
