@@ -1,5 +1,5 @@
 package seedu.address.logic.commands;
 
-public enum State {
+public enum GuiState {
     EXIT, SUMMARY, DETAILS, LESSONS, EXAMS
 }

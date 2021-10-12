@@ -33,10 +33,10 @@ public class DetailCommand extends Command {
 
         if (model.getFilteredModuleList().isEmpty()) {
             model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
-            return new CommandResult(String.format(MESSAGE_MODULE_NOT_FOUND, code), false, State.SUMMARY);
+            return new CommandResult(String.format(MESSAGE_MODULE_NOT_FOUND, code), false, GuiState.SUMMARY);
         }
 
-        return new CommandResult(String.format(MESSAGE_MODULE_DETAILS_LISTED, code), false, State.DETAILS);
+        return new CommandResult(String.format(MESSAGE_MODULE_DETAILS_LISTED, code), false, GuiState.DETAILS);
     }
 
     @Override
