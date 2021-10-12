@@ -32,8 +32,9 @@ import seedu.address.testutil.builders.PersonBuilder;
 
 public class AddressBookParserTest {
 
+    private static final GuiState DEFAULT_STATE = GuiState.SUMMARY;
+
     private final AddressBookParser parser = new AddressBookParser();
-    private final GuiState DEFAULT_STATE = GuiState.SUMMARY;
 
     @Test
     public void parseCommand_add() throws Exception {
