@@ -49,6 +49,7 @@ public class ParserUtilTest {
     private static final String INVALID_LESSON_NAME = " ";
     private static final String INVALID_MODULE_CODE = "C2030S";
     private static final String INVALID_MODULE_NAME = " ";
+    private static final String INVALID_FIRST_ARG = "shez";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -67,6 +68,9 @@ public class ParserUtilTest {
     private static final String VALID_LESSON_NAME = "Lecture";
     private static final String VALID_MODULE_CODE = "CS2103T";
     private static final String VALID_MODULE_NAME = "Software Engineering";
+    private static final String VALID_FIRST_ARG_MOD = "mod";
+    private static final String VALID_FIRST_ARG_EXAM = "exam";
+    private static final String VALID_FIRST_ARG_LESSON = "lesson";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -484,5 +488,22 @@ public class ParserUtilTest {
         ModuleName moduleName = new ModuleName(VALID_MODULE_NAME);
         Module expectedModule = new Module(moduleCode, Optional.of(moduleName));
         assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE_CODE, Optional.of(VALID_MODULE_NAME)));
+    }
+
+    @Test
+    public void parseFirstArg_null_throwsNullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFirstArg(null, null));
+    }
+
+    @Test
+    public void parseFirstArg_validValues_returnsValidResults() throws Exception {
+        assertEquals(Type.MOD, ParserUtil.parseFirstArg(VALID_FIRST_ARG_MOD, null));
+        assertEquals(Type.LESSON, ParserUtil.parseFirstArg(VALID_FIRST_ARG_LESSON, null));
+        assertEquals(Type.EXAM, ParserUtil.parseFirstArg(VALID_FIRST_ARG_EXAM, null));
+    }
+
+    @Test
+    public void parseFirstArg_invalidValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFirstArg(INVALID_FIRST_ARG, null));
     }
 }
