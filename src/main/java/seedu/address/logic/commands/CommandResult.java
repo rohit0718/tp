@@ -14,16 +14,25 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
-    /** The application should exit. */
-    private final boolean exit;
+    /** State of the application. */
+    private final State state;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
-        this.exit = exit;
+        this.state = State.SUMMARY;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields (includes state argument).
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, State state) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.state = state;
     }
 
     /**
@@ -31,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false);
     }
 
     public String getFeedbackToUser() {
@@ -42,8 +51,8 @@ public class CommandResult {
         return showHelp;
     }
 
-    public boolean isExit() {
-        return exit;
+    public State getState() {
+        return state;
     }
 
     @Override
@@ -60,12 +69,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && state == otherCommandResult.state;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, state);
     }
 
 }

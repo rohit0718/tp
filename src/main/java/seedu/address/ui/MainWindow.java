@@ -147,6 +147,38 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Shows the Module details view.
+     */
+    @FXML
+    public void handleDetailList() {
+        moduleListPanel.showDetailList();
+    }
+
+    /**
+     * Shows the Module Summary list view.
+     */
+    @FXML
+    public void handleSummaryList() {
+        moduleListPanel.showSummaryList();
+    }
+
+    /**
+     * Shows the Module Lessons view.
+     */
+    @FXML
+    public void handleLessonsList() {
+        moduleListPanel.showLessonsList();
+    }
+
+    /**
+     * Shows the Module Exams view.
+     */
+    @FXML
+    public void handleExamsList() {
+        moduleListPanel.showExamsList();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -182,8 +214,21 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            switch (commandResult.getState()) {
+            case DETAILS:
+                handleDetailList();
+                break;
+            case LESSONS:
+                handleLessonsList();
+                break;
+            case EXAMS:
+                handleExamsList();
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                handleSummaryList();
             }
 
             return commandResult;
