@@ -357,7 +357,8 @@ public class ParserUtil {
             return Type.LESSON;
         case "exam":
             return Type.EXAM;
+        default:
+            throw new ParseException(errorMessage);
         }
-        throw new ParseException(errorMessage);
     }
 }
