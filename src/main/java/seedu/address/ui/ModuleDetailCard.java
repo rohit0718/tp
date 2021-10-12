@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
 
 /**
- * An UI component that displays information of a {@code Module}.
+ * An UI component that displays information of a {@code Module}'s details.
  */
-public class ModuleCard extends UiPart<Region> {
+public class ModuleDetailCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleListCard.fxml";
+    private static final String FXML = "ModuleDetailCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,36 +33,37 @@ public class ModuleCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label nextLesson;
+    private Label lessons;
     @FXML
-    private Label nextExam;
+    private Label exams;
     @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
      */
-    public ModuleCard(Module module, int displayedIndex) {
+    public ModuleDetailCard(Module module) {
         super(FXML);
         this.module = module;
         String moduleHeader = module.getCode().toString();
-
         if (module.getName().isPresent()) {
             moduleHeader += String.format(" %s", module.getName().get());
         }
-
-        id.setText(displayedIndex + ". ");
         name.setText(moduleHeader);
-        if (module.getLessons().isEmpty()) {
-            nextLesson.setText("No lessons added");
-        } else {
-            nextLesson.setText(String.format("Next Lesson: %s", module.getNextLesson()));
-        }
-        if (module.getExams().isEmpty()) {
-            nextExam.setText("No exams added");
-        } else {
-            nextExam.setText(String.format("Next Exam: %s", module.getNextExam()));
-        }
+        // set Lessons
+        String lessonsString = (module.getLessons().isEmpty())
+            ? "No Lessons available. :("
+            : "Lessons:\n" + String.join("\n", IntStream.range(0, module.getLessons().size())
+                    .mapToObj(i -> String.format("%d.%s", i + 1, module.getLessons().get(i)))
+                    .toArray(String[]::new));
+        lessons.setText(lessonsString);
+        // set Exams
+        String examsString = (module.getExams().isEmpty())
+            ? "\nNo Exams available. :)"
+            : "\nExams:\n" + String.join("\n", IntStream.range(0, module.getExams().size())
+                    .mapToObj(i -> String.format("%d.%s", i + 1, module.getExams().get(i)))
+                    .toArray(String[]::new));
+        exams.setText(examsString);
     }
 
     @Override
@@ -72,12 +74,12 @@ public class ModuleCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModuleCard)) {
+        if (!(other instanceof ModuleDetailCard)) {
             return false;
         }
 
         // state check
-        ModuleCard card = (ModuleCard) other;
+        ModuleDetailCard card = (ModuleDetailCard) other;
         return id.getText().equals(card.id.getText())
                 && module.equals(card.module);
     }

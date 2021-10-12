@@ -27,13 +27,29 @@ public class ModuleListPanel extends UiPart<Region> {
     public ModuleListPanel(ObservableList<Module> moduleList) {
         super(FXML);
         moduleListView.setItems(moduleList);
-        moduleListView.setCellFactory(listView -> new ModuleListViewCell());
+        moduleListView.setCellFactory(listView -> new ModuleSummaryViewCell());
+    }
+
+    public void showSummaryList() {
+        moduleListView.setCellFactory(listView -> new ModuleSummaryViewCell());
+    }
+
+    public void showDetailList() {
+        moduleListView.setCellFactory(listView -> new ModuleDetailViewCell());
+    }
+
+    public void showLessonsList() {
+        moduleListView.setCellFactory(listView -> new ModuleLessonsViewCell());
+    }
+
+    public void showExamsList() {
+        moduleListView.setCellFactory(listView -> new ModuleExamsViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleSummaryCard}.
      */
-    class ModuleListViewCell extends ListCell<Module> {
+    class ModuleSummaryViewCell extends ListCell<Module> {
         @Override
         protected void updateItem(Module module, boolean empty) {
             super.updateItem(module, empty);
@@ -42,9 +58,59 @@ public class ModuleListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ModuleCard(module, getIndex() + 1).getRoot());
+                setGraphic(new ModuleSummaryCard(module).getRoot());
             }
         }
     }
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleDetailCard}.
+     */
+    class ModuleDetailViewCell extends ListCell<Module> {
+        @Override
+        protected void updateItem(Module module, boolean empty) {
+            super.updateItem(module, empty);
+
+            if (empty || module == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ModuleDetailCard(module).getRoot());
+            }
+        }
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleLessonsCard}.
+     */
+    class ModuleLessonsViewCell extends ListCell<Module> {
+        @Override
+        protected void updateItem(Module module, boolean empty) {
+            super.updateItem(module, empty);
+
+            if (empty || module == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ModuleLessonsCard(module).getRoot());
+            }
+        }
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleExamsCard}.
+     */
+    class ModuleExamsViewCell extends ListCell<Module> {
+        @Override
+        protected void updateItem(Module module, boolean empty) {
+            super.updateItem(module, empty);
+
+            if (empty || module == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ModuleExamsCard(module).getRoot());
+            }
+        }
+    }
 }
