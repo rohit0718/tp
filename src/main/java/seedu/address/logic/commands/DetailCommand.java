@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULE_DETAILS_LISTED;
+import static seedu.address.commons.core.Messages.MESSAGE_MODULE_NOT_FOUND;
 
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleHasModuleCodePredicate;
@@ -15,8 +16,8 @@ public class DetailCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all the lessons and exams of a given "
             + "module and displays them with index numbers.\n"
-            + "Parameters: c/MODULE_CODE"
-            + "Example: " + COMMAND_WORD + "c/CS2103T";
+            + "Parameters: c/MODULE_CODE\n"
+            + "Example: " + COMMAND_WORD + " c/CS2103T";
 
     private final ModuleHasModuleCodePredicate predicate;
 
@@ -28,7 +29,13 @@ public class DetailCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredModuleList(predicate);
-        return new CommandResult(String.format(MESSAGE_MODULE_DETAILS_LISTED, predicate.getCode().toString()),
-                false, State.DETAILS);
+        String code = predicate.getCode().toString();
+
+        if (model.getFilteredModuleList().isEmpty()) {
+            model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
+            return new CommandResult(String.format(MESSAGE_MODULE_NOT_FOUND, code), false, State.SUMMARY);
+        }
+
+        return new CommandResult(String.format(MESSAGE_MODULE_DETAILS_LISTED, code), false, State.DETAILS);
     }
 }
