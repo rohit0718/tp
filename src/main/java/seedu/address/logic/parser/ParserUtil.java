@@ -340,4 +340,25 @@ public class ParserUtil {
                 : Optional.empty();
         return new Module(moduleCode, moduleName);
     }
+
+    /**
+     * Parses a {@code String args} and returns first word if it is one of mod, lesson, or exam.
+     * If args is invalid, returns a ParseException with the provided errorMessage.
+     * Note that we only allow exact lowercase matches for now.
+     *
+     * @throws ParseException if the args string is invalid.
+     */
+    public static Type parseFirstArg(String args, String errorMessage) throws ParseException {
+        String firstArg = args.split(" ", 2)[0];
+        switch (firstArg) {
+        case "mod":
+            return Type.MOD;
+        case "lesson":
+            return Type.LESSON;
+        case "exam":
+            return Type.EXAM;
+        default:
+            throw new ParseException(errorMessage);
+        }
+    }
 }
