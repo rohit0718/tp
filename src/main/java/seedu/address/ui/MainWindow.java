@@ -30,7 +30,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private GuiState guiState = GuiState.SUMMARY;
+    private GuiState guiState;
 
     // Independent Ui parts residing in this Ui container
     private ModuleListPanel moduleListPanel;
@@ -61,6 +61,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.guiState = GuiState.SUMMARY;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
