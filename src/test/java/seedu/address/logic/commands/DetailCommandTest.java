@@ -59,7 +59,7 @@ public class DetailCommandTest {
     @Test
     public void execute_validKeyword_moduleFound() {
         String expectedMessage = String.format(MESSAGE_MODULE_DETAILS_LISTED, CS2103T.getCode());
-        CommandResult expectedResult = new CommandResult(expectedMessage, false, State.DETAILS);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
         HasModuleCodePredicate predicate = preparePredicate(CS2103T.getCode().toString());
         DetailCommand command = new DetailCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
@@ -70,7 +70,7 @@ public class DetailCommandTest {
     @Test
     public void execute_moduleNotFound_listAllModules() {
         String expectedMessage = String.format(MESSAGE_MODULE_NOT_FOUND, MA1521.getCode());
-        CommandResult expectedResult = new CommandResult(expectedMessage, false, State.SUMMARY);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.SUMMARY);
         HasModuleCodePredicate predicate = preparePredicate(MA1521.getCode().toString());
         DetailCommand command = new DetailCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
