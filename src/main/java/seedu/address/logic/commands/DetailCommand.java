@@ -38,4 +38,11 @@ public class DetailCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_MODULE_DETAILS_LISTED, code), false, State.DETAILS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DetailCommand // instanceof handles nulls
+                && predicate.equals(((DetailCommand) other).predicate)); // state check
+    }
 }
