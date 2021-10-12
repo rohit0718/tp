@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.person.Person;
 
 /**
@@ -131,12 +130,6 @@ public interface Model {
      * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     void setModule(Module target, Module editedModule);
-
-    /**
-     * Gets a {@code Module} that has the given {@code ModuleCode}.
-     * A module with the given {@code ModuleCode} must exist in the ModBook.
-     */
-    Module getModuleByCode(ModuleCode code);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Module> getFilteredModuleList();
