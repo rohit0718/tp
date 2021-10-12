@@ -214,10 +214,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
-                handleExit();
-            }
-
             switch (commandResult.getState()) {
             case DETAILS:
                 handleDetailList();
@@ -227,6 +223,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case EXAMS:
                 handleExamsList();
+                break;
+            case EXIT:
+                handleExit();
                 break;
             default:
                 handleSummaryList();
