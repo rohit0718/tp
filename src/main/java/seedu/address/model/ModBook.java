@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.UniqueModuleList;
 
 /**
@@ -90,6 +91,15 @@ public class ModBook implements ReadOnlyModBook {
      */
     public void removeModule(Module key) {
         modules.remove(key);
+    }
+
+    /**
+     * Returns the Module corresponding to the given {@code ModuleCode}
+     * A {@code Module} with the corresponding {@code ModuleCode} must exist in the ModBook.
+     */
+    public Module getModuleByCode(ModuleCode code) {
+        requireNonNull(code);
+        return modules.getModuleByCode(code);
     }
 
     //// util methods

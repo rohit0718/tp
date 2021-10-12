@@ -98,6 +98,19 @@ public class UniqueModuleList implements Iterable<Module> {
     }
 
     /**
+     * Gets a {@code Module} that has the given {@code ModuleCode}.
+     * A module with the given {@code ModuleCode} must exist in the ModBook.
+     */
+    public Module getModuleByCode(ModuleCode code) {
+        for (Module m : internalList) {
+            if (m.getCode().equals(code)) {
+                return m;
+            }
+        }
+        throw new ModuleNotFoundException();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Module> asUnmodifiableObservableList() {
