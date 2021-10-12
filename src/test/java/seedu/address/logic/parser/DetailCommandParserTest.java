@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DetailCommand;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
@@ -43,5 +44,10 @@ public class DetailCommandParserTest {
         // leading and trailing whitespaces
         assertParseSuccess(parser, " " + PREFIX_CODE + " \n \t " + VALID_MODULE_CODE
                 + " \n \t", expectedDetailCommand);
+
+        // parse in various GuiStates
+        assertParseSuccess(parser, VALID_MODULE_CODE_DESC, GuiState.LESSONS, expectedDetailCommand);
+        assertParseSuccess(parser, VALID_MODULE_CODE_DESC, GuiState.EXAMS, expectedDetailCommand);
+        assertParseSuccess(parser, VALID_MODULE_CODE_DESC, GuiState.DETAILS, expectedDetailCommand);
     }
 }
