@@ -3,6 +3,7 @@ package seedu.address.model.module;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,6 +35,23 @@ public class Module {
         this.exams = new ArrayList<>();
     }
 
+    /**
+     * Constructs a {@code Module} with existing lessons and exams
+     *
+     * @param moduleCode Code of module
+     * @param moduleName Optional name of Module
+     * @param lessons List of lessons
+     * @param exams List of exams
+     */
+    public Module(ModuleCode moduleCode, Optional<ModuleName> moduleName,
+                  List<Lesson> lessons, List<Exam> exams) {
+        requireAllNonNull(moduleCode, moduleName, lessons, exams);
+        this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
+        this.lessons = lessons;
+        this.exams = exams;
+    }
+
     public ModuleCode getCode() {
         return moduleCode;
     }
@@ -56,6 +74,20 @@ public class Module {
      */
     public boolean isSameModule(Module otherModule) {
         return otherModule != null && moduleCode.equals(otherModule.getCode());
+    }
+
+    /**
+     * Returns the very next Lesson that occurs.
+     */
+    public Lesson getNextLesson() {
+        return Collections.min(lessons);
+    }
+
+    /**
+     * Returns the very next Exam that occurs.
+     */
+    public Exam getNextExam() {
+        return Collections.min(exams);
     }
 
     /**

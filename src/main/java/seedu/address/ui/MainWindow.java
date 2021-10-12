@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,6 +30,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private GuiState guiState;
 
     // Independent Ui parts residing in this Ui container
     private ModuleListPanel moduleListPanel;
@@ -59,6 +61,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.guiState = GuiState.SUMMARY;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -116,7 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getModBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -147,6 +150,38 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Shows the Module details view.
+     */
+    @FXML
+    public void handleDetailList() {
+        moduleListPanel.showDetailList();
+    }
+
+    /**
+     * Shows the Module Summary list view.
+     */
+    @FXML
+    public void handleSummaryList() {
+        moduleListPanel.showSummaryList();
+    }
+
+    /**
+     * Shows the Module Lessons view.
+     */
+    @FXML
+    public void handleLessonsList() {
+        moduleListPanel.showLessonsList();
+    }
+
+    /**
+     * Shows the Module Exams view.
+     */
+    @FXML
+    public void handleExamsList() {
+        moduleListPanel.showExamsList();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -170,11 +205,11 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.Logic#execute(String, GuiState)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText, guiState);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -182,9 +217,24 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            switch (commandResult.getState()) {
+            case DETAILS:
+                handleDetailList();
+                break;
+            case LESSONS:
+                handleLessonsList();
+                break;
+            case EXAMS:
+                handleExamsList();
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                handleSummaryList();
             }
+
+            guiState = commandResult.getState();
 
             return commandResult;
         } catch (CommandException | ParseException e) {
