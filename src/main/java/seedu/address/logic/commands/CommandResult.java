@@ -15,7 +15,7 @@ public class CommandResult {
     private final boolean showHelp;
 
     /** State of the application. */
-    private final State state;
+    private final GuiState guiState;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -23,16 +23,16 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
-        this.state = State.SUMMARY;
+        this.guiState = GuiState.SUMMARY;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields (includes state argument).
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, State state) {
+    public CommandResult(String feedbackToUser, boolean showHelp, GuiState guiState) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
-        this.state = state;
+        this.guiState = guiState;
     }
 
     /**
@@ -51,8 +51,8 @@ public class CommandResult {
         return showHelp;
     }
 
-    public State getState() {
-        return state;
+    public GuiState getState() {
+        return guiState;
     }
 
     @Override
@@ -69,12 +69,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && state == otherCommandResult.state;
+                && guiState == otherCommandResult.guiState;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, state);
+        return Objects.hash(feedbackToUser, showHelp, guiState);
     }
 
 }
