@@ -13,6 +13,10 @@ public class ModuleHasModuleCodePredicate implements Predicate<Module> {
         this.code = code;
     }
 
+    public ModuleCode getCode() {
+        return code;
+    }
+
     @Override
     public boolean test(Module mod) {
         return mod.getCode().equals(code);
