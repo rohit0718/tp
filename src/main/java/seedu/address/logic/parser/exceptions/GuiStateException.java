@@ -2,7 +2,7 @@ package seedu.address.logic.parser.exceptions;
 
 public class GuiStateException extends ParseException {
 
-    private static String ERROR_MESSAGE = "This command cannot be used in this screen!";
+    private static final String ERROR_MESSAGE = "This command cannot be used in this screen!";
 
     public GuiStateException() {
         super(ERROR_MESSAGE);
