@@ -14,7 +14,7 @@ public class CommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
-     * equals to {@code expectedCommand} based on the given {@code GuiState}
+     * equals to {@code expectedCommand} based on the given {@code GuiState}.
      */
     public static void assertParseSuccess(Parser parser, String userInput, GuiState guiState, Command expectedCommand) {
         try {
@@ -27,8 +27,8 @@ public class CommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
-     * equals to {@code expectedCommand}
-     * Will use the default {@code GuiState}
+     * equals to {@code expectedCommand}.
+     * Will use the default {@code GuiState}.
      */
     public static void assertParseSuccess(Parser parser, String userInput, Command expectedCommand) {
         assertParseSuccess(parser, userInput, DEFAULT_STATE, expectedCommand);
@@ -36,7 +36,7 @@ public class CommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
-     * equals to {@code expectedMessage} based on the given {@code GuiState}
+     * equals to {@code expectedMessage} based on the given {@code GuiState}.
      */
     public static void assertParseFailure(Parser parser, String userInput, GuiState guiState, String expectedMessage) {
         try {
@@ -49,8 +49,8 @@ public class CommandParserTestUtil {
 
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
-     * equals to {@code expectedMessage} based on the given {@code GuiState}
-     * Will use the default {@code GuiState}
+     * equals to {@code expectedMessage} based on the given {@code GuiState}.
+     * Will use the default {@code GuiState}.
      */
     public static void assertParseFailure(Parser parser, String userInput, String expectedMessage) {
         assertParseFailure(parser, userInput, DEFAULT_STATE, expectedMessage);
