@@ -292,7 +292,7 @@ public class ParserUtil {
         if (!Day.isValidDay(trimmedDay)) {
             throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
-        return Day.valueOf(trimmedDay);
+        return Day.valueOf(trimmedDay.toUpperCase());
     }
 
     /**
