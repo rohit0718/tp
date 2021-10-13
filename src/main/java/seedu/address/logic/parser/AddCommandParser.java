@@ -13,11 +13,11 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddExamCommand;
-import seedu.address.logic.commands.AddLessonCommand;
-import seedu.address.logic.commands.AddModCommand;
 import seedu.address.logic.commands.GuiState;
+import seedu.address.logic.commands.add.AddCommand;
+import seedu.address.logic.commands.add.AddExamCommand;
+import seedu.address.logic.commands.add.AddLessonCommand;
+import seedu.address.logic.commands.add.AddModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;

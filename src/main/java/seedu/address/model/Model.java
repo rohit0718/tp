@@ -138,7 +138,6 @@ public interface Model {
 
     /**
      * Checks if a module has the lesson
-     * @throws CommandException If lesson already exists.
      */
     boolean moduleHasLesson(Module module, Lesson lesson);
 
@@ -149,7 +148,6 @@ public interface Model {
 
     /**
      * Checks if a module has the lesson
-     * @throws CommandException If lesson already exists.
      */
     boolean moduleHasExam(Module module, Exam exam);
 

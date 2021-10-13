@@ -211,16 +211,16 @@ public class ModelManager implements Model {
     public Module getModule(ModuleCode modCode) throws CommandException {
         Optional<Module> module = this.filteredModules.stream().filter(mod ->
                 mod.getCode().equals(modCode)).findAny();
-        if (module.isPresent()) {
-            return module.get();
+        if (module.isEmpty()) {
+            throw new CommandException(MESSAGE_MODULE_DOESNT_EXIST);
         }
-        throw new CommandException(MESSAGE_MODULE_DOESNT_EXIST);
+        return module.get();
     }
 
     @Override
     public boolean moduleHasLesson(Module module, Lesson lesson) {
         List<Lesson> lessons = module.getLessons();
-        return !lessons.contains(lesson);
+        return lessons.contains(lesson);
     }
 
     @Override
@@ -231,7 +231,7 @@ public class ModelManager implements Model {
     @Override
     public boolean moduleHasExam(Module module, Exam exam) {
         List<Exam> exams = module.getExams();
-        return !exams.contains(exam);
+        return exams.contains(exam);
     }
 
     @Override
