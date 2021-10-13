@@ -25,7 +25,7 @@ public class DeleteExamCommand extends DeleteCommand {
             + PREFIX_CODE + "CS2103T";
 
     /**
-     * Creates an DeleteModCommand to delete the Exam at specified {@code Index} of the specified {@code Module}.
+     * Creates an DeleteExamCommand to delete the Exam at specified {@code Index} of the specified {@code Module}.
      */
     public DeleteExamCommand(Index targetIndex, ModuleCode targetModuleCode) {
         requireNonNull(targetIndex);
