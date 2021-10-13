@@ -1,9 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -39,7 +40,6 @@ public class AddModCommand extends AddCommand {
         if (model.hasModule(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
-
         model.addModule(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

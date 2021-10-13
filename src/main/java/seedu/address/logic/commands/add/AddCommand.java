@@ -1,4 +1,6 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.add;
+
+import seedu.address.logic.commands.Command;
 
 /**
  * Adds a person to the address book.
