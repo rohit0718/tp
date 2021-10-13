@@ -61,7 +61,7 @@ public class AddExamCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_EXAM);
         }
         model.addExamToModule(module, toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

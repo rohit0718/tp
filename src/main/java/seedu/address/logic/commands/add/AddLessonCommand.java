@@ -61,7 +61,7 @@ public class AddLessonCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
         model.addLessonToModule(module, toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
