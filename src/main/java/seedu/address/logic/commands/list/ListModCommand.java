@@ -8,7 +8,7 @@ import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 
 /**
- * Lists all modules in the address book to the user.
+ * Lists all modules in the ModBook to the user.
  */
 public class ListModCommand extends ListCommand {
 

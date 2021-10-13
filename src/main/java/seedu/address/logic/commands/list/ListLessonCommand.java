@@ -8,7 +8,7 @@ import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 
 /**
- * Lists all lessons in the address book to the user.
+ * Lists all lessons in the ModBook to the user.
  */
 public class ListLessonCommand extends ListCommand {
 

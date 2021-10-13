@@ -12,6 +12,9 @@ import seedu.address.logic.commands.list.ListExamCommand;
 import seedu.address.logic.commands.list.ListLessonCommand;
 import seedu.address.logic.commands.list.ListModCommand;
 
+/**
+ * Contains unit tests for ListCommandParser.
+ */
 public class ListCommandParserTest {
 
     private ListCommandParser parser = new ListCommandParser();
