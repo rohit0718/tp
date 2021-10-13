@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddModCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
@@ -42,10 +43,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         switch(type) {
         case MOD:
             return parseMod(args);
-        case LESSON:
+        /*case LESSON:
             return parseLesson();
         case EXAM:
-            return parseExam();
+            return parseExam();*/
         default:
             throw new ParseException(AddCommand.MESSAGE_USAGE);
         }
@@ -69,25 +70,25 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(person);*/
     }
 
-    public AddCommand parseMod(String args) throws ParseException {
+    public AddModCommand parseMod(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_NAME).get());
+        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
         Optional<ModuleName> name;
         try {
-            name = Optional.of(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_PHONE).get()));
+            name = Optional.of(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get()));
         } catch (NullPointerException e) {
             name = Optional.empty();
         }
 
         Module module = new Module(code, name);
 
-        return new AddCommand(module);
+        return new AddModCommand(module);
     }
 
 

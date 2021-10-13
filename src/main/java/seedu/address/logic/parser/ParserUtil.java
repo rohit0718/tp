@@ -349,7 +349,8 @@ public class ParserUtil {
      * @throws ParseException if the args string is invalid.
      */
     public static Type parseFirstArg(String args, String errorMessage) throws ParseException {
-        String firstArg = args.split(" ", 2)[0];
+        String firstArg = args.trim().split(" ", 2)[0];
+
         switch (firstArg) {
         case "mod":
             return Type.MOD;
