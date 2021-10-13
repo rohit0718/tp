@@ -1,13 +1,25 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.logic.parser.DeleteCommandParser.MESSAGE_WRONG_VIEW_DETAILS;
+import static seedu.address.logic.parser.DeleteCommandParser.MESSAGE_WRONG_VIEW_SUMMARY;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NO_INDEXES_FOUND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.delete.DeleteExamCommand;
+import seedu.address.logic.commands.delete.DeleteLessonCommand;
+import seedu.address.logic.commands.delete.DeleteModCommand;
+import seedu.address.model.module.Module;
+import seedu.address.testutil.builders.ModuleBuilder;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -17,16 +29,71 @@ import seedu.address.logic.commands.delete.DeleteCommand;
  * therefore should be covered by the ParserUtilTest.
  */
 public class DeleteCommandParserTest {
-
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "    ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_missingKeyword_throwsParseException() {
+        assertParseFailure(parser, "venue",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingIndex_throwsParseException() {
+        assertParseFailure(parser, "mod lesson", MESSAGE_NO_INDEXES_FOUND);
+    }
+
+    @Test
+    public void parse_validArgs_returnsDeleteCommand() {
+        Module module = new ModuleBuilder().build();
+        // no leading and trailing whitespaces
+        DeleteCommand expectedDeleteModCommand = new DeleteModCommand(INDEX_FIRST_MODULE);
+        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(), expectedDeleteModCommand);
+
+        DeleteCommand expectedDeleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, module.getCode());
+        assertParseSuccess(parser, " lesson " + INDEX_FIRST_MODULE.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), expectedDeleteLessonCommand);
+
+        DeleteCommand expectedDeleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, module.getCode());
+        assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), expectedDeleteExamCommand);
+
+        // leading and trailing whitespaces
+        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased()
+                + " \n \t ", expectedDeleteModCommand);
+
+        // delete mod command must only work in the summary gui state
+        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+                GuiState.SUMMARY, expectedDeleteModCommand);
+        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+                GuiState.LESSONS, MESSAGE_WRONG_VIEW_SUMMARY);
+        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+                GuiState.EXAMS, MESSAGE_WRONG_VIEW_SUMMARY);
+        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+                GuiState.DETAILS, MESSAGE_WRONG_VIEW_SUMMARY);
+
+        // delete exam command must only work in the details gui state
+        assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteExamCommand);
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
+
+        assertParseSuccess(parser, " lesson " + INDEX_FIRST_MODULE.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteLessonCommand);
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getZeroBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
     }
 }
