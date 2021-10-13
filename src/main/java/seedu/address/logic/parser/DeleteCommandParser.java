@@ -26,7 +26,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args, GuiState guiState) throws ParseException {
-        Type type = ParserUtil.parseFirstArg(args, DeleteCommand.MESSAGE_USAGE);
+        Type type = ParserUtil.parseFirstArg(args, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
         switch(type) {
         case MOD:
             return parseMod(args, guiState);

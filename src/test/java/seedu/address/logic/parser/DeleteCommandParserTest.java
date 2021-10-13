@@ -53,47 +53,47 @@ public class DeleteCommandParserTest {
         Module module = new ModuleBuilder().build();
         // no leading and trailing whitespaces
         DeleteCommand expectedDeleteModCommand = new DeleteModCommand(INDEX_FIRST_MODULE);
-        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(), expectedDeleteModCommand);
+        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased(), expectedDeleteModCommand);
 
         DeleteCommand expectedDeleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, module.getCode());
-        assertParseSuccess(parser, " lesson " + INDEX_FIRST_MODULE.getZeroBased()
-                + " " + PREFIX_CODE + module.getCode(), expectedDeleteLessonCommand);
+        assertParseSuccess(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteLessonCommand);
 
         DeleteCommand expectedDeleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, module.getCode());
-        assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
-                + " " + PREFIX_CODE + module.getCode(), expectedDeleteExamCommand);
+        assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getOneBased()
+                + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteExamCommand);
 
         // leading and trailing whitespaces
-        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased()
+        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased()
                 + " \n \t ", expectedDeleteModCommand);
 
         // delete mod command must only work in the summary gui state
-        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+        assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased(),
                 GuiState.SUMMARY, expectedDeleteModCommand);
-        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getOneBased(),
                 GuiState.LESSONS, MESSAGE_WRONG_VIEW_SUMMARY);
-        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getOneBased(),
                 GuiState.EXAMS, MESSAGE_WRONG_VIEW_SUMMARY);
-        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getZeroBased(),
+        assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getOneBased(),
                 GuiState.DETAILS, MESSAGE_WRONG_VIEW_SUMMARY);
 
         // delete exam command must only work in the details gui state
-        assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+        assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteExamCommand);
-        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
-        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
-        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getZeroBased()
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
 
-        assertParseSuccess(parser, " lesson " + INDEX_FIRST_MODULE.getZeroBased()
+        assertParseSuccess(parser, " lesson " + INDEX_FIRST_MODULE.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteLessonCommand);
-        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getZeroBased()
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
-        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getZeroBased()
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
-        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getZeroBased()
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
     }
 }
