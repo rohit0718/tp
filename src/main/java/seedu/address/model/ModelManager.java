@@ -244,6 +244,11 @@ public class ModelManager implements Model {
         modBook.removeExam(module, target);
     }
 
+    @Override
+    public void deleteLesson(Module module, Lesson target) {
+        modBook.removeLesson(module, target);
+    }
+
     //=========== Filtered Module List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
