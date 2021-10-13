@@ -22,6 +22,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.PersonBuilder;
 
@@ -197,6 +200,21 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredModuleList(Predicate<Module> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Module getModule(ModuleCode modCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteExam(Module module, Exam target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Module module, Lesson target) {
             throw new AssertionError("This method should not be called.");
         }
     }
