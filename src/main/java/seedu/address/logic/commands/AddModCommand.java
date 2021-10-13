@@ -16,10 +16,10 @@ public class AddModCommand extends AddCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the Mod book. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_CODE + "CODE "
             + PREFIX_NAME + "NAME "
-            + "Example: " + COMMAND_WORD + " mod "
+            + "\nExample: " + COMMAND_WORD + " mod "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Software Engineering ";
 
