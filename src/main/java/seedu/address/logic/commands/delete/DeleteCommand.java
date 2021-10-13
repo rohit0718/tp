@@ -1,4 +1,6 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.delete;
+
+import seedu.address.logic.commands.Command;
 
 public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";

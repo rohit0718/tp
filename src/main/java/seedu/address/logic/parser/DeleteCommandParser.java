@@ -5,10 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteExamCommand;
-import seedu.address.logic.commands.DeleteLessonCommand;
-import seedu.address.logic.commands.DeleteModCommand;
+import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.delete.DeleteExamCommand;
+import seedu.address.logic.commands.delete.DeleteLessonCommand;
+import seedu.address.logic.commands.delete.DeleteModCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
