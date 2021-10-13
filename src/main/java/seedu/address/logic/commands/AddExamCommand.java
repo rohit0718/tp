@@ -54,7 +54,6 @@ public class AddExamCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // add exam c/CS2030S n/Final d/02/02/1999 s/11:00 e/12:00 l/htt.com/watch?v=8mL3L9hN2l4 v/COM2
         Module module = model.getModule(modCode);
 
         if (model.moduleHasExam(module, toAdd)) {
