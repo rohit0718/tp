@@ -35,7 +35,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newModule_success() {
-        Module validModule = new Module(new ModuleCode("CS0500"), Optional.empty());
+        Module validModule = new ModuleBuilder().withCode("CS0202").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.addModule(validModule);
