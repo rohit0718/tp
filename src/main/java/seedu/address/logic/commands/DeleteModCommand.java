@@ -14,8 +14,8 @@ public class DeleteModCommand extends DeleteCommand {
     private final Index targetIndex;
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a module from the Mod book. "
-            + "\nParameters: Index\n"
-            + "Example: " + COMMAND_WORD + " module 1";
+            + "\nParameters: Index"
+            + "\nExample: " + COMMAND_WORD + " module 1";
 
     /**
      * Creates an DeleteModCommand to delete the module at specified {@code Index}
