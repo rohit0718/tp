@@ -41,7 +41,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Module module = new ModuleBuilder().build();
-        AddModCommand command = (AddModCommand) parser.parseCommand(ModelUtil.getAddCommand(module), DEFAULT_STATE);
+        AddModCommand command = (AddModCommand) parser.parseCommand(PersonUtil.getAddCommand(module), DEFAULT_STATE);
         assertEquals(new AddModCommand(module), command);
     }
 
