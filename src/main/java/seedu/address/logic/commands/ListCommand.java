@@ -17,9 +17,9 @@ public class ListCommand extends Command {
             + "Parameters: [mod / lesson / exam]\n"
             + "Example: " + COMMAND_WORD + " mod";
 
-    public static String MESSAGE_SUCCESS_MODULES = "Listed all modules.";
-    public static String MESSAGE_SUCCESS_LESSONS = "Listed all lessons.";
-    public static String MESSAGE_SUCCESS_EXAMS = "Listed all exams.";
+    public static final String MESSAGE_SUCCESS_MODULES = "Listed all modules.";
+    public static final String MESSAGE_SUCCESS_LESSONS = "Listed all lessons.";
+    public static final String MESSAGE_SUCCESS_EXAMS = "Listed all exams.";
 
     private final Type type;
 
@@ -38,9 +38,9 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS_LESSONS, false, GuiState.LESSONS);
         case EXAM:
             return new CommandResult(MESSAGE_SUCCESS_EXAMS, false, GuiState.EXAMS);
+        default:
+            return new CommandResult(MESSAGE_SUCCESS_MODULES, false, GuiState.SUMMARY);
         }
-
-        return new CommandResult(MESSAGE_SUCCESS_MODULES, false, GuiState.SUMMARY);
     }
 
 }
