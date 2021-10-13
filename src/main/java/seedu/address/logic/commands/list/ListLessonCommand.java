@@ -28,5 +28,3 @@ public class ListLessonCommand extends ListCommand {
                 || (other instanceof ListLessonCommand); // state check
     }
 }
-
-

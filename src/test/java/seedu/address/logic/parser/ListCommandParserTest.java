@@ -1,23 +1,16 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_DESC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DetailCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.commands.list.ListExamCommand;
 import seedu.address.logic.commands.list.ListLessonCommand;
 import seedu.address.logic.commands.list.ListModCommand;
-import seedu.address.model.module.ModuleCode;
-import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class ListCommandParserTest {
 
