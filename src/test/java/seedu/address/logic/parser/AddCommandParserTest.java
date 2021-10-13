@@ -64,7 +64,6 @@ public class AddCommandParserTest {
         Lesson expectedLesson = new LessonBuilder(CS2103T_LECTURE_WITH_VENUE).build();
         Exam expectedExam = new ExamBuilder(PHYSICAL_FINALS).build();
 
-
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "mod"
                 + VALID_MODULE_CODE_DESC + VALID_MODULE_NAME_DESC, new AddModCommand(expectedModule));
