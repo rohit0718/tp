@@ -21,6 +21,12 @@ public class ListLessonCommand extends ListCommand {
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(MESSAGE_SUCCESS, false, GuiState.LESSONS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListLessonCommand); // state check
+    }
 }
 
 

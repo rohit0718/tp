@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DetailCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 
@@ -20,5 +21,11 @@ public class ListModCommand extends ListCommand {
 
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(MESSAGE_SUCCESS, false, GuiState.SUMMARY);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListModCommand); // state check
     }
 }

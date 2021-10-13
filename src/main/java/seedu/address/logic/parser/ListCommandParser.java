@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.commands.list.ListExamCommand;
 import seedu.address.logic.commands.list.ListLessonCommand;
@@ -11,14 +12,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ListCommand object
  */
-public class ListCommandParser {
+public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
      * and returns a ListCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ListCommand parse(String args) throws ParseException {
+    public ListCommand parse(String args, GuiState guiState) throws ParseException {
 
         if (hasMultipleArguments(args)) {
             throw new ParseException(
