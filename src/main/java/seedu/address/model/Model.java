@@ -136,25 +136,6 @@ public interface Model {
      */
     Module getModule(ModuleCode modCode) throws CommandException;
 
-    /**
-     * Checks if a module has the lesson
-     */
-    boolean moduleHasLesson(Module module, Lesson lesson);
-
-    /**
-     * Adds a lesson to a module.
-     */
-    void addLessonToModule(Module module, Lesson lesson);
-
-    /**
-     * Checks if a module has the lesson
-     */
-    boolean moduleHasExam(Module module, Exam exam);
-
-    /**
-     * Adds a lesson to a module.
-     */
-    void addExamToModule(Module module, Exam exam);
 
     /**
      * Deletes the Exam from the specified module's lessons list.

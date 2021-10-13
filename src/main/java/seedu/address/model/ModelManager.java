@@ -218,28 +218,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean moduleHasLesson(Module module, Lesson lesson) {
-        List<Lesson> lessons = module.getLessons();
-        return lessons.contains(lesson);
-    }
-
-    @Override
-    public void addLessonToModule(Module module, Lesson lesson) {
-        module.getLessons().add(lesson);
-    }
-
-    @Override
-    public boolean moduleHasExam(Module module, Exam exam) {
-        List<Exam> exams = module.getExams();
-        return !exams.contains(exam);
-    }
-
-    @Override
-    public void addExamToModule(Module module, Exam exam) {
-        module.getExams().add(exam);
-    }
-
-    @Override
     public void deleteExam(Module module, Exam target) {
         modBook.removeExam(module, target);
     }
