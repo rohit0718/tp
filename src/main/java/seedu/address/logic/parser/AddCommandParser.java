@@ -6,13 +6,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 
+
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,6 +37,19 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args, GuiState guiState) throws ParseException {
+        Type type = ParserUtil.parseFirstArg(args, AddCommand.MESSAGE_USAGE);
+
+        switch(type) {
+        case MOD:
+            return parseMod(args);
+        case LESSON:
+            return parseLesson();
+        case EXAM:
+            return parseExam();
+        default:
+            throw new ParseException(AddCommand.MESSAGE_USAGE);
+        }
+/*
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
@@ -47,10 +66,32 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(person);*/
     }
 
-    /**
+    public AddCommand parseMod(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_NAME).get());
+        Optional<ModuleName> name;
+        try {
+            name = Optional.of(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_PHONE).get()));
+        } catch (NullPointerException e) {
+            name = Optional.empty();
+        }
+
+        Module module = new Module(code, name);
+
+        return new AddCommand(module);
+    }
+
+
+        /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
