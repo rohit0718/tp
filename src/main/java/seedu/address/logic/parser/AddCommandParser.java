@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.add.AddCommand;
@@ -44,7 +43,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args, GuiState guiState) throws ParseException {
-        Type type = ParserUtil.parseFirstArg(args, AddCommand.MESSAGE_USAGE);
+        String errorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        Type type = ParserUtil.parseFirstArg(args, errorMessage);
 
         switch(type) {
         case MOD:
@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         case EXAM:
             return parseExam(args);
         default:
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(errorMessage);
         }
     }
 
