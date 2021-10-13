@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,11 +22,14 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.add.AddModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.builders.ModuleBuilder;
 import seedu.address.testutil.builders.PersonBuilder;
 
 public class AddressBookParserTest {
@@ -38,9 +40,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person), DEFAULT_STATE);
-        assertEquals(new AddCommand(person), command);
+        Module module = new ModuleBuilder().build();
+        AddModCommand command = (AddModCommand) parser.parseCommand(ModelUtil.getAddCommand(module), DEFAULT_STATE);
+        assertEquals(new AddModCommand(module), command);
     }
 
     @Test
