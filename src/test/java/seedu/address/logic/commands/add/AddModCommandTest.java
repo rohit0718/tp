@@ -36,14 +36,14 @@ public class AddModCommandTest {
     }
 
     @Test
-    public void execute_ModuleAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_moduleAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingModuleAdded modelStub = new ModelStubAcceptingModuleAdded();
         Module validModule = new ModuleBuilder().build();
 
         CommandResult commandResult = new AddModCommand(validModule).execute(modelStub);
 
         assertEquals(String.format(AddModCommand.MESSAGE_SUCCESS, validModule), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validModule), modelStub.ModulesAdded);
+        assertEquals(List.of(validModule), modelStub.modulesAdded);
     }
 
     @Test
@@ -52,7 +52,8 @@ public class AddModCommandTest {
         AddModCommand addCommand = new AddModCommand(validModule);
         ModelStub modelStub = new ModelStubWithModule(validModule);
 
-        assertThrows(CommandException.class, AddModCommand.MESSAGE_DUPLICATE_MODULE, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddModCommand.MESSAGE_DUPLICATE_MODULE, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -234,17 +235,17 @@ public class AddModCommandTest {
      * A Model stub that contains a single Module.
      */
     private class ModelStubWithModule extends ModelStub {
-        private final Module Module;
+        private final Module module;
 
-        ModelStubWithModule(Module Module) {
-            requireNonNull(Module);
-            this.Module = Module;
+        ModelStubWithModule(Module module) {
+            requireNonNull(module);
+            this.module = module;
         }
 
         @Override
-        public boolean hasModule(Module Module) {
-            requireNonNull(Module);
-            return this.Module.isSameModule(Module);
+        public boolean hasModule(Module module) {
+            requireNonNull(module);
+            return this.module.isSameModule(module);
         }
     }
 
@@ -252,18 +253,18 @@ public class AddModCommandTest {
      * A Model stub that always accept the Module being added.
      */
     private class ModelStubAcceptingModuleAdded extends ModelStub {
-        final ArrayList<Module> ModulesAdded = new ArrayList<>();
+        final ArrayList<Module> modulesAdded = new ArrayList<>();
 
         @Override
         public boolean hasModule(Module module) {
             requireNonNull(module);
-            return ModulesAdded.stream().anyMatch(module::isSameModule);
+            return modulesAdded.stream().anyMatch(module::isSameModule);
         }
 
         @Override
         public void addModule(Module module) {
             requireNonNull(module);
-            ModulesAdded.add(module);
+            modulesAdded.add(module);
         }
 
         @Override

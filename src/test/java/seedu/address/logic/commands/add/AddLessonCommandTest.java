@@ -22,9 +22,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.LessonBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
@@ -37,7 +37,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_LessonAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_lessonAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
         Lesson validLesson = new LessonBuilder().build();
         Module validModule = new ModuleBuilder().build();
@@ -46,7 +46,7 @@ public class AddLessonCommandTest {
         CommandResult commandResult = new AddLessonCommand(validModuleCode, validLesson).execute(modelStub);
 
         assertEquals(String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validLesson), modelStub.LessonsAdded);
+        assertEquals(List.of(validLesson), modelStub.lessonsAdded);
     }
 
     @Test
@@ -55,10 +55,11 @@ public class AddLessonCommandTest {
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
 
-        AddLessonCommand addCommand = new AddLessonCommand(validModuleCode,validLesson);
+        AddLessonCommand addCommand = new AddLessonCommand(validModuleCode, validLesson);
         ModelStub modelStub = new ModelStubWithLesson(validLesson);
 
-        assertThrows(CommandException.class, AddLessonCommand.MESSAGE_DUPLICATE_LESSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddLessonCommand.MESSAGE_DUPLICATE_LESSON, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -259,18 +260,18 @@ public class AddLessonCommandTest {
      * A Model stub that always accept the Module being added.
      */
     private class ModelStubAcceptingLessonAdded extends ModelStub {
-        final ArrayList<Lesson> LessonsAdded = new ArrayList<>();
+        final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
 
         @Override
         public boolean moduleHasLesson(Module module, Lesson lesson) {
             requireNonNull(lesson);
-            return LessonsAdded.stream().anyMatch(lesson::isSameLesson);
+            return lessonsAdded.stream().anyMatch(lesson::isSameLesson);
         }
 
         @Override
         public void addLessonToModule(Module module, Lesson lesson) {
             requireNonNull(lesson);
-            LessonsAdded.add(lesson);
+            lessonsAdded.add(lesson);
         }
 
         @Override

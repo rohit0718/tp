@@ -22,8 +22,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.ExamBuilder;
@@ -37,7 +37,7 @@ public class AddExamCommandTest {
     }
 
     @Test
-    public void execute_ExamAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_examAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
         Exam validExam = new ExamBuilder().build();
         Module validModule = new ModuleBuilder().build();
@@ -46,7 +46,7 @@ public class AddExamCommandTest {
         CommandResult commandResult = new AddExamCommand(validModuleCode, validExam).execute(modelStub);
 
         assertEquals(String.format(AddExamCommand.MESSAGE_SUCCESS, validExam), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validExam), modelStub.LessonsAdded);
+        assertEquals(List.of(validExam), modelStub.lessonsAdded);
     }
 
     @Test
@@ -55,10 +55,11 @@ public class AddExamCommandTest {
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
 
-        AddExamCommand addCommand = new AddExamCommand(validModuleCode,validExam);
+        AddExamCommand addCommand = new AddExamCommand(validModuleCode, validExam);
         ModelStub modelStub = new ModelStubWithExam(validExam);
 
-        assertThrows(CommandException.class, AddExamCommand.MESSAGE_DUPLICATE_EXAM, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddExamCommand.MESSAGE_DUPLICATE_EXAM, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
@@ -260,18 +261,18 @@ public class AddExamCommandTest {
      * A Model stub that always accept the Module being added.
      */
     private class ModelStubAcceptingLessonAdded extends ModelStub {
-        final ArrayList<Exam> LessonsAdded = new ArrayList<>();
+        final ArrayList<Exam> lessonsAdded = new ArrayList<>();
 
         @Override
         public boolean moduleHasExam(Module module, Exam exam) {
             requireNonNull(exam);
-            return LessonsAdded.stream().anyMatch(exam::isSameExam);
+            return lessonsAdded.stream().anyMatch(exam::isSameExam);
         }
 
         @Override
         public void addExamToModule(Module module, Exam exam) {
             requireNonNull(exam);
-            LessonsAdded.add(exam);
+            lessonsAdded.add(exam);
         }
 
         @Override

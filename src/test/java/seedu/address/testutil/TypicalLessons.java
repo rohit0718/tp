@@ -28,7 +28,8 @@ public class TypicalLessons {
             .withDay("FRIDAY").withTimeslot(new TimeslotBuilder().withStartTime("16:00").withEndTime("18:00").build())
             .withLink("profDamith.com").withVenue("COM1").build();
     public static final Lesson CS2103T_LECTURE_NO_LINK_NO_VENUE = new LessonBuilder().withName("CS2103T Lecture")
-            .withDay("FRIDAY").withTimeslot(new TimeslotBuilder().withStartTime("16:00").withEndTime("18:00").build()).build();
+            .withDay("FRIDAY").withTimeslot(new TimeslotBuilder().withStartTime("16:00").withEndTime("18:00")
+                    .build()).build();
     public static final Lesson CS2103T_TUTORIAL = new LessonBuilder().withName("CS2103T Tutorial")
             .withDay("THURSDAY").withTimeslot(new TimeslotBuilder().withStartTime("13:00").withEndTime("14:00").build())
             .withLink("danny.com").build();

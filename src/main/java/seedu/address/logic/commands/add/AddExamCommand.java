@@ -31,11 +31,11 @@ public class AddExamCommand extends AddCommand {
             + "\nExample: " + COMMAND_WORD + " exam "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Final "
-            + PREFIX_DAY + "Monday "
+            + PREFIX_DAY + "02/02/1999 "
             + PREFIX_START + "10:00 "
             + PREFIX_END + "11:00 "
             + PREFIX_LINK + "https://www.youtube.com/watch?v=8mL3L9hN2l4 "
-            + PREFIX_VENUE + "Field ";
+            + PREFIX_VENUE + "Field";
 
     public static final String MESSAGE_SUCCESS = "New exam added: %1$s";
     public static final String MESSAGE_DUPLICATE_EXAM = "This exam already exists in the mod book";

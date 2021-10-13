@@ -5,15 +5,13 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
-import seedu.address.model.module.Module;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
@@ -80,7 +78,8 @@ public class AddCommandIntegrationTest {
     public void execute_duplicateLesson_throwsCommandException() {
         Lesson lessonInList = model.getModBook().getModuleList().get(0).getLessons().get(0);
         ModuleCode moduleCode = model.getModBook().getModuleList().get(0).getCode();
-        assertCommandFailure(new AddLessonCommand(moduleCode, lessonInList), model, AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
+        assertCommandFailure(new AddLessonCommand(moduleCode, lessonInList), model,
+                AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
 
     @Test
