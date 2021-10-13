@@ -9,9 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
-import java.util.List;
-import java.util.Optional;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -26,28 +23,27 @@ public class AddExamCommand extends AddCommand {
             + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "EXAM_NAME "
             + PREFIX_DAY + "DAY "
-            + PREFIX_START +"START_TIME "
-            + PREFIX_END +"END_TIME "
-            + PREFIX_LINK +"LINK "
-            + PREFIX_VENUE +"VENUE "
+            + PREFIX_START + "START_TIME "
+            + PREFIX_END + "END_TIME "
+            + PREFIX_LINK + "LINK "
+            + PREFIX_VENUE + "VENUE "
             + "\nExample: " + COMMAND_WORD + " exam "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Final "
             + PREFIX_DAY + "Monday "
-            + PREFIX_START +"10:00 "
-            + PREFIX_END +"11:00 "
-            + PREFIX_LINK +"https://www.youtube.com/watch?v=8mL3L9hN2l4 "
-            + PREFIX_VENUE +"Field ";
+            + PREFIX_START + "10:00 "
+            + PREFIX_END + "11:00 "
+            + PREFIX_LINK + "https://www.youtube.com/watch?v=8mL3L9hN2l4 "
+            + PREFIX_VENUE + "Field ";
 
     public static final String MESSAGE_SUCCESS = "New exam added: %1$s";
     public static final String MESSAGE_DUPLICATE_EXAM = "This exam already exists in the mod book";
-
 
     private final Exam toAdd;
     private final ModuleCode modCode;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Exam}
      */
     public AddExamCommand(ModuleCode modCode, Exam exam) {
         requireNonNull(exam);

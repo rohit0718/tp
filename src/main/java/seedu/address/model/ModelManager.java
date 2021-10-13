@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    public static final String MESSAGE_MODULE_DOESNT_EXIST = "The module you chose does not exist";
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
@@ -31,8 +32,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Module> filteredModules;
-
-    public static final String MESSAGE_MODULE_DOESNT_EXIST= "The module you chose does not exist";
 
     /**
      * Initializes a ModelManager with the given addressBook, modBook and userPrefs.
@@ -212,7 +211,7 @@ public class ModelManager implements Model {
     public Module getModule(ModuleCode modCode) throws CommandException {
         Optional<Module> module = this.filteredModules.stream().filter(mod ->
                 mod.getCode().equals(modCode)).findAny();
-        if(module.isPresent()) {
+        if (module.isPresent()) {
             return module.get();
         }
         throw new CommandException(MESSAGE_MODULE_DOESNT_EXIST);
@@ -231,8 +230,8 @@ public class ModelManager implements Model {
 
     @Override
     public boolean moduleHasExam(Module module, Exam exam) {
-        List<Lesson> lessons = module.getLessons();
-        return !lessons.contains(exam);
+        List<Exam> exams = module.getExams();
+        return !exams.contains(exam);
     }
 
     @Override

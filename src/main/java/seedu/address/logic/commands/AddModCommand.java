@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,7 +11,7 @@ import seedu.address.model.module.Module;
 public class AddModCommand extends AddCommand {
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the Mod book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the Mod book. "
             + "\nParameters: "
             + PREFIX_CODE + "CODE "
             + PREFIX_NAME + "NAME "
@@ -29,7 +25,7 @@ public class AddModCommand extends AddCommand {
     private final Module toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Mpdule}
      */
     public AddModCommand(Module module) {
         requireNonNull(module);
