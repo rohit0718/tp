@@ -27,8 +27,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalExams.PHYSICAL_FINALS;
 import static seedu.address.testutil.TypicalExams.PHYSICAL_FINALS_NO_LINK_NO_VENUE;
-import static seedu.address.testutil.TypicalLessons.CS2103T_LECTURE;
 import static seedu.address.testutil.TypicalLessons.CS2103T_LECTURE_NO_LINK_NO_VENUE;
+import static seedu.address.testutil.TypicalLessons.CS2103T_LECTURE_WITH_VENUE;
 import static seedu.address.testutil.TypicalModules.CS2103T_CODE_NAME;
 import static seedu.address.testutil.TypicalModules.CS2103T_NO_NAME;
 
@@ -61,7 +61,7 @@ public class AddCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Module expectedModule = new ModuleBuilder(CS2103T_CODE_NAME).build();
         ModuleCode expectedModuleCode = expectedModule.getCode();
-        Lesson expectedLesson = new LessonBuilder(CS2103T_LECTURE).build();
+        Lesson expectedLesson = new LessonBuilder(CS2103T_LECTURE_WITH_VENUE).build();
         Exam expectedExam = new ExamBuilder(PHYSICAL_FINALS).build();
 
 
