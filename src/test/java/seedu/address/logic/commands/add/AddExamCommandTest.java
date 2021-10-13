@@ -22,59 +22,59 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.builders.LessonBuilder;
+import seedu.address.testutil.builders.ExamBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
 
-public class AddLessonCommandTest {
+public class AddExamCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddLessonCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddExamCommand(null, null));
     }
 
     @Test
-    public void execute_LessonAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_ExamAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
-        Lesson validLesson = new LessonBuilder().build();
+        Exam validExam = new ExamBuilder().build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
 
-        CommandResult commandResult = new AddLessonCommand(validModuleCode, validLesson).execute(modelStub);
+        CommandResult commandResult = new AddExamCommand(validModuleCode, validExam).execute(modelStub);
 
-        assertEquals(String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validLesson), modelStub.LessonsAdded);
+        assertEquals(String.format(AddExamCommand.MESSAGE_SUCCESS, validExam), commandResult.getFeedbackToUser());
+        assertEquals(List.of(validExam), modelStub.LessonsAdded);
     }
 
     @Test
     public void execute_duplicateModule_throwsCommandException() {
-        Lesson validLesson = new LessonBuilder().build();
+        Exam validExam = new ExamBuilder().build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
 
-        AddLessonCommand addCommand = new AddLessonCommand(validModuleCode,validLesson);
-        ModelStub modelStub = new ModelStubWithLesson(validLesson);
+        AddExamCommand addCommand = new AddExamCommand(validModuleCode,validExam);
+        ModelStub modelStub = new ModelStubWithExam(validExam);
 
-        assertThrows(CommandException.class, AddLessonCommand.MESSAGE_DUPLICATE_LESSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddExamCommand.MESSAGE_DUPLICATE_EXAM, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Lesson alice = new LessonBuilder().withName("Alice").build();
-        Lesson bob = new LessonBuilder().withName("Bob").build();
+        Exam alice = new ExamBuilder().withName("Alice").build();
+        Exam bob = new ExamBuilder().withName("Bob").build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
-        AddLessonCommand addAliceCommand = new AddLessonCommand(validModuleCode, alice);
-        AddLessonCommand addBobCommand = new AddLessonCommand(validModuleCode, bob);
+        AddExamCommand addAliceCommand = new AddExamCommand(validModuleCode, alice);
+        AddExamCommand addBobCommand = new AddExamCommand(validModuleCode, bob);
 
         // same object -> returns true
         assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
-        AddLessonCommand addAliceCommandCopy = new AddLessonCommand(validModuleCode, alice);
+        AddExamCommand addAliceCommandCopy = new AddExamCommand(validModuleCode, alice);
         assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
@@ -235,23 +235,24 @@ public class AddLessonCommandTest {
         public ReadOnlyModBook getModBook() {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
      * A Model stub that contains a single Module.
      */
-    private class ModelStubWithLesson extends ModelStub {
-        private final Lesson lesson;
+    private class ModelStubWithExam extends ModelStub {
+        private final Exam lesson;
 
-        ModelStubWithLesson(Lesson lesson) {
+        ModelStubWithExam(Exam lesson) {
             requireNonNull(lesson);
             this.lesson = lesson;
         }
 
         @Override
-        public boolean moduleHasLesson(Module module, Lesson lesson) {
-            requireNonNull(lesson);
-            return this.lesson.isSameLesson(lesson);
+        public boolean moduleHasExam(Module module, Exam exam) {
+            requireNonNull(exam);
+            return this.lesson.isSameExam(exam);
         }
     }
 
@@ -259,18 +260,18 @@ public class AddLessonCommandTest {
      * A Model stub that always accept the Module being added.
      */
     private class ModelStubAcceptingLessonAdded extends ModelStub {
-        final ArrayList<Lesson> LessonsAdded = new ArrayList<>();
+        final ArrayList<Exam> LessonsAdded = new ArrayList<>();
 
         @Override
-        public boolean moduleHasLesson(Module module, Lesson lesson) {
-            requireNonNull(lesson);
-            return LessonsAdded.stream().anyMatch(lesson::isSameLesson);
+        public boolean moduleHasExam(Module module, Exam exam) {
+            requireNonNull(exam);
+            return LessonsAdded.stream().anyMatch(exam::isSameExam);
         }
 
         @Override
-        public void addLessonToModule(Module module, Lesson lesson) {
-            requireNonNull(lesson);
-            LessonsAdded.add(lesson);
+        public void addExamToModule(Module module, Exam exam) {
+            requireNonNull(exam);
+            LessonsAdded.add(exam);
         }
 
         @Override

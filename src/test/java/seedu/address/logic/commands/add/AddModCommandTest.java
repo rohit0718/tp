@@ -2,13 +2,12 @@ package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +43,7 @@ public class AddModCommandTest {
         CommandResult commandResult = new AddModCommand(validModule).execute(modelStub);
 
         assertEquals(String.format(AddModCommand.MESSAGE_SUCCESS, validModule), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validModule), modelStub.ModulesAdded);
+        assertEquals(List.of(validModule), modelStub.ModulesAdded);
     }
 
     @Test
@@ -64,20 +63,20 @@ public class AddModCommandTest {
         AddModCommand addBobCommand = new AddModCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddModCommand addAliceCommandCopy = new AddModCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
         // different Module -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand, addBobCommand);
     }
 
     /**
@@ -120,7 +119,7 @@ public class AddModCommandTest {
         }
 
         @Override
-        public Module getModule(ModuleCode modCode) throws CommandException {
+        public Module getModule(ModuleCode modCode) {
             return null;
         }
 
@@ -181,7 +180,7 @@ public class AddModCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
