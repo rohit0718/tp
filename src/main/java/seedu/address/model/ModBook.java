@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.module.exam.Exam;
 
 /**
  * Wraps all data at the address-book level
@@ -90,6 +91,14 @@ public class ModBook implements ReadOnlyModBook {
      */
     public void removeModule(Module key) {
         modules.remove(key);
+    }
+
+    /**
+     * Removes Exam {@code target} from the Module {@code module}.
+     * {@code target} must exist in {@code module}'s lessons list.
+     */
+    public void removeExam(Module module, Exam target) {
+        module.getExams().remove(target);
     }
 
     //// util methods
