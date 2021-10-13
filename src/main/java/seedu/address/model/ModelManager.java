@@ -220,7 +220,7 @@ public class ModelManager implements Model {
     @Override
     public boolean moduleHasLesson(Module module, Lesson lesson) {
         List<Lesson> lessons = module.getLessons();
-        return !lessons.contains(lesson);
+        return lessons.contains(lesson);
     }
 
     @Override
@@ -237,6 +237,11 @@ public class ModelManager implements Model {
     @Override
     public void addExamToModule(Module module, Exam exam) {
         module.getExams().add(exam);
+    }
+
+    @Override
+    public void deleteExam(Module module, Exam target) {
+        modBook.removeExam(module, target);
     }
 
     //=========== Filtered Module List Accessors =============================================================

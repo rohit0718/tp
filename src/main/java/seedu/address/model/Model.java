@@ -156,7 +156,10 @@ public interface Model {
      */
     void addExamToModule(Module module, Exam exam);
 
-
+    /**
+     * Deletes the Exam from the specified module's lessons list.
+     */
+    void deleteExam(Module module, Exam target);
 
     /**
      * Replaces the given module {@code target} with {@code editedModule}.
