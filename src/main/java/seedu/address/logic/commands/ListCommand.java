@@ -17,6 +17,10 @@ public class ListCommand extends Command {
             + "Parameters: [mod / lesson / exam]\n"
             + "Example: " + COMMAND_WORD + " mod";
 
+    public static String MESSAGE_SUCCESS_MODULES = "Listed all modules.";
+    public static String MESSAGE_SUCCESS_LESSONS = "Listed all lessons.";
+    public static String MESSAGE_SUCCESS_EXAMS = "Listed all exams.";
+
     private final Type type;
 
     public ListCommand(Type type) {
@@ -26,14 +30,17 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+
         switch (type) {
-            case Type.MOD:
-                model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-            case Type.LESSON:
-                model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-            case Type.EXAM:
-                model.updateFilteredExamList(PREDICATE_SHOW_ALL_EXAMS);
+        case LESSON:
+            return new CommandResult(MESSAGE_SUCCESS_LESSONS, false, GuiState.LESSONS);
+        case EXAM:
+            return new CommandResult(MESSAGE_SUCCESS_EXAMS, false, GuiState.EXAMS);
         }
-        return new CommandResult("Listed all records.");
+
+        return new CommandResult(MESSAGE_SUCCESS_MODULES, false, GuiState.SUMMARY);
     }
+
 }
