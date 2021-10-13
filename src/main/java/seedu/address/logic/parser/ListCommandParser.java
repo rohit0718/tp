@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.list.ListCommand;
+import seedu.address.logic.commands.list.ListExamCommand;
+import seedu.address.logic.commands.list.ListLessonCommand;
+import seedu.address.logic.commands.list.ListModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -24,7 +27,14 @@ public class ListCommandParser {
 
         try {
             Type type = ParserUtil.parseFirstArg(args, ListCommand.MESSAGE_USAGE);
-            return new ListCommand(type);
+            switch (type) {
+            case LESSON:
+                return new ListLessonCommand();
+            case EXAM:
+                return new ListExamCommand();
+            default:
+                return new ListModCommand();
+            }
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), pe);
