@@ -156,8 +156,6 @@ public interface Model {
      */
     void addExamToModule(Module module, Exam exam);
 
-
-
     /**
      * Replaces the given module {@code target} with {@code editedModule}.
      * {@code target} must exist in the address book.
