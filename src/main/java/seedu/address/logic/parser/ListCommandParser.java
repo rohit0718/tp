@@ -16,6 +16,12 @@ public class ListCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
+
+        if (hasMultipleArguments(args)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+
         try {
             Type type = ParserUtil.parseFirstArg(args, ListCommand.MESSAGE_USAGE);
             return new ListCommand(type);
@@ -23,6 +29,13 @@ public class ListCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), pe);
         }
+    }
+
+    /**
+     * Checks if an argument string has multiple arguments
+     */
+    private static boolean hasMultipleArguments(String args) {
+        return args.trim().split(" ", 2).length != 1;
     }
 
 }
