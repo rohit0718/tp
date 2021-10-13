@@ -14,4 +14,6 @@ public class TypicalIndexes {
     public static final Index INDEX_THIRD_MODULE = Index.fromOneBased(3);
     public static final Index INDEX_FIRST_LESSON = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_LESSON = Index.fromOneBased(2);
+    public static final Index INDEX_FIRST_EXAM = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_EXAM = Index.fromOneBased(2);
 }
