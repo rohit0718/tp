@@ -274,7 +274,7 @@ public class ParserUtil {
         if (!Day.isValidDay(trimmedDay)) {
             throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
-        return Day.valueOf(trimmedDay);
+        return Day.valueOf(trimmedDay.toUpperCase());
     }
 
     /**
@@ -350,7 +350,6 @@ public class ParserUtil {
      */
     public static Type parseFirstArg(String args, String errorMessage) throws ParseException {
         String firstArg = args.trim().split(" ", 2)[0];
-
         switch (firstArg) {
         case "mod":
             return Type.MOD;

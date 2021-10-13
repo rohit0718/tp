@@ -24,7 +24,7 @@ public class AddModCommand extends AddCommand {
             + PREFIX_NAME + "Software Engineering ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This module already exists in the mod book";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the mod book";
 
     private final Module toAdd;
 
@@ -41,7 +41,7 @@ public class AddModCommand extends AddCommand {
         requireNonNull(model);
 
         if (model.hasModule(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
         model.addModule(toAdd);
