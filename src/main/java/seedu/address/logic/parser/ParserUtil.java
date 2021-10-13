@@ -35,6 +35,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_NO_INDEXES_FOUND = "No indexes found in command.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,6 +49,22 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses the first integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if no indexes found in args (no non-zero unsigned integer).
+     */
+    public static Index parseFirstIndex(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        for (String arg : trimmedArgs.split(" ")) {
+            if (StringUtil.isNonZeroUnsignedInteger(arg)) {
+                return Index.fromOneBased(Integer.parseInt(arg));
+            }
+        }
+        throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
     }
 
     /**
