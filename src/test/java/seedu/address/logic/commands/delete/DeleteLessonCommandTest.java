@@ -36,7 +36,7 @@ public class DeleteLessonCommandTest {
         Lesson lessonToDelete = targetModule.getLessons().get(INDEX_FIRST_LESSON.getZeroBased());
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode());
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
-                lessonToDelete, targetModule.getCode());
+                lessonToDelete.getName(), targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
@@ -57,7 +57,7 @@ public class DeleteLessonCommandTest {
         Lesson lessonToDelete = targetModule.getLessons().get(INDEX_FIRST_LESSON.getZeroBased());
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode());
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
-                lessonToDelete, targetModule.getCode());
+                lessonToDelete.getName(), targetModule.getCode());
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);

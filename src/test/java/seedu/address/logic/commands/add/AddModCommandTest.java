@@ -230,11 +230,6 @@ public class AddModCommandTest {
         }
 
         @Override
-        public Module getModule(ModuleCode modCode) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteExam(Module module, Exam target) {
             throw new AssertionError("This method should not be called.");
         }

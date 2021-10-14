@@ -37,7 +37,7 @@ public class DeleteExamCommandTest {
         Exam examToDelete = targetModule.getExams().get(INDEX_FIRST_EXAM.getZeroBased());
         DeleteCommand deleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, targetModule.getCode());
         String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS,
-                examToDelete, targetModule.getCode());
+                examToDelete.getName(), targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
         assertCommandSuccess(deleteExamCommand, model, expectedMessage, expectedModel);
@@ -57,7 +57,7 @@ public class DeleteExamCommandTest {
         Module targetModule = CS2103T.deepCopy();
         Exam examToDelete = targetModule.getExams().get(INDEX_FIRST_EXAM.getZeroBased());
         DeleteCommand deleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, targetModule.getCode());
-        String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS, examToDelete,
+        String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS, examToDelete.getName(),
                 targetModule.getCode());
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
