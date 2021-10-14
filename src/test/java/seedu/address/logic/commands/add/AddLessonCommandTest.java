@@ -236,6 +236,16 @@ public class AddLessonCommandTest {
         public ReadOnlyModBook getModBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteExam(Module module, Exam target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Module module, Lesson target) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -137,6 +137,16 @@ public interface Model {
     Module getModule(ModuleCode modCode) throws CommandException;
 
     /**
+     * Deletes the Exam from the specified module's lessons list.
+     */
+    void deleteExam(Module module, Exam target);
+
+    /**
+     * Deletes the Lesson from the specified module's lessons list.
+     */
+    void deleteLesson(Module module, Lesson target);
+
+    /**
      * Checks if a module has the lesson
      */
     boolean moduleHasLesson(Module module, Lesson lesson);

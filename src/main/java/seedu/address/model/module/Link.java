@@ -30,6 +30,10 @@ public class Link {
         this.link = link;
     }
 
+    public String getLink() {
+        return link;
+    }
+
     /**
      * Returns true if a given string is a valid link.
      */

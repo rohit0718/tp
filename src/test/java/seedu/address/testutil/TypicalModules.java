@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.ModBook;
 import seedu.address.model.module.Module;
@@ -52,6 +53,8 @@ public class TypicalModules {
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2040S, CS1231S));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2040S, CS1231S))
+                .stream().map(Module::deepCopy)
+                .collect(Collectors.toList());
     }
 }

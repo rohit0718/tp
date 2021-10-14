@@ -69,6 +69,18 @@ public class Lesson implements Comparable<Lesson> {
     }
 
     /**
+     * Returns a deepCopy of the Lesson object.
+     */
+    public Lesson deepCopy() {
+        LessonName newLessonName = new LessonName(name.getLessonName());
+        Timeslot newTimeslot = timeslot.deepCopy();
+        Optional<Venue> newVenue = venue.map(venue -> new Venue(venue.getFullVenue()));
+        Optional<Link> newLink = link.map(link -> new Link(link.getLink()));
+        // day is enum, no clone method
+        return new Lesson(newLessonName, day, newTimeslot, newVenue, newLink);
+    }
+
+    /**
      * Returns true if both Lessons have the same identity and data fields.
      * This defines a stronger notion of equality between two Lessons.
      */
