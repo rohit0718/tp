@@ -18,6 +18,10 @@ public class ExamName {
 
     public final String fullExamName;
 
+    public String getFullExamName() {
+        return fullExamName;
+    }
+
     /**
      * Constructs an {@code ExamName}.
      *

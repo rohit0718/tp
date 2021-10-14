@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
@@ -88,6 +89,14 @@ public class Module {
      */
     public Exam getNextExam() {
         return Collections.min(exams);
+    }
+
+    public Module deepCopy() {
+        ModuleCode newModCode = new ModuleCode(moduleCode.moduleCode);
+        Optional<ModuleName> newModName = moduleName.map(modName -> new ModuleName(modName.getModuleName()));
+        List<Lesson> newLessons = lessons.stream().map(Lesson::deepCopy).collect(Collectors.toList());
+        List<Exam> newExams = exams.stream().map(Exam::deepCopy).collect(Collectors.toList());
+        return new Module(newModCode, newModName, newLessons, newExams);
     }
 
     /**
