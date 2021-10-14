@@ -29,6 +29,14 @@ public class ModBookTime implements Comparable<ModBookTime> {
         this.time = LocalTime.parse(time, PARSE_FORMATTER);
     }
 
+    private ModBookTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public ModBookTime deepCopy() {
+        return new ModBookTime(time);
+    }
+
     /**
      * Returns true if a given string is a valid time
      */

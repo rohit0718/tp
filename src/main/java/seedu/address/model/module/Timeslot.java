@@ -28,6 +28,10 @@ public class Timeslot implements Comparable<Timeslot> {
         this.endTime = endTime;
     }
 
+    public Timeslot deepCopy() {
+        return new Timeslot(startTime.deepCopy(), endTime.deepCopy());
+    }
+
     /**
      * Returns true if the given startTime is before the given endTime.
      */

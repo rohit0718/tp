@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -14,7 +18,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -22,6 +25,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddModCommand;
+import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.delete.DeleteExamCommand;
+import seedu.address.logic.commands.delete.DeleteLessonCommand;
+import seedu.address.logic.commands.delete.DeleteModCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
@@ -53,9 +60,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), DEFAULT_STATE);
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        Module module = new ModuleBuilder().build();
+        DeleteCommand deleteModCommand = (DeleteModCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " mod " + INDEX_FIRST_MODULE.getOneBased(), DEFAULT_STATE);
+        assertEquals(new DeleteModCommand(INDEX_FIRST_MODULE), deleteModCommand);
+
+        DeleteCommand deleteLessonCommand = (DeleteLessonCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " lesson "
+                        + INDEX_FIRST_LESSON.getOneBased() + " "
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
+        assertEquals(new DeleteLessonCommand(INDEX_FIRST_LESSON, module.getCode()), deleteLessonCommand);
+
+        DeleteCommand deleteExamCommand = (DeleteExamCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " exam "
+                        + INDEX_FIRST_EXAM.getOneBased() + " "
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
+        assertEquals(new DeleteExamCommand(INDEX_FIRST_EXAM, module.getCode()), deleteExamCommand);
     }
 
     @Test

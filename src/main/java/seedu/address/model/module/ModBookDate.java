@@ -29,6 +29,14 @@ public class ModBookDate implements Comparable<ModBookDate> {
         this.date = LocalDate.parse(date, PARSE_FORMATTER);
     }
 
+    private ModBookDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public ModBookDate deepCopy() {
+        return new ModBookDate(date);
+    }
+
     /**
      * Returns true if a given string is a valid date
      */
