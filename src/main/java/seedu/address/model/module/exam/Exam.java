@@ -59,6 +59,9 @@ public class Exam implements Comparable<Exam> {
         return link;
     }
 
+    /**
+     * Returns a deepCopy of the Exam object.
+     */
     public Exam deepCopy() {
         ExamName newExamName = new ExamName(name.getFullExamName());
         ModBookDate newModBookDate = date.deepCopy();

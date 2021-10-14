@@ -91,6 +91,9 @@ public class Module {
         return Collections.min(exams);
     }
 
+    /**
+     * Returns a deepCopy of the Module object.
+     */
     public Module deepCopy() {
         ModuleCode newModCode = new ModuleCode(moduleCode.moduleCode);
         Optional<ModuleName> newModName = moduleName.map(modName -> new ModuleName(modName.getModuleName()));

@@ -1,5 +1,10 @@
 package seedu.address.logic.commands.delete;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -9,14 +14,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-
 public class DeleteExamCommand extends DeleteCommand {
-    private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
     public static final String MESSAGE_DELETE_EXAM_SUCCESS = "Deleted Exam %s from Module %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an Exam from a "
             + "specified Module from the Mod book."
@@ -24,6 +22,8 @@ public class DeleteExamCommand extends DeleteCommand {
             + PREFIX_CODE + "MOD_CODE"
             + "\nExample: " + COMMAND_WORD + " exam 1 "
             + PREFIX_CODE + "CS2103T";
+    private final Index targetIndex;
+    private final ModuleCode targetModuleCode;
 
     /**
      * Creates an DeleteExamCommand to delete the Exam at specified {@code Index} of the specified {@code Module}.

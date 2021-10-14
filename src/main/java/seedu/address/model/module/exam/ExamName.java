@@ -10,17 +10,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ExamName {
     public static final String MESSAGE_CONSTRAINTS =
             "Exam name should not be blank";
-
     /*
      * The first character of the exam must not be a whitespace.
      */
     public static final String VALIDATION_REGEX = "^\\S.*$";
-
     public final String fullExamName;
-
-    public String getFullExamName() {
-        return fullExamName;
-    }
 
     /**
      * Constructs an {@code ExamName}.
@@ -31,6 +25,10 @@ public class ExamName {
         requireNonNull(examName);
         checkArgument(isValidExamName(examName), MESSAGE_CONSTRAINTS);
         fullExamName = examName;
+    }
+
+    public String getFullExamName() {
+        return fullExamName;
     }
 
     /**

@@ -1,5 +1,10 @@
 package seedu.address.logic.commands.delete;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
@@ -9,14 +14,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.lesson.Lesson;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-
 public class DeleteLessonCommand extends DeleteCommand {
-    private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson %s from Module %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a Lesson from a "
             + "specified Module from the Mod book."
@@ -24,6 +22,8 @@ public class DeleteLessonCommand extends DeleteCommand {
             + PREFIX_CODE + "MOD_CODE"
             + "\nExample: " + COMMAND_WORD + " lesson 1 "
             + PREFIX_CODE + "CS1231S";
+    private final Index targetIndex;
+    private final ModuleCode targetModuleCode;
 
     /**
      * Creates an DeleteLessonCommand to delete the Lesson at specified {@code Index} of the specified {@code Module}.
