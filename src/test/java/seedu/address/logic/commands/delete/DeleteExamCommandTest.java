@@ -21,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 
 /**
@@ -30,7 +29,6 @@ import seedu.address.model.module.exam.Exam;
  */
 public class DeleteExamCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
-    private final ModuleCode MOD_CODE = new ModuleCode("CS2103T");
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -38,7 +36,8 @@ public class DeleteExamCommandTest {
         Module targetModule = CS2103T.deepCopy();
         Exam examToDelete = targetModule.getExams().get(INDEX_FIRST_EXAM.getZeroBased());
         DeleteCommand deleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, targetModule.getCode());
-        String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS, examToDelete, targetModule.getCode());
+        String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS,
+                examToDelete, targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
         assertCommandSuccess(deleteExamCommand, model, expectedMessage, expectedModel);
@@ -48,7 +47,7 @@ public class DeleteExamCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(targetModule.getExams().size() + 1);
-        DeleteCommand deleteExamCommand = new DeleteExamCommand(outOfBoundIndex, MOD_CODE);
+        DeleteCommand deleteExamCommand = new DeleteExamCommand(outOfBoundIndex, targetModule.getCode());
         assertCommandFailure(deleteExamCommand, model, Messages.MESSAGE_INVALID_EXAM_DISPLAYED_INDEX);
     }
 
@@ -58,7 +57,8 @@ public class DeleteExamCommandTest {
         Module targetModule = CS2103T.deepCopy();
         Exam examToDelete = targetModule.getExams().get(INDEX_FIRST_EXAM.getZeroBased());
         DeleteCommand deleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, targetModule.getCode());
-        String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS, examToDelete, targetModule.getCode());
+        String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS, examToDelete,
+                targetModule.getCode());
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
         showNoModule(expectedModel);
@@ -76,14 +76,14 @@ public class DeleteExamCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteExamFirstCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, MOD_CODE);
-        DeleteCommand deleteExamSecondCommand = new DeleteExamCommand(INDEX_SECOND_EXAM, MOD_CODE);
+        DeleteCommand deleteExamFirstCommand = new DeleteExamCommand(INDEX_FIRST_EXAM, CS2103T.getCode());
+        DeleteCommand deleteExamSecondCommand = new DeleteExamCommand(INDEX_SECOND_EXAM, CS2103T.getCode());
 
         // same object -> returns true
         assertEquals(deleteExamFirstCommand, deleteExamFirstCommand);
 
         // same values -> returns true
-        DeleteCommand deleteExamFirstCommandCopy = new DeleteExamCommand(INDEX_FIRST_EXAM, MOD_CODE);
+        DeleteCommand deleteExamFirstCommandCopy = new DeleteExamCommand(INDEX_FIRST_EXAM, CS2103T.getCode());
         assertEquals(deleteExamFirstCommand, deleteExamFirstCommandCopy);
 
         // different types -> returns false

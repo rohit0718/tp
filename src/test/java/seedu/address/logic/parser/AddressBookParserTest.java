@@ -19,21 +19,21 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteExamCommand;
 import seedu.address.logic.commands.delete.DeleteLessonCommand;
 import seedu.address.logic.commands.delete.DeleteModCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.module.Module;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.builders.ModuleBuilder;
@@ -62,7 +62,7 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         Module module = new ModuleBuilder().build();
         DeleteCommand deleteModCommand = (DeleteModCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " mod "+ INDEX_FIRST_MODULE.getOneBased(), DEFAULT_STATE);
+                DeleteCommand.COMMAND_WORD + " mod " + INDEX_FIRST_MODULE.getOneBased(), DEFAULT_STATE);
         assertEquals(new DeleteModCommand(INDEX_FIRST_MODULE), deleteModCommand);
 
         DeleteCommand deleteLessonCommand = (DeleteLessonCommand) parser.parseCommand(
