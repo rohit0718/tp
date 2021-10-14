@@ -18,6 +18,10 @@ public class LessonName {
 
     public final String fullLessonName;
 
+    public String getLessonName() {
+        return fullLessonName;
+    }
+
     /**
      * Constructs an {@code ExamName}.
      *
