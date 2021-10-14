@@ -224,7 +224,7 @@ public class ParserUtil {
         requireNonNull(examName);
         String trimmedExamName = examName.trim();
         if (!ExamName.isValidExamName(trimmedExamName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(ExamName.MESSAGE_CONSTRAINTS);
         }
         return new ExamName(trimmedExamName);
     }
