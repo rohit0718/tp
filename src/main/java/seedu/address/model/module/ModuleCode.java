@@ -33,6 +33,10 @@ public class ModuleCode {
         this.moduleCode = moduleCode.toUpperCase();
     }
 
+    public String getModuleCode() {
+        return moduleCode;
+    }
+
     /**
      * Returns true if a given string is a valid code.
      *
