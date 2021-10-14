@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class DeleteExamCommand extends DeleteCommand {
      * Creates an DeleteExamCommand to delete the Exam at specified {@code Index} of the specified {@code Module}.
      */
     public DeleteExamCommand(Index targetIndex, ModuleCode targetModuleCode) {
-        requireNonNull(targetIndex);
+        requireAllNonNull(targetIndex, targetModuleCode);
         this.targetIndex = targetIndex;
         this.targetModuleCode = targetModuleCode;
     }
@@ -44,7 +45,7 @@ public class DeleteExamCommand extends DeleteCommand {
         }
         Exam examToDelete = exams.get(targetIndex.getZeroBased());
         model.deleteExam(module, examToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EXAM_SUCCESS, examToDelete, targetModuleCode));
+        return new CommandResult(String.format(MESSAGE_DELETE_EXAM_SUCCESS, examToDelete.getName(), targetModuleCode));
     }
 
     @Override

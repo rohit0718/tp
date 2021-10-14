@@ -10,6 +10,7 @@ import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteExamCommand;
 import seedu.address.logic.commands.delete.DeleteLessonCommand;
 import seedu.address.logic.commands.delete.DeleteModCommand;
+import seedu.address.logic.parser.exceptions.GuiStateException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 
@@ -30,11 +31,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 DeleteCommand.MESSAGE_USAGE));
         switch(type) {
         case MOD:
-            return parseMod(args, guiState);
+            return parseDeleteMod(args, guiState);
         case LESSON:
-            return parseLesson(args, guiState);
+            return parseDeleteLesson(args, guiState);
         case EXAM:
-            return parseExam(args, guiState);
+            return parseDeleteExam(args, guiState);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
@@ -45,9 +46,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteModCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public DeleteModCommand parseMod(String args, GuiState guiState) throws ParseException {
+    public DeleteModCommand parseDeleteMod(String args, GuiState guiState) throws ParseException {
         if (guiState != GuiState.SUMMARY) {
-            throw new ParseException(MESSAGE_WRONG_VIEW_SUMMARY);
+            throw new GuiStateException(MESSAGE_WRONG_VIEW_SUMMARY);
         }
         Index index = ParserUtil.parseFirstIndex(args);
         return new DeleteModCommand(index);
@@ -58,9 +59,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteLessonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public DeleteLessonCommand parseLesson(String args, GuiState guiState) throws ParseException {
+    public DeleteLessonCommand parseDeleteLesson(String args, GuiState guiState) throws ParseException {
         if (guiState != GuiState.DETAILS) {
-            throw new ParseException(MESSAGE_WRONG_VIEW_DETAILS);
+            throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE);
         if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
@@ -76,9 +77,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteExamCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public DeleteExamCommand parseExam(String args, GuiState guiState) throws ParseException {
+    public DeleteExamCommand parseDeleteExam(String args, GuiState guiState) throws ParseException {
         if (guiState != GuiState.DETAILS) {
-            throw new ParseException(MESSAGE_WRONG_VIEW_DETAILS);
+            throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE);
         if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
