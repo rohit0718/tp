@@ -68,13 +68,13 @@ public class AddressBookParserTest {
         DeleteCommand deleteLessonCommand = (DeleteLessonCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " lesson "
                         + INDEX_FIRST_LESSON.getOneBased() + " "
-                        + PREFIX_CODE + module.getCode(), DEFAULT_STATE);
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
         assertEquals(new DeleteLessonCommand(INDEX_FIRST_LESSON, module.getCode()), deleteLessonCommand);
 
         DeleteCommand deleteExamCommand = (DeleteExamCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " exam "
                         + INDEX_FIRST_EXAM.getOneBased() + " "
-                        + PREFIX_CODE + module.getCode(), DEFAULT_STATE);
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
         assertEquals(new DeleteExamCommand(INDEX_FIRST_EXAM, module.getCode()), deleteExamCommand);
     }
 

@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -33,10 +34,11 @@ public class DeleteLessonCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
+        Module targetModule = CS2103T.deepCopy();
         Lesson lessonToDelete = targetModule.getLessons().get(INDEX_FIRST_LESSON.getZeroBased());
-        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, MOD_CODE);
-        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, MOD_CODE);
+        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode());
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
+                lessonToDelete, targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
@@ -45,7 +47,7 @@ public class DeleteLessonCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(targetModule.getLessons().size() + 1);
+        Index outOfBoundIndex = Index.fromZeroBased(targetModule.getLessons().size() + 1);
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex, MOD_CODE);
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
@@ -53,13 +55,13 @@ public class DeleteLessonCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
-        Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
+        Module targetModule = CS2103T.deepCopy();
         Lesson lessonToDelete = targetModule.getLessons().get(INDEX_FIRST_LESSON.getZeroBased());
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode());
-        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, targetModule.getCode());
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
+                lessonToDelete, targetModule.getCode());
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
-        showNoModule(expectedModel);
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
     }
 
@@ -67,7 +69,7 @@ public class DeleteLessonCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Index outOfBoundIndex = Index.fromOneBased(targetModule.getLessons().size() + 1);
+        Index outOfBoundIndex = Index.fromZeroBased(targetModule.getLessons().size() + 1);
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex, targetModule.getCode());
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
