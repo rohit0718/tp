@@ -41,11 +41,11 @@ public class ModuleSummaryCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
      */
-    public ModuleSummaryCard(Module module) {
+    public ModuleSummaryCard(Module module, int displayedIndex) {
         super(FXML);
         this.module = module;
+        id.setText(displayedIndex + ". ");
         String moduleHeader = module.getCode().toString();
-
         if (module.getName().isPresent()) {
             moduleHeader += String.format(" %s", module.getName().get());
         }
