@@ -226,7 +226,7 @@ public class ModelManager implements Model {
     public void deleteLesson(Module module, Lesson target) {
         modBook.removeLesson(module, target);
     }
-        
+
     @Override
     public boolean moduleHasLesson(Module module, Lesson lesson) {
         List<Lesson> lessons = module.getLessons();
