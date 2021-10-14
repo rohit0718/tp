@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 
@@ -68,10 +69,19 @@ public class Lesson implements Comparable<Lesson> {
                 && otherLesson.getName().equals(getName());
     }
 
-    /**
-     * Returns true if both Lessons have the same identity and data fields.
-     * This defines a stronger notion of equality between two Lessons.
-     */
+    public Lesson deepCopy() {
+        LessonName newLessonName = new LessonName(name.getLessonName());
+        Timeslot newTimeslot = timeslot.deepCopy();
+        Optional<Venue> newVenue = venue.map(venue -> new Venue(venue.getFullVenue()));
+        Optional<Link> newLink = link.map(link -> new Link(link.getLink()));
+        // day is enum, no clone method
+        return new Lesson(newLessonName, day, newTimeslot, newVenue, newLink);
+    }
+
+        /**
+         * Returns true if both Lessons have the same identity and data fields.
+         * This defines a stronger notion of equality between two Lessons.
+         */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
