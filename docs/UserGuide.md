@@ -5,7 +5,7 @@ NUS ModBook is a **desktop app for managing modules, optimized for use via a Com
 
 ## Table of Contents
 1. [Quick Start](#Quick-start)
-1. [Features](#Features)
+2. [Features](#Features)
     * [Modules](#Modules)
         * [Adding a module](#Adding-a-module-add-mod)
         * [Listing all modules](#Listing-all-modules--list-mod)
@@ -28,8 +28,9 @@ NUS ModBook is a **desktop app for managing modules, optimized for use via a Com
         * [Exiting the program](#Exiting-the-program--exit)
         * [Saving the data](#Saving-the-data)
         * [Editing the data file](#Editing-the-data-file)
-1. [FAQ](#FAQ)
-1. [Command Summary](#Command-Summary)
+3. [FAQ](#FAQ)
+4. [Date and time formats](#Date-and-time-formats)
+5. [Command Summary](#Command-Summary)
     * [By Action](#Command-Summary-by-Action)
     * [By Object](#Command-Summary-by-Object)
 
@@ -49,7 +50,7 @@ NUS ModBook is a **desktop app for managing modules, optimized for use via a Com
 
 
 ## Features
-#### Notes about the command format:
+### Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user.
   e.g. in add `c/CODE`, `CODE` is a parameter which can be used as `add mod c/CS2103T`.
 * Items in square brackets are optional.
@@ -160,11 +161,36 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 Caution: If your changes to the data file makes its format invalid, ModBook will discard all data and start with an empty data file at the next run.
 
 ## FAQ
-**Q**:   How do I transfer my data to another Computer?
+**Q**:   How do I transfer my data to another Computer?  
 **A**:   Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModBook home folder.
+
+## Date and time formats
+The following formats are valid for entering time values:
+
+| Format   | Examples             |
+|----------|----------------------|
+| `HH:mm`  | `09:00`, `14:30`     |
+| `HH.mm`  | `09.00`, `14.30`     |
+| `HHmm`   | `0900`, `1430`       |
+| `ha`     | `9AM`, `2pm`         |
+| `hha`    | `09AM`, `11pm`       |
+| `h:mma`  | `9:00AM`, `2:30pm`   |
+| `hh:mma` | `09:00AM`, `11:30pm` |
+| `h.mma`  | `9.00AM`, `2.30pm`   |
+| `hh.mma` | `09.00AM`, `11.30pm` |
+
+The meaning of the symbols in the formats specified are in the table below:
+
+| Symbol | Meaning                                 |
+|--------|-----------------------------------------|
+| H      | Hour of 24-hour time. Goes from 0 to 23 |
+| h      | Hour of 12-hour time. Goes from 1 to 12 |
+| m      | Minute                                  |
+| a      | AM/PM indicator                         |
 
 ## Command Summary
 ### Command Summary by Action
+
 | Action | Object | Format, Examples                                                                                                         |
 |--------|--------|--------------------------------------------------------------------------------------------------------------------------|
 | Add    | Module | `add mod c/CODE [n/NAME]`                                                                                                  |
@@ -185,6 +211,7 @@ Caution: If your changes to the data file makes its format invalid, ModBook will
 | Exit   |        | `exit`                                                                                                                     |
 
 ### Command Summary by Object
+
 | Object | Action | Format, Examples                                                                                                         |
 |--------|--------|--------------------------------------------------------------------------------------------------------------------------|
 | Module | Add    | `add mod c/CODE [n/NAME]`                                                                                                  |
