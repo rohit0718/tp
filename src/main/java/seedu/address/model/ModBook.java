@@ -25,7 +25,8 @@ public class ModBook implements ReadOnlyModBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         modules = new UniqueModuleList();
     }
 

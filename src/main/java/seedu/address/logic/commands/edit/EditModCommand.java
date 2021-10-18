@@ -22,12 +22,9 @@ import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
 
 public class EditModCommand extends EditCommand {
-    private final Index targetIndex;
-    private final EditModDescriptor editModDescriptor;
-
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists.";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a module in the Mod book. "
             + "\nParameters: "
             + PREFIX_CODE + "CODE "
@@ -35,6 +32,8 @@ public class EditModCommand extends EditCommand {
             + "\nExample: " + COMMAND_WORD + " mod "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Software Engineering ";
+    private final Index targetIndex;
+    private final EditModDescriptor editModDescriptor;
 
     /**
      * Creates an EditModCommand to edit the specified {@code Module}.

@@ -30,13 +30,9 @@ import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.module.lesson.LessonName;
 
 public class EditLessonCommand extends EditCommand {
-    private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
-    private final EditLessonDescriptor editLessonDescriptor;
-
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists.";
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson %s in Module %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson in the Mod book. "
             + "\nParameters: "
             + PREFIX_CODE + "MOD_CODE "
@@ -54,11 +50,15 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_END + "11:00 "
             + PREFIX_LINK + "https://www.youtube.com/watch?v=8mL3L9hN2l4 "
             + PREFIX_VENUE + "COM1 ";
+    private final Index targetIndex;
+    private final ModuleCode targetModuleCode;
+    private final EditLessonDescriptor editLessonDescriptor;
 
     /**
      * Creates an EditLessonCommand to edit the Lesson at specified {@code Index} of the specified {@code Module}.
      */
-    public EditLessonCommand(Index targetIndex, ModuleCode targetModuleCode, EditLessonDescriptor editLessonDescriptor) {
+    public EditLessonCommand(Index targetIndex, ModuleCode targetModuleCode,
+                             EditLessonDescriptor editLessonDescriptor) {
         requireAllNonNull(targetIndex, targetModuleCode, editLessonDescriptor);
 
         this.targetIndex = targetIndex;

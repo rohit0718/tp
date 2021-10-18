@@ -291,5 +291,4 @@ public class AddModCommandTest {
             return new ModBook();
         }
     }
-
 }

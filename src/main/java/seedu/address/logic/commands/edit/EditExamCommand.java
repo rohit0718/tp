@@ -30,13 +30,9 @@ import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.exam.ExamName;
 
 public class EditExamCommand extends EditCommand {
-    private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
-    private final EditExamDescriptor editExamDescriptor;
-
+    public static final String MESSAGE_DUPLICATE_EXAM = "This exam already exists.";
     public static final String MESSAGE_EDIT_EXAM_SUCCESS = "Edited Exam %s in Module %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EXAM = "This exam already exists.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an exam in the Mod book. "
             + "\nParameters: "
             + PREFIX_CODE + "MOD_CODE "
@@ -54,6 +50,9 @@ public class EditExamCommand extends EditCommand {
             + PREFIX_END + "11:00 "
             + PREFIX_LINK + "https://www.youtube.com/watch?v=8mL3L9hN2l4 "
             + PREFIX_VENUE + "Field";
+    private final Index targetIndex;
+    private final ModuleCode targetModuleCode;
+    private final EditExamDescriptor editExamDescriptor;
 
     /**
      * Creates an EditExamCommand to edit the Exam at specified {@code Index} of the specified {@code Module}.
