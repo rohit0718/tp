@@ -15,17 +15,13 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ModBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonModBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.ModBookStorage;
@@ -52,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ModBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -60,9 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         ModBookStorage modBookStorage = new JsonModBookStorage(userPrefs.getModBookFilePath());
-        storage = new StorageManager(addressBookStorage, modBookStorage, userPrefsStorage);
+        storage = new StorageManager(modBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,28 +69,12 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book, mod book and {@code userPrefs}.
-     * <br> The data from the sample address/mod book will be used instead if {@code storage}'s address/mod book is not
-     * found, or an empty address/mod book will be used instead if errors occur when reading {@code storage}'s
-     * address/mod book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s mod book and {@code userPrefs}.
+     * <br> The data from the sample mod book will be used instead if {@code storage}'s mod book is not
+     * found, or an empty mod book will be used instead if errors occur when reading {@code storage}'s
+     * mod book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialAddressBook;
-
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialAddressBook = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialAddressBook = new AddressBook();
-        }
 
         Optional<ReadOnlyModBook> modBookOptional;
         ReadOnlyModBook initialModBook;
@@ -114,7 +93,7 @@ public class MainApp extends Application {
             initialModBook = new ModBook();
         }
 
-        return new ModelManager(initialAddressBook, initialModBook, userPrefs);
+        return new ModelManager(initialModBook, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -175,7 +154,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty ModBook");
             initializedPrefs = new UserPrefs();
         }
 
