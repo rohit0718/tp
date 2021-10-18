@@ -95,7 +95,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditLessonCommand parseEditLesson(String args, GuiState guiState) throws ParseException {
-        if (guiState != GuiState.SUMMARY) {
+        if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
 
@@ -146,7 +146,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditExamCommand parseEditExam(String args, GuiState guiState) throws ParseException {
-        if (guiState != GuiState.SUMMARY) {
+        if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
 
