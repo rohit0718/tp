@@ -40,17 +40,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' mod book file path.
      */
     Path getModBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' mod book file path.
      */
     void setModBookFilePath(Path modBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code modBook}.
+     * Replaces mod book data with the data in {@code modBook}.
      */
     void setModBook(ReadOnlyModBook modBook);
 
