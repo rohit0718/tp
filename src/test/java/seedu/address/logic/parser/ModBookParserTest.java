@@ -39,11 +39,11 @@ import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.builders.ModuleBuilder;
 import seedu.address.testutil.builders.PersonBuilder;
 
-public class AddressBookParserTest {
+public class ModBookParserTest {
 
     private static final GuiState DEFAULT_STATE = GuiState.SUMMARY;
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ModBookParser parser = new ModBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
