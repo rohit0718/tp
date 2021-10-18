@@ -98,7 +98,7 @@ public class EditLessonCommand extends EditCommand {
         LessonName updatedName = editLessonDescriptor.getName().orElse(lessonToEdit.getName());
         Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         Timeslot updatedTimeslot = editLessonDescriptor.getTimeslot().orElse(lessonToEdit.getTimeslot());
-        
+
         Optional<Venue> updatedVenue = Optional.empty();
         if (lessonToEdit.getVenue().isPresent()) {
             updatedVenue = Optional.of(lessonToEdit.getVenue().get());
@@ -127,7 +127,8 @@ public class EditLessonCommand extends EditCommand {
             return false;
         }
         return targetIndex.equals(((EditLessonCommand) other).targetIndex)
-                && targetModuleCode.equals(((EditLessonCommand) other).targetModuleCode);
+                && targetModuleCode.equals(((EditLessonCommand) other).targetModuleCode)
+                && editLessonDescriptor.equals(((EditLessonCommand) other).editLessonDescriptor);
     }
 
     /**

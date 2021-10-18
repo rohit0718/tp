@@ -90,6 +90,18 @@ public class EditModCommand extends EditCommand {
         return new Module(updateCode, updatedName, lessons, exams);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof EditModCommand)) {
+            return false;
+        }
+        return targetIndex.equals(((EditModCommand) other).targetIndex)
+                && editModDescriptor.equals(((EditModCommand) other).editModDescriptor);
+    }
+
     /**
      * Stores the details to edit the module with. Each non-empty field value will replace the
      * corresponding field value of the module.
@@ -103,7 +115,6 @@ public class EditModCommand extends EditCommand {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditModDescriptor(EditModDescriptor toCopy) {
             setModuleCode(toCopy.moduleCode);

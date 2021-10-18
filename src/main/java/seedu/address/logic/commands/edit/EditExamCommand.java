@@ -117,6 +117,19 @@ public class EditExamCommand extends EditCommand {
         return new Exam(updatedName, updatedDate, updatedTimeslot, updatedVenue, updatedLink);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof EditExamCommand)) {
+            return false;
+        }
+        return targetIndex.equals(((EditExamCommand) other).targetIndex)
+                && targetModuleCode.equals(((EditExamCommand) other).targetModuleCode)
+                && editExamDescriptor.equals(((EditExamCommand) other).editExamDescriptor);
+    }
+
     /**
      * Stores the details to edit the exam with. Each non-empty field value will replace the
      * corresponding field value of the exam.
