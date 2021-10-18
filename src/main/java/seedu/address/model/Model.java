@@ -141,6 +141,7 @@ public interface Model {
 
     /**
      * Gets the requested module based on given modCode.
+     *
      * @param modCode Used to find module.
      * @return Module.
      * @throws CommandException If module does not exist.
@@ -176,6 +177,16 @@ public interface Model {
      * Adds a lesson to a module.
      */
     void addExamToModule(Module module, Exam exam);
+
+    /**
+     * Replaces the {@code target} Exam with {@code newExam} from the specified module's exams list.
+     */
+    void setExam(Module module, Exam target, Exam newExam);
+
+    /**
+     * Replaces the {@code target} Exam with {@code newLesson} from the specified module's lessons list.
+     */
+    void setLesson(Module module, Lesson target, Lesson newLesson);
 
     /**
      * Replaces the given module {@code target} with {@code editedModule}.
