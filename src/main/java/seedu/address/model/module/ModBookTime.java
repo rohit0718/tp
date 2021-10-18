@@ -33,6 +33,13 @@ public class ModBookTime implements Comparable<ModBookTime> {
         this.time = time;
     }
 
+    /**
+     * Checks if ModBookTime is in the future
+     */
+    public boolean isFuture() {
+        return time.compareTo(LocalTime.now()) > 0;
+    }
+
     public ModBookTime deepCopy() {
         return new ModBookTime(time);
     }
