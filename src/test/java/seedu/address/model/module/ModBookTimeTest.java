@@ -82,16 +82,24 @@ class ModBookTimeTest {
         assertEquals(ModBookTime.tryParse("16.00"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("1600"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("4PM"), expectedFourPm);
+        assertEquals(ModBookTime.tryParse("4pm"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("04PM"), expectedFourPm);
+        assertEquals(ModBookTime.tryParse("04pm"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("4:00PM"), expectedFourPm);
+        assertEquals(ModBookTime.tryParse("4:00pm"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("04:00PM"), expectedFourPm);
+        assertEquals(ModBookTime.tryParse("04:00pm"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("4.00PM"), expectedFourPm);
+        assertEquals(ModBookTime.tryParse("4.00pm"), expectedFourPm);
         assertEquals(ModBookTime.tryParse("04.00PM"), expectedFourPm);
+        assertEquals(ModBookTime.tryParse("04.00pm"), expectedFourPm);
 
         assertEquals(ModBookTime.tryParse("11:30"), expectedElevenThirtyAm);
         assertEquals(ModBookTime.tryParse("11.30"), expectedElevenThirtyAm);
         assertEquals(ModBookTime.tryParse("1130"), expectedElevenThirtyAm);
         assertEquals(ModBookTime.tryParse("11:30AM"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.tryParse("11:30am"), expectedElevenThirtyAm);
         assertEquals(ModBookTime.tryParse("11.30AM"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.tryParse("11.30am"), expectedElevenThirtyAm);
     }
 }
