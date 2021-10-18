@@ -2,10 +2,10 @@ package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateTimeUtil.buildFormatter;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -47,16 +47,6 @@ public class ModBookTime implements Comparable<ModBookTime> {
 
     public ModBookTime deepCopy() {
         return new ModBookTime(time);
-    }
-
-    /**
-     * Returns a case-insensitive DateTimeFormatter according to the given pattern
-     */
-    private static DateTimeFormatter buildFormatter(String pattern) {
-        return new DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendPattern(pattern)
-                .toFormatter();
     }
 
     /**
