@@ -32,13 +32,13 @@ import seedu.address.testutil.builders.ModuleBuilder;
 public class AddExamCommandTest {
 
     @Test
-    public void constructor_nullLesson_throwsNullPointerException() {
+    public void constructor_nullExam_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddExamCommand(null, null));
     }
 
     @Test
     public void execute_examAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
+        ModelStubAcceptingExamAdded modelStub = new ModelStubAcceptingExamAdded();
         Exam validExam = new ExamBuilder().build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
@@ -46,7 +46,7 @@ public class AddExamCommandTest {
         CommandResult commandResult = new AddExamCommand(validModuleCode, validExam).execute(modelStub);
 
         assertEquals(String.format(AddExamCommand.MESSAGE_SUCCESS, validExam), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validExam), modelStub.lessonsAdded);
+        assertEquals(List.of(validExam), modelStub.examsAdded);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class AddExamCommandTest {
         // null -> returns false
         assertNotEquals(null, addAliceCommand);
 
-        // different Lesson -> returns false
+        // different Exam -> returns false
         assertNotEquals(addAliceCommand, addBobCommand);
     }
 
@@ -262,36 +262,36 @@ public class AddExamCommandTest {
      * A Model stub that contains a single Module.
      */
     private class ModelStubWithExam extends ModelStub {
-        private final Exam lesson;
+        private final Exam exam;
 
-        ModelStubWithExam(Exam lesson) {
-            requireNonNull(lesson);
-            this.lesson = lesson;
+        ModelStubWithExam(Exam exam) {
+            requireNonNull(exam);
+            this.exam = exam;
         }
 
         @Override
         public boolean moduleHasExam(Module module, Exam exam) {
             requireNonNull(exam);
-            return this.lesson.isSameExam(exam);
+            return this.exam.isSameExam(exam);
         }
     }
 
     /**
      * A Model stub that always accept the Module being added.
      */
-    private class ModelStubAcceptingLessonAdded extends ModelStub {
-        final ArrayList<Exam> lessonsAdded = new ArrayList<>();
+    private class ModelStubAcceptingExamAdded extends ModelStub {
+        final ArrayList<Exam> examsAdded = new ArrayList<>();
 
         @Override
         public boolean moduleHasExam(Module module, Exam exam) {
             requireNonNull(exam);
-            return lessonsAdded.stream().anyMatch(exam::isSameExam);
+            return examsAdded.stream().anyMatch(exam::isSameExam);
         }
 
         @Override
         public void addExamToModule(Module module, Exam exam) {
             requireNonNull(exam);
-            lessonsAdded.add(exam);
+            examsAdded.add(exam);
         }
 
         @Override
