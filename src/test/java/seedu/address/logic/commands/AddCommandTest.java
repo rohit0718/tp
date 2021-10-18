@@ -22,6 +22,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.PersonBuilder;
 
@@ -197,6 +200,51 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredModuleList(Predicate<Module> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Module getModule(ModuleCode modCode) {
+            return null;
+        }
+
+        @Override
+        public boolean moduleHasLesson(Module module, Lesson lesson) {
+            return false;
+        }
+
+        @Override
+        public void addLessonToModule(Module module, Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean moduleHasExam(Module module, Exam exam) {
+            return false;
+        }
+
+        @Override
+        public void addExamToModule(Module module, Exam exam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteExam(Module module, Exam target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Module module, Lesson target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExam(Module module, Exam target, Exam newExam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLesson(Module module, Lesson target, Lesson newLesson) {
             throw new AssertionError("This method should not be called.");
         }
     }
