@@ -25,7 +25,7 @@ public class JsonAdaptedModBookTime {
      * Converts a given {@code ModBookTime} into this class for Jackson use.
      */
     public JsonAdaptedModBookTime(ModBookTime source) {
-        time = source.time.format(ModBookTime.PARSE_FORMATTER); // in parsing format so that it can be parsed correctly
+        time = source.time.format(ModBookTime.PARSE_FORMATTERS[0]); // so that it can be parsed correctly
     }
 
     @JsonValue

@@ -90,8 +90,8 @@ public class CommandTestUtil {
     public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "jupiter";
     public static final String INVALID_DATE_DESC = " " + PREFIX_DAY + "mon";
     public static final String INVALID_LINK_DESC = " " + PREFIX_LINK + "";
-    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START + "1000";
-    public static final String INVALID_END_TIME_DESC = " " + PREFIX_END + "1000";
+    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START + "100";
+    public static final String INVALID_END_TIME_DESC = " " + PREFIX_END + "100";
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + "";
 
     public static final String RANDOM_TEXT = " " + "momo";

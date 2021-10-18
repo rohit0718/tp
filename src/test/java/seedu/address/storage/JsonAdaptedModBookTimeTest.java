@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.ModBookTime;
 
 class JsonAdaptedModBookTimeTest {
-    private static final String INVALID_TIME = "1200";
+    private static final String INVALID_TIME = "2500";
     private static final ModBookTime VALID_MODBOOKTIME = new ModBookTime("12:00");
 
     @Test
