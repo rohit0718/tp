@@ -37,7 +37,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
     public ModBookTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = tryParse(time);
+        this.time = parseTime(time);
     }
 
     private ModBookTime(LocalTime time) {
@@ -53,14 +53,14 @@ public class ModBookTime implements Comparable<ModBookTime> {
      */
     public static boolean isValidTime(String test) {
         requireNonNull(test);
-        return tryParse(test) != null;
+        return parseTime(test) != null;
     }
 
     /**
      * Tries to parse a given string with various DateTimeFormatters.
      * Returns a LocalTime if parsing was successful,  null otherwise.
      */
-    public static LocalTime tryParse(String test) {
+    public static LocalTime parseTime(String test) {
         requireNonNull(test);
         LocalTime result = null;
         for (DateTimeFormatter f : PARSE_FORMATTERS) {

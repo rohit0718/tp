@@ -64,43 +64,43 @@ class ModBookTimeTest {
         LocalTime expectedFourPm = LocalTime.parse("16:00");
         LocalTime expectedElevenThirtyAm = LocalTime.parse("11:30");
         // null time
-        assertThrows(NullPointerException.class, () -> ModBookTime.tryParse(null));
+        assertThrows(NullPointerException.class, () -> ModBookTime.parseTime(null));
 
         // blank time
-        assertNull(ModBookTime.tryParse(""));
-        assertNull(ModBookTime.tryParse(" "));
+        assertNull(ModBookTime.parseTime(""));
+        assertNull(ModBookTime.parseTime(" "));
 
         // invalid time formats
-        assertNull(ModBookTime.tryParse("14")); // no minutes
-        assertNull(ModBookTime.tryParse("25:00")); // hours out of range
-        assertNull(ModBookTime.tryParse("14:98")); // minutes out of range
-        assertNull(ModBookTime.tryParse("16:00:01")); // including seconds value
-        assertNull(ModBookTime.tryParse("16:00:01.1234")); // including seconds and decimal value
-        assertNull(ModBookTime.tryParse("abcd")); // not a time
+        assertNull(ModBookTime.parseTime("14")); // no minutes
+        assertNull(ModBookTime.parseTime("25:00")); // hours out of range
+        assertNull(ModBookTime.parseTime("14:98")); // minutes out of range
+        assertNull(ModBookTime.parseTime("16:00:01")); // including seconds value
+        assertNull(ModBookTime.parseTime("16:00:01.1234")); // including seconds and decimal value
+        assertNull(ModBookTime.parseTime("abcd")); // not a time
 
         // valid time formats
-        assertEquals(ModBookTime.tryParse("16:00"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("16.00"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("1600"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("4PM"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("4pm"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("04PM"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("04pm"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("4:00PM"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("4:00pm"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("04:00PM"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("04:00pm"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("4.00PM"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("4.00pm"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("04.00PM"), expectedFourPm);
-        assertEquals(ModBookTime.tryParse("04.00pm"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("16:00"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("16.00"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("1600"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("4PM"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("4pm"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("04PM"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("04pm"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("4:00PM"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("4:00pm"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("04:00PM"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("04:00pm"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("4.00PM"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("4.00pm"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("04.00PM"), expectedFourPm);
+        assertEquals(ModBookTime.parseTime("04.00pm"), expectedFourPm);
 
-        assertEquals(ModBookTime.tryParse("11:30"), expectedElevenThirtyAm);
-        assertEquals(ModBookTime.tryParse("11.30"), expectedElevenThirtyAm);
-        assertEquals(ModBookTime.tryParse("1130"), expectedElevenThirtyAm);
-        assertEquals(ModBookTime.tryParse("11:30AM"), expectedElevenThirtyAm);
-        assertEquals(ModBookTime.tryParse("11:30am"), expectedElevenThirtyAm);
-        assertEquals(ModBookTime.tryParse("11.30AM"), expectedElevenThirtyAm);
-        assertEquals(ModBookTime.tryParse("11.30am"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("11:30"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("11.30"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("1130"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("11:30AM"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("11:30am"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("11.30AM"), expectedElevenThirtyAm);
+        assertEquals(ModBookTime.parseTime("11.30am"), expectedElevenThirtyAm);
     }
 }
