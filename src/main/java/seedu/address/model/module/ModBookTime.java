@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -16,15 +17,15 @@ public class ModBookTime implements Comparable<ModBookTime> {
             "Invalid time format. Please refer to the User Guide for valid time formats.";
     public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public static final DateTimeFormatter[] PARSE_FORMATTERS = new DateTimeFormatter[] {
-            DateTimeFormatter.ofPattern("HH:mm"), // 09:30, 14:30
-            DateTimeFormatter.ofPattern("HH.mm"), // 09.30, 14.30
-            DateTimeFormatter.ofPattern("HHmm"), // 0930, 1430
-            DateTimeFormatter.ofPattern("ha"), // 9AM, 4PM
-            DateTimeFormatter.ofPattern("hha"), // 11AM, 04PM
-            DateTimeFormatter.ofPattern("h:mma"), // 9:30AM, 4:00PM
-            DateTimeFormatter.ofPattern("hh:mma"), // 11:30AM, 04:00PM
-            DateTimeFormatter.ofPattern("h.mma"), // 9.30AM, 4.00PM
-            DateTimeFormatter.ofPattern("hh.mma") // 11.30AM, 04.00PM
+            buildFormatter("HH:mm"), // 09:30, 14:30
+            buildFormatter("HH.mm"), // 09.30, 14.30
+            buildFormatter("HHmm"), // 0930, 1430
+            buildFormatter("ha"), // 9AM, 4PM
+            buildFormatter("hha"), // 11AM, 04PM
+            buildFormatter("h:mma"), // 9:30AM, 4:00PM
+            buildFormatter("hh:mma"), // 11:30AM, 04:00PM
+            buildFormatter("h.mma"), // 9.30AM, 4.00PM
+            buildFormatter("hh.mma") // 11.30AM, 04.00PM
     };
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public final LocalTime time;
@@ -46,6 +47,16 @@ public class ModBookTime implements Comparable<ModBookTime> {
 
     public ModBookTime deepCopy() {
         return new ModBookTime(time);
+    }
+
+    /**
+     * Returns a case-insensitive DateTimeFormatter according to the given pattern
+     */
+    private static DateTimeFormatter buildFormatter(String pattern) {
+        return new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern(pattern)
+                .toFormatter();
     }
 
     /**
