@@ -70,14 +70,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
+        Index index = ParserUtil.parseFirstIndex(args);
         EditModDescriptor editModDescriptor = new EditModDescriptor();
 
         if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
@@ -114,15 +107,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
+        Index index = ParserUtil.parseFirstIndex(args);
         ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -173,15 +158,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
+        Index index = ParserUtil.parseFirstIndex(args);
         ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
