@@ -25,7 +25,7 @@ public interface Logic {
     CommandResult execute(String commandText, GuiState guiState) throws CommandException, ParseException;
 
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of modules */
     ObservableList<Module> getFilteredModuleList();
 
     /**

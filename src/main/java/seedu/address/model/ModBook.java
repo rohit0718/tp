@@ -12,7 +12,7 @@ import seedu.address.model.module.lesson.Lesson;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameModule comparison)
  */
 public class ModBook implements ReadOnlyModBook {
     private final UniqueModuleList modules;
@@ -51,7 +51,7 @@ public class ModBook implements ReadOnlyModBook {
     /**
      * Replaces the given module {@code target} in the list with {@code editedModule}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedModule} must not be the same as another existing module in the address book.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     public void setModules(Module target, Module editedModule) {
         requireNonNull(editedModule);
