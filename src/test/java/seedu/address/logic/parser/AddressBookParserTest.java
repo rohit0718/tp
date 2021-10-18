@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -16,18 +20,24 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.edit.EditCommand;
+import seedu.address.logic.commands.edit.EditExamCommand;
+import seedu.address.logic.commands.edit.EditExamCommand.EditExamDescriptor;
+import seedu.address.logic.commands.edit.EditLessonCommand;
+import seedu.address.logic.commands.edit.EditLessonCommand.EditLessonDescriptor;
+import seedu.address.logic.commands.edit.EditModCommand;
+import seedu.address.logic.commands.edit.EditModCommand.EditModDescriptor;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.builders.ModuleBuilder;
 import seedu.address.testutil.builders.PersonBuilder;
 
 public class AddressBookParserTest {
@@ -58,12 +68,25 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
-                DEFAULT_STATE);
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        Module module = new ModuleBuilder().build();
+        EditCommand editModCommand = (EditModCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " mod "
+                + INDEX_FIRST_MODULE.getOneBased(), DEFAULT_STATE);
+        EditModDescriptor editModDescriptor = new EditModDescriptor();
+        assertEquals(new EditModCommand(INDEX_FIRST_MODULE, editModDescriptor), editModCommand);
+
+        EditCommand editLessonCommand = (EditLessonCommand) parser.parseCommand(EditCommand.COMMAND_WORD
+                + " lesson " + INDEX_FIRST_LESSON.getOneBased() + " "
+                + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
+        EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+        assertEquals(new EditLessonCommand(INDEX_FIRST_LESSON, module.getCode(), editLessonDescriptor),
+                editLessonCommand);
+
+        EditCommand editExamCommand = (EditExamCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " exam "
+                        + INDEX_FIRST_EXAM.getOneBased() + " "
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
+        EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
+        assertEquals(new EditExamCommand(INDEX_FIRST_EXAM, module.getCode(), editExamDescriptor), editExamCommand);
     }
 
     @Test
@@ -100,7 +123,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", DEFAULT_STATE));
+                -> parser.parseCommand("", DEFAULT_STATE));
     }
 
     @Test
