@@ -15,7 +15,6 @@ import java.time.format.DateTimeParseException;
 public class ModBookTime implements Comparable<ModBookTime> {
     public static final String MESSAGE_CONSTRAINTS =
             "Invalid time format. Please refer to the User Guide for valid time formats.";
-    public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public static final DateTimeFormatter[] PARSE_FORMATTERS = new DateTimeFormatter[] {
             buildFormatter("HH:mm"), // 09:30, 14:30
             buildFormatter("HH.mm"), // 09.30, 14.30
