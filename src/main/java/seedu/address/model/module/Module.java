@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.exam.exceptions.ExamNotFoundException;
 import seedu.address.model.module.lesson.Lesson;
 
 /**
@@ -86,9 +87,19 @@ public class Module {
 
     /**
      * Returns the very next Exam that occurs.
+     *
+     * @return Next exam that starts in the future
+     * @throws ExamNotFoundException if no upcoming exam found
      */
-    public Exam getNextExam() {
-        return Collections.min(exams);
+    public Exam getNextExam() throws ExamNotFoundException {
+        Collections.sort(exams);
+        for (Exam exam : exams) {
+            if (exam.isFuture()) {
+                return exam;
+            }
+        }
+        // No upcoming exam
+        throw new ExamNotFoundException();
     }
 
     /**
