@@ -5,17 +5,25 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
 
     /**
@@ -53,7 +61,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -80,11 +90,14 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
@@ -104,7 +117,9 @@ public interface Model {
      */
     void setModBook(ReadOnlyModBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyModBook getModBook();
 
     /**
@@ -125,17 +140,69 @@ public interface Model {
     void addModule(Module module);
 
     /**
+     * Gets the requested module based on given modCode.
+     *
+     * @param modCode Used to find module.
+     * @return Module.
+     * @throws CommandException If module does not exist.
+     */
+    Module getModule(ModuleCode modCode) throws CommandException;
+
+    /**
+     * Checks if a module has the lesson
+     */
+    boolean moduleHasLesson(Module module, Lesson lesson);
+
+    /**
+     * Adds a lesson to a module.
+     */
+    void addLessonToModule(Module module, Lesson lesson);
+
+    /**
+     * Checks if a module has the lesson
+     */
+    boolean moduleHasExam(Module module, Exam exam);
+
+    /**
+     * Adds a lesson to a module.
+     */
+    void addExamToModule(Module module, Exam exam);
+
+    /**
+     * Deletes the Exam from the specified module's exam list.
+     */
+    void deleteExam(Module module, Exam target);
+
+    /**
+     * Deletes the Lesson from the specified module's lessons list.
+     */
+    void deleteLesson(Module module, Lesson target);
+
+    /**
+     * Replaces the {@code target} Exam with {@code newExam} from the specified module's exams list.
+     */
+    void setExam(Module module, Exam target, Exam newExam);
+
+    /**
+     * Replaces the {@code target} Exam with {@code newLesson} from the specified module's lessons list.
+     */
+    void setLesson(Module module, Lesson target, Lesson newLesson);
+
+    /**
      * Replaces the given module {@code target} with {@code editedModule}.
      * {@code target} must exist in the address book.
      * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
      */
     void setModule(Module target, Module editedModule);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered module list
+     */
     ObservableList<Module> getFilteredModuleList();
 
     /**
      * Updates the filter of the filtered module list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredModuleList(Predicate<Module> predicate);
