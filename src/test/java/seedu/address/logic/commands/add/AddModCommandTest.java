@@ -240,41 +240,6 @@ public class AddModCommandTest {
         }
 
         @Override
-        public Module getModule(ModuleCode modCode) {
-            return null;
-        }
-
-        @Override
-        public boolean moduleHasLesson(Module module, Lesson lesson) {
-            return false;
-        }
-
-        @Override
-        public void addLessonToModule(Module module, Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean moduleHasExam(Module module, Exam exam) {
-            return false;
-        }
-
-        @Override
-        public void addExamToModule(Module module, Exam exam) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteExam(Module module, Exam target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteLesson(Module module, Lesson target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setExam(Module module, Exam target, Exam newExam) {
             throw new AssertionError("This method should not be called.");
         }
