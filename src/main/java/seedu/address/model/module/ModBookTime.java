@@ -13,8 +13,19 @@ import java.time.format.DateTimeParseException;
  */
 public class ModBookTime implements Comparable<ModBookTime> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Times should be in the format of hh:mm in 24 hour time";
+            "Invalid time format. Please refer to the User Guide for valid time formats.";
     public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    public static final DateTimeFormatter[] PARSE_FORMATTERS = new DateTimeFormatter[] {
+            DateTimeFormatter.ofPattern("HH:mm"), // 09:30, 14:30
+            DateTimeFormatter.ofPattern("HH.mm"), // 09.30, 14.30
+            DateTimeFormatter.ofPattern("HHmm"), // 0930, 1430
+            DateTimeFormatter.ofPattern("ha"), // 9AM, 4PM
+            DateTimeFormatter.ofPattern("hha"), // 11AM, 04PM
+            DateTimeFormatter.ofPattern("h:mma"), // 9:30AM, 4:00PM
+            DateTimeFormatter.ofPattern("hh:mma"), // 11:30AM, 04:00PM
+            DateTimeFormatter.ofPattern("h.mma"), // 9.30AM, 4.00PM
+            DateTimeFormatter.ofPattern("hh.mma") // 11.30AM, 04.00PM
+    };
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     public final LocalTime time;
 
@@ -26,7 +37,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
     public ModBookTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, PARSE_FORMATTER);
+        this.time = tryParse(time);
     }
 
     private ModBookTime(LocalTime time) {
@@ -42,12 +53,24 @@ public class ModBookTime implements Comparable<ModBookTime> {
      */
     public static boolean isValidTime(String test) {
         requireNonNull(test);
-        try {
-            LocalTime.parse(test, PARSE_FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
+        return tryParse(test) == null;
+    }
+
+    /**
+     * Tries to parse a given string with various DateTimeFormatters.
+     * Returns a LocalTime if parsing was successful,  null otherwise.
+     */
+    public static LocalTime tryParse(String test) {
+        requireNonNull(test);
+        LocalTime result = null;
+        for (DateTimeFormatter f : PARSE_FORMATTERS) {
+            try {
+                result = LocalTime.parse(test, f);
+            } catch (DateTimeParseException e) {
+                // do nothing
+            }
         }
+        return result;
     }
 
     /**
