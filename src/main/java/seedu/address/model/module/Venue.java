@@ -31,6 +31,10 @@ public class Venue {
         fullVenue = venue;
     }
 
+    public String getFullVenue() {
+        return fullVenue;
+    }
+
     /**
      * Returns true if a given string is a valid venue.
      */

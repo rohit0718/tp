@@ -29,6 +29,17 @@ public class Timeslot implements Comparable<Timeslot> {
     }
 
     /**
+     * Checks if starting time is in the future
+     */
+    public boolean isFuture() {
+        return startTime.isFuture();
+    }
+
+    public Timeslot deepCopy() {
+        return new Timeslot(startTime.deepCopy(), endTime.deepCopy());
+    }
+
+    /**
      * Returns true if the given startTime is before the given endTime.
      */
     public static boolean isValidTimeslot(ModBookTime startTime, ModBookTime endTime) {

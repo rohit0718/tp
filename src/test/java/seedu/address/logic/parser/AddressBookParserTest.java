@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,13 +16,16 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.add.AddModCommand;
+import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.delete.DeleteExamCommand;
+import seedu.address.logic.commands.delete.DeleteLessonCommand;
+import seedu.address.logic.commands.delete.DeleteModCommand;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.edit.EditExamCommand;
 import seedu.address.logic.commands.edit.EditExamCommand.EditExamDescriptor;
@@ -35,10 +37,8 @@ import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.builders.ModuleBuilder;
-import seedu.address.testutil.builders.PersonBuilder;
 
 public class AddressBookParserTest {
 
@@ -48,9 +48,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person), DEFAULT_STATE);
-        assertEquals(new AddCommand(person), command);
+        Module module = new ModuleBuilder().build();
+        AddModCommand command = (AddModCommand) parser.parseCommand(PersonUtil.getAddCommand(module), DEFAULT_STATE);
+        assertEquals(new AddModCommand(module), command);
     }
 
     @Test
@@ -61,9 +61,22 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), DEFAULT_STATE);
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        Module module = new ModuleBuilder().build();
+        DeleteCommand deleteModCommand = (DeleteModCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " mod " + INDEX_FIRST_MODULE.getOneBased(), DEFAULT_STATE);
+        assertEquals(new DeleteModCommand(INDEX_FIRST_MODULE), deleteModCommand);
+
+        DeleteCommand deleteLessonCommand = (DeleteLessonCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " lesson "
+                        + INDEX_FIRST_LESSON.getOneBased() + " "
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
+        assertEquals(new DeleteLessonCommand(INDEX_FIRST_LESSON, module.getCode()), deleteLessonCommand);
+
+        DeleteCommand deleteExamCommand = (DeleteExamCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD + " exam "
+                        + INDEX_FIRST_EXAM.getOneBased() + " "
+                        + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
+        assertEquals(new DeleteExamCommand(INDEX_FIRST_EXAM, module.getCode()), deleteExamCommand);
     }
 
     @Test

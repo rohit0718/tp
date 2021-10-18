@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.exam.exceptions.ExamNotFoundException;
 import seedu.address.model.module.lesson.Lesson;
 
 /**
@@ -85,9 +87,30 @@ public class Module {
 
     /**
      * Returns the very next Exam that occurs.
+     *
+     * @return Next exam that starts in the future
+     * @throws ExamNotFoundException if no upcoming exam found
      */
-    public Exam getNextExam() {
-        return Collections.min(exams);
+    public Exam getNextExam() throws ExamNotFoundException {
+        Collections.sort(exams);
+        for (Exam exam : exams) {
+            if (exam.isFuture()) {
+                return exam;
+            }
+        }
+        // No upcoming exam
+        throw new ExamNotFoundException();
+    }
+
+    /**
+     * Returns a deepCopy of the Module object.
+     */
+    public Module deepCopy() {
+        ModuleCode newModCode = new ModuleCode(moduleCode.moduleCode);
+        Optional<ModuleName> newModName = moduleName.map(modName -> new ModuleName(modName.getModuleName()));
+        List<Lesson> newLessons = lessons.stream().map(Lesson::deepCopy).collect(Collectors.toList());
+        List<Exam> newExams = exams.stream().map(Exam::deepCopy).collect(Collectors.toList());
+        return new Module(newModCode, newModName, newLessons, newExams);
     }
 
     /**

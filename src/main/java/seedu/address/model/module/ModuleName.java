@@ -36,6 +36,10 @@ public class ModuleName {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getModuleName() {
+        return moduleName;
+    }
+
     @Override
     public String toString() {
         return moduleName;

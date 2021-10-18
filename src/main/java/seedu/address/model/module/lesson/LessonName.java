@@ -10,12 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LessonName {
     public static final String MESSAGE_CONSTRAINTS =
             "Lesson name should not be blank";
-
     /*
      * The first character of the exam must not be a whitespace.
      */
     public static final String VALIDATION_REGEX = "^\\S.*$";
-
     public final String fullLessonName;
 
     /**
@@ -27,6 +25,10 @@ public class LessonName {
         requireNonNull(lessonName);
         checkArgument(isValidLessonName(lessonName), MESSAGE_CONSTRAINTS);
         fullLessonName = lessonName;
+    }
+
+    public String getLessonName() {
+        return fullLessonName;
     }
 
     /**

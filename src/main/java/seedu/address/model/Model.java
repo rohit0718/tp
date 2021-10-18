@@ -141,12 +141,21 @@ public interface Model {
 
     /**
      * Gets the requested module based on given modCode.
-     *
      * @param modCode Used to find module.
      * @return Module.
      * @throws CommandException If module does not exist.
      */
     Module getModule(ModuleCode modCode) throws CommandException;
+
+    /**
+     * Deletes the Exam from the specified module's lessons list.
+     */
+    void deleteExam(Module module, Exam target);
+
+    /**
+     * Deletes the Lesson from the specified module's lessons list.
+     */
+    void deleteLesson(Module module, Lesson target);
 
     /**
      * Checks if a module has the lesson
@@ -167,26 +176,6 @@ public interface Model {
      * Adds a lesson to a module.
      */
     void addExamToModule(Module module, Exam exam);
-
-    /**
-     * Deletes the Exam from the specified module's exam list.
-     */
-    void deleteExam(Module module, Exam target);
-
-    /**
-     * Deletes the Lesson from the specified module's lessons list.
-     */
-    void deleteLesson(Module module, Lesson target);
-
-    /**
-     * Replaces the {@code target} Exam with {@code newExam} from the specified module's exams list.
-     */
-    void setExam(Module module, Exam target, Exam newExam);
-
-    /**
-     * Replaces the {@code target} Exam with {@code newLesson} from the specified module's lessons list.
-     */
-    void setLesson(Module module, Lesson target, Lesson newLesson);
 
     /**
      * Replaces the given module {@code target} with {@code editedModule}.
