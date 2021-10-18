@@ -117,12 +117,12 @@ public class AddressBookParserTest {
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
         editExamDescriptor.setName(exam.getName());
         editExamDescriptor.setDate(exam.getDate());
-        editExamDescriptor.setTimeslot(lesson.getTimeslot());
-        if (lesson.getLink().isPresent()) {
-            editExamDescriptor.setLink(lesson.getLink().get());
+        editExamDescriptor.setTimeslot(exam.getTimeslot());
+        if (exam.getLink().isPresent()) {
+            editExamDescriptor.setLink(exam.getLink().get());
         }
-        if (lesson.getVenue().isPresent()) {
-            editExamDescriptor.setVenue(lesson.getVenue().get());
+        if (exam.getVenue().isPresent()) {
+            editExamDescriptor.setVenue(exam.getVenue().get());
         }
         EditCommand editExamCommand = (EditExamCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
