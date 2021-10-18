@@ -42,7 +42,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LINK = " ";
-    private static final String INVALID_TIME = "3:00PM";
+    private static final String INVALID_TIME = "33:00PM";
     private static final String INVALID_DATE = "20/15/2022";
     private static final String INVALID_VENUE = " ";
     private static final String INVALID_EXAM_NAME = " ";
@@ -59,7 +59,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_LINK = "https://www.google.com/";
     private static final String VALID_TIME_1 = "09:00";
-    private static final String VALID_TIME_2 = "11:00";
+    private static final String VALID_TIME_2 = "11am";
     private static final ModBookTime VALID_MBTIME_1 = new ModBookTime(VALID_TIME_1);
     private static final ModBookTime VALID_MBTIME_2 = new ModBookTime(VALID_TIME_2);
     private static final String VALID_DATE = "13/12/2021";
