@@ -92,15 +92,13 @@ public class Module {
      * @throws ExamNotFoundException if no upcoming exam found
      */
     public Exam getNextExam() throws ExamNotFoundException {
-        List<Exam> upcomingExams = new ArrayList<>(exams);
-        while (!upcomingExams.isEmpty()) {
-            Exam nextExam = Collections.min(upcomingExams);
-            if (nextExam.isFuture()) {
-                return nextExam;
+        Collections.sort(exams);
+        for (Exam exam : exams) {
+            if (exam.isFuture()) {
+                return exam;
             }
-            upcomingExams.remove(nextExam);
         }
-
+        // No upcoming exam
         throw new ExamNotFoundException();
     }
 

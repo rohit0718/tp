@@ -50,7 +50,7 @@ public class ModuleTest {
     @Test
     void getNextExam() {
         // Empty exam list
-        ArrayList exams = new ArrayList<Exam>();
+        ArrayList<Exam> exams = new ArrayList<>();
         assertThrows(ExamNotFoundException.class, () -> new Module(MODULE_CODE, MODULE_NAME,
                 new ArrayList<>(), exams).getNextExam());
 

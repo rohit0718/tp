@@ -63,11 +63,7 @@ public class Exam implements Comparable<Exam> {
      * Checks if an exam is starting in the future.
      */
     public boolean isFuture() {
-        return date.isFuture()
-                ? true
-                : date.isToday()
-                    ? timeslot.isFuture()
-                    : false;
+        return date.isFuture() || (date.isToday() && timeslot.isFuture());
     }
 
     /**
