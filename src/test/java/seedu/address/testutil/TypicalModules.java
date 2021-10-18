@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.ModBook;
 import seedu.address.model.module.Module;
@@ -20,6 +21,9 @@ public class TypicalModules {
             .withExams(TypicalExams.DEFAULT_EXAM).build();
 
     // Computer Science modules for some real life modules
+    public static final Module CS2103T_NO_NAME = new ModuleBuilder().withCode("CS2103T").build();
+    public static final Module CS2103T_CODE_NAME = new ModuleBuilder().withCode("CS2103T")
+            .withName("Software Engineering").build();
     public static final Module CS2103T = new ModuleBuilder().withCode("CS2103T").withName("Software Engineering")
             .withLessons(TypicalLessons.CS2103T_LECTURE, TypicalLessons.CS2103T_TUTORIAL)
             .withExams(TypicalExams.CS2103T_PRACTICAL, TypicalExams.CS2103T_FINALS).build();
@@ -49,6 +53,8 @@ public class TypicalModules {
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2040S, CS1231S));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2040S, CS1231S))
+                .stream().map(Module::deepCopy)
+                .collect(Collectors.toList());
     }
 }
