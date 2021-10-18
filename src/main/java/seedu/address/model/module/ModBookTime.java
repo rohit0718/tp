@@ -53,7 +53,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
      */
     public static boolean isValidTime(String test) {
         requireNonNull(test);
-        return tryParse(test) == null;
+        return tryParse(test) != null;
     }
 
     /**
