@@ -66,6 +66,7 @@ public class ModBookTime implements Comparable<ModBookTime> {
         for (DateTimeFormatter f : PARSE_FORMATTERS) {
             try {
                 result = LocalTime.parse(test, f);
+                break; // short circuit once valid formatter is found
             } catch (DateTimeParseException e) {
                 // do nothing
             }
