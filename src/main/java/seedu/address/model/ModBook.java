@@ -80,18 +80,18 @@ public class ModBook implements ReadOnlyModBook {
 
     /**
      * Adds a module to the address book.
-     * The module must not already exist in the address book.
+     * The module must not already exist in the mod book.
      */
     public void addModule(Module module) {
         modules.add(module);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code module} from this {@code ModBook}.
+     * {@code module} must exist in the mod book.
      */
-    public void removeModule(Module key) {
-        modules.remove(key);
+    public void removeModule(Module module) {
+        modules.remove(module);
     }
 
     /**
