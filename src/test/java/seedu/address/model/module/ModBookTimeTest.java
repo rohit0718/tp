@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalTime;
+
 import org.junit.jupiter.api.Test;
 
 class ModBookTimeTest {
@@ -42,5 +44,12 @@ class ModBookTimeTest {
         assertTrue(ModBookTime.isValidTime("16:00"));
         assertTrue(ModBookTime.isValidTime("08:00"));
         assertTrue(ModBookTime.isValidTime("23:59"));
+    }
+
+    @Test
+    void isFuture() {
+        assertTrue(new ModBookTime(LocalTime.now().plusMinutes(1).format(ModBookTime.PRINT_FORMATTER)).isFuture());
+        assertFalse(new ModBookTime(LocalTime.now().format(ModBookTime.PRINT_FORMATTER)).isFuture());
+        assertFalse(new ModBookTime(LocalTime.now().minusMinutes(1).format(ModBookTime.PRINT_FORMATTER)).isFuture());
     }
 }
