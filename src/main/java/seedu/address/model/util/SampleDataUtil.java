@@ -21,7 +21,7 @@ import seedu.address.model.module.lesson.Lesson;
 import seedu.address.model.module.lesson.LessonName;
 
 /**
- * Contains utility methods for populating {@code AddressBook} and {@code ModBook} with sample data.
+ * Contains utility methods for populating {@code ModBook} with sample data.
  */
 public class SampleDataUtil {
 
