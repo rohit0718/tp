@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package UI {
+
+Class MainWindow UI_COLOR
+}
+
+package Logic {
+
+Class AddressBookParser
+Class XYZCommand
+Class XYZParser
+Class CommandResult
+
+Class "{abstract}\nCommand" as Command
+
+Class "<<enumeration>>\nGuiState" as GuiState
+Interface Logic <<Interface>>
+Interface Parser <<Interface>>
+
+Class LogicManager
+
+}
+
+package Model{
+Class HiddenModel #FFFFFF
+}
+
+package Storage{
+}
+
+MainWindow .> Logic
+
+LogicManager .right|> Logic
+MainWindow ->"1" GuiState
+Logic .right> GuiState
+
+XYZCommand -up-|> Command
+LogicManager ..> Command : executes >
+
+LogicManager -->"1" AddressBookParser
+AddressBookParser ..> Parser
+XYZParser .up.|> Parser
+XYZParser .down.> XYZCommand : creates >
+
+LogicManager --> Model
+LogicManager --> Storage
+Storage --[hidden] Model
+Command .[hidden]up.> Storage
+Command .left.> Model
+note left of XYZCommand: XYZCommand = AddCommand, \nDeleteCommand, etc
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+Command .up.> CommandResult : produces >
+CommandResult -up->"1" GuiState
+MainWindow .down.> CommandResult : updates <
+@enduml
