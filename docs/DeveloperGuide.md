@@ -154,6 +154,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Restricting Commands based on GUI state
+
+#### Rationale
+
+Some commands, e.g. `delete lesson` and `edit exam` should not be used in the view where the `Modules` are listed.
+This is because the `delete` and `edit` commands are indexed based, and in the `Modules` view, there are multiple `Lesson`s or `Exam`s displayed with the same index.
+Hence, there is a need to restrict these commands to the Module Details view, so that there is no ambiguity about which `Lesson` or `Exam` to delete.
+
+Thus, before commands are executed, the GUI state of the application needs to be checked to see if it is valid.
+
+#### Implementation
+
+To implement this feature, the GUI needs to keep track of which state it is in, so a field in `MainWindow` was created to store the `GuiState`.
+In addition, the `Logic#execute()` method has an additional `GuiState` parameter, which will be the current `GuiState` of the `MainWindow`, and the `Parser` interface was modified so that `parse` also takes in a `GuiState` parameter.
+After the command is executed, the `GuiState` of the `MainWindow` is updated with the `GuiState` of the returned `CommandResult`.
+
+The class diagram of how UI and Logic interact with each other is shown below.
+
+![LogicGuiStateClassDigram](images/LogicGuiStateClassDiagram.png)
+
+The sequence diagram of how this works for a `delete` command is found below. The objects in `Model` and `Storage` are not shown for simplicity.
+
+![GuiStateSequenceDiagram](images/GuiStateSEquenceDiagram.png)
+
+When parsing, the respective `Parser` will check the current `GuiState` with the allowed `GuiState`s. If the `GuiState` is valid, it will proceed with parsing the command.
+Otherwise, it will throw a `GuiStateException`.
+
+#### Design considerations:
+
+**Aspect: How to implement edit/delete lessons/exams:**
+
+* **Alternative 1 (current choice)**: Limits these two commands to the Module Details view.
+  * Pros: Easier to implement. 
+  * Cons: Requires passing `GuiState` from the `UI` component to the `Logic` component, reducing cohesion.
+* **Alternative 2**: Combine the lists of lessons and exams into one central list in the List Lessons or Exams view respectively.
+  * Pros: Does not require `MainWindow` to keep track of its current `GuiState`.
+  * Cons: Difficult to implement - have to figure out how to map the `Lesson` or `Exam` from the central list to its original module.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
