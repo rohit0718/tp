@@ -67,9 +67,9 @@ public class EditLessonCommandTest {
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(targetModule.getLessons().size() + 1);
 
-        EditCommand EditLessonCommand = new EditLessonCommand(outOfBoundIndex, new EditLessonDescriptor());
+        EditCommand editLessonCommand = new EditLessonCommand(outOfBoundIndex, new EditLessonDescriptor());
 
-        assertCommandFailure(EditLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
