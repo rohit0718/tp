@@ -43,7 +43,7 @@ public class DeleteExamCommand extends DeleteCommand {
         Exam examToDelete = exams.get(targetIndex.getZeroBased());
         model.deleteExam(module, examToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_EXAM_SUCCESS, examToDelete.getName(), module.getCode()),
-                false, GuiState.EXAMS);
+                false, GuiState.DETAILS);
     }
 
     @Override

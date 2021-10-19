@@ -43,7 +43,7 @@ public class DeleteLessonCommand extends DeleteCommand {
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
         model.deleteLesson(module, lessonToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS,
-                lessonToDelete.getName(), module.getCode()), false, GuiState.LESSONS);
+                lessonToDelete.getName(), module.getCode()), false, GuiState.DETAILS);
     }
 
     @Override
