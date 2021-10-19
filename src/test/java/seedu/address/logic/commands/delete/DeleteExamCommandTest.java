@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,7 +42,8 @@ public class DeleteExamCommandTest {
                 examToDelete.getName(), targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
-        assertCommandSuccess(deleteExamCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        assertCommandSuccess(deleteExamCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -62,7 +65,8 @@ public class DeleteExamCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
         showNoModule(expectedModel);
-        assertCommandSuccess(deleteExamCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        assertCommandSuccess(deleteExamCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
