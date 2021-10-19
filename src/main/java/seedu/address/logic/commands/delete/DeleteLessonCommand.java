@@ -12,7 +12,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.lesson.Lesson;
 
 public class DeleteLessonCommand extends DeleteCommand {
@@ -24,21 +23,19 @@ public class DeleteLessonCommand extends DeleteCommand {
             + "\nExample: " + COMMAND_WORD + " lesson 1 "
             + PREFIX_CODE + "CS1231S";
     private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
 
     /**
      * Creates an DeleteLessonCommand to delete the Lesson at specified {@code Index} of the specified {@code Module}.
      */
-    public DeleteLessonCommand(Index targetIndex, ModuleCode targetModuleCode) {
-        requireAllNonNull(targetIndex, targetModuleCode);
+    public DeleteLessonCommand(Index targetIndex) {
+        requireAllNonNull(targetIndex);
         this.targetIndex = targetIndex;
-        this.targetModuleCode = targetModuleCode;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Module module = model.getModule(targetModuleCode);
+        Module module = model.getFilteredModuleList().get(0);
         List<Lesson> lessons = module.getLessons();
         if (targetIndex.getZeroBased() >= lessons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
@@ -46,7 +43,7 @@ public class DeleteLessonCommand extends DeleteCommand {
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
         model.deleteLesson(module, lessonToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS,
-                lessonToDelete.getName(), targetModuleCode));
+                lessonToDelete.getName(), module.getCode()));
     }
 
     @Override
@@ -57,7 +54,6 @@ public class DeleteLessonCommand extends DeleteCommand {
         if (!(other instanceof DeleteLessonCommand)) {
             return false;
         }
-        return targetIndex.equals(((DeleteLessonCommand) other).targetIndex)
-                && targetModuleCode.equals(((DeleteLessonCommand) other).targetModuleCode);
+        return targetIndex.equals(((DeleteLessonCommand) other).targetIndex);
     }
 }

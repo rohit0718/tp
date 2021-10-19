@@ -55,7 +55,7 @@ public class DeleteCommandParserTest {
         DeleteCommand expectedDeleteModCommand = new DeleteModCommand(INDEX_FIRST_MODULE);
         assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased(), expectedDeleteModCommand);
 
-        DeleteCommand expectedDeleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, module.getCode());
+        DeleteCommand expectedDeleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         assertParseSuccess(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased()
                 + " " + PREFIX_CODE + module.getCode(), GuiState.DETAILS, expectedDeleteLessonCommand);
 
