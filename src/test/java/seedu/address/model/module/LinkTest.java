@@ -41,11 +41,5 @@ public class LinkTest {
         assertFalse(Link.isValidLink("https:/www.youtube.com/watch?v=dE1P4zDhhqw&t=1s"));
         assertFalse(Link.isValidLink("rajesh://www.youtube.com/watch?v=dE1P4zDhhqw&t=1s"));
         assertFalse(Link.isValidLink("dummytext"));
-
-
-
-
-
-
     }
 }
