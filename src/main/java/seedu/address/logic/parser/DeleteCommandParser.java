@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.GuiState;
@@ -12,7 +10,6 @@ import seedu.address.logic.commands.delete.DeleteLessonCommand;
 import seedu.address.logic.commands.delete.DeleteModCommand;
 import seedu.address.logic.parser.exceptions.GuiStateException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -63,13 +60,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
-        }
         Index index = ParserUtil.parseFirstIndex(args);
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
-        return new DeleteLessonCommand(index, modCode);
+        return new DeleteLessonCommand(index);
     }
 
     /**
@@ -81,12 +73,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExamCommand.MESSAGE_USAGE));
-        }
         Index index = ParserUtil.parseFirstIndex(args);
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
-        return new DeleteExamCommand(index, modCode);
+        return new DeleteExamCommand(index);
     }
 }
