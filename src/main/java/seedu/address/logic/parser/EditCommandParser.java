@@ -140,8 +140,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditLessonCommand
-     * and returns an EditLessonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditExamCommand
+     * and returns an EditExamCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -154,7 +154,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditExamCommand.MESSAGE_USAGE));
         }
 
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
@@ -184,7 +184,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editExamDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditLessonCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditExamCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditExamCommand(index, modCode, editExamDescriptor);
