@@ -64,13 +64,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
+        Index index = ParserUtil.parseFirstIndex(args);
 
         if (!(ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)
                 || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModCommand.MESSAGE_USAGE));
         }
-
-        Index index = ParserUtil.parseFirstIndex(args);
         EditModDescriptor editModDescriptor = new EditModDescriptor();
 
         if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
@@ -101,13 +100,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
+        Index index = ParserUtil.parseFirstIndex(args);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE));
         }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
-        Index index = ParserUtil.parseFirstIndex(args);
         ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -149,6 +148,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
+        Index index = ParserUtil.parseFirstIndex(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
@@ -158,7 +158,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
-        Index index = ParserUtil.parseFirstIndex(args);
         ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
