@@ -26,10 +26,10 @@ public class EditModCommand extends EditCommand {
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a module in the Mod book. "
-            + "\nParameters: "
+            + "\nParameters: INDEX "
             + PREFIX_CODE + "CODE "
             + PREFIX_NAME + "NAME "
-            + "\nExample: " + COMMAND_WORD + " mod "
+            + "\nExample: " + COMMAND_WORD + " mod 1 "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Software Engineering ";
     private final Index targetIndex;

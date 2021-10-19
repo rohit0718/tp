@@ -34,7 +34,7 @@ public class EditExamCommand extends EditCommand {
     public static final String MESSAGE_EDIT_EXAM_SUCCESS = "Edited Exam %s in Module %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an exam in the Mod book. "
-            + "\nParameters: "
+            + "\nParameters: INDEX "
             + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "EXAM_NAME "
             + PREFIX_DAY + "DAY "
@@ -42,7 +42,7 @@ public class EditExamCommand extends EditCommand {
             + PREFIX_END + "END_TIME "
             + PREFIX_LINK + "LINK "
             + PREFIX_VENUE + "VENUE "
-            + "\nExample: " + COMMAND_WORD + " exam "
+            + "\nExample: " + COMMAND_WORD + " exam 1 "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Final "
             + PREFIX_DAY + "02/02/1999 "

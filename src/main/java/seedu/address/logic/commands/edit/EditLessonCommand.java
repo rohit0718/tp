@@ -34,7 +34,7 @@ public class EditLessonCommand extends EditCommand {
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson %s in Module %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson in the Mod book. "
-            + "\nParameters: "
+            + "\nParameters: INDEX "
             + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "LESSON_NAME "
             + PREFIX_DAY + "DAY "
@@ -42,7 +42,7 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_END + "END_TIME "
             + PREFIX_LINK + "LINK "
             + PREFIX_VENUE + "VENUE "
-            + "\nExample: " + COMMAND_WORD + " lesson "
+            + "\nExample: " + COMMAND_WORD + " lesson 1 "
             + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Tutorial "
             + PREFIX_DAY + "Monday "
