@@ -2,6 +2,7 @@ package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
@@ -23,7 +24,7 @@ public class AddExamCommand extends AddCommand {
             + "\nParameters: "
             + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "EXAM_NAME "
-            + PREFIX_DAY + "DATE "
+            + PREFIX_DATE + "DATE "
             + PREFIX_START + "START_TIME "
             + PREFIX_END + "END_TIME "
             + PREFIX_LINK + "LINK "
