@@ -7,7 +7,7 @@ import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.model.module.Module;
 
 /**
- * A utility class for Person.
+ * A utility class for Module.
  */
 public class ModuleUtil {
 

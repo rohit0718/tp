@@ -30,7 +30,7 @@ public class JsonSerializableModBookTest {
     }
 
     @Test
-    public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
+    public void toModelType_invalidModuleFile_throwsIllegalValueException() throws Exception {
         JsonSerializableModBook dataFromFile = JsonUtil.readJsonFile(INVALID_MODULE_FILE,
                 JsonSerializableModBook.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);

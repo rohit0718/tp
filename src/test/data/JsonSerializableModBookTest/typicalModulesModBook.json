@@ -1,5 +1,5 @@
 {
-  "_comment": "ModBook save file which contains the same Person values as in TypicalModules#getTypicalModBook()",
+  "_comment": "ModBook save file which contains the same Module values as in TypicalModules#getTypicalModBook()",
   "modules" : [ {
     "code": "CS2103T",
     "name": "Software Engineering",

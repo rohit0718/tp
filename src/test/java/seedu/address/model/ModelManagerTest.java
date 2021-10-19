@@ -76,12 +76,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasModule_moduleNotInAddressBook_returnsFalse() {
+    public void hasModule_moduleNotInModBook_returnsFalse() {
         assertFalse(modelManager.hasModule(CS2030S));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasModule_moduleInModBook_returnsTrue() {
         modelManager.addModule(CS2030S);
         assertTrue(modelManager.hasModule(CS2030S));
     }
