@@ -17,6 +17,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Day;
@@ -83,7 +84,8 @@ public class EditLessonCommand extends EditCommand {
         }
 
         model.setLesson(module, lessonToEdit, editedLesson);
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(), module.getCode()));
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(), module.getCode()),
+                false, GuiState.DETAILS);
     }
 
     /**

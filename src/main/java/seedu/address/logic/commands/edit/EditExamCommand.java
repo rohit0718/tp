@@ -17,6 +17,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Link;
@@ -83,7 +84,7 @@ public class EditExamCommand extends EditCommand {
 
         model.setExam(module, examToEdit, editedExam);
         return new CommandResult(String.format(MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
-                module.getCode()));
+                module.getCode()), false, GuiState.DETAILS);
     }
 
     /**
