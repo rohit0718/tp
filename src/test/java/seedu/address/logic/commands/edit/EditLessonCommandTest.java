@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.edit.EditLessonCommand.EditLessonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ModBook;
@@ -55,11 +57,12 @@ public class EditLessonCommandTest {
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
                 targetModule.getCode());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.setLesson(targetModule, targetModule.getLessons().get(0), editedLesson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -91,10 +94,12 @@ public class EditLessonCommandTest {
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
                 targetModule.getCode());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.setLesson(targetModule, targetModule.getLessons().get(0), editedLesson);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -119,10 +124,12 @@ public class EditLessonCommandTest {
                 editLessonDescriptor);
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, lessonToEdit.getName(),
                 targetModule.getCode());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.setLesson(targetModule, lessonToEdit, editedLesson);
 
-        assertCommandSuccess(editLessonCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editLessonCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

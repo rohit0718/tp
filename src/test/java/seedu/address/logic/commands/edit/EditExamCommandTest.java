@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.edit.EditExamCommand.EditExamDescriptor;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ModBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -58,11 +58,12 @@ public class EditExamCommandTest {
 
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 targetModule.getCode());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, targetModule.getExams().get(0), editedExam);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -94,10 +95,12 @@ public class EditExamCommandTest {
 
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 targetModule.getCode());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, targetModule.getExams().get(0), editedExam);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -122,10 +125,12 @@ public class EditExamCommandTest {
                 editExamDescriptor);
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, examToEdit.getName(),
                 targetModule.getCode());
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, examToEdit, editedExam);
 
-        assertCommandSuccess(editExamCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editExamCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
