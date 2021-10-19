@@ -20,7 +20,7 @@ import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the mod book data.
  */
 public class ModelManager implements Model {
     public static final String MESSAGE_MODULE_DOESNT_EXIST = "The module you chose does not exist";
