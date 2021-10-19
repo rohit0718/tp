@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -34,19 +36,20 @@ public class DeleteLessonCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Module targetModule = CS2103T.deepCopy();
         Lesson lessonToDelete = targetModule.getLessons().get(INDEX_FIRST_LESSON.getZeroBased());
-        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode());
+        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete.getName(), targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
-        assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        assertCommandSuccess(deleteLessonCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(targetModule.getLessons().size() + 1);
-        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex, targetModule.getCode());
+        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex);
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
@@ -55,12 +58,13 @@ public class DeleteLessonCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Module targetModule = CS2103T.deepCopy();
         Lesson lessonToDelete = targetModule.getLessons().get(INDEX_FIRST_LESSON.getZeroBased());
-        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode());
+        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete.getName(), targetModule.getCode());
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
-        assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        assertCommandSuccess(deleteLessonCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -68,20 +72,20 @@ public class DeleteLessonCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(targetModule.getLessons().size() + 1);
-        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex, targetModule.getCode());
+        DeleteCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex);
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteLessonFirstCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON, CS2103T.getCode());
-        DeleteCommand deleteLessonSecondCommand = new DeleteLessonCommand(INDEX_SECOND_LESSON, CS2103T.getCode());
+        DeleteCommand deleteLessonFirstCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
+        DeleteCommand deleteLessonSecondCommand = new DeleteLessonCommand(INDEX_SECOND_LESSON);
 
         // same object -> returns true
         assertEquals(deleteLessonFirstCommand, deleteLessonFirstCommand);
 
         // same values -> returns true
-        DeleteCommand deleteLessonFirstCommandCopy = new DeleteLessonCommand(INDEX_FIRST_LESSON, CS2103T.getCode());
+        DeleteCommand deleteLessonFirstCommandCopy = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         assertEquals(deleteLessonFirstCommand, deleteLessonFirstCommandCopy);
 
         // different types -> returns false

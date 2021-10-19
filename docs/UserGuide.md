@@ -1,5 +1,4 @@
-User Guide
-==========
+# User Guide
 
 NUS ModBook is a **desktop app for managing modules, optimized for use via a Command Line Interface** (CLI) while still
 having the benefits of a Graphical User Interface (GUI). If you can type fast, ModBook can help you organise modules
@@ -7,35 +6,38 @@ faster than traditional GUI apps.
 
 ## Table of Contents
 
-1. [Quick Start](#Quick-start)
-2. [Features](#Features)
-    * [Modules](#Modules)
-        * [Adding a module](#Adding-a-module-add-mod)
-        * [Listing all modules](#Listing-all-modules--list-mod)
-        * [Show details of a module](#Show-details-of-a-module-detail)
-        * [Editing a module](#Editing-a-module-edit-mod)
-        * [Deleting a module](#Delete-a-module-delete-mod)
-    * [Lessons](#Lessons)
-        * [Adding a lesson](#Adding-a-lesson-add-lesson)
-        * [Listing all lessons](#Listing-all-lessons--list-lesson)
-        * [Editing a lesson](#Editing-a-lesson-edit-lesson)
-        * [Deleting a lesson](#Deleting-a-lesson-delete-lesson)
-    * [Exams](#Exams)
-        * [Adding an exam](#Adding-an-exam-add-exam)
-        * [Listing all exam](#Listing-all-Exams-list-exam)
-        * [Editing an exam](#Editing-an-Exam-edit-exam)
-        * [Deleting a exam](#Deleting-an-Exam--delete-exam)
-    * [Miscellaneous](#Miscellaneous)
-        * [Viewing help](#Viewing-help--help)
-        * [Clearing all entries](#Clearing-all-entries--clear)
-        * [Exiting the program](#Exiting-the-program--exit)
-        * [Saving the data](#Saving-the-data)
-        * [Editing the data file](#Editing-the-data-file)
-3. [FAQ](#FAQ)
-4. [Date and time formats](#Date-and-time-formats)
-5. [Command Summary](#Command-Summary)
-    * [By Action](#Command-Summary-by-Action)
-    * [By Object](#Command-Summary-by-Object)
+- [User Guide](#user-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+    - [Notes about the command format:](#notes-about-the-command-format)
+    - [Modules](#modules)
+      - [Adding a module: `add mod`](#adding-a-module-add-mod)
+      - [Listing all modules : `list mod`](#listing-all-modules--list-mod)
+      - [Show details of a module: `detail`](#show-details-of-a-module-detail)
+      - [Editing a module: `edit mod`](#editing-a-module-edit-mod)
+      - [Delete a module: `delete mod`](#delete-a-module-delete-mod)
+    - [Lessons](#lessons)
+      - [Adding a lesson: `add lesson`](#adding-a-lesson-add-lesson)
+      - [Listing all lessons : `list lesson`](#listing-all-lessons--list-lesson)
+      - [Editing a lesson: `edit lesson`](#editing-a-lesson-edit-lesson)
+      - [Deleting a lesson: `delete lesson`](#deleting-a-lesson-delete-lesson)
+    - [Exams](#exams)
+      - [Adding an exam: `add exam`](#adding-an-exam-add-exam)
+      - [Listing all Exams : `list exam`](#listing-all-exams--list-exam)
+      - [Editing an Exam: `edit exam`](#editing-an-exam-edit-exam)
+      - [Deleting an Exam : `delete exam`](#deleting-an-exam--delete-exam)
+    - [Miscellaneous](#miscellaneous)
+      - [Viewing help : `help`](#viewing-help--help)
+      - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+      - [Exiting the program : `exit`](#exiting-the-program--exit)
+      - [Saving the data](#saving-the-data)
+      - [Editing the data file](#editing-the-data-file)
+  - [FAQ](#faq)
+  - [Date and time formats](#date-and-time-formats)
+  - [Command Summary](#command-summary)
+    - [Command Summary by Action](#command-summary-by-action)
+    - [Command Summary by Object](#command-summary-by-object)
 
 ## Quick Start
 
@@ -46,11 +48,11 @@ faster than traditional GUI apps.
    contains some sample data
 1. Try out some example commands:
 
-* `list mod`: Lists all modules.
-* `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
-* `delete mod 1`: Deletes the 1st module shown in the module list.
-* `clear`: Deletes all modules.
-* `exit`: Exits the app.
+- `list mod`: Lists all modules.
+- `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
+- `delete mod 1`: Deletes the 1st module shown in the module list.
+- `clear`: Deletes all modules.
+- `exit`: Exits the app.
 
 1. Refer to the Features below for details of each command.
 
@@ -58,14 +60,14 @@ faster than traditional GUI apps.
 
 ### Notes about the command format:
 
-* Words in UPPER_CASE are the parameters to be supplied by the user. e.g. in add `c/CODE`, `CODE` is a parameter which
+- Words in UPPER_CASE are the parameters to be supplied by the user. e.g. in add `c/CODE`, `CODE` is a parameter which
   can be used as `add mod c/CS2103T`.
-* Items in square brackets are optional. e.g `c/CODE [n/NAME]` can be used as `c/CS2103T` or
+- Items in square brackets are optional. e.g `c/CODE [n/NAME]` can be used as `c/CS2103T` or
   as `c/CS2103T n/Software Engineering`.
-* Parameters can be in any order. e.g. if the command specifies `c/CODE n/NAME`, `n/NAME c/CODE` is also acceptable.
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
+- Parameters can be in any order. e.g. if the command specifies `c/CODE n/NAME`, `n/NAME c/CODE` is also acceptable.
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
   the parameter will be taken. e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 ### Modules
@@ -74,7 +76,7 @@ faster than traditional GUI apps.
 
 Adds a module to the ModBook. Format: `add mod c/CODE [n/NAME]`
 
-* Example: `add mod c/CS2103T n/Software Engineering` : Adds a module with code CS2103T, named Software Engineering.
+- Example: `add mod c/CS2103T n/Software Engineering` : Adds a module with code CS2103T, named Software Engineering.
 
 #### Listing all modules : `list mod`
 
@@ -85,26 +87,26 @@ Shows a list of all modules in the ModBook. Format: `list mod`
 Show details of an existing module in the ModBook. A list of all Lessons and Exams of the specified Module is printed.
 Format: `detail c/CODE`
 
-* Example: `detail c/CS2103T` : Shows details for the CS2103T module.
+- Example: `detail c/CS2103T` : Shows details for the CS2103T module.
 
 #### Editing a module: `edit mod`
 
 Edits an existing module in the ModBook. Format: `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`
 
-* Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list.
+- Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list.
   The index must be a positive integer 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* Examples:
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- Examples:
   `edit mod 1 c/CS2105 n/Computer Networks` : Edits the name of the CS2105 module to Computer Networks
 
 #### Delete a module: `delete mod`
 
 Deletes a module from the ModBook Format: `delete mod INDEX`
 
-* Deletes the person at the specified INDEX.
-* The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …​ Examples: `delete mod 2` : deletes the 2nd module in the ModBook.
+- Deletes the person at the specified INDEX.
+- The index refers to the index number shown in the displayed person list.
+- The index must be a positive integer 1, 2, 3, …​ Examples: `delete mod 2` : deletes the 2nd module in the ModBook.
 
 ### Lessons
 
@@ -113,7 +115,7 @@ Deletes a module from the ModBook Format: `delete mod INDEX`
 Adds a lesson to the ModBook.
 Format: `add lesson c/CODE n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
-* Examples:
+- Examples:
   `add lesson c/CS2103T n/Weekly Tutorial d/Monday s/1000 e/1100 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`:
   Adds a lesson to the CS2103T module.
 
@@ -128,20 +130,21 @@ Format: `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [
 
 Examples:
 
-* `edit lesson 2 c/CS2103T n/Weekly Tutorial d/Monday s/1000 e/1100 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1` :
+- `edit lesson 2 c/CS2103T n/Weekly Tutorial d/Monday s/1000 e/1100 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1` :
   Edits the second lesson of the CS2103T module.
 
 #### Deleting a lesson: `delete lesson`
 
-Deletes a lesson from the ModBook Format: `delete lesson INDEX c/CODE`
+Deletes a lesson from the ModBook
+Format: `delete lesson`
 
-* Deletes the lesson at the specified INDEX.
-* The index refers to the index number shown in the displayed module detail list.
-* The index must be a positive integer 1, 2, 3, …​
+- Deletes the lesson at the specified INDEX.
+- The index refers to the index number shown in the displayed module detail list.
+- The index must be a positive integer 1, 2, 3, …​
 
 Examples:
 
-* `delete lesson 2 c/CS2103T`: deletes the 2nd lesson of the CS2130T module.
+- `delete lesson 2`: Deletes the 2nd lesson of the module that is currently displayed.
 
 ### Exams
 
@@ -149,7 +152,7 @@ Examples:
 
 Adds an exam to the ModBook. Format: `add exam c/CODE n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
-* Examples:
+- Examples:
   `add exam c/CS2103T n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`:
   Adds an exam to the CS2103T module.
 
@@ -162,19 +165,20 @@ Shows a list of all lessons in the ModBook. Format: `list exam`
 Edits an existing exam in the ModBook.
 Format: `edit exam 3 [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
-* Examples:
+- Examples:
   `edit exam 3 c/CS2103T n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1` :
   Edits the 3rd exam of the CS2103T module.
 
 #### Deleting an Exam : `delete exam`
 
-Deletes the specified Exam from the ModBook. Format: `delete exam INDEX c/CODE`
+Deletes the specified Exam from the ModBook.
+Format: `delete exam INDEX`
 
-* Deletes the Exam at the specified INDEX.
-* The index refers to the index number shown in the displayed Module details list.
-* The index must be a positive integer 1, 2, 3, …​
-* Examples:
-  `delete exam 3 c/CS2103T` : Deletes the 3rd exam of the CS2103T module.
+- Deletes the Exam at the specified INDEX.
+- The index refers to the index number shown in the displayed Module details list.
+- The index must be a positive integer 1, 2, 3, …​
+- Examples:
+  `delete exam 3` : Deletes the 3rd exam of the module that is currently displayed.
 
 ### Miscellaneous
 
@@ -203,8 +207,8 @@ discard all data and start with an empty data file at the next run.
 
 ## FAQ
 
-**Q**:   How do I transfer my data to another Computer?
-**A**:   Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+**Q**: How do I transfer my data to another Computer?
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous ModBook home folder.
 
 ## Date and time formats
@@ -212,7 +216,7 @@ the data of your previous ModBook home folder.
 The following formats are valid for entering time values:
 
 | Format   | Examples             |
-|----------|----------------------|
+| -------- | -------------------- |
 | `HH:mm`  | `09:00`, `14:30`     |
 | `HH.mm`  | `09.00`, `14.30`     |
 | `HHmm`   | `0900`, `1430`       |
@@ -226,7 +230,7 @@ The following formats are valid for entering time values:
 The meaning of the symbols in the formats specified are in the table below:
 
 | Symbol | Meaning                                 |
-|--------|-----------------------------------------|
+| ------ | --------------------------------------- |
 | H      | Hour of 24-hour time. Goes from 0 to 23 |
 | h      | Hour of 12-hour time. Goes from 1 to 12 |
 | m      | Minute                                  |
@@ -236,42 +240,42 @@ The meaning of the symbols in the formats specified are in the table below:
 
 ### Command Summary by Action
 
-| Action | Object | Format, Examples                                                                                                         |
-|--------|--------|--------------------------------------------------------------------------------------------------------------------------|
-| Add    | Module | `add mod c/CODE [n/NAME]`                                                                                                  |
-|        | Lesson | `add lesson c/CODE n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                        |
-|        | Exam   | `add exam c/CODE n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                                 |
-| List   | Module | `list mod`                                                                                                                 |
-|        | Lesson | `list lesson`                                                                                                              |
-|        | Exam   | `list exam`                                                                                                                |
-| Detail | Module | `detail c/CODE`                                                                                                            |
-| Delete | Module | `delete mod INDEX`                                                                                                         |
-|        | Lesson | `delete lesson INDEX c/CODE`                                                                                               |
-|        | Exam   | `delete exam INDEX c/CODE`                                                                                                 |
-| Edit   | Module | `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`                                                                                 |
+| Action | Object | Format, Examples                                                                                                    |
+| ------ | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| Add    | Module | `add mod c/CODE [n/NAME]`                                                                                           |
+|        | Lesson | `add lesson c/CODE n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                 |
+|        | Exam   | `add exam c/CODE n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                          |
+| List   | Module | `list mod`                                                                                                          |
+|        | Lesson | `list lesson`                                                                                                       |
+|        | Exam   | `list exam`                                                                                                         |
+| Detail | Module | `detail c/CODE`                                                                                                     |
+| Delete | Module | `delete mod INDEX`                                                                                                  |
+|        | Lesson | `delete lesson INDEX`                                                                                               |
+|        | Exam   | `delete exam INDEX`                                                                                                 |
+| Edit   | Module | `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`                                                                          |
 |        | Lesson | `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]` |
 |        | Exam   | `edit exam INDEX [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`          |
-| Help   |        | `help`                                                                                                                     |
-| Clear  |        | `clear`                                                                                                                    |
-| Exit   |        | `exit`                                                                                                                     |
+| Help   |        | `help`                                                                                                              |
+| Clear  |        | `clear`                                                                                                             |
+| Exit   |        | `exit`                                                                                                              |
 
 ### Command Summary by Object
 
-| Object | Action | Format, Examples                                                                                                         |
-|--------|--------|--------------------------------------------------------------------------------------------------------------------------|
-| Module | Add    | `add mod c/CODE [n/NAME]`                                                                                                  |
-|        | Detail | `detail c/CODE`                                                                                                            |
-|        | List   | `list mod`                                                                                                                 |
-|        | Edit   | `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`                                                                                 |
-|        | Delete | `delete mod INDEX`                                                                                                         |
-| Lesson | Add    | `add lesson c/CODE n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                        |
-|        | List   | `list lesson`                                                                                                              |
+| Object | Action | Format, Examples                                                                                                    |
+| ------ | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| Module | Add    | `add mod c/CODE [n/NAME]`                                                                                           |
+|        | Detail | `detail c/CODE`                                                                                                     |
+|        | List   | `list mod`                                                                                                          |
+|        | Edit   | `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`                                                                          |
+|        | Delete | `delete mod INDEX`                                                                                                  |
+| Lesson | Add    | `add lesson c/CODE n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                 |
+|        | List   | `list lesson`                                                                                                       |
 |        | Edit   | `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]` |
-|        | Delete | `delete lesson INDEX c/CODE`                                                                                               |
-| Exam   | Add    | `add exam c/CODE n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                                 |
-|        | List   | `list exam`                                                                                                                |
+|        | Delete | `delete lesson INDEX`                                                                                               |
+| Exam   | Add    | `add exam c/CODE n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                          |
+|        | List   | `list exam`                                                                                                         |
 |        | Edit   | `edit exam INDEX [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`          |
-|        | Delete | `delete exam INDEX c/CODE`                                                                                                 |
-| Help   |        | `help`                                                                                                                     |
-| Clear  |        | `clear`                                                                                                                    |
-| Exit   |        | `exit`                                                                                                                     |
+|        | Delete | `delete exam INDEX`                                                                                                 |
+| Help   |        | `help`                                                                                                              |
+| Clear  |        | `clear`                                                                                                             |
+| Exit   |        | `exit`                                                                                                              |
