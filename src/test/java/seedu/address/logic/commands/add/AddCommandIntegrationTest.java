@@ -3,7 +3,6 @@ package seedu.address.logic.commands.add;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,14 +27,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+        model = new ModelManager(getTypicalModBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newModule_success() {
         Module validModule = new ModuleBuilder().withCode("CS0202").build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.addModule(validModule);
 
         assertCommandSuccess(new AddModCommand(validModule), model,
@@ -48,7 +47,7 @@ public class AddCommandIntegrationTest {
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.addLessonToModule(validModule, validLesson);
 
         assertCommandSuccess(new AddLessonCommand(validModuleCode, validLesson), model,
@@ -61,7 +60,7 @@ public class AddCommandIntegrationTest {
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.addExamToModule(validModule, validExam);
 
         assertCommandSuccess(new AddExamCommand(validModuleCode, validExam), model,

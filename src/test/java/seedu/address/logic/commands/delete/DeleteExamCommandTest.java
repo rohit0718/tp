@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXAM;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ import seedu.address.model.module.exam.Exam;
  * {@code DeleteExamCommand}.
  */
 public class DeleteExamCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -40,7 +39,7 @@ public class DeleteExamCommandTest {
         DeleteCommand deleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM);
         String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS,
                 examToDelete.getName(), targetModule.getCode());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
         assertCommandSuccess(deleteExamCommand, model, expectedCommandResult, expectedModel);
@@ -62,7 +61,7 @@ public class DeleteExamCommandTest {
         DeleteCommand deleteExamCommand = new DeleteExamCommand(INDEX_FIRST_EXAM);
         String expectedMessage = String.format(DeleteExamCommand.MESSAGE_DELETE_EXAM_SUCCESS, examToDelete.getName(),
                 targetModule.getCode());
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
         showNoModule(expectedModel);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);

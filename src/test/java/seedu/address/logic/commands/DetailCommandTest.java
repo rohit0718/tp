@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.MA1521;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 import static seedu.address.testutil.TypicalModules.getTypicalModules;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 
@@ -26,8 +25,8 @@ import seedu.address.model.module.predicates.HasModuleCodePredicate;
  * Contains integration tests (interaction with the Model) for {@code DetailCommand}
  */
 public class DetailCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void equals() {

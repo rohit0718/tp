@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ import seedu.address.model.module.lesson.Lesson;
  * {@code DeleteLessonCommand}.
  */
 public class DeleteLessonCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -39,7 +38,7 @@ public class DeleteLessonCommandTest {
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete.getName(), targetModule.getCode());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
         assertCommandSuccess(deleteLessonCommand, model, expectedCommandResult, expectedModel);
@@ -61,7 +60,7 @@ public class DeleteLessonCommandTest {
         DeleteCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS,
                 lessonToDelete.getName(), targetModule.getCode());
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
         assertCommandSuccess(deleteLessonCommand, model, expectedCommandResult, expectedModel);
