@@ -98,22 +98,6 @@ public class EditLessonCommandTest {
     }
 
     @Test
-    public void execute_noLessonFieldSpecifiedUnfilteredList_success() {
-        Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Lesson editedLesson = new LessonBuilder(CS2103T_LECTURE_WITH_VENUE).build();
-        EditCommand editCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editedModule.getCode(),
-                new EditLessonDescriptor());
-
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
-                editedModule.getCode());
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new ModBook(model.getModBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-
-    @Test
     public void execute_validIndexFilteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Module targetModule = CS2103T.deepCopy();

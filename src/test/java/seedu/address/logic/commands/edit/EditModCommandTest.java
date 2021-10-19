@@ -77,19 +77,6 @@ public class EditModCommandTest {
     }
 
     @Test
-    public void execute_noModuleFieldSpecifiedUnfilteredList_success() {
-        Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        EditCommand editCommand = new EditModCommand(INDEX_FIRST_MODULE, new EditModDescriptor());
-
-        String expectedMessage = String.format(EditModCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule.getCode());
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new ModBook(model.getModBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-
-    @Test
     public void execute_validIndexFilteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Module editedModule = CS2103T.deepCopy();

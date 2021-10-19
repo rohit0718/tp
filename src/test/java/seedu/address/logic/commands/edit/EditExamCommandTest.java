@@ -101,22 +101,6 @@ public class EditExamCommandTest {
     }
 
     @Test
-    public void execute_noExamFieldSpecifiedUnfilteredList_success() {
-        Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Exam editedExam = new ExamBuilder(CS2103T_PRACTICAL).build();
-        EditCommand editCommand = new EditExamCommand(INDEX_FIRST_EXAM, editedModule.getCode(),
-                new EditExamDescriptor());
-
-        String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
-                editedModule.getCode());
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new ModBook(model.getModBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-
-    @Test
     public void execute_validIndexFilteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Module targetModule = CS2103T.deepCopy();
