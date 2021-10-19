@@ -113,13 +113,13 @@ Examples:
 * `edit lesson 2 c/CS2103T n/Weekly Tutorial d/Monday s/1000 e/1100 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1` : Edits the second lesson of the CS2103T module.
 #### Deleting a lesson: `delete lesson`
 Deletes a lesson from the ModBook
-Format: `delete lesson INDEX c/CODE`
+Format: `delete lesson`
 * Deletes the lesson at the specified INDEX.
 * The index refers to the index number shown in the displayed module detail list.
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `delete lesson 2 c/CS2103T`: deletes the 2nd lesson of the CS2130T module.
+* `delete lesson 2`: deletes the 2nd lesson of the currently showing module.
 
 ### Exams
 #### Adding an exam: `add exam`
@@ -137,12 +137,12 @@ Format: `edit exam 3 c/CODE n/NEW_NAME d/NEW_DATE s/NEW_START_TIME e/NEW_END_TIM
   `edit exam 3 c/CS2103T n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1` : Edits the 3rd exam of the CS2103T module.
 #### Deleting an Exam : `delete exam`
 Deletes the specified Exam from the ModBook.
-Format: `delete exam INDEX c/CODE`
+Format: `delete exam INDEX`
 * Deletes the Exam at the specified INDEX.
 * The index refers to the index number shown in the displayed Module details list.
 * The index must be a positive integer 1, 2, 3, …​
 * Examples:
-  `delete exam 3 c/CS2103T` : Deletes the 3rd exam of the CS2103T module.
+  `delete exam 3` : Deletes the 3rd exam of the currently showing module.
 
 ### Miscellaneous
 #### Viewing help : `help`
@@ -201,8 +201,8 @@ The meaning of the symbols in the formats specified are in the table below:
 |        | Exam   | `list exam`                                                                                                                |
 | Detail | Module | `detail c/CODE`                                                                                                            |
 | Delete | Module | `delete mod INDEX`                                                                                                         |
-|        | Lesson | `delete lesson INDEX c/CODE`                                                                                               |
-|        | Exam   | `delete exam INDEX c/CODE`                                                                                                 |
+|        | Lesson | `delete lesson INDEX`                                                                                               |
+|        | Exam   | `delete exam INDEX`                                                                                                 |
 | Edit   | Module | `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`                                                                                 |
 |        | Lesson | `edit lesson INDEX c/CODE [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]` |
 |        | Exam   | `edit exam INDEX c/CODE [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`          |
@@ -222,11 +222,11 @@ The meaning of the symbols in the formats specified are in the table below:
 | Lesson | Add    | `add lesson c/CODE n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                        |
 |        | List   | `list lesson`                                                                                                              |
 |        | Edit   | `edit lesson INDEX c/CODE [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]` |
-|        | Delete | `delete lesson INDEX c/CODE`                                                                                               |
+|        | Delete | `delete lesson INDEX`                                                                                               |
 | Exam   | Add    | `add exam c/CODE n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`                                                 |
 |        | List   | `list exam`                                                                                                                |
 |        | Edit   | `edit exam INDEX c/CODE [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`          |
-|        | Delete | `delete exam INDEX c/CODE`                                                                                                 |
+|        | Delete | `delete exam INDEX`                                                                                                 |
 | Help   |        | `help`                                                                                                                     |
 | Clear  |        | `clear`                                                                                                                    |
 | Exit   |        | `exit`                                                                                                                     |
