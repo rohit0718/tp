@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -28,7 +28,7 @@ public class DeleteLessonCommand extends DeleteCommand {
      * Creates an DeleteLessonCommand to delete the Lesson at specified {@code Index} of the specified {@code Module}.
      */
     public DeleteLessonCommand(Index targetIndex) {
-        requireAllNonNull(targetIndex);
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -43,7 +43,7 @@ public class DeleteLessonCommand extends DeleteCommand {
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
         model.deleteLesson(module, lessonToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS,
-                lessonToDelete.getName(), module.getCode()));
+                lessonToDelete.getName(), module.getCode()), false, GuiState.LESSONS);
     }
 
     @Override

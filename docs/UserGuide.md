@@ -119,7 +119,7 @@ Format: `delete lesson`
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `delete lesson 2`: deletes the 2nd lesson of the currently showing module.
+* `delete lesson 2`: Deletes the 2nd lesson of the module that is currently displayed.
 
 ### Exams
 #### Adding an exam: `add exam`
@@ -142,7 +142,7 @@ Format: `delete exam INDEX`
 * The index refers to the index number shown in the displayed Module details list.
 * The index must be a positive integer 1, 2, 3, …​
 * Examples:
-  `delete exam 3` : Deletes the 3rd exam of the currently showing module.
+  `delete exam 3` : Deletes the 2nd exam of the module that is currently displayed.
 
 ### Miscellaneous
 #### Viewing help : `help`
