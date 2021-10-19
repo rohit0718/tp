@@ -42,8 +42,8 @@ public class Module {
      *
      * @param moduleCode Code of module
      * @param moduleName Optional name of Module
-     * @param lessons List of lessons
-     * @param exams List of exams
+     * @param lessons    List of lessons
+     * @param exams      List of exams
      */
     public Module(ModuleCode moduleCode, Optional<ModuleName> moduleName,
                   List<Lesson> lessons, List<Exam> exams) {
@@ -111,6 +111,14 @@ public class Module {
         List<Lesson> newLessons = lessons.stream().map(Lesson::deepCopy).collect(Collectors.toList());
         List<Exam> newExams = exams.stream().map(Exam::deepCopy).collect(Collectors.toList());
         return new Module(newModCode, newModName, newLessons, newExams);
+    }
+
+    public void setLesson(Lesson target, Lesson newLesson) {
+        lessons.set(lessons.indexOf(target), newLesson);
+    }
+
+    public void setExam(Exam target, Exam newExam) {
+        exams.set(exams.indexOf(target), newExam);
     }
 
     /**

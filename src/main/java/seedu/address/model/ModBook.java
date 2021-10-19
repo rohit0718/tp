@@ -115,8 +115,7 @@ public class ModBook implements ReadOnlyModBook {
      * {@code target} must exist in {@code module}'s exams list.
      */
     public void setExam(Module module, Exam target, Exam newExam) {
-        List<Exam> examList = module.getExams();
-        examList.set(examList.indexOf(target), newExam);
+        module.setExam(target, newExam);
     }
 
     /**
@@ -124,8 +123,7 @@ public class ModBook implements ReadOnlyModBook {
      * {@code target} must exist in {@code module}'s lessons list.
      */
     public void setLesson(Module module, Lesson target, Lesson newLesson) {
-        List<Lesson> lessonList = module.getLessons();
-        lessonList.set(lessonList.indexOf(target), newLesson);
+        module.setLesson(target, newLesson);
     }
 
     //// util methods
