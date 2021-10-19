@@ -9,7 +9,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,10 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddModCommand;
@@ -32,12 +28,8 @@ import seedu.address.logic.commands.delete.DeleteModCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ModuleUtil;
 import seedu.address.testutil.builders.ModuleBuilder;
-import seedu.address.testutil.builders.PersonBuilder;
 
 public class ModBookParserTest {
 
@@ -48,7 +40,7 @@ public class ModBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Module module = new ModuleBuilder().build();
-        AddModCommand command = (AddModCommand) parser.parseCommand(PersonUtil.getAddCommand(module), DEFAULT_STATE);
+        AddModCommand command = (AddModCommand) parser.parseCommand(ModuleUtil.getAddCommand(module), DEFAULT_STATE);
         assertEquals(new AddModCommand(module), command);
     }
 
