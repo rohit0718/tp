@@ -15,7 +15,8 @@ public class Link {
      * The first character of the link must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\." +
+            "[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
 
     public final String link;
 
