@@ -10,10 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
