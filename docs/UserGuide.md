@@ -161,7 +161,7 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 Caution: If your changes to the data file makes its format invalid, ModBook will discard all data and start with an empty data file at the next run.
 
 ## FAQ
-**Q**:   How do I transfer my data to another Computer?  
+**Q**:   How do I transfer my data to another Computer?
 **A**:   Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModBook home folder.
 
 ## Date and time formats
