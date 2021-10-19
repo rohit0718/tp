@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalExams.CS2103T_PRACTICAL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
@@ -39,12 +38,7 @@ public class EditExamCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
 
     @Test
-    public void constructor_nullExam_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EditExamCommand(null, null, null));
-    }
-
-    @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allExamFieldsSpecifiedUnfilteredList_success() {
         Module targetModule = new ModuleBuilder(CS2103T).withExams(CS2103T_PRACTICAL).build();
         Exam editedExam = new ExamBuilder(CS2103T_PRACTICAL).build();
 
@@ -83,7 +77,7 @@ public class EditExamCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_someExamFieldsSpecifiedUnfilteredList_success() {
         Module targetModule = new ModuleBuilder(CS2103T).withExams(CS2103T_PRACTICAL).build();
         Exam editedExam = new ExamBuilder(CS2103T_PRACTICAL).build();
 
@@ -107,7 +101,7 @@ public class EditExamCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noExamFieldSpecifiedUnfilteredList_success() {
         Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Exam editedExam = new ExamBuilder(CS2103T_PRACTICAL).build();
         EditCommand editCommand = new EditExamCommand(INDEX_FIRST_EXAM, editedModule.getCode(),
