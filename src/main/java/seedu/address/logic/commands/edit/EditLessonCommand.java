@@ -84,7 +84,6 @@ public class EditLessonCommand extends EditCommand {
         }
 
         model.setLesson(module, lessonToEdit, editedLesson);
-        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(), module.getCode()));
     }
 

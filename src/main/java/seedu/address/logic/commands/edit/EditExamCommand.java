@@ -83,7 +83,6 @@ public class EditExamCommand extends EditCommand {
         }
 
         model.setExam(module, examToEdit, editedExam);
-        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(String.format(MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 module.getCode()));
     }
