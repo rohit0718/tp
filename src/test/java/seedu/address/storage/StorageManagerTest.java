@@ -46,7 +46,7 @@ public class StorageManagerTest {
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
     }
-    
+
     @Test
     public void modBookReadSave() throws Exception {
         /*
