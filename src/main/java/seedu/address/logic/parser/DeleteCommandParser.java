@@ -76,12 +76,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExamCommand.MESSAGE_USAGE));
-        }
         Index index = ParserUtil.parseFirstIndex(args);
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
-        return new DeleteExamCommand(index, modCode);
+        return new DeleteExamCommand(index);
     }
 }

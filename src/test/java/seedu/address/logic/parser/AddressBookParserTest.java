@@ -75,7 +75,7 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " exam "
                         + INDEX_FIRST_EXAM.getOneBased() + " "
                         + PREFIX_CODE + module.getCode(), GuiState.DETAILS);
-        assertEquals(new DeleteExamCommand(INDEX_FIRST_EXAM, module.getCode()), deleteExamCommand);
+        assertEquals(new DeleteExamCommand(INDEX_FIRST_EXAM), deleteExamCommand);
     }
 
     @Test
