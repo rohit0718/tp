@@ -23,7 +23,7 @@ public class AddExamCommand extends AddCommand {
             + "\nParameters: "
             + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "EXAM_NAME "
-            + PREFIX_DAY + "DAY "
+            + PREFIX_DAY + "DATE "
             + PREFIX_START + "START_TIME "
             + PREFIX_END + "END_TIME "
             + PREFIX_LINK + "LINK "
