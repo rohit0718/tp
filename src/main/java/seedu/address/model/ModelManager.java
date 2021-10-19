@@ -218,6 +218,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteExam(Module module, Exam target) {
+        modBook.removeExam(module, target);
+    }
+
+    @Override
+    public void deleteLesson(Module module, Lesson target) {
+        modBook.removeLesson(module, target);
+    }
+
+    @Override
     public boolean moduleHasLesson(Module module, Lesson lesson) {
         List<Lesson> lessons = module.getLessons();
         return lessons.contains(lesson);
@@ -237,16 +247,6 @@ public class ModelManager implements Model {
     @Override
     public void addExamToModule(Module module, Exam exam) {
         module.getExams().add(exam);
-    }
-
-    @Override
-    public void deleteExam(Module module, Exam target) {
-        modBook.removeExam(module, target);
-    }
-
-    @Override
-    public void deleteLesson(Module module, Lesson target) {
-        modBook.removeLesson(module, target);
     }
 
     @Override
