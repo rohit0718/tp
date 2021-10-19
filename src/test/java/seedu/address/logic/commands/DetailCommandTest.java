@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULE_DETAILS_LISTED;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULE_NOT_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.preparePredicate;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.MA1521;
@@ -76,12 +77,5 @@ public class DetailCommandTest {
         expectedModel.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(getTypicalModules(), model.getFilteredModuleList());
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code ModuleHasModuleCodePredicate}.
-     */
-    private HasModuleCodePredicate preparePredicate(String userInput) {
-        return new HasModuleCodePredicate(new ModuleCode(userInput));
     }
 }

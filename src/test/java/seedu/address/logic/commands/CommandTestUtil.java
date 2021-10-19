@@ -20,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModBook;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 /**
@@ -119,6 +120,13 @@ public class CommandTestUtil {
         model.updateFilteredModuleList(new HasModuleCodePredicate(module.getCode()));
 
         assertEquals(1, model.getFilteredModuleList().size());
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code ModuleHasModuleCodePredicate}.
+     */
+    public static HasModuleCodePredicate preparePredicate(String userInput) {
+        return new HasModuleCodePredicate(new ModuleCode(userInput));
     }
 
 }

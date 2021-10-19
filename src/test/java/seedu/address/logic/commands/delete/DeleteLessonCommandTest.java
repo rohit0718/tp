@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.preparePredicate;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
@@ -23,6 +24,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.lesson.Lesson;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -63,6 +65,8 @@ public class DeleteLessonCommandTest {
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteLesson(targetModule, lessonToDelete);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        HasModuleCodePredicate predicate = preparePredicate(CS2103T.getCode().toString());
+        expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(deleteLessonCommand, model, expectedCommandResult, expectedModel);
     }
 
