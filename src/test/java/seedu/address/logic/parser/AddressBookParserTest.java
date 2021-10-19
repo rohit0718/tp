@@ -110,7 +110,7 @@ public class AddressBookParserTest {
         EditCommand editLessonCommand = (EditLessonCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
                 + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor), GuiState.DETAILS);
-        assertEquals(new EditLessonCommand(INDEX_FIRST_LESSON, module.getCode(), editLessonDescriptor),
+        assertEquals(new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor),
                 editLessonCommand);
 
         Exam exam = new ExamBuilder().build();
@@ -127,7 +127,7 @@ public class AddressBookParserTest {
         EditCommand editExamCommand = (EditExamCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
                 + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor), GuiState.DETAILS);
-        assertEquals(new EditExamCommand(INDEX_FIRST_EXAM, module.getCode(), editExamDescriptor), editExamCommand);
+        assertEquals(new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor), editExamCommand);
     }
 
     @Test
@@ -164,7 +164,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", DEFAULT_STATE));
+                -> parser.parseCommand("", DEFAULT_STATE));
     }
 
     @Test

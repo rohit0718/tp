@@ -22,8 +22,6 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.edit.EditLessonCommand.EditLessonDescriptor;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ModBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -52,8 +50,7 @@ public class EditLessonCommandTest {
             editLessonDescriptor.setVenue(editedLesson.getVenue().get());
         }
 
-        EditCommand editCommand = new EditLessonCommand(
-                INDEX_FIRST_LESSON, targetModule.getCode(), editLessonDescriptor);
+        EditCommand editCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
                 targetModule.getCode());
@@ -70,8 +67,7 @@ public class EditLessonCommandTest {
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(targetModule.getLessons().size() + 1);
 
-        EditCommand EditLessonCommand = new EditLessonCommand(outOfBoundIndex, targetModule.getCode(),
-                new EditLessonDescriptor());
+        EditCommand EditLessonCommand = new EditLessonCommand(outOfBoundIndex, new EditLessonDescriptor());
 
         assertCommandFailure(EditLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
@@ -89,8 +85,7 @@ public class EditLessonCommandTest {
             editLessonDescriptor.setVenue(editedLesson.getVenue().get());
         }
 
-        EditCommand editCommand = new EditLessonCommand(
-                INDEX_FIRST_LESSON, targetModule.getCode(), editLessonDescriptor);
+        EditCommand editCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
                 targetModule.getCode());
@@ -120,8 +115,7 @@ public class EditLessonCommandTest {
             editLessonDescriptor.setVenue(editedLesson.getVenue().get());
         }
 
-        EditCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, targetModule.getCode(),
-                editLessonDescriptor);
+        EditCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, lessonToEdit.getName(),
                 targetModule.getCode());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
@@ -148,8 +142,7 @@ public class EditLessonCommandTest {
             editLessonDescriptor.setVenue(firstLesson.getVenue().get());
         }
 
-        EditCommand editCommand = new EditLessonCommand(INDEX_SECOND_LESSON, firstModule.getCode(),
-                editLessonDescriptor);
+        EditCommand editCommand = new EditLessonCommand(INDEX_SECOND_LESSON, editLessonDescriptor);
 
         assertCommandFailure(editCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
@@ -170,8 +163,7 @@ public class EditLessonCommandTest {
             editLessonDescriptor.setVenue(firstLesson.getVenue().get());
         }
 
-        EditCommand editCommand = new EditLessonCommand(INDEX_SECOND_LESSON, firstModule.getCode(),
-                editLessonDescriptor);
+        EditCommand editCommand = new EditLessonCommand(INDEX_SECOND_LESSON, editLessonDescriptor);
 
         assertCommandFailure(editCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
@@ -184,7 +176,7 @@ public class EditLessonCommandTest {
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
         editLessonDescriptor.setName(editedLesson.getName());
 
-        EditCommand editCommand = new EditLessonCommand(outOfBoundIndex, firstModule.getCode(), editLessonDescriptor);
+        EditCommand editCommand = new EditLessonCommand(outOfBoundIndex, editLessonDescriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
@@ -204,17 +196,14 @@ public class EditLessonCommandTest {
             editLessonDescriptor.setVenue(editedLesson.getVenue().get());
         }
 
-        EditCommand editLessonFirstCommand = new EditLessonCommand(INDEX_FIRST_LESSON, CS2103T.getCode(),
-                editLessonDescriptor);
-        EditCommand editLessonSecondCommand = new EditLessonCommand(INDEX_SECOND_LESSON, CS2103T.getCode(),
-                editLessonDescriptor);
+        EditCommand editLessonFirstCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
+        EditCommand editLessonSecondCommand = new EditLessonCommand(INDEX_SECOND_LESSON, editLessonDescriptor);
 
         // same object -> returns true
         assertEquals(editLessonFirstCommand, editLessonFirstCommand);
 
         // same values -> returns true
-        EditCommand editLessonFirstCommandCopy = new EditLessonCommand(INDEX_FIRST_LESSON, CS2103T.getCode(),
-                editLessonDescriptor);
+        EditCommand editLessonFirstCommandCopy = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
         assertEquals(editLessonFirstCommand, editLessonFirstCommandCopy);
 
         // different types -> returns false
@@ -229,7 +218,6 @@ public class EditLessonCommandTest {
         // different descriptor -> returns false
         EditLessonDescriptor editLessonDescriptorTwo = new EditLessonDescriptor(editLessonDescriptor);
         editLessonDescriptorTwo.setName(new LessonName("CHAMPBENROCKZ"));
-        assertNotEquals(editLessonFirstCommand, new EditLessonCommand(INDEX_FIRST_LESSON, CS2103T.getCode(),
-                editLessonDescriptorTwo));
+        assertNotEquals(editLessonFirstCommand, new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptorTwo));
     }
 }

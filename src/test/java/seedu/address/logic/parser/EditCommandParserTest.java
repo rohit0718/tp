@@ -120,14 +120,12 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
                 + PersonUtil.getEditModDescriptorDetails(editModDescriptor), expectedEditModCommand);
 
-        EditCommand expectedEditLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, module.getCode(),
-                editLessonDescriptor);
+        EditCommand expectedEditLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
         assertParseSuccess(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
                         + module.getCode() + " " + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
                 GuiState.DETAILS, expectedEditLessonCommand);
 
-        EditCommand expectedEditExamCommand = new EditExamCommand(INDEX_FIRST_EXAM, module.getCode(),
-                editExamDescriptor);
+        EditCommand expectedEditExamCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
         assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
                         + module.getCode() + " " + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor),
                 GuiState.DETAILS, expectedEditExamCommand);

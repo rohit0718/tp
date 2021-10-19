@@ -53,8 +53,7 @@ public class EditExamCommandTest {
             editExamDescriptor.setVenue(editedExam.getVenue().get());
         }
 
-        EditCommand editCommand = new EditExamCommand(
-                INDEX_FIRST_EXAM, targetModule.getCode(), editExamDescriptor);
+        EditCommand editCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
 
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 targetModule.getCode());
@@ -71,8 +70,7 @@ public class EditExamCommandTest {
         Module targetModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Index outOfBoundIndex = Index.fromZeroBased(targetModule.getExams().size() + 1);
 
-        EditCommand editExamCommand = new EditExamCommand(outOfBoundIndex, targetModule.getCode(),
-                new EditExamDescriptor());
+        EditCommand editExamCommand = new EditExamCommand(outOfBoundIndex, new EditExamDescriptor());
 
         assertCommandFailure(editExamCommand, model, Messages.MESSAGE_INVALID_EXAM_DISPLAYED_INDEX);
     }
@@ -90,8 +88,7 @@ public class EditExamCommandTest {
             editExamDescriptor.setVenue(editedExam.getVenue().get());
         }
 
-        EditCommand editCommand = new EditExamCommand(
-                INDEX_FIRST_EXAM, targetModule.getCode(), editExamDescriptor);
+        EditCommand editCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
 
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 targetModule.getCode());
@@ -121,8 +118,7 @@ public class EditExamCommandTest {
             editExamDescriptor.setVenue(editedExam.getVenue().get());
         }
 
-        EditCommand editExamCommand = new EditExamCommand(INDEX_FIRST_EXAM, targetModule.getCode(),
-                editExamDescriptor);
+        EditCommand editExamCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, examToEdit.getName(),
                 targetModule.getCode());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
@@ -149,7 +145,7 @@ public class EditExamCommandTest {
             editExamDescriptor.setVenue(firstExam.getVenue().get());
         }
 
-        EditCommand editCommand = new EditExamCommand(INDEX_SECOND_EXAM, firstModule.getCode(), editExamDescriptor);
+        EditCommand editCommand = new EditExamCommand(INDEX_SECOND_EXAM, editExamDescriptor);
 
         assertCommandFailure(editCommand, model, EditExamCommand.MESSAGE_DUPLICATE_EXAM);
     }
@@ -170,7 +166,7 @@ public class EditExamCommandTest {
             editExamDescriptor.setVenue(firstExam.getVenue().get());
         }
 
-        EditCommand editCommand = new EditExamCommand(INDEX_SECOND_EXAM, firstModule.getCode(), editExamDescriptor);
+        EditCommand editCommand = new EditExamCommand(INDEX_SECOND_EXAM, editExamDescriptor);
 
         assertCommandFailure(editCommand, model, EditExamCommand.MESSAGE_DUPLICATE_EXAM);
     }
@@ -183,7 +179,7 @@ public class EditExamCommandTest {
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
         editExamDescriptor.setName(editedExam.getName());
 
-        EditCommand editCommand = new EditExamCommand(outOfBoundIndex, firstModule.getCode(), editExamDescriptor);
+        EditCommand editCommand = new EditExamCommand(outOfBoundIndex, editExamDescriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EXAM_DISPLAYED_INDEX);
     }
@@ -203,17 +199,14 @@ public class EditExamCommandTest {
             editExamDescriptor.setVenue(editedExam.getVenue().get());
         }
 
-        EditCommand editExamFirstCommand = new EditExamCommand(INDEX_FIRST_EXAM, CS2103T.getCode(),
-                editExamDescriptor);
-        EditCommand editExamSecondCommand = new EditExamCommand(INDEX_SECOND_EXAM, CS2103T.getCode(),
-                editExamDescriptor);
+        EditCommand editExamFirstCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
+        EditCommand editExamSecondCommand = new EditExamCommand(INDEX_SECOND_EXAM, editExamDescriptor);
 
         // same object -> returns true
         assertEquals(editExamFirstCommand, editExamFirstCommand);
 
         // same values -> returns true
-        EditCommand editExamFirstCommandCopy = new EditExamCommand(INDEX_FIRST_EXAM, CS2103T.getCode(),
-                editExamDescriptor);
+        EditCommand editExamFirstCommandCopy = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
         assertEquals(editExamFirstCommand, editExamFirstCommandCopy);
 
         // different types -> returns false
@@ -228,7 +221,6 @@ public class EditExamCommandTest {
         // different descriptor -> returns false
         EditExamDescriptor editExamDescriptorTwo = new EditExamDescriptor(editExamDescriptor);
         editExamDescriptorTwo.setName(new ExamName("CHAMPBENROCKZ"));
-        assertNotEquals(editExamFirstCommand, new EditExamCommand(INDEX_FIRST_EXAM, CS2103T.getCode(),
-                editExamDescriptorTwo));
+        assertNotEquals(editExamFirstCommand, new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptorTwo));
     }
 }
