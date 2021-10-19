@@ -23,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.lesson.Lesson;
@@ -51,25 +50,22 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_LINK + "https://www.youtube.com/watch?v=8mL3L9hN2l4 "
             + PREFIX_VENUE + "COM1 ";
     private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
     private final EditLessonDescriptor editLessonDescriptor;
 
     /**
      * Creates an EditLessonCommand to edit the Lesson at specified {@code Index} of the specified {@code Module}.
      */
-    public EditLessonCommand(Index targetIndex, ModuleCode targetModuleCode,
-                             EditLessonDescriptor editLessonDescriptor) {
-        requireAllNonNull(targetIndex, targetModuleCode, editLessonDescriptor);
+    public EditLessonCommand(Index targetIndex, EditLessonDescriptor editLessonDescriptor) {
+        requireAllNonNull(targetIndex, editLessonDescriptor);
 
         this.targetIndex = targetIndex;
-        this.targetModuleCode = targetModuleCode;
         this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Module module = model.getModule(targetModuleCode);
+        Module module = model.getFilteredModuleList().get(0);
         List<Lesson> lessons = module.getLessons();
 
         if (targetIndex.getZeroBased() >= lessons.size()) {
@@ -127,7 +123,6 @@ public class EditLessonCommand extends EditCommand {
             return false;
         }
         return targetIndex.equals(((EditLessonCommand) other).targetIndex)
-                && targetModuleCode.equals(((EditLessonCommand) other).targetModuleCode)
                 && editLessonDescriptor.equals(((EditLessonCommand) other).editLessonDescriptor);
     }
 

@@ -23,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Timeslot;
 import seedu.address.model.module.Venue;
 import seedu.address.model.module.exam.Exam;
@@ -51,24 +50,22 @@ public class EditExamCommand extends EditCommand {
             + PREFIX_LINK + "https://www.youtube.com/watch?v=8mL3L9hN2l4 "
             + PREFIX_VENUE + "Field";
     private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
     private final EditExamDescriptor editExamDescriptor;
 
     /**
      * Creates an EditExamCommand to edit the Exam at specified {@code Index} of the specified {@code Module}.
      */
-    public EditExamCommand(Index targetIndex, ModuleCode targetModuleCode, EditExamDescriptor editExamDescriptor) {
-        requireAllNonNull(targetIndex, targetModuleCode, editExamDescriptor);
+    public EditExamCommand(Index targetIndex, EditExamDescriptor editExamDescriptor) {
+        requireAllNonNull(targetIndex, editExamDescriptor);
 
         this.targetIndex = targetIndex;
-        this.targetModuleCode = targetModuleCode;
         this.editExamDescriptor = new EditExamDescriptor(editExamDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Module module = model.getModule(targetModuleCode);
+        Module module = model.getFilteredModuleList().get(0);
         List<Exam> exams = module.getExams();
 
         if (targetIndex.getZeroBased() >= exams.size()) {
@@ -125,7 +122,6 @@ public class EditExamCommand extends EditCommand {
             return false;
         }
         return targetIndex.equals(((EditExamCommand) other).targetIndex)
-                && targetModuleCode.equals(((EditExamCommand) other).targetModuleCode)
                 && editExamDescriptor.equals(((EditExamCommand) other).editExamDescriptor);
     }
 
@@ -145,7 +141,6 @@ public class EditExamCommand extends EditCommand {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditExamDescriptor(EditExamDescriptor toCopy) {
             setName(toCopy.name);

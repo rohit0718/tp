@@ -21,7 +21,6 @@ import seedu.address.logic.commands.edit.EditModCommand;
 import seedu.address.logic.commands.edit.EditModCommand.EditModDescriptor;
 import seedu.address.logic.parser.exceptions.GuiStateException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -98,16 +97,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
         Index index = ParserUtil.parseFirstIndex(args);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE));
-        }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editLessonDescriptor.setName(ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -135,7 +130,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditLessonCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditLessonCommand(index, modCode, editLessonDescriptor);
+        return new EditLessonCommand(index, editLessonDescriptor);
     }
 
     /**
@@ -150,15 +145,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Index index = ParserUtil.parseFirstIndex(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditExamCommand.MESSAGE_USAGE));
-        }
-
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editExamDescriptor.setName(ParserUtil.parseExamName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -186,6 +176,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditExamCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditExamCommand(index, modCode, editExamDescriptor);
+        return new EditExamCommand(index, editExamDescriptor);
     }
 }
