@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ModuleListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -84,7 +84,20 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Module` objects residing in the `Model`.
+- keeps a reference to the current screen state as a `GuiState` in order to restrict some commands to certain screens (more on this under `Restricting Commands based on GUI state` in the `Implementation` section below).
+- changes the screen based on the return value of CommandResult.
+
+#### Design considerations:
+
+**Aspect: How to change UI screen based on the command**
+
+* **Alternative 1 (current choice)**: Create card classes for each type of screen and change rendered card based on return value of CommandResult.
+    * Pros: Readability is enhanced, easily extendable.
+    * Cons: Coupling of UI component is reduced; logic needs to be added to CommandResult to change the current screen.
+* **Alternative 2**: Have a single rendered ModuleCard that changes text based on the type of the object in the ObservableList.
+    * Pros: Easier to implement.
+    * Cons: Harder to extend; can lead to a monolithic ModuleCard that handles all views.
 
 ### Logic component
 

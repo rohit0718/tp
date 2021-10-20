@@ -7,49 +7,49 @@ end box
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ModBookParser" as ModBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "d:DeleteLessonCommand" as DeleteLessonCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-[-> MainWindow : executeCommand(delete 1)
+[-> MainWindow : executeCommand(delete lesson 1)
 activate MainWindow
 
-MainWindow -> LogicManager : execute(delete 1, GuiState.DETAILS)
+MainWindow -> LogicManager : execute(delete lesson 1, GuiState.DETAILS)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(delete 1, GuiState.DETAILS)
-activate AddressBookParser
+LogicManager -> ModBookParser : parseCommand(delete lesson 1, GuiState.DETAILS)
+activate ModBookParser
 
-AddressBookParser -> DeleteCommandParser : parse(1, GuiState.DETAILS)
+ModBookParser -> DeleteCommandParser : parse(delete 1, GuiState.DETAILS)
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteLessonCommand
+DeleteCommandParser -> DeleteLessonCommand
+activate DeleteLessonCommand
 
-DeleteCommand --> DeleteCommandParser
-deactivate DeleteCommand
+DeleteLessonCommand --> DeleteCommandParser
+deactivate DeleteLessonCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> ModBookParser : d
 deactivate DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+ModBookParser --> LogicManager : d
+deactivate ModBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteLessonCommand : execute()
+activate DeleteLessonCommand
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteLessonCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteLessonCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+DeleteLessonCommand --> LogicManager : r
+deactivate DeleteLessonCommand
 
 LogicManager --> MainWindow : r
 deactivate LogicManager
