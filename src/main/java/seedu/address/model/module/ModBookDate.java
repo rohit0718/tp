@@ -24,7 +24,7 @@ public class ModBookDate implements Comparable<ModBookDate> {
         buildFormatter("dd LLLL yyyy"),
         buildFormatter("dd LLL yyyy"),
         buildFormatter("d LLL yyyy"),
-        buildFormatter("d LLLL yyyy"),
+        buildFormatter("d LLLL yyyy")
     };
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public final LocalDate date;

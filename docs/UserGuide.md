@@ -229,17 +229,17 @@ The following formats are valid for entering time values:
 
 The following formats are valid for entering date values:
 
-| Format   | Examples             |
-| -------- | -------------------- |
-| `dd/MM/yyyy`  | `09:00`, `14:30`     |
-| `dd.MM.yyyy` | `09.00`, `14.30`     |
+| Format         | Examples             |
+| --------       | -------------------- |
+| `dd/MM/yyyy`   | `09:00`, `14:30`     |
+| `dd.MM.yyyy`   | `09.00`, `14.30`     |
 | `dd-MM-yyyy`   | `0900`, `1430`       |
 | `ddMMyyyy`     | `9AM`, `2pm`         |
-| `dd MM yyyy`    | `09AM`, `11pm`       |
-| `dd LLLL yyyy`  | `9:00AM`, `2:30pm`   |
-| `dd LLL yyyy` | `09:00AM`, `11:30pm` |
+| `dd MM yyyy`   | `09AM`, `11pm`       |
+| `dd LLLL yyyy` | `9:00AM`, `2:30pm`   |
+| `dd LLL yyyy`  | `09:00AM`, `11:30pm` |
 | `d LLLL yyyy`  | `9.00AM`, `2.30pm`   |
-| `d LLL yyyy` | `09.00AM`, `11.30pm` |
+| `d LLL yyyy`   | `09.00AM`, `11.30pm` |
 
 The meaning of the symbols in the formats specified are in the table below:
 
