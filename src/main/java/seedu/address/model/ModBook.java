@@ -68,8 +68,6 @@ public class ModBook implements ReadOnlyModBook {
         setModules(newData.getModuleList());
     }
 
-    //// module-level operations
-
     /**
      * Returns true if a module with the same identity as {@code module} exists in the mod book.
      */
