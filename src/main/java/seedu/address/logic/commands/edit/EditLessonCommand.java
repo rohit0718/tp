@@ -34,7 +34,6 @@ public class EditLessonCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lesson in the Mod book. "
             + "\nParameters: INDEX "
-            + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "LESSON_NAME "
             + PREFIX_DAY + "DAY "
             + PREFIX_START + "START_TIME "
@@ -42,7 +41,6 @@ public class EditLessonCommand extends EditCommand {
             + PREFIX_LINK + "LINK "
             + PREFIX_VENUE + "VENUE "
             + "\nExample: " + COMMAND_WORD + " lesson 1 "
-            + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Tutorial "
             + PREFIX_DAY + "Monday "
             + PREFIX_START + "10:00 "
@@ -142,7 +140,6 @@ public class EditLessonCommand extends EditCommand {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setName(toCopy.name);

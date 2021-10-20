@@ -2,7 +2,6 @@ package seedu.address.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
@@ -34,7 +33,6 @@ public class EditExamCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an exam in the Mod book. "
             + "\nParameters: INDEX "
-            + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "EXAM_NAME "
             + PREFIX_DAY + "DAY "
             + PREFIX_START + "START_TIME "
@@ -42,7 +40,6 @@ public class EditExamCommand extends EditCommand {
             + PREFIX_LINK + "LINK "
             + PREFIX_VENUE + "VENUE "
             + "\nExample: " + COMMAND_WORD + " exam 1 "
-            + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Final "
             + PREFIX_DAY + "02/02/1999 "
             + PREFIX_START + "10:00 "
