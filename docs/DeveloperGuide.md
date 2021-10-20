@@ -94,7 +94,7 @@ The `UI` component,
 
 * **Alternative 1 (current choice)**: Create card classes for each type of screen and change rendered card based on return value of CommandResult.
     * Pros: Readability is enhanced, easily extendable.
-    * Cons: Slightly more difficult to implement; logic needs to be added to CommandResult to change the current screen.
+    * Cons: Coupling of UI component is reduced; logic needs to be added to CommandResult to change the current screen.
 * **Alternative 2**: Have a single rendered ModuleCard that changes text based on the type of the object in the ObservableList.
     * Pros: Easier to implement.
     * Cons: Harder to extend; can lead to a monolithic ModuleCard that handles all views.
