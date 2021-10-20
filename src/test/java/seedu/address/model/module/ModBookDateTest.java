@@ -36,20 +36,16 @@ public class ModBookDateTest {
         assertFalse(ModBookDate.isValidDate("19th Sep")); // no year
         assertFalse(ModBookDate.isValidDate("12/13/2021")); // Month out of range
         assertFalse(ModBookDate.isValidDate("6pm 12/12/2021")); // including time of day
-        assertFalse(ModBookDate.isValidDate("06 092021")); // including time of day
-        assertFalse(ModBookDate.isValidDate("09,09,2021"));
-        assertFalse(ModBookDate.isValidDate("09|09|2021"));
-
 
         // valid dates
         assertTrue(ModBookDate.isValidDate("19 Sep 2021")); // use of month abbreviations
         assertTrue(ModBookDate.isValidDate("19-02-2012")); // use of hyphens
+        assertTrue(ModBookDate.isValidDate("09,09,2021"));
         assertTrue(ModBookDate.isValidDate("09.09.2021"));
+        assertTrue(ModBookDate.isValidDate("09|09|2021"));
         assertTrue(ModBookDate.isValidDate("09 July 2021"));
         assertTrue(ModBookDate.isValidDate("09 Jul 2021"));
-        assertTrue(ModBookDate.isValidDate("09 jul 2021"));
         assertTrue(ModBookDate.isValidDate("9 July 2021"));
-        assertTrue(ModBookDate.isValidDate("9 JuLY 2021"));
         assertTrue(ModBookDate.isValidDate("9 Jul 2021"));
         assertTrue(ModBookDate.isValidDate("09092021"));
         assertTrue(ModBookDate.isValidDate("22/12/2022"));
