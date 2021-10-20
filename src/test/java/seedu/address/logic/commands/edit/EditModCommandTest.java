@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.testutil.builders.ModuleBuilder;
 
 public class EditModCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void execute_allModuleFieldsSpecifiedUnfilteredList_success() {
@@ -41,7 +40,7 @@ public class EditModCommandTest {
 
         String expectedMessage = String.format(EditModCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule.getCode());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setModule(editedModule, editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -68,7 +67,7 @@ public class EditModCommandTest {
                 INDEX_FIRST_MODULE, editModDescriptor);
 
         String expectedMessage = String.format(EditModCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule.getCode());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setModule(editedModule, editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -87,7 +86,7 @@ public class EditModCommandTest {
 
         EditCommand editModCommand = new EditModCommand(INDEX_FIRST_MODULE, editModDescriptor);
         String expectedMessage = String.format(EditModCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule.getCode());
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setModule(editedModule, editedModule);
 
         assertCommandSuccess(editModCommand, model, expectedMessage, expectedModel);

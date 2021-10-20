@@ -3,7 +3,7 @@ package seedu.address.logic.commands.add;
 import seedu.address.logic.commands.Command;
 
 /**
- * Adds a person to the address book.
+ * Adds a module, lesson or exam to the mod book.
  */
 public abstract class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";

@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,14 +24,14 @@ import seedu.address.model.module.Module;
  * {@code DeleteModCommand}.
  */
 public class DeleteModCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Module moduleToDelete = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteModCommand(INDEX_FIRST_MODULE);
         String expectedMessage = String.format(DeleteModCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -50,7 +49,7 @@ public class DeleteModCommandTest {
         Module moduleToDelete = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteModCommand(INDEX_FIRST_MODULE);
         String expectedMessage = String.format(DeleteModCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);
         showNoModule(expectedModel);
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

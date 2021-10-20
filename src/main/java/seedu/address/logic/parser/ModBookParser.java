@@ -10,7 +10,6 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DetailCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddCommand;
@@ -23,7 +22,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class ModBookParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -58,9 +57,6 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments, guiState);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments, guiState);

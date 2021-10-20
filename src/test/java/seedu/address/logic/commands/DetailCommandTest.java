@@ -6,11 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULE_DETAILS_LISTED;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULE_NOT_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.preparePredicate;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.MA1521;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 import static seedu.address.testutil.TypicalModules.getTypicalModules;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 
@@ -26,8 +27,8 @@ import seedu.address.model.module.predicates.HasModuleCodePredicate;
  * Contains integration tests (interaction with the Model) for {@code DetailCommand}
  */
 public class DetailCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -73,15 +74,8 @@ public class DetailCommandTest {
         CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.SUMMARY);
         HasModuleCodePredicate predicate = preparePredicate(MA1521.getCode().toString());
         DetailCommand command = new DetailCommand(predicate);
-        expectedModel.updateFilteredModuleList(predicate);
+        expectedModel.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(getTypicalModules(), model.getFilteredModuleList());
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code ModuleHasModuleCodePredicate}.
-     */
-    private HasModuleCodePredicate preparePredicate(String userInput) {
-        return new HasModuleCodePredicate(new ModuleCode(userInput));
     }
 }
