@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 
 import java.util.List;
@@ -9,10 +8,10 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 
 public class DeleteExamCommand extends DeleteCommand {
@@ -24,28 +23,27 @@ public class DeleteExamCommand extends DeleteCommand {
             + "\nExample: " + COMMAND_WORD + " exam 1 "
             + PREFIX_CODE + "CS2103T";
     private final Index targetIndex;
-    private final ModuleCode targetModuleCode;
 
     /**
      * Creates an DeleteExamCommand to delete the Exam at specified {@code Index} of the specified {@code Module}.
      */
-    public DeleteExamCommand(Index targetIndex, ModuleCode targetModuleCode) {
-        requireAllNonNull(targetIndex, targetModuleCode);
+    public DeleteExamCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
-        this.targetModuleCode = targetModuleCode;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Module module = model.getModule(targetModuleCode);
+        Module module = model.getFilteredModuleList().get(0);
         List<Exam> exams = module.getExams();
         if (targetIndex.getZeroBased() >= exams.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EXAM_DISPLAYED_INDEX);
         }
         Exam examToDelete = exams.get(targetIndex.getZeroBased());
         model.deleteExam(module, examToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EXAM_SUCCESS, examToDelete.getName(), targetModuleCode));
+        return new CommandResult(String.format(MESSAGE_DELETE_EXAM_SUCCESS, examToDelete.getName(), module.getCode()),
+                false, GuiState.DETAILS);
     }
 
     @Override
@@ -56,7 +54,6 @@ public class DeleteExamCommand extends DeleteCommand {
         if (!(other instanceof DeleteExamCommand)) {
             return false;
         }
-        return targetIndex.equals(((DeleteExamCommand) other).targetIndex)
-                && targetModuleCode.equals(((DeleteExamCommand) other).targetModuleCode);
+        return targetIndex.equals(((DeleteExamCommand) other).targetIndex);
     }
 }
