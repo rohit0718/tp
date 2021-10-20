@@ -153,7 +153,7 @@ When storing the `ModBook`, the respective `JsonAdaptedObject` classes will crea
 
 #### Design considerations:
 
-**Aspect: How to save components of Modules (Lessons / Exams / Timeslots / ModBookTime / ModBookDate):**
+**Aspect: How to save components of Modules (Lesson / Exam / Timeslot / ModBookTime / ModBookDate):**
 
 * **Alternative 1 (current choice)**: Create respective `JsonAdaptedObject` classes for each type of object.
     * Pros: Greatly increases the readability of the JSON storage file
