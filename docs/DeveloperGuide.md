@@ -145,7 +145,7 @@ The `Storage` component,
 * inherits from both `ModBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-The sequence diagram of how this works for an `add lesson` command is found below. The objects in `Model` and `UI` are not shown for simplicity.
+The sequence diagram of how this works for an `add lesson` command is found below. The objects in `Model` and `UI`, as well as time-related objects, are omitted for simplicity.
 
 ![StorageSequenceDiagram](images/StorageSequenceDiagram.png)
 

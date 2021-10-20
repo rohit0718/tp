@@ -11,8 +11,6 @@ participant ":JsonModBookStorage" as JsonModBookStorage STORAGE_COLOR
 participant ":JsonSerializableModBook" as JsonSerializableModBook STORAGE_COLOR
 participant ":JsonAdaptedModule" as JsonAdaptedModule STORAGE_COLOR
 participant ":JsonAdaptedLesson" as JsonAdaptedLesson STORAGE_COLOR
-participant ":JsonAdaptedTimeslot" as JsonAdaptedTimeslot STORAGE_COLOR
-participant ":JsonAdaptedModBookTime" as JsonAdaptedModBookTime STORAGE_COLOR
 participant ":JsonUtil" as JsonUtil STORAGE_COLOR
 end box
 
@@ -37,27 +35,6 @@ create JsonAdaptedLesson
 JsonAdaptedModule -> JsonAdaptedLesson : new JsonAdaptedLesson(lesson)
 activate JsonAdaptedLesson
 
-create JsonAdaptedTimeslot
-JsonAdaptedLesson -> JsonAdaptedTimeslot : new JsonAdaptedTimeslot(timeslot)
-activate JsonAdaptedTimeslot
-
-create JsonAdaptedModBookTime
-JsonAdaptedTimeslot -> JsonAdaptedModBookTime : new JsonAdaptedModBookTime(starttime)
-activate JsonAdaptedModBookTime
-
-JsonAdaptedModBookTime --> JsonAdaptedTimeslot : json starttime
-deactivate JsonAdaptedModBookTime
-
-create JsonAdaptedModBookTime
-JsonAdaptedTimeslot -> JsonAdaptedModBookTime : new JsonAdaptedModBookTime(endtime)
-activate JsonAdaptedModBookTime
-
-JsonAdaptedModBookTime --> JsonAdaptedTimeslot : json endtime
-deactivate JsonAdaptedModBookTime
-
-JsonAdaptedTimeslot --> JsonAdaptedLesson : json timeslot
-deactivate JsonAdaptedTimeslot
-
 JsonAdaptedLesson --> JsonAdaptedModule : json lesson
 deactivate JsonAdaptedLesson
 
@@ -67,7 +44,7 @@ deactivate JsonAdaptedModule
 JsonSerializableModBook --> JsonModBookStorage : json modbook
 deactivate JsonSerializableModBook
 
-JsonModBookStorage -> JsonUtil : JsonUtil.saveJsonFile(json modbook, filePath)
+JsonModBookStorage -> JsonUtil : saveJsonFile(json modbook, filePath)
 activate JsonUtil
 
 JsonUtil --> JsonModBookStorage
