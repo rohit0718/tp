@@ -29,6 +29,17 @@ public class LinkTest {
 
         // valid Link
         assertTrue(Link.isValidLink("https://www.youtube.com/watch?v=dE1P4zDhhqw&t=1s"));
-        assertTrue(Link.isValidLink("-")); // one character
+        assertTrue(Link.isValidLink("www.google.com"));
+        assertTrue(Link.isValidLink("http://www.cool.com.au"));
+        assertTrue(Link.isValidLink("http://www.cool.com:81/index.html"));
+
+        // invalid Link
+        assertFalse(Link.isValidLink("-")); // one character
+        assertFalse(Link.isValidLink("htp://youtube.com"));
+        assertFalse(Link.isValidLink("https://wwwyoutubecom/watch?v=dE1P4zDhhqw&t=1s"));
+        assertFalse(Link.isValidLink("https://www.youtube.com/ f  f  f"));
+        assertFalse(Link.isValidLink("https:/www.youtube.com/watch?v=dE1P4zDhhqw&t=1s"));
+        assertFalse(Link.isValidLink("rajesh://www.youtube.com/watch?v=dE1P4zDhhqw&t=1s"));
+        assertFalse(Link.isValidLink("dummytext"));
     }
 }
