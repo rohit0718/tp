@@ -14,12 +14,14 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "ModBook Storage" #F4F6F6{
+Interface ModBookStorage <<Interface>>
+Class JsonModBookStorage
+Class JsonSerializableModBook
+Class JsonAdaptedModule
+Class JsonAdaptedLesson
+Class JsonAdaptedExam
+Class JsonAdaptedTimeslot
 }
 
 }
@@ -29,15 +31,18 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" ModBookStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> ModBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonModBookStorage .up.|> ModBookStorage
+JsonModBookStorage ..> JsonSerializableModBook
+JsonSerializableModBook --> "*" JsonAdaptedModule
+JsonAdaptedModule --> "*" JsonAdaptedLesson
+JsonAdaptedModule --> "*" JsonAdaptedExam
+JsonAdaptedLesson --> "0...1" JsonAdaptedTimeslot
+JsonAdaptedExam --> "0...1" JsonAdaptedTimeslot
 
 @enduml
