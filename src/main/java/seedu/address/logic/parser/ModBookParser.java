@@ -14,6 +14,7 @@ import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.delete.DeleteCommand;
+import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -47,6 +48,9 @@ public class ModBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments, guiState);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments, guiState);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments, guiState);
