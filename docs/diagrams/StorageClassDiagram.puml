@@ -22,6 +22,8 @@ Class JsonAdaptedModule
 Class JsonAdaptedLesson
 Class JsonAdaptedExam
 Class JsonAdaptedTimeslot
+Class JsonAdaptedModBookTime
+Class JsonAdaptedModBookDate
 }
 
 }
@@ -42,7 +44,9 @@ JsonModBookStorage ..> JsonSerializableModBook
 JsonSerializableModBook --> "*" JsonAdaptedModule
 JsonAdaptedModule --> "*" JsonAdaptedLesson
 JsonAdaptedModule --> "*" JsonAdaptedExam
-JsonAdaptedLesson --> "0...1" JsonAdaptedTimeslot
-JsonAdaptedExam --> "0...1" JsonAdaptedTimeslot
+JsonAdaptedLesson --> "1" JsonAdaptedTimeslot
+JsonAdaptedExam --> "1" JsonAdaptedTimeslot
+JsonAdaptedExam --> "1" JsonAdaptedModBookDate
+JsonAdaptedTimeslot --> "2" JsonAdaptedModBookTime
 
 @enduml
