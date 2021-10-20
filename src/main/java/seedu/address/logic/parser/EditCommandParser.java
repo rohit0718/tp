@@ -101,7 +101,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
         Index index = ParserUtil.parseFirstIndex(args);
 
-
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
