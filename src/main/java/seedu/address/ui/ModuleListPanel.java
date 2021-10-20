@@ -4,11 +4,14 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
+
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_MODULE_LIST;
 
 
 /**
@@ -21,11 +24,15 @@ public class ModuleListPanel extends UiPart<Region> {
     @FXML
     private ListView<Module> moduleListView;
 
+    @FXML
+    private Label placeholder;
+
     /**
      * Creates a {@code ModuleListPanel} with the given {@code ObservableList}.
      */
     public ModuleListPanel(ObservableList<Module> moduleList) {
         super(FXML);
+        placeholder.setText(MESSAGE_EMPTY_MODULE_LIST);
         moduleListView.setItems(moduleList);
         moduleListView.setCellFactory(listView -> new ModuleSummaryViewCell());
     }
