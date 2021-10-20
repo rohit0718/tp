@@ -43,7 +43,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LINK = " ";
     private static final String INVALID_TIME = "33:00PM";
-    private static final String INVALID_DATE = "20/15/2022";
+    private static final String INVALID_DATE = "20/July/2022";
     private static final String INVALID_VENUE = " ";
     private static final String INVALID_EXAM_NAME = " ";
     private static final String INVALID_LESSON_NAME = " ";

@@ -2,6 +2,7 @@ package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.DateTimeUtil.buildFormatter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,8 +14,20 @@ import java.time.format.DateTimeParseException;
  */
 public class ModBookDate implements Comparable<ModBookDate> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format of dd/MM/yyyy";
-    public static final DateTimeFormatter PARSE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            "Invalid date format. Please refer to the User Guide for valid date formats.";
+    public static final DateTimeFormatter[] PARSE_FORMATTERS = new DateTimeFormatter[] {
+        buildFormatter("dd/MM/yyyy"),
+        buildFormatter("dd-MM-yyyy"),
+        buildFormatter("dd.MM.yyyy"),
+        buildFormatter("ddMMyyyy"),
+        buildFormatter("dd MM yyyy"),
+        buildFormatter("dd,MM,yyyy"),
+        buildFormatter("dd|MM|yyyy"),
+        buildFormatter("dd LLLL yyyy"),
+        buildFormatter("dd LLL yyyy"),
+        buildFormatter("d LLL yyyy"),
+        buildFormatter("d LLLL yyyy"),
+    };
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public final LocalDate date;
 
@@ -26,7 +39,7 @@ public class ModBookDate implements Comparable<ModBookDate> {
     public ModBookDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, PARSE_FORMATTER);
+        this.date = parseDate(date);
     }
 
     private ModBookDate(LocalDate date) {
@@ -42,12 +55,25 @@ public class ModBookDate implements Comparable<ModBookDate> {
      */
     public static boolean isValidDate(String test) {
         requireNonNull(test);
-        try {
-            LocalDate.parse(test, PARSE_FORMATTER);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
+        return parseDate(test) != null;
+    }
+
+    /**
+     * Tries to parse a given string with various DateTimeFormatters.
+     * Returns a LocalTime if parsing was successful,  null otherwise.
+     */
+    public static LocalDate parseDate(String test) {
+        requireNonNull(test);
+        LocalDate result = null;
+        for (DateTimeFormatter f : PARSE_FORMATTERS) {
+            try {
+                result = LocalDate.parse(test, f);
+                break; // short circuit once valid formatter is found
+            } catch (DateTimeParseException e) {
+                // do nothing
+            }
         }
+        return result;
     }
 
     /**

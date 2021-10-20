@@ -25,7 +25,7 @@ public class JsonAdaptedModBookDate {
      * Converts a given {@code ModBookDate} into this class for Jackson use.
      */
     public JsonAdaptedModBookDate(ModBookDate source) {
-        date = source.date.format(ModBookDate.PARSE_FORMATTER); // in parsing format so that it can be parsed correctly
+        date = source.date.format(ModBookDate.PARSE_FORMATTERS[0]); // format so that it can be parsed correctly
     }
 
     @JsonValue

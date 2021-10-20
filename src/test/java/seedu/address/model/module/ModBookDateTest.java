@@ -30,8 +30,6 @@ public class ModBookDateTest {
         assertFalse(ModBookDate.isValidDate(" "));
 
         // invalid date formats
-        assertFalse(ModBookDate.isValidDate("19-02-2012")); // use of hyphens
-        assertFalse(ModBookDate.isValidDate("19 Sep 2021")); // use of month abbreviations
         assertFalse(ModBookDate.isValidDate("September 2021")); // no specification of date within month
         assertFalse(ModBookDate.isValidDate("32/07/2021")); // non-existent date
         assertFalse(ModBookDate.isValidDate("2021/07/2012")); // wrong order
@@ -40,7 +38,16 @@ public class ModBookDateTest {
         assertFalse(ModBookDate.isValidDate("6pm 12/12/2021")); // including time of day
 
         // valid dates
-        assertTrue(ModBookDate.isValidDate("09/09/2021"));
+        assertTrue(ModBookDate.isValidDate("19 Sep 2021")); // use of month abbreviations
+        assertTrue(ModBookDate.isValidDate("19-02-2012")); // use of hyphens
+        assertTrue(ModBookDate.isValidDate("09,09,2021"));
+        assertTrue(ModBookDate.isValidDate("09.09.2021"));
+        assertTrue(ModBookDate.isValidDate("09|09|2021"));
+        assertTrue(ModBookDate.isValidDate("09 July 2021"));
+        assertTrue(ModBookDate.isValidDate("09 Jul 2021"));
+        assertTrue(ModBookDate.isValidDate("9 July 2021"));
+        assertTrue(ModBookDate.isValidDate("9 Jul 2021"));
+        assertTrue(ModBookDate.isValidDate("09092021"));
         assertTrue(ModBookDate.isValidDate("22/12/2022"));
         assertTrue(ModBookDate.isValidDate("29/05/2024"));
     }
