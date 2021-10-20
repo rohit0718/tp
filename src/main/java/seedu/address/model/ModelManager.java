@@ -204,7 +204,7 @@ public class ModelManager implements Model {
     @Override
     public void setModule(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
-        modBook.setModules(target, editedModule);
+        modBook.setModule(target, editedModule);
     }
 
     @Override
@@ -249,7 +249,20 @@ public class ModelManager implements Model {
         module.getExams().add(exam);
     }
 
+    @Override
+    public void setExam(Module module, Exam target, Exam newExam) {
+        requireAllNonNull(module, target, newExam);
+        modBook.setExam(module, target, newExam);
+    }
+
+    @Override
+    public void setLesson(Module module, Lesson target, Lesson newLesson) {
+        requireAllNonNull(module, target, newLesson);
+        modBook.setLesson(module, target, newLesson);
+    }
+
     //=========== Filtered Module List Accessors =============================================================
+
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
