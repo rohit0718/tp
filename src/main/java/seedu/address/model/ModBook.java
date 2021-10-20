@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -11,8 +12,8 @@ import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the ModBook level
+ * Duplicates are not allowed (by .isSameModule comparison)
  */
 public class ModBook implements ReadOnlyModBook {
     private final UniqueModuleList modules;
@@ -50,12 +51,11 @@ public class ModBook implements ReadOnlyModBook {
 
     /**
      * Replaces the given module {@code target} in the list with {@code editedModule}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedModule} must not be the same as another existing module in the address book.
+     * {@code target} must exist in the modbook.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the modbook.
      */
-    public void setModules(Module target, Module editedModule) {
-        requireNonNull(editedModule);
-
+    public void setModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
         modules.setModule(target, editedModule);
     }
 
@@ -108,6 +108,22 @@ public class ModBook implements ReadOnlyModBook {
      */
     public void removeLesson(Module module, Lesson target) {
         module.getLessons().remove(target);
+    }
+
+    /**
+     * Sets Exam {@code target} in the Module {@code module}.
+     * {@code target} must exist in {@code module}'s exams list.
+     */
+    public void setExam(Module module, Exam target, Exam newExam) {
+        module.setExam(target, newExam);
+    }
+
+    /**
+     * Sets Lesson {@code target} in the Module {@code module}.
+     * {@code target} must exist in {@code module}'s lessons list.
+     */
+    public void setLesson(Module module, Lesson target, Lesson newLesson) {
+        module.setLesson(target, newLesson);
     }
 
     //// util methods
