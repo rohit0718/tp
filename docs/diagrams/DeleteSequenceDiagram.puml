@@ -3,9 +3,9 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ModBookParser" as ModBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "d:DeleteModCommand" as DeleteModCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,56 +13,56 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete mod 1", GuiState.DETAILS)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> ModBookParser : parseCommand("delete mod 1", GuiState.DETAILS)
+activate ModBookParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+ModBookParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> ModBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+ModBookParser -> DeleteCommandParser : parse("mod 1", GuiState.DETAILS)
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteModCommand
+DeleteCommandParser -> DeleteModCommand
+activate DeleteModCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+DeleteModCommand --> DeleteCommandParser : d
+deactivate DeleteModCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> ModBookParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> ModBookParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+ModBookParser --> LogicManager : d
+deactivate ModBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteModCommand : execute()
+activate DeleteModCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteModCommand -> Model : deleteModule(module)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteModCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteModCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteModCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+DeleteModCommand --> LogicManager : result
+deactivate DeleteModCommand
 
 [<--LogicManager
 deactivate LogicManager
