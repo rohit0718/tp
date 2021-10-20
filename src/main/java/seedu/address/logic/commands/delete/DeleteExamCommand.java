@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.delete;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 
 import java.util.List;
 
@@ -19,9 +18,7 @@ public class DeleteExamCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an Exam from a "
             + "specified Module from the Mod book."
             + "\nParameters: Index "
-            + PREFIX_CODE + "MOD_CODE"
-            + "\nExample: " + COMMAND_WORD + " exam 1 "
-            + PREFIX_CODE + "CS2103T";
+            + "\nExample: " + COMMAND_WORD + " exam 1 ";
     private final Index targetIndex;
 
     /**
