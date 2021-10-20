@@ -36,6 +36,7 @@ public class ModBookDateTest {
         assertFalse(ModBookDate.isValidDate("19th Sep")); // no year
         assertFalse(ModBookDate.isValidDate("12/13/2021")); // Month out of range
         assertFalse(ModBookDate.isValidDate("6pm 12/12/2021")); // including time of day
+        assertFalse(ModBookDate.isValidDate("06 092021")); // including time of day
 
         // valid dates
         assertTrue(ModBookDate.isValidDate("19 Sep 2021")); // use of month abbreviations
