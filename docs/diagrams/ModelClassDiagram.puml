@@ -5,50 +5,48 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyModBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class ModBook
+Class ReadOnlyModBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class UniqueModuleList
+Class Module
+Class Exam
+Class ModuleName
+Class ModuleCode
+Class Lesson
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ModBook .up.|> ReadOnlyModBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyModBook
+ModelManager -left-> "1" ModBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ModBook *--> "1" UniqueModuleList
+UniqueModuleList --> "~* all" Module
+Module *--> ModuleCode
+Module *--> "0..1" ModuleName
+Module *--> "*" Exam
+Module *--> "*" Lesson
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ModuleCode -[hidden]right-> ModuleName
+ModuleName -[hidden]right-> Exam
+Exam -[hidden]right-> Lesson
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Module
 @enduml
