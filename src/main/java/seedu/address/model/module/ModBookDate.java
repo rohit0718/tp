@@ -21,8 +21,6 @@ public class ModBookDate implements Comparable<ModBookDate> {
         buildFormatter("dd.MM.yyyy"),
         buildFormatter("ddMMyyyy"),
         buildFormatter("dd MM yyyy"),
-        buildFormatter("dd,MM,yyyy"),
-        buildFormatter("dd|MM|yyyy"),
         buildFormatter("dd LLLL yyyy"),
         buildFormatter("dd LLL yyyy"),
         buildFormatter("d LLL yyyy"),
