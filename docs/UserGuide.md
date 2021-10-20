@@ -10,7 +10,7 @@ faster than traditional GUI apps.
   - [Table of Contents](#table-of-contents)
   - [Quick Start](#quick-start)
   - [Features](#features)
-    - [Notes about the command format:](#notes-about-commands)
+    - [Notes about commands](#notes-about-commands)
     - [Modules](#modules)
       - [Adding a module: `add mod`](#adding-a-module-add-mod)
       - [Listing all modules : `list mod`](#listing-all-modules--list-mod)
@@ -59,7 +59,7 @@ faster than traditional GUI apps.
 
 ## Features
 
-### Notes about commands:
+### Notes about commands
 
 - Words in UPPER_CASE are the parameters to be supplied by the user. e.g. in add `c/CODE`, `CODE` is a parameter which
   can be used as `add mod c/CS2103T`.
