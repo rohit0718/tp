@@ -18,27 +18,25 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.ExamBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
 
 public class AddExamCommandTest {
 
     @Test
-    public void constructor_nullLesson_throwsNullPointerException() {
+    public void constructor_nullExam_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddExamCommand(null, null));
     }
 
     @Test
     public void execute_examAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
+        ModelStubAcceptingExamAdded modelStub = new ModelStubAcceptingExamAdded();
         Exam validExam = new ExamBuilder().build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
@@ -46,7 +44,7 @@ public class AddExamCommandTest {
         CommandResult commandResult = new AddExamCommand(validModuleCode, validExam).execute(modelStub);
 
         assertEquals(String.format(AddExamCommand.MESSAGE_SUCCESS, validExam), commandResult.getFeedbackToUser());
-        assertEquals(List.of(validExam), modelStub.lessonsAdded);
+        assertEquals(List.of(validExam), modelStub.examsAdded);
     }
 
     @Test
@@ -84,7 +82,7 @@ public class AddExamCommandTest {
         // null -> returns false
         assertNotEquals(null, addAliceCommand);
 
-        // different Lesson -> returns false
+        // different Exam -> returns false
         assertNotEquals(addAliceCommand, addBobCommand);
     }
 
@@ -109,16 +107,6 @@ public class AddExamCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,46 +137,6 @@ public class AddExamCommandTest {
 
         @Override
         public void addExamToModule(Module module, Exam exam) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            return false;
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return null;
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -246,42 +194,52 @@ public class AddExamCommandTest {
         public void deleteLesson(Module module, Lesson target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setExam(Module module, Exam target, Exam newExam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLesson(Module module, Lesson target, Lesson newLesson) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single Module.
      */
     private class ModelStubWithExam extends ModelStub {
-        private final Exam lesson;
+        private final Exam exam;
 
-        ModelStubWithExam(Exam lesson) {
-            requireNonNull(lesson);
-            this.lesson = lesson;
+        ModelStubWithExam(Exam exam) {
+            requireNonNull(exam);
+            this.exam = exam;
         }
 
         @Override
         public boolean moduleHasExam(Module module, Exam exam) {
             requireNonNull(exam);
-            return this.lesson.isSameExam(exam);
+            return this.exam.isSameExam(exam);
         }
     }
 
     /**
      * A Model stub that always accept the Module being added.
      */
-    private class ModelStubAcceptingLessonAdded extends ModelStub {
-        final ArrayList<Exam> lessonsAdded = new ArrayList<>();
+    private class ModelStubAcceptingExamAdded extends ModelStub {
+        final ArrayList<Exam> examsAdded = new ArrayList<>();
 
         @Override
         public boolean moduleHasExam(Module module, Exam exam) {
             requireNonNull(exam);
-            return lessonsAdded.stream().anyMatch(exam::isSameExam);
+            return examsAdded.stream().anyMatch(exam::isSameExam);
         }
 
         @Override
         public void addExamToModule(Module module, Exam exam) {
             requireNonNull(exam);
-            lessonsAdded.add(exam);
+            examsAdded.add(exam);
         }
 
         @Override

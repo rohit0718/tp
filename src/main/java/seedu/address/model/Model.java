@@ -10,16 +10,14 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
 
     /**
@@ -43,93 +41,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
-     * Sets the user prefs' address book file path.
-     */
-    void setAddressBookFilePath(Path addressBookFilePath);
-
-    /**
-     * Replaces address book data with the data in {@code addressBook}.
-     */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Person person);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deletePerson(Person target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addPerson(Person person);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' mod book file path.
      */
     Path getModBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' mod book file path.
      */
-    void setModBookFilePath(Path addressBookFilePath);
+    void setModBookFilePath(Path modBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces mod book data with the data in {@code modBook}.
      */
-    void setModBook(ReadOnlyModBook addressBook);
+    void setModBook(ReadOnlyModBook modBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the ModBook
+     */
     ReadOnlyModBook getModBook();
 
     /**
-     * Returns true if a module with the same identity as {@code module} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the mod book.
      */
     boolean hasModule(Module module);
 
     /**
      * Deletes the given module.
-     * The module must exist in the address book.
+     * The module must exist in the mod book.
      */
     void deleteModule(Module module);
 
     /**
      * Adds the given module.
-     * {@code module} must not already exist in the address book.
+     * {@code module} must not already exist in the mod book.
      */
     void addModule(Module module);
 
     /**
      * Gets the requested module based on given modCode.
+     *
      * @param modCode Used to find module.
      * @return Module.
      * @throws CommandException If module does not exist.
@@ -167,17 +117,30 @@ public interface Model {
     void addExamToModule(Module module, Exam exam);
 
     /**
+     * Replaces the {@code target} Exam with {@code newExam} from the specified module's exams list.
+     */
+    void setExam(Module module, Exam target, Exam newExam);
+
+    /**
+     * Replaces the {@code target} Exam with {@code newLesson} from the specified module's lessons list.
+     */
+    void setLesson(Module module, Lesson target, Lesson newLesson);
+
+    /**
      * Replaces the given module {@code target} with {@code editedModule}.
-     * {@code target} must exist in the address book.
-     * The module identity of {@code editedModule} must not be the same as another existing module in the address book.
+     * {@code target} must exist in the mod book.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the mod book.
      */
     void setModule(Module target, Module editedModule);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered module list
+     */
     ObservableList<Module> getFilteredModuleList();
 
     /**
      * Updates the filter of the filtered module list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredModuleList(Predicate<Module> predicate);

@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":JsonModBookStorage" as JsonModBookStorage STORAGE_COLOR
+participant ":JsonSerializableModBook" as JsonSerializableModBook STORAGE_COLOR
+participant ":JsonAdaptedModule" as JsonAdaptedModule STORAGE_COLOR
+participant ":JsonAdaptedLesson" as JsonAdaptedLesson STORAGE_COLOR
+participant ":JsonUtil" as JsonUtil STORAGE_COLOR
+end box
+
+[-> LogicManager : execute(add lesson, GuiState.DETAILS)
+activate LogicManager
+
+LogicManager -> StorageManager : saveModBook(modbook)
+activate StorageManager
+
+StorageManager -> JsonModBookStorage : saveModBook(modBook, filePath)
+activate JsonModBookStorage
+
+create JsonSerializableModBook
+JsonModBookStorage -> JsonSerializableModBook : new JsonSerializableModBook(modBook)
+activate JsonSerializableModBook
+
+create JsonAdaptedModule
+JsonSerializableModBook -> JsonAdaptedModule : new JsonAdaptedModule(module)
+activate JsonAdaptedModule
+
+create JsonAdaptedLesson
+JsonAdaptedModule -> JsonAdaptedLesson : new JsonAdaptedLesson(lesson)
+activate JsonAdaptedLesson
+
+JsonAdaptedLesson --> JsonAdaptedModule : json lesson
+deactivate JsonAdaptedLesson
+
+JsonAdaptedModule --> JsonSerializableModBook : json module
+deactivate JsonAdaptedModule
+
+JsonSerializableModBook --> JsonModBookStorage : json modbook
+deactivate JsonSerializableModBook
+
+JsonModBookStorage -> JsonUtil : saveJsonFile(json modbook, filePath)
+activate JsonUtil
+
+JsonUtil --> JsonModBookStorage
+deactivate JsonUtil
+
+JsonModBookStorage --> StorageManager
+deactivate JsonModBookStorage
+
+StorageManager --> LogicManager
+deactivate StorageManager
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

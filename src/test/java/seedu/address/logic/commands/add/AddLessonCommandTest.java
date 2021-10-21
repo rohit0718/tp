@@ -18,14 +18,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ModBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyModBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.builders.LessonBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
 
@@ -113,16 +111,6 @@ public class AddLessonCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addModule(Module module) {
             throw new AssertionError("This method should not be called.");
         }
@@ -149,46 +137,6 @@ public class AddLessonCommandTest {
 
         @Override
         public void addExamToModule(Module module, Exam exam) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            return false;
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return null;
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -244,6 +192,16 @@ public class AddLessonCommandTest {
 
         @Override
         public void deleteLesson(Module module, Lesson target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExam(Module module, Exam target, Exam newExam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLesson(Module module, Lesson target, Lesson newLesson) {
             throw new AssertionError("This method should not be called.");
         }
     }

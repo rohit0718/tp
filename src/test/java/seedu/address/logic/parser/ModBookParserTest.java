@@ -9,19 +9,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddModCommand;
@@ -29,26 +21,33 @@ import seedu.address.logic.commands.delete.DeleteCommand;
 import seedu.address.logic.commands.delete.DeleteExamCommand;
 import seedu.address.logic.commands.delete.DeleteLessonCommand;
 import seedu.address.logic.commands.delete.DeleteModCommand;
+import seedu.address.logic.commands.edit.EditCommand;
+import seedu.address.logic.commands.edit.EditExamCommand;
+import seedu.address.logic.commands.edit.EditExamCommand.EditExamDescriptor;
+import seedu.address.logic.commands.edit.EditLessonCommand;
+import seedu.address.logic.commands.edit.EditLessonCommand.EditLessonDescriptor;
+import seedu.address.logic.commands.edit.EditModCommand;
+import seedu.address.logic.commands.edit.EditModCommand.EditModDescriptor;
 import seedu.address.logic.commands.list.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.lesson.Lesson;
+import seedu.address.testutil.ModuleUtil;
+import seedu.address.testutil.builders.ExamBuilder;
+import seedu.address.testutil.builders.LessonBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
-import seedu.address.testutil.builders.PersonBuilder;
 
-public class AddressBookParserTest {
+public class ModBookParserTest {
 
     private static final GuiState DEFAULT_STATE = GuiState.SUMMARY;
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ModBookParser parser = new ModBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
         Module module = new ModuleBuilder().build();
-        AddModCommand command = (AddModCommand) parser.parseCommand(PersonUtil.getAddCommand(module), DEFAULT_STATE);
+        AddModCommand command = (AddModCommand) parser.parseCommand(ModuleUtil.getAddCommand(module), DEFAULT_STATE);
         assertEquals(new AddModCommand(module), command);
     }
 
@@ -80,27 +79,55 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
-                DEFAULT_STATE);
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        Module module = new ModuleBuilder().withDefaultName().build();
+        EditModDescriptor editModDescriptor = new EditModDescriptor();
+        editModDescriptor.setModuleCode(module.getCode());
+        if (module.getName().isPresent()) {
+            editModDescriptor.setModuleName(module.getName().get());
+        }
+        EditCommand editModCommand = (EditModCommand) parser.parseCommand(EditCommand.COMMAND_WORD
+                + " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
+                + ModuleUtil.getEditModDescriptorDetails(editModDescriptor), DEFAULT_STATE);
+        assertEquals(new EditModCommand(INDEX_FIRST_MODULE, editModDescriptor), editModCommand);
+
+        Lesson lesson = new LessonBuilder().build();
+        EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+        editLessonDescriptor.setName(lesson.getName());
+        editLessonDescriptor.setDay(lesson.getDay());
+        editLessonDescriptor.setTimeslot(lesson.getTimeslot());
+        if (lesson.getLink().isPresent()) {
+            editLessonDescriptor.setLink(lesson.getLink().get());
+        }
+        if (lesson.getVenue().isPresent()) {
+            editLessonDescriptor.setVenue(lesson.getVenue().get());
+        }
+        EditCommand editLessonCommand = (EditLessonCommand) parser.parseCommand(EditCommand.COMMAND_WORD
+                + " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
+                + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor), GuiState.DETAILS);
+        assertEquals(new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor),
+                editLessonCommand);
+
+        Exam exam = new ExamBuilder().build();
+        EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
+        editExamDescriptor.setName(exam.getName());
+        editExamDescriptor.setDate(exam.getDate());
+        editExamDescriptor.setTimeslot(exam.getTimeslot());
+        if (exam.getLink().isPresent()) {
+            editExamDescriptor.setLink(exam.getLink().get());
+        }
+        if (exam.getVenue().isPresent()) {
+            editExamDescriptor.setVenue(exam.getVenue().get());
+        }
+        EditCommand editExamCommand = (EditExamCommand) parser.parseCommand(EditCommand.COMMAND_WORD
+                + " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
+                + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor), GuiState.DETAILS);
+        assertEquals(new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor), editExamCommand);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, DEFAULT_STATE) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", DEFAULT_STATE) instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
-                DEFAULT_STATE);
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -121,8 +148,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand("", DEFAULT_STATE));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("", DEFAULT_STATE));
     }
 
     @Test
