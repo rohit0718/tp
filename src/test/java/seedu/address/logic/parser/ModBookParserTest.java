@@ -10,15 +10,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.add.AddModCommand;
@@ -38,22 +33,21 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ModuleUtil;
 import seedu.address.testutil.builders.ExamBuilder;
 import seedu.address.testutil.builders.LessonBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
 
-public class AddressBookParserTest {
+public class ModBookParserTest {
 
     private static final GuiState DEFAULT_STATE = GuiState.SUMMARY;
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final ModBookParser parser = new ModBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
         Module module = new ModuleBuilder().build();
-        AddModCommand command = (AddModCommand) parser.parseCommand(PersonUtil.getAddCommand(module), DEFAULT_STATE);
+        AddModCommand command = (AddModCommand) parser.parseCommand(ModuleUtil.getAddCommand(module), DEFAULT_STATE);
         assertEquals(new AddModCommand(module), command);
     }
 
@@ -93,7 +87,7 @@ public class AddressBookParserTest {
         }
         EditCommand editModCommand = (EditModCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                + PersonUtil.getEditModDescriptorDetails(editModDescriptor), DEFAULT_STATE);
+                + ModuleUtil.getEditModDescriptorDetails(editModDescriptor), DEFAULT_STATE);
         assertEquals(new EditModCommand(INDEX_FIRST_MODULE, editModDescriptor), editModCommand);
 
         Lesson lesson = new LessonBuilder().build();
@@ -109,7 +103,7 @@ public class AddressBookParserTest {
         }
         EditCommand editLessonCommand = (EditLessonCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
-                + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor), GuiState.DETAILS);
+                + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor), GuiState.DETAILS);
         assertEquals(new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor),
                 editLessonCommand);
 
@@ -126,7 +120,7 @@ public class AddressBookParserTest {
         }
         EditCommand editExamCommand = (EditExamCommand) parser.parseCommand(EditCommand.COMMAND_WORD
                 + " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE + module.getCode() + " "
-                + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor), GuiState.DETAILS);
+                + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor), GuiState.DETAILS);
         assertEquals(new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor), editExamCommand);
     }
 
@@ -134,15 +128,6 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, DEFAULT_STATE) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", DEFAULT_STATE) instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
-                DEFAULT_STATE);
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

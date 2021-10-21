@@ -27,7 +27,7 @@ import seedu.address.logic.commands.edit.EditModCommand;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ModuleUtil;
 import seedu.address.testutil.builders.ExamBuilder;
 import seedu.address.testutil.builders.LessonBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
@@ -118,61 +118,61 @@ public class EditCommandParserTest {
         // no leading and trailing whitespaces
         EditCommand expectedEditModCommand = new EditModCommand(INDEX_FIRST_MODULE, editModDescriptor);
         assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                + PersonUtil.getEditModDescriptorDetails(editModDescriptor), expectedEditModCommand);
+                + ModuleUtil.getEditModDescriptorDetails(editModDescriptor), expectedEditModCommand);
 
         EditCommand expectedEditLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
         assertParseSuccess(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
                 GuiState.DETAILS, expectedEditLessonCommand);
 
         EditCommand expectedEditExamCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
         assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor),
                 GuiState.DETAILS, expectedEditExamCommand);
 
         // leading and trailing whitespaces
         assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                + PersonUtil.getEditModDescriptorDetails(editModDescriptor) + " \n \t ", expectedEditModCommand);
+                + ModuleUtil.getEditModDescriptorDetails(editModDescriptor) + " \n \t ", expectedEditModCommand);
 
         // edit mod command must only work in the summary gui state
         assertParseSuccess(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                + PersonUtil.getEditModDescriptorDetails(editModDescriptor), GuiState.SUMMARY, expectedEditModCommand);
+                + ModuleUtil.getEditModDescriptorDetails(editModDescriptor), GuiState.SUMMARY, expectedEditModCommand);
         assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                        + PersonUtil.getEditModDescriptorDetails(editModDescriptor), GuiState.LESSONS,
+                        + ModuleUtil.getEditModDescriptorDetails(editModDescriptor), GuiState.LESSONS,
                 MESSAGE_WRONG_VIEW_SUMMARY);
         assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                        + PersonUtil.getEditModDescriptorDetails(editModDescriptor),
+                        + ModuleUtil.getEditModDescriptorDetails(editModDescriptor),
                 GuiState.EXAMS, MESSAGE_WRONG_VIEW_SUMMARY);
         assertParseFailure(parser, " mod " + INDEX_FIRST_MODULE.getOneBased() + " "
-                        + PersonUtil.getEditModDescriptorDetails(editModDescriptor),
+                        + ModuleUtil.getEditModDescriptorDetails(editModDescriptor),
                 GuiState.DETAILS, MESSAGE_WRONG_VIEW_SUMMARY);
 
         // edit exam command must only work in the details gui state
         assertParseSuccess(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor),
                 GuiState.DETAILS, expectedEditExamCommand);
         assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor),
                 GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
         assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor),
                 GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
         assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditExamDescriptorDetails(editExamDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditExamDescriptorDetails(editExamDescriptor),
                 GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
 
         // edit lesson command must only work in the details gui state
         assertParseSuccess(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
                 GuiState.DETAILS, expectedEditLessonCommand);
         assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
                 GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
         assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
                 GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
         assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
-                        + module.getCode() + " " + PersonUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
+                        + module.getCode() + " " + ModuleUtil.getEditLessonDescriptorDetails(editLessonDescriptor),
                 GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
     }
 

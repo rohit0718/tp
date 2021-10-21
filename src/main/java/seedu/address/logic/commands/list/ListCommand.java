@@ -3,7 +3,7 @@ package seedu.address.logic.commands.list;
 import seedu.address.logic.commands.Command;
 
 /**
- * Lists all modules / lessons / exams in the address book to the user.
+ * Lists all modules / lessons / exams in the mod book to the user.
  */
 public abstract class ListCommand extends Command {
 

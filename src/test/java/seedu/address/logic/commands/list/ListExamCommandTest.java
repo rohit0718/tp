@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +24,8 @@ public class ListExamCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
-        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+        model = new ModelManager(getTypicalModBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalModBook(), new UserPrefs());
     }
 
     @Test

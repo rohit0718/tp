@@ -11,7 +11,7 @@ Class MainWindow UI_COLOR
 
 package Logic {
 
-Class AddressBookParser
+Class ModBookParser
 Class XYZCommand
 Class XYZParser
 Class CommandResult
@@ -42,8 +42,8 @@ Logic .right> GuiState
 XYZCommand -up-|> Command
 LogicManager ..> Command : executes >
 
-LogicManager -->"1" AddressBookParser
-AddressBookParser ..> Parser
+LogicManager -->"1" ModBookParser
+ModBookParser ..> Parser
 XYZParser .up.|> Parser
 XYZParser .down.> XYZCommand : creates >
 

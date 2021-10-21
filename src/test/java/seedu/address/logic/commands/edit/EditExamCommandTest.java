@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.preparePredicate;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.address.testutil.TypicalExams.CS2103T_PRACTICAL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXAM;
@@ -11,7 +12,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXAM;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +27,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.exam.ExamName;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 import seedu.address.testutil.builders.ExamBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
 
@@ -35,7 +36,7 @@ import seedu.address.testutil.builders.ModuleBuilder;
  * {@code EditExamCommand}.
  */
 public class EditExamCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalModBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
 
     @Test
     public void execute_allExamFieldsSpecifiedUnfilteredList_success() {
@@ -59,7 +60,7 @@ public class EditExamCommandTest {
                 targetModule.getCode());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, targetModule.getExams().get(0), editedExam);
 
         assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
@@ -94,7 +95,7 @@ public class EditExamCommandTest {
                 targetModule.getCode());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, targetModule.getExams().get(0), editedExam);
 
         assertCommandSuccess(editCommand, model, expectedCommandResult, expectedModel);
@@ -123,8 +124,10 @@ public class EditExamCommandTest {
                 targetModule.getCode());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getModBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, examToEdit, editedExam);
+        HasModuleCodePredicate predicate = preparePredicate(CS2103T.getCode().toString());
+        expectedModel.updateFilteredModuleList(predicate);
 
         assertCommandSuccess(editExamCommand, model, expectedCommandResult, expectedModel);
     }

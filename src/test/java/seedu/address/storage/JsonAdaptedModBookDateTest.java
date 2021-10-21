@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.ModBookDate;
 
 public class JsonAdaptedModBookDateTest {
-    private static final String INVALID_DATE = "12112021";
+    private static final String INVALID_DATE = "12 112021";
     private static final ModBookDate VALID_MODBOOKDATE = new ModBookDate("09/09/2021");
 
     @Test

@@ -51,8 +51,8 @@ public class ModBook implements ReadOnlyModBook {
 
     /**
      * Replaces the given module {@code target} in the list with {@code editedModule}.
-     * {@code target} must exist in the modbook.
-     * The module identity of {@code editedModule} must not be the same as another existing module in the modbook.
+     * {@code target} must exist in the {@code ModBook}.
+     * The module identity of {@code editedModule} must not be the same as another existing module in {@code ModBook}.
      */
     public void setModule(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
@@ -68,10 +68,8 @@ public class ModBook implements ReadOnlyModBook {
         setModules(newData.getModuleList());
     }
 
-    //// module-level operations
-
     /**
-     * Returns true if a module with the same identity as {@code module} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the mod book.
      */
     public boolean hasModule(Module module) {
         requireNonNull(module);
@@ -79,19 +77,19 @@ public class ModBook implements ReadOnlyModBook {
     }
 
     /**
-     * Adds a module to the address book.
-     * The module must not already exist in the address book.
+     * Adds a module to the mod book.
+     * The module must not already exist in the mod book.
      */
     public void addModule(Module module) {
         modules.add(module);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code module} from this {@code ModBook}.
+     * {@code module} must exist in the mod book.
      */
-    public void removeModule(Module key) {
-        modules.remove(key);
+    public void removeModule(Module module) {
+        modules.remove(module);
     }
 
     /**
