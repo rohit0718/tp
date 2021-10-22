@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.GuiState;
@@ -57,6 +58,7 @@ public class AddExamCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         Module module = model.getModule(modCode);
 
         if (model.moduleHasExam(module, toAdd)) {
