@@ -1,5 +1,7 @@
 package seedu.address.logic.parser.exceptions;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.DetailCommand;
 import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.list.ListCommand;
@@ -26,6 +28,7 @@ public class GuiStateException extends ParseException {
     }
 
     private static String fillCommand(GuiState guiState) {
+        requireNonNull(guiState);
         String commandToUse = "";
 
         switch (guiState) {
@@ -45,9 +48,7 @@ public class GuiStateException extends ParseException {
             // do nothing
         }
 
-        if (commandToUse != "") {
-            return String.format(SWITCH_VIEW_MESSAGE, commandToUse);
-        }
-        return ERROR_MESSAGE;
+        assert commandToUse != "";
+        return String.format(SWITCH_VIEW_MESSAGE, commandToUse);
     }
 }
