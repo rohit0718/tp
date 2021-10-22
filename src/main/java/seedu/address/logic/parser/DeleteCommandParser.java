@@ -15,8 +15,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
-    public static final String MESSAGE_WRONG_VIEW_DETAILS = "Please execute the \"detail\" command first!";
-    public static final String MESSAGE_WRONG_VIEW_SUMMARY = "Please execute \"list mod\" first!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
