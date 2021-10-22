@@ -23,6 +23,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_DES
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_DESC;
+import static seedu.address.logic.parser.CommandParserTestUtil.MESSAGE_WRONG_VIEW_DETAILS;
+import static seedu.address.logic.parser.CommandParserTestUtil.MESSAGE_WRONG_VIEW_SUMMARY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalExams.PHYSICAL_FINALS;
@@ -34,6 +36,7 @@ import static seedu.address.testutil.TypicalModules.CS2103T_NO_NAME;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.add.AddExamCommand;
 import seedu.address.logic.commands.add.AddLessonCommand;
@@ -60,7 +63,6 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Module expectedModule = new ModuleBuilder(CS2103T_CODE_NAME).build();
-        ModuleCode expectedModuleCode = expectedModule.getCode();
         Lesson expectedLesson = new LessonBuilder(CS2103T_LECTURE_WITH_VENUE).build();
         Exam expectedExam = new ExamBuilder(PHYSICAL_FINALS).build();
 
@@ -70,24 +72,22 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "lesson"
-                + VALID_MODULE_CODE_DESC + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
+                + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
                 + VALID_START_TIME_DESC + VALID_END_TIME_DESC + VALID_LINK_DESC
-                + VALID_VENUE_DESC, new AddLessonCommand(expectedModuleCode, expectedLesson));
+                + VALID_VENUE_DESC, GuiState.DETAILS, new AddLessonCommand(expectedLesson));
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "exam"
-                + VALID_MODULE_CODE_DESC + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
+                + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
                 + VALID_START_TIME_DESC + VALID_END_TIME_DESC + VALID_LINK_DESC
-                + VALID_VENUE_DESC, new AddExamCommand(expectedModuleCode, expectedExam));
+                + VALID_VENUE_DESC, GuiState.DETAILS, new AddExamCommand(expectedExam));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         Module expectedModule = new ModuleBuilder(CS2103T_NO_NAME).build();
-        ModuleCode expectedModuleCode = expectedModule.getCode();
         Lesson expectedLesson = new LessonBuilder(CS2103T_LECTURE_NO_LINK_NO_VENUE).build();
         Exam expectedExam = new ExamBuilder(PHYSICAL_FINALS_NO_LINK_NO_VENUE).build();
-
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "mod"
@@ -95,14 +95,40 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "lesson"
-                + VALID_MODULE_CODE_DESC + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
-                + VALID_START_TIME_DESC
-                + VALID_END_TIME_DESC, new AddLessonCommand(expectedModuleCode, expectedLesson));
+                + VALID_LESSON_NAME_DESC + VALID_DAY_DESC + VALID_START_TIME_DESC
+                + VALID_END_TIME_DESC, GuiState.DETAILS, new AddLessonCommand(expectedLesson));
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "exam"
-                + VALID_MODULE_CODE_DESC + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, new AddExamCommand(expectedModuleCode, expectedExam));
+                + VALID_EXAM_NAME_DESC + VALID_DATE_DESC + VALID_START_TIME_DESC
+                + VALID_END_TIME_DESC, GuiState.DETAILS, new AddExamCommand(expectedExam));
+    }
+
+    @Test
+    public void parse_wrongGuiState_failure() {
+        // add mod command not in GuiState.SUMMARY
+        assertParseFailure(parser, "mod" + VALID_MODULE_CODE_DESC,
+                GuiState.LESSONS, MESSAGE_WRONG_VIEW_SUMMARY);
+        assertParseFailure(parser, "mod" + VALID_MODULE_CODE_DESC,
+                GuiState.EXAMS, MESSAGE_WRONG_VIEW_SUMMARY);
+        assertParseFailure(parser, "mod" + VALID_MODULE_CODE_DESC,
+                GuiState.DETAILS, MESSAGE_WRONG_VIEW_SUMMARY);
+
+        // add exam command not in GuiState.DETAILS
+        assertParseFailure(parser, "exam" + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
+                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, "exam" + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
+                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, "exam" + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
+                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
+
+        // add lesson command not in GuiState.DETAILS
+        assertParseFailure(parser, "lesson" + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
+                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, GuiState.SUMMARY, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, "lesson" + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
+                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
+        assertParseFailure(parser, "lesson" + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
+                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, GuiState.LESSONS, MESSAGE_WRONG_VIEW_DETAILS);
     }
 
     @Test
@@ -119,18 +145,19 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "mod" + RANDOM_TEXT, expectedModMessage);
 
         // Invalid add lesson command
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson" + RANDOM_TEXT, expectedLessonMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson" + RANDOM_TEXT,
+                GuiState.DETAILS, expectedLessonMessage);
 
         // Invalid add exam command
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + "exam" + RANDOM_TEXT, expectedExamMessage);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + "exam" + RANDOM_TEXT,
+                GuiState.DETAILS, expectedExamMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid Module Code
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson"
-                + INVALID_MODULE_CODE_DESC + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + "mod"
+                + INVALID_MODULE_CODE_DESC + VALID_MODULE_NAME_DESC, ModuleCode.MESSAGE_CONSTRAINTS);
 
         // invalid Module Name
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "mod" + VALID_MODULE_CODE_DESC
@@ -138,47 +165,43 @@ public class AddCommandParserTest {
 
         // invalid Lesson Name
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson"
-                + VALID_MODULE_CODE_DESC + INVALID_LESSON_NAME_DESC + VALID_DAY_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, LessonName.MESSAGE_CONSTRAINTS);
+                + INVALID_LESSON_NAME_DESC + VALID_DAY_DESC + VALID_START_TIME_DESC
+                + VALID_END_TIME_DESC, GuiState.DETAILS, LessonName.MESSAGE_CONSTRAINTS);
 
         // invalid Exam name
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "exam"
-                + VALID_MODULE_CODE_DESC + INVALID_EXAM_NAME_DESC + VALID_DATE_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC + VALID_LINK_DESC
-                + VALID_VENUE_DESC, ExamName.MESSAGE_CONSTRAINTS);
+                + INVALID_EXAM_NAME_DESC + VALID_DATE_DESC + VALID_START_TIME_DESC + VALID_END_TIME_DESC
+                + VALID_LINK_DESC + VALID_VENUE_DESC, GuiState.DETAILS, ExamName.MESSAGE_CONSTRAINTS);
 
         // invalid Day
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson"
-                + VALID_MODULE_CODE_DESC + VALID_LESSON_NAME_DESC + INVALID_DAY_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC, Day.MESSAGE_CONSTRAINTS);
+                + VALID_LESSON_NAME_DESC + INVALID_DAY_DESC + VALID_START_TIME_DESC
+                + VALID_END_TIME_DESC, GuiState.DETAILS, Day.MESSAGE_CONSTRAINTS);
 
         // invalid Date
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "exam"
-                + VALID_MODULE_CODE_DESC + VALID_EXAM_NAME_DESC + INVALID_DATE_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC + VALID_LINK_DESC
-                + VALID_VENUE_DESC, ModBookDate.MESSAGE_CONSTRAINTS);
+                + VALID_EXAM_NAME_DESC + INVALID_DATE_DESC + VALID_START_TIME_DESC + VALID_END_TIME_DESC
+                + VALID_LINK_DESC + VALID_VENUE_DESC, GuiState.DETAILS, ModBookDate.MESSAGE_CONSTRAINTS);
 
         // invalid Start Time
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson"
-                + VALID_MODULE_CODE_DESC + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
-                + INVALID_START_TIME_DESC + VALID_END_TIME_DESC, ModBookTime.MESSAGE_CONSTRAINTS);
+                + VALID_LESSON_NAME_DESC + VALID_DAY_DESC + INVALID_START_TIME_DESC
+                + VALID_END_TIME_DESC, GuiState.DETAILS, ModBookTime.MESSAGE_CONSTRAINTS);
 
         // invalid End Time
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "lesson"
-                + VALID_MODULE_CODE_DESC + VALID_LESSON_NAME_DESC + VALID_DAY_DESC
-                + VALID_START_TIME_DESC + INVALID_END_TIME_DESC, ModBookTime.MESSAGE_CONSTRAINTS);
+                + VALID_LESSON_NAME_DESC + VALID_DAY_DESC + VALID_START_TIME_DESC
+                + INVALID_END_TIME_DESC, GuiState.DETAILS, ModBookTime.MESSAGE_CONSTRAINTS);
 
         // invalid Link
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "exam"
-                + VALID_MODULE_CODE_DESC + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC + INVALID_LINK_DESC
-                + VALID_VENUE_DESC, Link.MESSAGE_CONSTRAINTS);
+                + VALID_EXAM_NAME_DESC + VALID_DATE_DESC + VALID_START_TIME_DESC + VALID_END_TIME_DESC
+                + INVALID_LINK_DESC + VALID_VENUE_DESC, GuiState.DETAILS, Link.MESSAGE_CONSTRAINTS);
 
         // invalid Venue
         assertParseFailure(parser, PREAMBLE_WHITESPACE + "exam"
-                + VALID_MODULE_CODE_DESC + VALID_EXAM_NAME_DESC + VALID_DATE_DESC
-                + VALID_START_TIME_DESC + VALID_END_TIME_DESC + VALID_LINK_DESC
-                + INVALID_VENUE_DESC, Venue.MESSAGE_CONSTRAINTS);
+                + VALID_EXAM_NAME_DESC + VALID_DATE_DESC + VALID_START_TIME_DESC + VALID_END_TIME_DESC
+                + VALID_LINK_DESC + INVALID_VENUE_DESC, GuiState.DETAILS, Venue.MESSAGE_CONSTRAINTS);
     }
 
 }
