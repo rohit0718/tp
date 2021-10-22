@@ -6,8 +6,8 @@ import seedu.address.logic.commands.list.ListCommand;
 
 public class GuiStateException extends ParseException {
 
-    private static final String ERROR_MESSAGE = "This command cannot be used in this screen!";
-    private static final String SWITCH_VIEW_MESSAGE = "Please execute the %s command first!";
+    public static final String ERROR_MESSAGE = "This command cannot be used in this screen!";
+    public static final String SWITCH_VIEW_MESSAGE = "Please execute the %s command first!";
 
     public GuiStateException() {
         super(ERROR_MESSAGE);
