@@ -59,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditModCommand parseEditMod(String args, GuiState guiState) throws ParseException {
         if (guiState != GuiState.SUMMARY) {
-            throw new GuiStateException(MESSAGE_WRONG_VIEW_SUMMARY);
+            throw new GuiStateException(GuiState.SUMMARY);
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
@@ -94,7 +94,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditLessonCommand parseEditLesson(String args, GuiState guiState) throws ParseException {
         if (guiState != GuiState.DETAILS) {
-            throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
+            throw new GuiStateException(GuiState.DETAILS);
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
@@ -140,7 +140,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditExamCommand parseEditExam(String args, GuiState guiState) throws ParseException {
         if (guiState != GuiState.DETAILS) {
-            throw new GuiStateException(MESSAGE_WRONG_VIEW_DETAILS);
+            throw new GuiStateException(GuiState.DETAILS);
         }
         Index index = ParserUtil.parseFirstIndex(args);
 
