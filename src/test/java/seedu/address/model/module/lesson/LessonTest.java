@@ -68,6 +68,6 @@ public class LessonTest {
         // assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, dayTwo, timeslotTwo, VENUE, LINK)) > 0);
 
         // same date, same time
-        // assertEquals(LESSON.compareTo(new Lesson(LESSON_NAME, DAY, TIMESLOT, VENUE, LINK)), 0);
+        assertEquals(LESSON.compareTo(new Lesson(LESSON_NAME, DAY, TIMESLOT, VENUE, LINK)), 0);
     }
 }

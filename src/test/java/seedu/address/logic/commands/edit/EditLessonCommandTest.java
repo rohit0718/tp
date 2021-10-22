@@ -55,7 +55,7 @@ public class EditLessonCommandTest {
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
                 targetModule.getCode());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setLesson(targetModule, targetModule.getLessons().get(0), editedLesson);
@@ -90,7 +90,7 @@ public class EditLessonCommandTest {
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson.getName(),
                 targetModule.getCode());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setLesson(targetModule, targetModule.getLessons().get(0), editedLesson);
@@ -119,7 +119,7 @@ public class EditLessonCommandTest {
         EditCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_LESSON, editLessonDescriptor);
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, lessonToEdit.getName(),
                 targetModule.getCode());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setLesson(targetModule, lessonToEdit, editedLesson);

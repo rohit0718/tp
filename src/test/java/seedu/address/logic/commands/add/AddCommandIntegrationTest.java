@@ -2,11 +2,14 @@ package seedu.address.logic.commands.add;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.preparePredicate;
 import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -14,6 +17,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 import seedu.address.testutil.builders.ExamBuilder;
 import seedu.address.testutil.builders.LessonBuilder;
 import seedu.address.testutil.builders.ModuleBuilder;
@@ -48,10 +52,14 @@ public class AddCommandIntegrationTest {
         ModuleCode validModuleCode = validModule.getCode();
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
+        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
         expectedModel.addLessonToModule(validModule, validLesson);
+        expectedModel.updateFilteredModuleList(predicate);
+        String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
         assertCommandSuccess(new AddLessonCommand(validModuleCode, validLesson), model,
-                String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson), expectedModel);
+                expectedResult, expectedModel);
     }
 
     @Test
@@ -61,10 +69,14 @@ public class AddCommandIntegrationTest {
         ModuleCode validModuleCode = validModule.getCode();
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
+        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
         expectedModel.addExamToModule(validModule, validExam);
+        expectedModel.updateFilteredModuleList(predicate);
+        String expectedMessage = String.format(AddExamCommand.MESSAGE_SUCCESS, validExam);
+        CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
         assertCommandSuccess(new AddExamCommand(validModuleCode, validExam), model,
-                String.format(AddExamCommand.MESSAGE_SUCCESS, validExam), expectedModel);
+                expectedResult, expectedModel);
     }
 
     @Test

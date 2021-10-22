@@ -43,7 +43,7 @@ public class DeleteExamCommandTest {
                 examToDelete.getName(), targetModule.getCode());
         ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.deleteExam(targetModule, examToDelete);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(deleteExamCommand, model, expectedCommandResult, expectedModel);
     }
 
@@ -67,7 +67,7 @@ public class DeleteExamCommandTest {
         expectedModel.deleteExam(targetModule, examToDelete);
         HasModuleCodePredicate predicate = preparePredicate(CS2103T.getCode().toString());
         expectedModel.updateFilteredModuleList(predicate);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(deleteExamCommand, model, expectedCommandResult, expectedModel);
     }
 

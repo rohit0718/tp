@@ -162,7 +162,7 @@ public class AddExamCommandTest {
 
         @Override
         public void updateFilteredModuleList(Predicate<Module> predicate) {
-            throw new AssertionError("This method should not be called.");
+            return; // add exam actually uses this to go into details view
         }
 
         @Override
