@@ -10,11 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.lesson.Lesson;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class AddLessonCommand extends AddCommand {
     public static final String COMMAND_WORD = "add";
@@ -61,7 +63,10 @@ public class AddLessonCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
         model.addLessonToModule(module, toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+
+        // set to details view
+        model.updateFilteredModuleList(new HasModuleCodePredicate(modCode));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), false, GuiState.DETAILS);
     }
 
     @Override
