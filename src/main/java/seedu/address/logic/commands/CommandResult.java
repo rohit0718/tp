@@ -23,7 +23,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
-        this.guiState = GuiState.SUMMARY;
+        this.guiState = null; // default behaviour is not to change GuiState
     }
 
     /**

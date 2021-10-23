@@ -8,13 +8,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class AddExamCommand extends AddCommand {
     public static final String COMMAND_WORD = "add";
@@ -55,13 +58,17 @@ public class AddExamCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         Module module = model.getModule(modCode);
 
         if (model.moduleHasExam(module, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EXAM);
         }
         model.addExamToModule(module, toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+
+        // set to details view
+        model.updateFilteredModuleList(new HasModuleCodePredicate(modCode));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), false, GuiState.DETAILS);
     }
 
     @Override

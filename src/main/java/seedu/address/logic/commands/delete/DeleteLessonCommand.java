@@ -7,7 +7,6 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -40,7 +39,7 @@ public class DeleteLessonCommand extends DeleteCommand {
         Lesson lessonToDelete = lessons.get(targetIndex.getZeroBased());
         model.deleteLesson(module, lessonToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS,
-                lessonToDelete.getName(), module.getCode()), false, GuiState.DETAILS);
+                lessonToDelete.getName(), module.getCode()));
     }
 
     @Override
