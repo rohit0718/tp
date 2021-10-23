@@ -217,7 +217,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            switch (commandResult.getState()) {
+            if (commandResult.getState() != null) {
+                guiState = commandResult.getState();
+            }
+
+            switch (guiState) {
             case DETAILS:
                 handleDetailList();
                 break;
@@ -233,8 +237,6 @@ public class MainWindow extends UiPart<Stage> {
             default:
                 handleSummaryList();
             }
-
-            guiState = commandResult.getState();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

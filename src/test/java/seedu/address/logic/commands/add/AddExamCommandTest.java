@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,17 +32,15 @@ public class AddExamCommandTest {
 
     @Test
     public void constructor_nullExam_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddExamCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddExamCommand(null));
     }
 
     @Test
     public void execute_examAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingExamAdded modelStub = new ModelStubAcceptingExamAdded();
         Exam validExam = new ExamBuilder().build();
-        Module validModule = new ModuleBuilder().build();
-        ModuleCode validModuleCode = validModule.getCode();
 
-        CommandResult commandResult = new AddExamCommand(validModuleCode, validExam).execute(modelStub);
+        CommandResult commandResult = new AddExamCommand(validExam).execute(modelStub);
 
         assertEquals(String.format(AddExamCommand.MESSAGE_SUCCESS, validExam), commandResult.getFeedbackToUser());
         assertEquals(List.of(validExam), modelStub.examsAdded);
@@ -50,10 +49,8 @@ public class AddExamCommandTest {
     @Test
     public void execute_duplicateModule_throwsCommandException() {
         Exam validExam = new ExamBuilder().build();
-        Module validModule = new ModuleBuilder().build();
-        ModuleCode validModuleCode = validModule.getCode();
 
-        AddExamCommand addCommand = new AddExamCommand(validModuleCode, validExam);
+        AddExamCommand addCommand = new AddExamCommand(validExam);
         ModelStub modelStub = new ModelStubWithExam(validExam);
 
         assertThrows(CommandException.class, AddExamCommand.MESSAGE_DUPLICATE_EXAM, () ->
@@ -64,16 +61,14 @@ public class AddExamCommandTest {
     public void equals() {
         Exam alice = new ExamBuilder().withName("Alice").build();
         Exam bob = new ExamBuilder().withName("Bob").build();
-        Module validModule = new ModuleBuilder().build();
-        ModuleCode validModuleCode = validModule.getCode();
-        AddExamCommand addAliceCommand = new AddExamCommand(validModuleCode, alice);
-        AddExamCommand addBobCommand = new AddExamCommand(validModuleCode, bob);
+        AddExamCommand addAliceCommand = new AddExamCommand(alice);
+        AddExamCommand addBobCommand = new AddExamCommand(bob);
 
         // same object -> returns true
         assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
-        AddExamCommand addAliceCommandCopy = new AddExamCommand(validModuleCode, alice);
+        AddExamCommand addAliceCommandCopy = new AddExamCommand(alice);
         assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
@@ -162,7 +157,7 @@ public class AddExamCommandTest {
 
         @Override
         public void updateFilteredModuleList(Predicate<Module> predicate) {
-            throw new AssertionError("This method should not be called.");
+            return; // add exam actually uses this to go into details view
         }
 
         @Override
@@ -207,7 +202,22 @@ public class AddExamCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Module.
+     * An ObservableList stub that contains a single Module.
+     */
+    private class ObservableListModule extends ObservableListBase<Module> {
+        @Override
+        public Module get(int index) {
+            return new ModuleBuilder().build();
+        }
+
+        @Override
+        public int size() {
+            return 0;
+        }
+    }
+
+    /**
+     * A Model stub that contains a single Exam.
      */
     private class ModelStubWithExam extends ModelStub {
         private final Exam exam;
@@ -218,6 +228,11 @@ public class AddExamCommandTest {
         }
 
         @Override
+        public ObservableList<Module> getFilteredModuleList() {
+            return new ObservableListModule();
+        }
+
+        @Override
         public boolean moduleHasExam(Module module, Exam exam) {
             requireNonNull(exam);
             return this.exam.isSameExam(exam);
@@ -225,10 +240,15 @@ public class AddExamCommandTest {
     }
 
     /**
-     * A Model stub that always accept the Module being added.
+     * A Model stub that always accept the Exam being added.
      */
     private class ModelStubAcceptingExamAdded extends ModelStub {
         final ArrayList<Exam> examsAdded = new ArrayList<>();
+
+        @Override
+        public ObservableList<Module> getFilteredModuleList() {
+            return new ObservableListModule();
+        }
 
         @Override
         public boolean moduleHasExam(Module module, Exam exam) {

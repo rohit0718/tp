@@ -16,8 +16,9 @@ public class ClearCommandTest {
     public void execute_emptyModBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        CommandResult expectedResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, false, GuiState.SUMMARY);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedResult, expectedModel);
     }
 
     @Test
@@ -25,8 +26,9 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalModBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalModBook(), new UserPrefs());
         expectedModel.setModBook(new ModBook());
+        CommandResult expectedResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, false, GuiState.SUMMARY);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedResult, expectedModel);
     }
 
 }
