@@ -49,7 +49,7 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
 3. Copy the file to the folder you want to use as the home folder for your ModBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data
 
-![](https://i.imgur.com/8xECbsX.png)
+![QuickStartView](images/QuickStartView.png)
 
 5. Try out some example commands:
 
@@ -69,25 +69,25 @@ The following are the **screen views** available in NUS ModBook.
 
 See all the modules with the next lesson and exam for each module.
 
-![](https://i.imgur.com/3sqFynH.png)
+![ModulesView](images/ModulesView.png)
 
 ### Details View
 
 See all the lessons and modules for a given module.
 
-![](https://i.imgur.com/AHXBITU.png)
+![DetailsView](images/DetailsView.png)
 
 ### Lessons View
 
 See all the lessons of all modules.
 
-![](https://i.imgur.com/S5UCJ2e.png)
+![LessonsView](images/LessonsView.png)
 
 ### Exams View
 
 See all the exams of all modules.
 
-![](https://i.imgur.com/31uOthy.png)
+![ExamsView](images/ExamsView.png)
 
 ## Features
 
