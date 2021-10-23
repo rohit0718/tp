@@ -7,12 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.lesson.Lesson;
+import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class AddLessonCommand extends AddCommand {
     public static final String COMMAND_WORD = "add";
