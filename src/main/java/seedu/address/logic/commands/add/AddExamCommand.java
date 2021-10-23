@@ -1,30 +1,24 @@
 package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.exam.Exam;
-import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class AddExamCommand extends AddCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exam to the Mod book. "
             + "\nParameters: "
-            + PREFIX_CODE + "MOD_CODE "
             + PREFIX_NAME + "EXAM_NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_START + "START_TIME "
@@ -32,7 +26,6 @@ public class AddExamCommand extends AddCommand {
             + PREFIX_LINK + "LINK "
             + PREFIX_VENUE + "VENUE "
             + "\nExample: " + COMMAND_WORD + " exam "
-            + PREFIX_CODE + "CS2103 "
             + PREFIX_NAME + "Final "
             + PREFIX_DATE + "02/02/1999 "
             + PREFIX_START + "10:00 "
@@ -44,31 +37,26 @@ public class AddExamCommand extends AddCommand {
     public static final String MESSAGE_DUPLICATE_EXAM = "This exam already exists in the mod book";
 
     private final Exam toAdd;
-    private final ModuleCode modCode;
 
     /**
      * Creates an AddCommand to add the specified {@code Exam}
      */
-    public AddExamCommand(ModuleCode modCode, Exam exam) {
+    public AddExamCommand(Exam exam) {
         requireNonNull(exam);
         this.toAdd = exam;
-        this.modCode = modCode;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-        Module module = model.getModule(modCode);
+        Module module = model.getFilteredModuleList().get(0);
 
         if (model.moduleHasExam(module, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EXAM);
         }
         model.addExamToModule(module, toAdd);
 
-        // set to details view
-        model.updateFilteredModuleList(new HasModuleCodePredicate(modCode));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), false, GuiState.DETAILS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

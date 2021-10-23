@@ -17,6 +17,7 @@ import seedu.address.logic.commands.add.AddCommand;
 import seedu.address.logic.commands.add.AddExamCommand;
 import seedu.address.logic.commands.add.AddLessonCommand;
 import seedu.address.logic.commands.add.AddModCommand;
+import seedu.address.logic.parser.exceptions.GuiStateException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
@@ -48,11 +49,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         switch(type) {
         case MOD:
-            return parseMod(args);
+            return parseMod(args, guiState);
         case LESSON:
-            return parseLesson(args);
+            return parseLesson(args, guiState);
         case EXAM:
-            return parseExam(args);
+            return parseExam(args, guiState);
         default:
             throw new ParseException(errorMessage);
         }
@@ -63,7 +64,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddModCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddModCommand parseMod(String args) throws ParseException {
+    public AddModCommand parseMod(String args, GuiState guiState) throws ParseException {
+        if (guiState != GuiState.SUMMARY) {
+            throw new GuiStateException(GuiState.SUMMARY);
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
 
@@ -88,17 +93,19 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddLessonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddLessonCommand parseLesson(String args) throws ParseException {
+    public AddLessonCommand parseLesson(String args, GuiState guiState) throws ParseException {
+        if (guiState != GuiState.DETAILS) {
+            throw new GuiStateException(GuiState.DETAILS);
+        }
+
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END,
                         PREFIX_LINK, PREFIX_VENUE);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY,
-                PREFIX_START, PREFIX_END)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
         LessonName lessonName = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_NAME).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         ModBookTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
@@ -120,7 +127,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Lesson lesson = new Lesson(lessonName, day, timeslot, venue, link);
-        return new AddLessonCommand(modCode, lesson);
+        return new AddLessonCommand(lesson);
     }
 
     /**
@@ -128,17 +135,19 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddExamCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddExamCommand parseExam(String args) throws ParseException {
+    public AddExamCommand parseExam(String args, GuiState guiState) throws ParseException {
+        if (guiState != GuiState.DETAILS) {
+            throw new GuiStateException(GuiState.DETAILS);
+        }
+
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END,
                         PREFIX_LINK, PREFIX_VENUE);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_NAME, PREFIX_DAY,
-                PREFIX_START, PREFIX_END)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode modCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
         ExamName examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_NAME).get());
         ModBookDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DAY).get());
         ModBookTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
@@ -160,6 +169,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Exam exam = new Exam(examName, date, timeslot, venue, link);
-        return new AddExamCommand(modCode, exam);
+        return new AddExamCommand(exam);
     }
 }

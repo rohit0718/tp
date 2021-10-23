@@ -8,8 +8,6 @@ import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -50,16 +48,16 @@ public class AddCommandIntegrationTest {
         Lesson validLesson = new LessonBuilder().build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
+        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
+        model.updateFilteredModuleList(predicate);
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
-        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
         expectedModel.addLessonToModule(validModule, validLesson);
         expectedModel.updateFilteredModuleList(predicate);
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson);
-        CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
-        assertCommandSuccess(new AddLessonCommand(validModuleCode, validLesson), model,
-                expectedResult, expectedModel);
+        assertCommandSuccess(new AddLessonCommand(validLesson), model,
+                expectedMessage, expectedModel);
     }
 
     @Test
@@ -67,16 +65,16 @@ public class AddCommandIntegrationTest {
         Exam validExam = new ExamBuilder().build();
         Module validModule = new ModuleBuilder().build();
         ModuleCode validModuleCode = validModule.getCode();
+        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
+        model.updateFilteredModuleList(predicate);
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
-        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
         expectedModel.addExamToModule(validModule, validExam);
         expectedModel.updateFilteredModuleList(predicate);
         String expectedMessage = String.format(AddExamCommand.MESSAGE_SUCCESS, validExam);
-        CommandResult expectedResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
 
-        assertCommandSuccess(new AddExamCommand(validModuleCode, validExam), model,
-                expectedResult, expectedModel);
+        assertCommandSuccess(new AddExamCommand(validExam), model,
+                expectedMessage, expectedModel);
     }
 
     @Test
@@ -87,16 +85,18 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateLesson_throwsCommandException() {
-        Lesson lessonInList = model.getModBook().getModuleList().get(0).getLessons().get(0);
-        ModuleCode moduleCode = model.getModBook().getModuleList().get(0).getCode();
-        assertCommandFailure(new AddLessonCommand(moduleCode, lessonInList), model,
+        Module moduleInList = model.getModBook().getModuleList().get(0);
+        Lesson lessonInList = moduleInList.getLessons().get(0);
+        model.updateFilteredModuleList(preparePredicate(moduleInList.getCode().toString()));
+        assertCommandFailure(new AddLessonCommand(lessonInList), model,
                 AddLessonCommand.MESSAGE_DUPLICATE_LESSON);
     }
 
     @Test
     public void execute_duplicateExam_throwsCommandException() {
-        Exam examInList = model.getModBook().getModuleList().get(0).getExams().get(0);
-        ModuleCode moduleCode = model.getModBook().getModuleList().get(0).getCode();
-        assertCommandFailure(new AddExamCommand(moduleCode, examInList), model, AddExamCommand.MESSAGE_DUPLICATE_EXAM);
+        Module moduleInList = model.getModBook().getModuleList().get(0);
+        Exam examInList = moduleInList.getExams().get(0);
+        model.updateFilteredModuleList(preparePredicate(moduleInList.getCode().toString()));
+        assertCommandFailure(new AddExamCommand(examInList), model, AddExamCommand.MESSAGE_DUPLICATE_EXAM);
     }
 }

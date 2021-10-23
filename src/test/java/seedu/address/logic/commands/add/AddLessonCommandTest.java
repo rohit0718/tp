@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,17 +32,16 @@ public class AddLessonCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddLessonCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new AddLessonCommand(null));
     }
 
     @Test
     public void execute_lessonAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
-        Lesson validLesson = new LessonBuilder().build();
+        Lesson validLesson = new LessonBuilder().withName("test").build();
         Module validModule = new ModuleBuilder().build();
-        ModuleCode validModuleCode = validModule.getCode();
 
-        CommandResult commandResult = new AddLessonCommand(validModuleCode, validLesson).execute(modelStub);
+        CommandResult commandResult = new AddLessonCommand(validLesson).execute(modelStub);
 
         assertEquals(String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson), commandResult.getFeedbackToUser());
         assertEquals(List.of(validLesson), modelStub.lessonsAdded);
@@ -51,9 +51,8 @@ public class AddLessonCommandTest {
     public void execute_duplicateModule_throwsCommandException() {
         Lesson validLesson = new LessonBuilder().build();
         Module validModule = new ModuleBuilder().build();
-        ModuleCode validModuleCode = validModule.getCode();
 
-        AddLessonCommand addCommand = new AddLessonCommand(validModuleCode, validLesson);
+        AddLessonCommand addCommand = new AddLessonCommand(validLesson);
         ModelStub modelStub = new ModelStubWithLesson(validLesson);
 
         assertThrows(CommandException.class, AddLessonCommand.MESSAGE_DUPLICATE_LESSON, () ->
@@ -64,16 +63,14 @@ public class AddLessonCommandTest {
     public void equals() {
         Lesson alice = new LessonBuilder().withName("Alice").build();
         Lesson bob = new LessonBuilder().withName("Bob").build();
-        Module validModule = new ModuleBuilder().build();
-        ModuleCode validModuleCode = validModule.getCode();
-        AddLessonCommand addAliceCommand = new AddLessonCommand(validModuleCode, alice);
-        AddLessonCommand addBobCommand = new AddLessonCommand(validModuleCode, bob);
+        AddLessonCommand addAliceCommand = new AddLessonCommand(alice);
+        AddLessonCommand addBobCommand = new AddLessonCommand(bob);
 
         // same object -> returns true
         assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
-        AddLessonCommand addAliceCommandCopy = new AddLessonCommand(validModuleCode, alice);
+        AddLessonCommand addAliceCommandCopy = new AddLessonCommand(alice);
         assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
@@ -207,7 +204,22 @@ public class AddLessonCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Module.
+     * An ObservableList stub that contains a single Module.
+     */
+    private class ObservableListModule extends ObservableListBase<Module> {
+        @Override
+        public Module get(int index) {
+            return new ModuleBuilder().build();
+        }
+
+        @Override
+        public int size() {
+            return 0;
+        }
+    }
+
+    /**
+     * A Model stub that contains a single Lesson.
      */
     private class ModelStubWithLesson extends ModelStub {
         private final Lesson lesson;
@@ -218,6 +230,11 @@ public class AddLessonCommandTest {
         }
 
         @Override
+        public ObservableList<Module> getFilteredModuleList() {
+            return new ObservableListModule();
+        }
+
+        @Override
         public boolean moduleHasLesson(Module module, Lesson lesson) {
             requireNonNull(lesson);
             return this.lesson.isSameLesson(lesson);
@@ -225,10 +242,15 @@ public class AddLessonCommandTest {
     }
 
     /**
-     * A Model stub that always accept the Module being added.
+     * A Model stub that always accept the Lesson being added.
      */
     private class ModelStubAcceptingLessonAdded extends ModelStub {
         final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+
+        @Override
+        public ObservableList<Module> getFilteredModuleList() {
+            return new ObservableListModule();
+        }
 
         @Override
         public boolean moduleHasLesson(Module module, Lesson lesson) {
