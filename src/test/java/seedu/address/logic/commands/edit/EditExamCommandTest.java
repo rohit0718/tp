@@ -19,7 +19,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.GuiState;
 import seedu.address.logic.commands.edit.EditExamCommand.EditExamDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -58,7 +57,7 @@ public class EditExamCommandTest {
 
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 targetModule.getCode());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, targetModule.getExams().get(0), editedExam);
@@ -93,7 +92,7 @@ public class EditExamCommandTest {
 
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, editedExam.getName(),
                 targetModule.getCode());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         ModelManager expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, targetModule.getExams().get(0), editedExam);
@@ -122,7 +121,7 @@ public class EditExamCommandTest {
         EditCommand editExamCommand = new EditExamCommand(INDEX_FIRST_EXAM, editExamDescriptor);
         String expectedMessage = String.format(EditExamCommand.MESSAGE_EDIT_EXAM_SUCCESS, examToEdit.getName(),
                 targetModule.getCode());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, GuiState.DETAILS);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
         expectedModel.setExam(targetModule, examToEdit, editedExam);
