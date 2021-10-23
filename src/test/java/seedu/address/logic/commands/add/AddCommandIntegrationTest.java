@@ -8,8 +8,6 @@ import static seedu.address.testutil.TypicalModules.getTypicalModBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.GuiState;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -54,7 +52,6 @@ public class AddCommandIntegrationTest {
         model.updateFilteredModuleList(predicate);
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
-        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
         expectedModel.addLessonToModule(validModule, validLesson);
         expectedModel.updateFilteredModuleList(predicate);
         String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson);
@@ -72,7 +69,6 @@ public class AddCommandIntegrationTest {
         model.updateFilteredModuleList(predicate);
 
         Model expectedModel = new ModelManager(model.getModBook(), new UserPrefs());
-        HasModuleCodePredicate predicate = preparePredicate(validModuleCode.toString());
         expectedModel.addExamToModule(validModule, validExam);
         expectedModel.updateFilteredModuleList(predicate);
         String expectedMessage = String.format(AddExamCommand.MESSAGE_SUCCESS, validExam);
