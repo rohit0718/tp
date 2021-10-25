@@ -33,7 +33,7 @@ public class EditExamCommand extends EditCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an exam in the Mod book. "
             + "\nParameters: INDEX "
             + PREFIX_NAME + "EXAM_NAME "
-            + PREFIX_DATE + "DAY "
+            + PREFIX_DATE + "DATE "
             + PREFIX_START + "START_TIME "
             + PREFIX_END + "END_TIME "
             + PREFIX_LINK + "LINK "
