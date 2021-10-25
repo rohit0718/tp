@@ -17,10 +17,16 @@ import seedu.address.model.module.Venue;
 
 public class LessonTest {
     private static final LessonName LESSON_NAME = new LessonName("Lecture");
-    private static final Day DAY = Day.SATURDAY;
+    private static final Day DAY = Day.values()[Day.getTodayIntValue() + 2];
     private static final ModBookTime START_TIME = new ModBookTime("09:00");
     private static final ModBookTime END_TIME = new ModBookTime("11:00");
     private static final Timeslot TIMESLOT = new Timeslot(START_TIME, END_TIME);
+
+    private static final Day DAY_2 = Day.values()[Day.getTodayIntValue() + 1];
+    private static final ModBookTime START_TIME_2 = new ModBookTime("09:30");
+    private static final ModBookTime END_TIME_2 = new ModBookTime("11:30");
+    private static final Timeslot TIMESLOT_2 = new Timeslot(START_TIME_2, END_TIME_2);
+
     private static final Optional<Venue> VENUE = Optional.of(new Venue("COM1-B102"));
     private static final Optional<Link> LINK = Optional.of(new Link("http://nus-sg.zoom.us/123456789"));
     private static final Lesson LESSON = new Lesson(LESSON_NAME, DAY, TIMESLOT, VENUE, LINK);
@@ -53,19 +59,14 @@ public class LessonTest {
 
     @Test
     void compareTo() {
-        Day dayTwo = Day.FRIDAY;
-        ModBookTime startTimeTwo = new ModBookTime("09:30");
-        ModBookTime endTimeTwo = new ModBookTime("11:30");
-        Timeslot timeslotTwo = new Timeslot(startTimeTwo, endTimeTwo);
-
         // different date, same time
-        // assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, dayTwo, TIMESLOT, VENUE, LINK)) > 0);
+        assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, DAY_2, TIMESLOT, VENUE, LINK)) > 0);
 
         // same date, different time
-        // assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, DAY, timeslotTwo, VENUE, LINK)) < 0);
+        assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, DAY, TIMESLOT_2, VENUE, LINK)) < 0);
 
         // different date, different time
-        // assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, dayTwo, timeslotTwo, VENUE, LINK)) > 0);
+        assertTrue(LESSON.compareTo(new Lesson(LESSON_NAME, DAY_2, TIMESLOT_2, VENUE, LINK)) > 0);
 
         // same date, same time
         assertEquals(LESSON.compareTo(new Lesson(LESSON_NAME, DAY, TIMESLOT, VENUE, LINK)), 0);
