@@ -10,7 +10,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Timeslot implements Comparable<Timeslot> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Start time of the Timeslot should be before the end time";
+            "Start time of the time slot should be before the end time";
     public static final String SEPARATOR = " - ";
     public final ModBookTime startTime;
     public final ModBookTime endTime;
