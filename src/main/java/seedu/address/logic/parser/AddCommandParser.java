@@ -22,7 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
-import seedu.address.model.module.ModBookTime;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
@@ -108,9 +107,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         LessonName lessonName = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_NAME).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
-        ModBookTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
-        ModBookTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
-        Timeslot timeslot = new Timeslot(startTime, endTime);
+        String startTime = argMultimap.getValue(PREFIX_START).get();
+        String endTime = argMultimap.getValue(PREFIX_END).get();
+        Timeslot timeslot = ParserUtil.parseTimeslot(startTime, endTime);
         Optional<Link> link;
         Optional<Venue> venue;
 
@@ -150,9 +149,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ExamName examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_NAME).get());
         ModBookDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DAY).get());
-        ModBookTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
-        ModBookTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
-        Timeslot timeslot = new Timeslot(startTime, endTime);
+        String startTime = argMultimap.getValue(PREFIX_START).get();
+        String endTime = argMultimap.getValue(PREFIX_END).get();
+        Timeslot timeslot = ParserUtil.parseTimeslot(startTime, endTime);
         Optional<Link> link;
         Optional<Venue> venue;
 
