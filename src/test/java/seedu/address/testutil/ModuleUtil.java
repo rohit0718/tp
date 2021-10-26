@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
@@ -68,7 +69,7 @@ public class ModuleUtil {
     public static String getEditExamDescriptorDetails(EditExamCommand.EditExamDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullExamName).append(" "));
-        descriptor.getDate().ifPresent(day -> sb.append(PREFIX_DAY).append(day).append(" "));
+        descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date).append(" "));
         descriptor.getTimeslot().ifPresent(timeslot -> sb.append(PREFIX_START).append(timeslot.startTime.toString())
                 .append(" ").append(PREFIX_END).append(timeslot.endTime.toString()).append(" "));
         descriptor.getLink().ifPresent(link -> sb.append(PREFIX_LINK).append(link).append(" "));
