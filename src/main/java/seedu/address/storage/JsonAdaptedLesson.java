@@ -76,7 +76,7 @@ public class JsonAdaptedLesson {
         if (!Day.isValidDay(day)) {
             throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
         }
-        final Day modelDay = Day.valueOf(day.toUpperCase());
+        final Day modelDay = Day.find(day);
 
         if (timeslot == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
