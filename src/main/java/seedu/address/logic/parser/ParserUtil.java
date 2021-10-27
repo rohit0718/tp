@@ -26,23 +26,8 @@ import seedu.address.model.module.lesson.LessonName;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Please enter an Index greater than or equal to 1.";
     public static final String MESSAGE_NO_INDEXES_FOUND = "Index not found in command.";
-
-    /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
 
     /**
      * Parses the first integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
@@ -53,8 +38,14 @@ public class ParserUtil {
     public static Index parseFirstIndex(String args) throws ParseException {
         String trimmedArgs = args.trim();
         for (String arg : trimmedArgs.split(" ")) {
-            if (StringUtil.isNonZeroUnsignedInteger(arg)) {
+            try {
+                int parsedInt = Integer.parseInt(arg);
+                if (parsedInt <= 0) {
+                    throw new ParseException(MESSAGE_INVALID_INDEX);
+                }
                 return Index.fromOneBased(Integer.parseInt(arg));
+            } catch (NumberFormatException e) {
+                // do nothing
             }
         }
         throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
