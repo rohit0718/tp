@@ -11,7 +11,7 @@ public enum Day {
     MONDAY ("MONDAY", "MON"),
     TUESDAY ("TUESDAY", "TUES", "TUE"),
     WEDNESDAY ("WEDNESDAY", "WED"),
-    THURSDAY ("THURSDAY", "THURS", "THUR", "THUR"),
+    THURSDAY ("THURSDAY", "THURS", "THUR", "THU"),
     FRIDAY("FRIDAY", "FRI"),
     SATURDAY("SATURDAY", "SAT"),
     SUNDAY("SUNDAY", "SUN");
