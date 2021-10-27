@@ -80,6 +80,9 @@ public class ParserUtilTest {
 
         // Ending non integer values
         assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("1 a b"));
+
+        // Starting non integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("a b 1"));
     }
 
     @Test

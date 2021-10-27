@@ -42,7 +42,7 @@ public class ParserUtil {
                 if (parsedInt <= 0) {
                     throw new ParseException(MESSAGE_INVALID_INDEX);
                 }
-                return Index.fromOneBased(Integer.parseInt(arg));
+                return Index.fromOneBased(parsedInt);
             } catch (NumberFormatException e) {
                 // do nothing
             }
