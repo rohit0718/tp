@@ -194,7 +194,7 @@ public class ParserUtil {
         if (!Day.isValidDay(trimmedDay)) {
             throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
-        return Day.valueOf(trimmedDay.toUpperCase());
+        return Day.find(trimmedDay);
     }
 
     /**
@@ -206,7 +206,7 @@ public class ParserUtil {
     public static Lesson parseLesson(String name, String dayString, String startTime, String endTime,
                                      Optional<String> venueName, Optional<String> linkString) throws ParseException {
         LessonName lessonName = parseLessonName(name);
-        Day day = parseDay(dayString.toUpperCase());
+        Day day = parseDay(dayString);
         Timeslot timeslot = parseTimeslot(startTime, endTime);
 
         Optional<Venue> venue = venueName.isPresent()

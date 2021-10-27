@@ -32,7 +32,7 @@ public class LessonBuilder {
      */
     public LessonBuilder() {
         name = new LessonName(DEFAULT_NAME);
-        day = Day.valueOf(DEFAULT_DAY);
+        day = Day.find(DEFAULT_DAY);
         timeslot = DEFAULT_TIMESLOT;
         venue = Optional.empty();
         link = Optional.empty();
@@ -76,8 +76,8 @@ public class LessonBuilder {
     /**
      * Sets the {@code Day} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withDay(String day) {
-        this.day = Day.valueOf(day.toUpperCase());
+    public LessonBuilder withDay(String dayString) {
+        this.day = Day.find(dayString);
         return this;
     }
 
