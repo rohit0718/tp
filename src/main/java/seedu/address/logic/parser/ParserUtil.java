@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -38,22 +41,20 @@ public class ParserUtil {
      */
     public static Index parseLastIndex(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        Optional<Integer> parsedInteger = Optional.empty();
-        for (String arg : trimmedArgs.split(" ")) {
+        List<String> argsList = Arrays.asList(trimmedArgs.split(" "));
+        Collections.reverse(argsList); // reverse as we are taking first valid integer from the back
+        for (String arg : argsList) {
             try {
                 int parsedInt = Integer.parseInt(arg);
-                parsedInteger = Optional.of(parsedInt);
+                if (parsedInt <= 0) {
+                    throw new ParseException(MESSAGE_INVALID_INDEX);
+                }
+                return Index.fromOneBased(Integer.parseInt(arg));
             } catch (NumberFormatException e) {
                 // do nothing
             }
         }
-        if (parsedInteger.isEmpty()) {
-            throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
-        }
-        if (parsedInteger.get() <= 0) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(parsedInteger.get());
+        throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
     }
 
     /**
