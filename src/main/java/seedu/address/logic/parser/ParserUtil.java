@@ -2,11 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
@@ -26,35 +28,30 @@ import seedu.address.model.module.lesson.LessonName;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Please enter an Index greater than or equal to 1.";
     public static final String MESSAGE_NO_INDEXES_FOUND = "Index not found in command.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
-
-    /**
-     * Parses the first integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
+     * Parses the last integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
+     * If multiple integers are provided as args, only the last one will be parsed into an Index, if valid.
+     * If no integers are found in args, then MESSAGE_NO_INDEXES_FOUND is presented.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if no indexes found in args (no non-zero unsigned integer).
      */
-    public static Index parseFirstIndex(String args) throws ParseException {
+    public static Index parseLastIndex(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        for (String arg : trimmedArgs.split(" ")) {
-            if (StringUtil.isNonZeroUnsignedInteger(arg)) {
+        List<String> argsList = Arrays.asList(trimmedArgs.split(" "));
+        Collections.reverse(argsList); // reverse as we are taking first valid integer from the back
+        for (String arg : argsList) {
+            try {
+                int parsedInt = Integer.parseInt(arg);
+                if (parsedInt <= 0) {
+                    throw new ParseException(MESSAGE_INVALID_INDEX);
+                }
                 return Index.fromOneBased(Integer.parseInt(arg));
+            } catch (NumberFormatException e) {
+                // do nothing
             }
         }
         throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
