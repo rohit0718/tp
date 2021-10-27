@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NO_INDEXES_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
@@ -55,19 +56,21 @@ public class ParserUtilTest {
 
     @Test
     public void parseFirstIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseLastIndex(INVALID_FIRST_ARG));
-    }
+        // No integer values
+        assertThrows(ParseException.class, MESSAGE_NO_INDEXES_FOUND, ()
+            -> ParserUtil.parseLastIndex(INVALID_FIRST_ARG));
 
-    @Test
-    public void parseFirstIndex_zeroInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseLastIndex(Long.toString(0)));
-    }
+        // 0 integer value
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("0"));
 
-    @Test
-    public void parseFirstIndex_negativeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseLastIndex(Long.toString(-1)));
+        // Negative integer value
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("-1"));
+
+        // Mix of invalid integer values and non integer values
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("-1 a"));
+
+        // Mix of integer values ending with invalid value
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("1 3 -1"));
     }
 
     @Test
@@ -85,7 +88,13 @@ public class ParserUtilTest {
         assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("a b 1"));
 
         // Multiple integer values
-        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("1 2 3"));
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("3 2 1"));
+
+        // Mix of valid and invalid integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("-1 0 1"));
+
+        // Mix of valid integer values and non integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("2 1 a"));
     }
 
     @Test

@@ -42,7 +42,7 @@ public class ParserUtil {
         for (String arg : trimmedArgs.split(" ")) {
             try {
                 int parsedInt = Integer.parseInt(arg);
-                parsedInteger.map(i -> parsedInt);
+                parsedInteger = Optional.of(parsedInt);
             } catch (NumberFormatException e) {
                 // do nothing
             }
