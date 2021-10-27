@@ -1,26 +1,43 @@
 package seedu.address.model.module;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public enum Day {
-    MONDAY ("Monday"),
-    TUESDAY ("Tuesday"),
-    WEDNESDAY ("Wednesday"),
-    THURSDAY ("Thursday"),
-    FRIDAY("Friday"),
-    SATURDAY("Saturday"),
-    SUNDAY("Sunday");
+    MONDAY ("MONDAY", "MON"),
+    TUESDAY ("TUESDAY", "TUES", "TUE"),
+    WEDNESDAY ("WEDNESDAY", "WED"),
+    THURSDAY ("THURSDAY", "THURS", "THUR", "THUR"),
+    FRIDAY("FRIDAY", "FRI"),
+    SATURDAY("SATURDAY", "SAT"),
+    SUNDAY("SUNDAY", "SUN");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Day should be entered as day of the week e.g. Monday, Tuesday, etc.";
+            "Day should be entered as day of the week e.g. Mon, Tuesday, etc.";
 
-    // Attribute to hold String Name
-    private String string;
+    // Attribute to hold the valid inputs
+    private final List<String> values;
 
     // Constructor to set string attribute
-    Day(String name) {
-        this.string = name;
+    Day(String ...names) {
+        requireNonNull(names);
+        this.values = Arrays.asList(names);
+    }
+
+    /**
+     * Returns the corresponding Day for the input string.
+     */
+    public static Day find(String input) {
+        for (Day day: Day.values()) {
+            if (day.values.contains(input.toUpperCase().trim())) {
+                return day;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -28,7 +45,7 @@ public enum Day {
      */
     public static boolean isValidDay(String dayString) {
         try {
-            Day.valueOf(dayString.toUpperCase());
+            Day.find(dayString);
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -58,8 +75,12 @@ public enum Day {
         }
     }
 
+    /**
+     * Returns Day in readable format (e.g. Monday, Tuesday).
+     */
     @Override
     public String toString() {
-        return this.string;
+        String dayString = this.values.get(0);
+        return dayString.substring(0, 1) + dayString.substring(1).toLowerCase();
     }
 }
