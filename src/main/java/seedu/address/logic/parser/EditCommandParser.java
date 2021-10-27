@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
@@ -61,7 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
-        Index index = ParserUtil.parseFirstIndex(args);
+        Index index = ParserUtil.parseLastIndex(args);
 
         if (!(ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)
                 || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME))) {
@@ -97,7 +98,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
-        Index index = ParserUtil.parseFirstIndex(args);
+        Index index = ParserUtil.parseLastIndex(args);
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
@@ -140,9 +141,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseFirstIndex(args);
+        Index index = ParserUtil.parseLastIndex(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
 
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
@@ -151,8 +152,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editExamDescriptor.setName(ParserUtil.parseExamName(argMultimap.getValue(PREFIX_NAME).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
-            editExamDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DAY).get()));
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            editExamDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
 
         // TODO: Need to deal with case where only start or end time is given. Currently assume both given.

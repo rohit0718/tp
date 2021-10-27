@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
@@ -22,7 +23,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Day;
 import seedu.address.model.module.Link;
 import seedu.address.model.module.ModBookDate;
-import seedu.address.model.module.ModBookTime;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
@@ -108,9 +108,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         LessonName lessonName = ParserUtil.parseLessonName(argMultimap.getValue(PREFIX_NAME).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
-        ModBookTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
-        ModBookTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
-        Timeslot timeslot = new Timeslot(startTime, endTime);
+        String startTime = argMultimap.getValue(PREFIX_START).get();
+        String endTime = argMultimap.getValue(PREFIX_END).get();
+        Timeslot timeslot = ParserUtil.parseTimeslot(startTime, endTime);
         Optional<Link> link;
         Optional<Venue> venue;
 
@@ -141,18 +141,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_START, PREFIX_END,
                         PREFIX_LINK, PREFIX_VENUE);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DAY, PREFIX_START, PREFIX_END)) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_START, PREFIX_END)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 
         ExamName examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_NAME).get());
-        ModBookDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DAY).get());
-        ModBookTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START).get());
-        ModBookTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END).get());
-        Timeslot timeslot = new Timeslot(startTime, endTime);
+        ModBookDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        String startTime = argMultimap.getValue(PREFIX_START).get();
+        String endTime = argMultimap.getValue(PREFIX_END).get();
+        Timeslot timeslot = ParserUtil.parseTimeslot(startTime, endTime);
         Optional<Link> link;
         Optional<Venue> venue;
 
