@@ -29,25 +29,31 @@ public class ParserUtil {
     public static final String MESSAGE_NO_INDEXES_FOUND = "Index not found in command.";
 
     /**
-     * Parses the first integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
+     * Parses the last integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
+     * If multiple integers are provided as args, only the last one will be parsed into an Index, if valid.
+     * If no integers are found in args, then MESSAGE_NO_INDEXES_FOUND is presented.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if no indexes found in args (no non-zero unsigned integer).
      */
-    public static Index parseFirstIndex(String args) throws ParseException {
+    public static Index parseLastIndex(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        Optional<Integer> parsedInteger = Optional.empty();
         for (String arg : trimmedArgs.split(" ")) {
             try {
                 int parsedInt = Integer.parseInt(arg);
-                if (parsedInt <= 0) {
-                    throw new ParseException(MESSAGE_INVALID_INDEX);
-                }
-                return Index.fromOneBased(parsedInt);
+                parsedInteger.map(i -> parsedInt);
             } catch (NumberFormatException e) {
                 // do nothing
             }
         }
-        throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
+        if (parsedInteger.isEmpty()) {
+            throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
+        }
+        if (parsedInteger.get() <= 0) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Index.fromOneBased(parsedInteger.get());
     }
 
     /**

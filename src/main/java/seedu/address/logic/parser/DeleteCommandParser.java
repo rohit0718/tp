@@ -45,7 +45,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.SUMMARY) {
             throw new GuiStateException(GuiState.SUMMARY);
         }
-        Index index = ParserUtil.parseFirstIndex(args);
+        Index index = ParserUtil.parseLastIndex(args);
         return new DeleteModCommand(index);
     }
 
@@ -58,7 +58,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseFirstIndex(args);
+        Index index = ParserUtil.parseLastIndex(args);
         return new DeleteLessonCommand(index);
     }
 
@@ -71,7 +71,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseFirstIndex(args);
+        Index index = ParserUtil.parseLastIndex(args);
         return new DeleteExamCommand(index);
     }
 }
