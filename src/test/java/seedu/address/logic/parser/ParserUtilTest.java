@@ -54,23 +54,32 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+    public void parseFirstIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFirstIndex(INVALID_FIRST_ARG));
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
+    public void parseFirstIndex_zeroInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+            -> ParserUtil.parseFirstIndex(Long.toString(0)));
     }
 
     @Test
-    public void parseIndex_validInput_success() throws Exception {
+    public void parseFirstIndex_negativeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseFirstIndex(Long.toString(-1)));
+    }
+
+    @Test
+    public void parseFirstIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("  1  "));
+
+        // Ending non integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("1 a b"));
     }
 
     @Test
