@@ -83,6 +83,9 @@ public class ParserUtilTest {
 
         // Starting non integer values
         assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("a b 1"));
+
+        // Multiple integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseFirstIndex("1 2 3"));
     }
 
     @Test
