@@ -1,4 +1,4 @@
-package seedu.address.model.module;
+package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,8 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.ModBook;
-import seedu.address.model.ReadOnlyModBook;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.testutil.builders.ModuleBuilder;
 
