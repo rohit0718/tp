@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NO_INDEXES_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
@@ -54,23 +55,46 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+    public void parseFirstIndex_invalidInput_throwsParseException() {
+        // No integer values
+        assertThrows(ParseException.class, MESSAGE_NO_INDEXES_FOUND, ()
+            -> ParserUtil.parseLastIndex(INVALID_FIRST_ARG));
+
+        // 0 integer value
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("0"));
+
+        // Negative integer value
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("-1"));
+
+        // Mix of invalid integer values and non integer values
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("-1 a"));
+
+        // Mix of integer values ending with invalid value
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("1 3 -1"));
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
-    }
-
-    @Test
-    public void parseIndex_validInput_success() throws Exception {
+    public void parseFirstIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("  1  "));
+
+        // Ending non integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("1 a b"));
+
+        // Starting non integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("a b 1"));
+
+        // Multiple integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("3 2 1"));
+
+        // Mix of valid and invalid integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("-1 0 1"));
+
+        // Mix of valid integer values and non integer values
+        assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("2 1 a"));
     }
 
     @Test
