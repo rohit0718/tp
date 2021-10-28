@@ -102,11 +102,11 @@ See all the exams of all modules.
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.
   - E.g. If you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 - Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
-  - E.g. If the command specifies `help 123`, it will be interpreted as `help`.
+  - E.g. If you type the command `help 123`, it will be interpreted as `help`.
 - For commands which expect indexes, the last integer value given, if any, will be used as the input argument. Any non-integer values given will be ignored. For example:
-  - If you specify `delete lesson 1 2 -1`, only `-1` will be taken as the index.
-  - If you specify `delete lesson 1 2 a b`, only `2` will be taken as the index.
-- Some commands such as `delete` and `edit` can _only be executed from certain screens. These requirements will be further explained in the descriptions of the commands below.
+  - If you specify `delete lesson 1 3 2`, only `2` will be taken as the index.
+  - If you specify `delete lesson 1 3 a b`, only `3` will be taken as the index.
+- Some commands such as `delete` and `edit` can only be executed from certain screens. These requirements will be further explained in the descriptions of the commands below.
 
 ### Modules
 
@@ -333,7 +333,7 @@ The meaning of the symbols in the formats specified are in the table below:
 
 ### Command Summary by Action
 
-| Action | Object | Format, Examples                                                                                                                                     | View    |
+| Action | Object | Format                                                                                                                                     | View    |
 | ------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | Add    | Module | [`add mod c/CODE [n/NAME]`](#adding-a-module-add-mod)                                                                                                | Modules |
 |        | Lesson | [`add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-a-lesson-add-lesson)                                          | Details |
@@ -354,7 +354,7 @@ The meaning of the symbols in the formats specified are in the table below:
 
 ### Command Summary by Object
 
-| Object | Action | Format, Examples                                                                                                                                     | View    |
+| Object | Action | Format                                                                                                                                     | View    |
 | ------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | Module | Add    | [`add mod c/CODE [n/NAME]`](#adding-a-module-add-mod)                                                                                                | Modules |
 |        | Detail | [`detail c/CODE`](#show-details-of-a-module-detail)                                                                                                  | Any     |
