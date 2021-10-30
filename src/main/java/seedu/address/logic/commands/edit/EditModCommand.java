@@ -20,7 +20,6 @@ import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.exam.Exam;
 import seedu.address.model.module.lesson.Lesson;
-import seedu.address.model.module.predicates.HasModuleCodePredicate;
 
 public class EditModCommand extends EditCommand {
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists.";
@@ -58,11 +57,7 @@ public class EditModCommand extends EditCommand {
         Module moduleToEdit = lastShownList.get(targetIndex.getZeroBased());
         Module editedModule = createEditedModule(moduleToEdit, editModDescriptor);
 
-        // check if module code is changed and if another module already has the new module code
-        HasModuleCodePredicate pred = new HasModuleCodePredicate(editedModule.getCode());
-        model.updateFilteredModuleList(pred);
-        if (!moduleToEdit.isSameModule(editedModule) && model.getFilteredModuleList().size() > 0) {
-            model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+        if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
