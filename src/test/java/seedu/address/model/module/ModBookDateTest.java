@@ -41,8 +41,6 @@ public class ModBookDateTest {
         assertFalse(ModBookDate.isValidDate("29/02/2021"));
         assertFalse(ModBookDate.isValidDate("31/06/2021"));
 
-
-
         // valid dates
         assertTrue(ModBookDate.isValidDate("19 Sep 2021")); // use of month abbreviations
         assertTrue(ModBookDate.isValidDate("19-02-2012")); // use of hyphens
