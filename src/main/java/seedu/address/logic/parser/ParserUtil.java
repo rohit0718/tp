@@ -36,8 +36,8 @@ public class ParserUtil {
     /**
      * Parses the last number seen in {@code args} (split by " ") into an {@code Index} and returns it.
      * If multiple numbers are provided as args, only the last one will be parsed into an Index, if valid.
+     * If last number parsed is out of range, then MESSAGE_INVALID_INDEX is presented.
      * If no numbers are found in args, then MESSAGE_NO_INDEXES_FOUND is presented.
-     * If number is out of range, then MESSAGE_INVALID_INDEX is presented.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if no indexes found in args (no non-zero unsigned integer).
@@ -88,7 +88,12 @@ public class ParserUtil {
         }
         for (int i = 0; i < number.length(); i += 9) {
             try {
-                Integer.parseInt(number.substring(i, Math.min(i + 9, number.length())));
+                boolean isNegativeNumber = Integer.parseInt(
+                        number.substring(i, Math.min(i + 9, number.length()))) < 0;
+                boolean isNotFirstSubstring = i > 0;
+                if (isNotFirstSubstring && isNegativeNumber) {
+                    return false;
+                }
             } catch (NumberFormatException e) {
                 return false;
             }
