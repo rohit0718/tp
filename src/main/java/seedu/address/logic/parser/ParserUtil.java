@@ -79,7 +79,13 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Checks if a {@code String number} is a valid whole number.
+     */
     private static boolean isWholeNumber(String number) {
+        if (number.isEmpty()) {
+            return false;
+        }
         for (int i = 0; i < number.length(); i += 9) {
             try {
                 Integer.parseInt(number.substring(i, Math.min(i + 9, number.length())));
