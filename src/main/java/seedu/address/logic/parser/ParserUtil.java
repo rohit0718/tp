@@ -28,13 +28,16 @@ import seedu.address.model.module.lesson.LessonName;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-    public static final String MESSAGE_INVALID_INDEX = "Please enter an Index greater than or equal to 1.";
+    public static final Integer INDEX_LIMIT = 1000000;
+    public static final String MESSAGE_INVALID_INDEX = "Please enter an Index between 1 and " + INDEX_LIMIT + ".";
+    public static final String MESSAGE_INVALID_NUMBER = "Input is not a valid whole number.";
     public static final String MESSAGE_NO_INDEXES_FOUND = "Index not found in command.";
 
     /**
-     * Parses the last integer seen in {@code args} (split by " ") into an {@code Index} and returns it.
-     * If multiple integers are provided as args, only the last one will be parsed into an Index, if valid.
-     * If no integers are found in args, then MESSAGE_NO_INDEXES_FOUND is presented.
+     * Parses the last number seen in {@code args} (split by " ") into an {@code Index} and returns it.
+     * If multiple numbers are provided as args, only the last one will be parsed into an Index, if valid.
+     * If no numbers are found in args, then MESSAGE_NO_INDEXES_FOUND is presented.
+     * If number is out of range, then MESSAGE_INVALID_INDEX is presented.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if no indexes found in args (no non-zero unsigned integer).
@@ -45,16 +48,46 @@ public class ParserUtil {
         Collections.reverse(argsList); // reverse as we are taking first valid integer from the back
         for (String arg : argsList) {
             try {
-                int parsedInt = Integer.parseInt(arg);
-                if (parsedInt <= 0) {
-                    throw new ParseException(MESSAGE_INVALID_INDEX);
-                }
-                return Index.fromOneBased(Integer.parseInt(arg));
+                return parseIndex(arg);
             } catch (NumberFormatException e) {
-                // do nothing
+                // try the next arg instead
             }
         }
         throw new ParseException(MESSAGE_NO_INDEXES_FOUND);
+    }
+
+    /**
+     * Parses a {@code String index} into a {@code Index}
+     * If string does not represent a whole number, MESSAGE_INVALID_NUMBER is presented.
+     * If number is out of range, then MESSAGE_INVALID_INDEX is presented.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if number is out of range.
+     */
+    private static Index parseIndex(String index) throws ParseException {
+        if (!isWholeNumber(index)) {
+            throw new NumberFormatException(MESSAGE_INVALID_NUMBER);
+        }
+        try {
+            int parsedInt = Integer.parseInt(index);
+            if (parsedInt <= 0 || parsedInt >= INDEX_LIMIT) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            return Index.fromOneBased(Integer.parseInt(index));
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+    }
+
+    private static boolean isWholeNumber(String number) {
+        for (int i = 0; i < number.length(); i += 9) {
+            try {
+                Integer.parseInt(number.substring(i, Math.min(i + 9, number.length())));
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
