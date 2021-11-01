@@ -70,7 +70,7 @@ public class ParserUtil {
         }
         try {
             int parsedInt = Integer.parseInt(index);
-            if (parsedInt <= 0 || parsedInt >= INDEX_LIMIT) {
+            if (parsedInt <= 0 || parsedInt > INDEX_LIMIT) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
             }
             return Index.fromOneBased(Integer.parseInt(index));
