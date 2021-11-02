@@ -1,6 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.GuiState;
@@ -45,7 +51,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.SUMMARY) {
             throw new GuiStateException(GuiState.SUMMARY);
         }
-        Index index = ParserUtil.parseLastIndex(args);
+
+        // defensive coding to guard against users who erroneously add extra prefixes which may cause it to mess up
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
+                PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
         return new DeleteModCommand(index);
     }
 
@@ -58,7 +68,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseLastIndex(args);
+
+        // defensive coding to guard against users who erroneously add extra prefixes which may cause it to mess up
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
+                PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
         return new DeleteLessonCommand(index);
     }
 
@@ -71,7 +85,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseLastIndex(args);
+
+        // defensive coding to guard against users who erroneously add extra prefixes which may cause it to mess up
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
+                PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
         return new DeleteExamCommand(index);
     }
 }
