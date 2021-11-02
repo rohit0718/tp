@@ -194,6 +194,7 @@ Format: `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [
 
 - Edits the lesson at the specified `INDEX`. The index refers to the index number shown in the displayed lesson list. The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
 - Existing values will be updated to the input values.
+- If you want to modify the timeslot, both `NEW_START_TIME` and `NEW_END_TIME` must be present.
 
 Examples:
 
@@ -241,11 +242,12 @@ Format: `edit exam 3 [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIM
 
 - Edits the exam at the specified `INDEX`. The index refers to the index number shown in the displayed exam list. The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
 - Existing values will be updated to the input values.
+- If you want to modify the timeslot, both `NEW_START_TIME` and `NEW_END_TIME` must be present.
 
 Examples:
 
 - `edit exam 3 c/CS2103T n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Edits the 3rd exam of the CS2103T module.
-- `edit exam 4 c/CS2100 n/Final d/31/12/2022 s/2000 2/2100`: Edits the 4th exam of CS2100 module.
+- `edit exam 4 c/CS2100 n/Final d/31/12/2022 s/2000 e/2100`: Edits the 4th exam of CS2100 module.
 
 #### Deleting an Exam : `delete exam`
 
