@@ -103,7 +103,10 @@ See all the exams of all modules.
   - E.g. If you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 - Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   - E.g. If you type the command `help 123`, it will be interpreted as `help`.
-- For commands which expect indexes, the last integer given, if any, will be used as the input argument. Any non-integer values given will be ignored.
+- For commands which expect indexes, the index must be before any parameter prefix (e.g. `c/`, `s/`) specified
+  - E.g. If you specify `edit mod 1 c/CS1231S`, you would change the module code of the first module to CS1231S.
+  - However, If you specify `edit mod c/CS1231S 1`, you would get an error
+- In addition, the last integer given, if any, will be used as the input argument. Any non-integer values given will be ignored.
   - If you specify `delete lesson 1 3 2`, only `2` will be taken as the index.
   - If you specify `delete lesson 1 3 a b`, only `3` will be taken as the index.
   - Note that this effectively means that even if your last integer is invalid, it will be taken to be the index. E.g. if you specify `delete lesson 1 2 -1`, the invalid integer `-1` will be taken as the index.
