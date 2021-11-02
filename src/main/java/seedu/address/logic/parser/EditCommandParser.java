@@ -64,7 +64,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
-        Index index = ParserUtil.parseLastIndex(args);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
 
         if (!(ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)
                 || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME))) {
@@ -100,7 +100,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
-        Index index = ParserUtil.parseLastIndex(args);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
@@ -147,10 +147,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseLastIndex(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
 
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
 
