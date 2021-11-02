@@ -113,7 +113,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // Prevent users from inputting only either the start or the end timings
-        if ((argMultimap.getValue(PREFIX_START).isPresent() ^ argMultimap.getValue(PREFIX_END).isPresent())) {
+        if (argMultimap.getValue(PREFIX_START).isPresent() ^ argMultimap.getValue(PREFIX_END).isPresent()) {
             throw new ParseException(MESSAGE_INVALID_TIMESLOT);
         }
 
@@ -163,7 +163,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // Prevent users from inputting only either the start or the end timings
-        if ((argMultimap.getValue(PREFIX_START).isPresent() ^ argMultimap.getValue(PREFIX_END).isPresent())) {
+        if (argMultimap.getValue(PREFIX_START).isPresent() ^ argMultimap.getValue(PREFIX_END).isPresent()) {
             throw new ParseException(MESSAGE_INVALID_TIMESLOT);
         }
 
