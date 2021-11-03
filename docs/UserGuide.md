@@ -103,10 +103,13 @@ See all the exams of all modules.
   - E.g. If you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 - Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   - E.g. If you type the command `help 123`, it will be interpreted as `help`.
-- For commands which expect indexes, the last integer value given, if any, will be used as the input argument. Any non-integer values given will be ignored.
+- For commands which expect indexes, the index must be before any parameter prefix (e.g. `c/`, `s/`) specified
+  - E.g. If you specify `edit mod 1 c/CS1231S`, you would change the module code of the first module to CS1231S.
+  - However, If you specify `edit mod c/CS1231S 1`, you would get an error
+- In addition, the last integer given, if any, will be used as the input argument. Any non-integer values given will be ignored.
   - If you specify `delete lesson 1 3 2`, only `2` will be taken as the index.
   - If you specify `delete lesson 1 3 a b`, only `3` will be taken as the index.
-  - Note that this effectively means that even if your last integer value is invalid, it will be taken to be the index. E.g. if you specify `delete lesson 1 2 -1`, the invalid integer `-1` will be taken as the index.
+  - Note that this effectively means that even if your last integer is invalid, it will be taken to be the index. E.g. if you specify `delete lesson 1 2 -1`, the invalid integer `-1` will be taken as the index.
 - Some commands such as `delete` and `edit` can only be executed from certain screens. These requirements will be further explained in the descriptions of the commands below.
 
 ### Modules
@@ -144,7 +147,7 @@ Edits an existing module in the ModBook. This command can only be executed in th
 
 Format: `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`
 
-- Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index must be a positive integer 1, 2, 3, …​
+- Edits the module at the specified `INDEX`. The index refers to the index number shown in the displayed module list. The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
@@ -159,9 +162,9 @@ Deletes a module from the ModBook. This command can only be executed in the **mo
 
 Format: `delete mod INDEX`
 
-- Deletes the person at the specified INDEX.
-- The index refers to the index number shown in the displayed person list.
-- The index must be a positive integer 1, 2, 3, …​
+- Deletes the module at the specified INDEX.
+- The index refers to the index number shown in the displayed module list.
+- The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
 
 Example:
 
@@ -192,6 +195,10 @@ Edits an existing lesson in the ModBook. This command can only be executed in th
 
 Format: `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
+- Edits the lesson at the specified `INDEX`. The index refers to the index number shown in the displayed lesson list. The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
+- Existing values will be updated to the input values.
+- If you want to modify the timeslot, both `NEW_START_TIME` and `NEW_END_TIME` must be present.
+
 Examples:
 
 - `edit lesson 2 n/Weekly Tutorial` : Edits the name of the second lesson of the currently showing module.
@@ -204,8 +211,8 @@ Deletes a lesson from the ModBook. This command can only be executed in the **de
 Format: `delete lesson`
 
 - Deletes the lesson at the specified INDEX.
-- The index refers to the index number shown in the displayed module detail list.
-- The index must be a positive integer 1, 2, 3, …​
+- The index refers to the index number shown in the displayed lesson list.
+- The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
 
 Example:
 
@@ -236,10 +243,14 @@ Edits an existing exam in the ModBook. This command can only be executed in the 
 
 Format: `edit exam 3 [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
+- Edits the exam at the specified `INDEX`. The index refers to the index number shown in the displayed exam list. The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
+- Existing values will be updated to the input values.
+- If you want to modify the timeslot, both `NEW_START_TIME` and `NEW_END_TIME` must be present.
+
 Examples:
 
-- `edit exam 3 c/CS2103T n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Edits the 3rd exam of the CS2103T module.
-- `edit exam 4 c/CS2100 n/Final d/31/12/2022 s/2000 2/2100`: Edits the 4th exam of CS2100 module.
+- `edit exam 3 n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Edits the 3rd exam of the CS2103T module.
+- `edit exam 4 n/Final d/31/12/2022 s/2000 e/2100`: Edits the 4th exam of CS2100 module.
 
 #### Deleting an Exam : `delete exam`
 
@@ -248,8 +259,8 @@ Deletes the specified Exam from the ModBook. This command can only be executed i
 Format: `delete exam INDEX`
 
 - Deletes the Exam at the specified index.
-- The index refers to the index number shown in the displayed Module details list.
-- The index must be a positive integer 1, 2, 3, …​
+- The index refers to the index number shown in the displayed exam list.
+- The index must be a positive integer 1, 2, 3, …​, not greater than 1,000,000.
 
 Example:
 

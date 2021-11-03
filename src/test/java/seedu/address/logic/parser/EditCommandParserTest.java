@@ -176,4 +176,27 @@ public class EditCommandParserTest {
                 GuiState.EXAMS, MESSAGE_WRONG_VIEW_DETAILS);
     }
 
+    /**
+     * Editing timeslot of lesson/exam requires both fields present
+     */
+    @Test
+    public void parse_invalidTimeslot_throwsParseException() {
+        Module module = new ModuleBuilder(CS2103T).withDefaultName().build();
+
+        // Test with only start and end time of lesson
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
+                        + module.getCode() + " " + "s/1200",
+                GuiState.DETAILS, EditCommandParser.MESSAGE_INVALID_TIMESLOT);
+        assertParseFailure(parser, " lesson " + INDEX_FIRST_LESSON.getOneBased() + " " + PREFIX_CODE
+                        + module.getCode() + " " + "e/1200",
+                GuiState.DETAILS, EditCommandParser.MESSAGE_INVALID_TIMESLOT);
+
+        // Test with only start and end time of exam
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
+                        + module.getCode() + " " + "s/1200",
+                GuiState.DETAILS, EditCommandParser.MESSAGE_INVALID_TIMESLOT);
+        assertParseFailure(parser, " exam " + INDEX_FIRST_EXAM.getOneBased() + " " + PREFIX_CODE
+                        + module.getCode() + " " + "e/1200",
+                GuiState.DETAILS, EditCommandParser.MESSAGE_INVALID_TIMESLOT);
+    }
 }
