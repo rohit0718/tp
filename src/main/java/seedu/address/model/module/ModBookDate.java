@@ -7,6 +7,7 @@ import static seedu.address.commons.util.DateTimeUtil.buildFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a date in the ModBook.
@@ -16,15 +17,15 @@ public class ModBookDate implements Comparable<ModBookDate> {
     public static final String MESSAGE_CONSTRAINTS =
             "Invalid date format. Please refer to the User Guide for valid date formats.";
     public static final DateTimeFormatter[] PARSE_FORMATTERS = new DateTimeFormatter[] {
-        buildFormatter("dd/MM/yyyy"),
-        buildFormatter("dd-MM-yyyy"),
-        buildFormatter("dd.MM.yyyy"),
-        buildFormatter("ddMMyyyy"),
-        buildFormatter("dd MM yyyy"),
-        buildFormatter("dd LLLL yyyy"),
-        buildFormatter("dd LLL yyyy"),
-        buildFormatter("d LLL yyyy"),
-        buildFormatter("d LLLL yyyy")
+        buildFormatter("dd/MM/uuuu"),
+        buildFormatter("dd-MM-uuuu"),
+        buildFormatter("dd.MM.uuuu"),
+        buildFormatter("ddMMuuuu"),
+        buildFormatter("dd MM uuuu"),
+        buildFormatter("dd LLLL uuuu"),
+        buildFormatter("dd LLL uuuu"),
+        buildFormatter("d LLL uuuu"),
+        buildFormatter("d LLLL uuuu")
     };
     public static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public final LocalDate date;
@@ -65,7 +66,7 @@ public class ModBookDate implements Comparable<ModBookDate> {
         LocalDate result = null;
         for (DateTimeFormatter f : PARSE_FORMATTERS) {
             try {
-                result = LocalDate.parse(test, f);
+                result = LocalDate.parse(test, f.withResolverStyle(ResolverStyle.STRICT));
                 break; // short circuit once valid formatter is found
             } catch (DateTimeParseException e) {
                 // do nothing

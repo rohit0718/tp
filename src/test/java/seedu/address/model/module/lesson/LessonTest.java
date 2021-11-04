@@ -17,12 +17,12 @@ import seedu.address.model.module.Venue;
 
 public class LessonTest {
     private static final LessonName LESSON_NAME = new LessonName("Lecture");
-    private static final Day DAY_1 = Day.values()[Day.getTodayIntValue() + 1];
+    private static final Day DAY_1 = Day.values()[(Day.getTodayIntValue() + 1) % 7];
     private static final ModBookTime START_TIME_2 = new ModBookTime("09:30");
     private static final ModBookTime END_TIME_2 = new ModBookTime("11:30");
     private static final Timeslot TIMESLOT_2 = new Timeslot(START_TIME_2, END_TIME_2);
 
-    private static final Day DAY_2 = Day.values()[Day.getTodayIntValue() + 2];
+    private static final Day DAY_2 = Day.values()[(Day.getTodayIntValue() + 2) % 7];
     private static final ModBookTime START_TIME = new ModBookTime("09:00");
     private static final ModBookTime END_TIME = new ModBookTime("11:00");
     private static final Timeslot TIMESLOT = new Timeslot(START_TIME, END_TIME);

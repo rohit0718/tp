@@ -20,8 +20,8 @@ import seedu.address.model.module.lesson.Lesson;
 public class Module {
     private final ModuleCode moduleCode;
     private final Optional<ModuleName> moduleName;
-    private final List<Lesson> lessons;
-    private final List<Exam> exams;
+    private final ArrayList<Lesson> lessons;
+    private final ArrayList<Exam> exams;
 
     /**
      * Constructs a {@code Module}
@@ -50,8 +50,10 @@ public class Module {
         requireAllNonNull(moduleCode, moduleName, lessons, exams);
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
-        this.lessons = lessons;
-        this.exams = exams;
+        this.lessons = new ArrayList<>();
+        this.lessons.addAll(lessons);
+        this.exams = new ArrayList<>();
+        this.exams.addAll(exams);
     }
 
     public ModuleCode getCode() {

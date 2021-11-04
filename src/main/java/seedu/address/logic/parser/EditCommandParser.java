@@ -27,6 +27,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    public static final String MESSAGE_INVALID_TIMESLOT =
+            "Both start and end timings have to be present to modify the timeslot.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -62,7 +64,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_NAME);
-        Index index = ParserUtil.parseLastIndex(args);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
 
         if (!(ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CODE)
                 || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME))) {
@@ -98,7 +100,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
-        Index index = ParserUtil.parseLastIndex(args);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
@@ -110,7 +112,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editLessonDescriptor.setDay(ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get()));
         }
 
-        // TODO: Need to deal with case where only start or end time is given. Currently assume both given.
+        // Prevent users from inputting only either the start or the end timings
+        if (argMultimap.getValue(PREFIX_START).isPresent() ^ argMultimap.getValue(PREFIX_END).isPresent()) {
+            throw new ParseException(MESSAGE_INVALID_TIMESLOT);
+        }
+
         if (argMultimap.getValue(PREFIX_START).isPresent() && argMultimap.getValue(PREFIX_END).isPresent()) {
             editLessonDescriptor.setTimeslot(ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_START).get(),
                     argMultimap.getValue(PREFIX_END).get()));
@@ -141,10 +147,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (guiState != GuiState.DETAILS) {
             throw new GuiStateException(GuiState.DETAILS);
         }
-        Index index = ParserUtil.parseLastIndex(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_START, PREFIX_END, PREFIX_LINK, PREFIX_VENUE);
+        Index index = ParserUtil.parseLastIndex(argMultimap.getPreamble());
 
         EditExamDescriptor editExamDescriptor = new EditExamDescriptor();
 
@@ -156,7 +162,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editExamDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
 
-        // TODO: Need to deal with case where only start or end time is given. Currently assume both given.
+        // Prevent users from inputting only either the start or the end timings
+        if (argMultimap.getValue(PREFIX_START).isPresent() ^ argMultimap.getValue(PREFIX_END).isPresent()) {
+            throw new ParseException(MESSAGE_INVALID_TIMESLOT);
+        }
+
         if (argMultimap.getValue(PREFIX_START).isPresent() && argMultimap.getValue(PREFIX_END).isPresent()) {
             editExamDescriptor.setTimeslot(ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_START).get(),
                     argMultimap.getValue(PREFIX_END).get()));

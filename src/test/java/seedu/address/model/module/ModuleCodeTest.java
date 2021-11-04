@@ -32,7 +32,8 @@ public class ModuleCodeTest {
         assertFalse(ModuleCode.isValidModuleCode("CS20S")); // two numbers only
         assertFalse(ModuleCode.isValidModuleCode("CS2S")); // one numbers only
         assertFalse(ModuleCode.isValidModuleCode("CS")); // no numbers
-        assertFalse(ModuleCode.isValidModuleCode("CS2040SS")); // two letter suffix
+        assertFalse(ModuleCode.isValidModuleCode("CS2040SSS")); // three letter suffix
+
 
         // valid module code
         assertTrue(ModuleCode.isValidModuleCode("cs2040s")); // lowercase alphabets only
@@ -41,6 +42,7 @@ public class ModuleCodeTest {
         assertTrue(ModuleCode.isValidModuleCode("CS2103")); // two letter with no ending letter
         assertTrue(ModuleCode.isValidModuleCode("CS2103T")); // two letter with ending letter
         assertTrue(ModuleCode.isValidModuleCode("DAO1000")); // three letter with no ending letter
+        assertTrue(ModuleCode.isValidModuleCode("UIS3951CS")); // two letter suffix
         assertTrue(ModuleCode.isValidModuleCode("DAO1000S")); // three letter with ending letter
     }
 }

@@ -12,14 +12,14 @@ public class ModuleCode {
      * "Each module of study has a unique module code consisting of a two‐ or three‐letter prefix
      * that denotes the discipline, and four digits, the first of which indicates the level of
      * the module (e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module)."
-     * There is also an optional last character representing the course of study.
+     * There are also two optional last characters representing the course of study.
      * Reference: https://www.nus.edu.sg/registrar/academic-information-policies/non-graduating/modular-system
      */
-    public static final String VALIDATION_REGEX = "^([a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]?)$";
+    public static final String VALIDATION_REGEX = "^([a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,2})$";
     public static final String MESSAGE_CONSTRAINTS =
-            "Module Code must have a two or three letter prefix that denotes disciple, four digits "
-                    + "which represents the level of the module, and an optional last character that "
-                    + "represents the course of study.";
+            "Module Code must have a two or three letter prefix that denotes the discipline, four digits "
+                    + "which represents the level of the module, and two optional characters at the end which "
+                    + "represent the course of study.";
     public final String moduleCode;
 
     /**

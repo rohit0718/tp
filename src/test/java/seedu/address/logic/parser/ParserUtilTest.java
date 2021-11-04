@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_NO_INDEXES_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_MAX_LIMIT;
 
 import java.util.Optional;
 
@@ -36,6 +37,9 @@ public class ParserUtilTest {
     private static final String INVALID_MODULE_CODE = "C2030S";
     private static final String INVALID_MODULE_NAME = " ";
     private static final String INVALID_FIRST_ARG = "shez";
+    private static final String INVALID_INDEX_SUBSTRING = "999999999-9999999";
+    private static final String INVALID_INDEX_NEGATIVE_OVERFLOW = "-9999999999999";
+    private static final String INVALID_INDEX_POSITIVE_OVERFLOW = "9999999999999";
 
     private static final String VALID_LINK = "https://www.google.com/";
     private static final String VALID_TIME_1 = "09:00";
@@ -55,16 +59,32 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseFirstIndex_invalidInput_throwsParseException() {
+    public void parseLastIndex_invalidInput_throwsParseException() {
         // No integer values
-        assertThrows(ParseException.class, MESSAGE_NO_INDEXES_FOUND, ()
-            -> ParserUtil.parseLastIndex(INVALID_FIRST_ARG));
+        assertThrows(ParseException.class, MESSAGE_NO_INDEXES_FOUND, () ->
+                ParserUtil.parseLastIndex(INVALID_FIRST_ARG));
+
+        // No integer values (Negative numbers used as substring)
+        assertThrows(ParseException.class, MESSAGE_NO_INDEXES_FOUND, () ->
+                ParserUtil.parseLastIndex(INVALID_INDEX_SUBSTRING));
 
         // 0 integer value
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("0"));
 
         // Negative integer value
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("-1"));
+
+        // Positive integer above index limit
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseLastIndex(String.valueOf(ParserUtil.INDEX_LIMIT + 1)));
+
+        // Negative integer overflow
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseLastIndex(INVALID_INDEX_NEGATIVE_OVERFLOW));
+
+        // Positive integer overflow
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseLastIndex(INVALID_INDEX_POSITIVE_OVERFLOW));
 
         // Mix of invalid integer values and non integer values
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseLastIndex("-1 a"));
@@ -74,9 +94,12 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFirstIndex_validInput_success() throws Exception {
+    public void parseLastIndex_validInput_success() throws Exception {
         // No whitespaces
         assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("1"));
+
+        // Max index value
+        assertEquals(INDEX_MAX_LIMIT, ParserUtil.parseLastIndex(String.valueOf(ParserUtil.INDEX_LIMIT)));
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_MODULE, ParserUtil.parseLastIndex("  1  "));
