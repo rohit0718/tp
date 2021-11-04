@@ -125,7 +125,7 @@ Examples:
 - `add mod c/CS2103T n/Software Engineering` : Adds a module with code CS2103T, named Software Engineering.
 - `add mod c/CS2040S` : Adds a module with code CS2040S, without a given name.
 
-#### Listing all modules : `list mod`
+#### Listing all modules: `list mod`
 
 Shows a list of all modules in the ModBook. This command can be executed in any view.
 
@@ -183,7 +183,7 @@ Examples:
 - `add lesson n/Weekly Tutorial d/Monday s/1000 e/1100 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Adds a lesson to the CS2103T module with a specified link.
 - `add lesson n/Weekly Lab d/Monday s/1000 e/1100`: Adds a lesson to the CS2103T module without a specified link.
 
-#### Listing all lessons : `list lesson`
+#### Listing all lessons: `list lesson`
 
 Shows a list of all lessons in the ModBook. This command can be executed in any view.
 
@@ -231,7 +231,7 @@ Examples:
 - `add exam n/Final Exam d/31/12/2022 s/2100 e/2200 v/MPSH`: Adds an exam to the current module with a specified venue.
 - `add exam n/Midterms d/04/01/2021 s/2000 e/2200` Adds an exam to the current module.
 
-#### Listing all Exams : `list exam`
+#### Listing all Exams: `list exam`
 
 Shows a list of all lessons in the ModBook. This command can be executed in any view.
 
@@ -252,7 +252,7 @@ Examples:
 - `edit exam 3 n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Edits the 3rd exam of the CS2103T module.
 - `edit exam 4 n/Final d/31/12/2022 s/2000 e/2100`: Edits the 4th exam of CS2100 module.
 
-#### Deleting an Exam : `delete exam`
+#### Deleting an Exam: `delete exam`
 
 Deletes the specified Exam from the ModBook. This command can only be executed in the **details** view.
 
@@ -268,15 +268,15 @@ Example:
 
 ### Miscellaneous
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaining how to access the help page. Format: `help`
 
-#### Clearing all entries : `clear`
+#### Clearing all entries: `clear`
 
 Clears all entries from the ModBook. Format: `clear`
 
-#### Exiting the program : `exit`
+#### Exiting the program: `exit`
 
 Exits the program. Format: `exit`
 
