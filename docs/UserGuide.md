@@ -37,7 +37,7 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
-- [Date and Time Formats](#date-and-time-formats)
+- [Day, Date and Time Formats](#day-date-and-time-formats)
 - [Command Summary](#command-summary)
   - [Command Summary by Action](#command-summary-by-action)
   - [Command Summary by Object](#command-summary-by-object)
@@ -296,7 +296,18 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModBook home folder.
 
-## Date and Time Formats
+## Day, Date and Time Formats
+The following formats are valid for entering day values:
+
+| Day of Week | Format                             |
+|-------------|------------------------------------|
+| Monday      | `Monday`, `Mon`                    |
+| Tuesday     | `Tuesday`, `Tues`, `Tue`           |
+| Wednesday   | `Wednesday`, `Wed`                 |
+| Thursday    | `Thursday`, `Thurs`, `Thur`, `Thu` |
+| Friday      | `Friday`, `Fri`                    |
+| Saturday    | `Saturday`, `Sat`                  |
+| Sunday      | `Sunday`, `Sun`                    |
 
 The following formats are valid for entering time values:
 
