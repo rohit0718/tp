@@ -120,7 +120,7 @@ See all the exams of all modules. Use the [list exam](#listing-all-exams--list-e
 
 #### Adding a module: `add mod`
 
-Adds a module to the ModBook. This command can be executed in the **modules** view.
+Adds a module to the ModBook. This command can be executed in the [modules view](#modules-view).
 
 Format: `add mod c/CODE [n/NAME]`
 
@@ -147,7 +147,7 @@ Example:
 
 #### Editing a module: `edit mod`
 
-Edits an existing module in the ModBook. This command can only be executed in the **modules** view.
+Edits an existing module in the ModBook. This command can only be executed in the [modules view](#modules-view).
 
 Format: `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`
 
@@ -162,7 +162,7 @@ Examples:
 
 #### Delete a module: `delete mod`
 
-Deletes a module from the ModBook. This command can only be executed in the **modules** view.
+Deletes a module from the ModBook. This command can only be executed in the [modules view](#modules-view).
 
 Format: `delete mod INDEX`
 
@@ -178,7 +178,7 @@ Example:
 
 #### Adding a lesson: `add lesson`
 
-Adds a lesson to the ModBook. This command can be executed in the **details** view.
+Adds a lesson to the ModBook. This command can be executed in the [details view](#details-view).
 
 Format: `add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -195,7 +195,7 @@ Format: `list lesson`
 
 #### Editing a lesson: `edit lesson`
 
-Edits an existing lesson in the ModBook. This command can only be executed in the **details** view.
+Edits an existing lesson in the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
@@ -210,9 +210,9 @@ Examples:
 
 #### Deleting a lesson: `delete lesson`
 
-Deletes a lesson from the ModBook. This command can only be executed in the **details** view.
+Deletes a lesson from the ModBook. This command can only be executed in the [details view](#details-view).
 
-Format: `delete lesson`
+Format: `delete lesson INDEX`
 
 - Deletes the lesson at the specified INDEX.
 - The index refers to the index number shown in the displayed lesson list.
@@ -226,7 +226,7 @@ Example:
 
 #### Adding an exam: `add exam`
 
-Adds an exam to the ModBook. This command can be executed in the **details** view.
+Adds an exam to the ModBook. This command can be executed in the [details view](#details-view).
 
 Format: `add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -243,7 +243,7 @@ Format: `list exam`
 
 #### Editing an Exam: `edit exam`
 
-Edits an existing exam in the ModBook. This command can only be executed in the **details** view.
+Edits an existing exam in the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `edit exam 3 [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
@@ -258,7 +258,7 @@ Examples:
 
 #### Deleting an Exam: `delete exam`
 
-Deletes the specified Exam from the ModBook. This command can only be executed in the **details** view.
+Deletes the specified Exam from the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `delete exam INDEX`
 
