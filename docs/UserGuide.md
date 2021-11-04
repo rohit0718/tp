@@ -44,14 +44,14 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
 
 ## Quick Start
 
-1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest modbook.jar from here.
+1. Ensure you have Java `11` or above installed in your Computer.
+2. Download the latest `modbook.jar` from [here](https://github.com/AY2122S1-CS2103T-T13-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your ModBook.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
 ![QuickStartView](images/QuickStartView.png)
 
-5. Try out some example commands:
+5. Try out some example commands by typing it in the command box and pressing Enter:
 
 - `list mod`: Lists all modules.
 - `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
@@ -63,7 +63,7 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
 
 ## Screen Views
 
-The following are the **screen views** available in NUS ModBook.
+The following are the screen views available in NUS ModBook.
 
 ### Modules View
 
