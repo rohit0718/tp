@@ -67,25 +67,25 @@ The following are the screen views available in NUS ModBook.
 
 ### Modules View
 
-See all the modules with the next lesson and exam for each module.
+See all the modules with the next lesson and exam for each module. Use the [list mod](#listing-all-modules--list-mod) command to access this view.
 
 ![ModulesView](images/ModulesView.png)
 
 ### Details View
 
-See all the lessons and modules for a given module.
+See all the lessons and modules for a given module. Use the [detail](#show-details-of-a-module-detail) command to access this view.
 
 ![DetailsView](images/DetailsView.png)
 
 ### Lessons View
 
-See all the lessons of all modules.
+See all the lessons of all modules. Use the [list lesson](#listing-all-lessons--list-lesson) command to access this view.
 
 ![LessonsView](images/LessonsView.png)
 
 ### Exams View
 
-See all the exams of all modules.
+See all the exams of all modules. Use the [list exam](#listing-all-exams--list-exam) command to access this view.
 
 ![ExamsView](images/ExamsView.png)
 
