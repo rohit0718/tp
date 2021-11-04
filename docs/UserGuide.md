@@ -178,7 +178,7 @@ Example:
 
 #### Adding a lesson: `add lesson`
 
-Adds a lesson to the ModBook. This command can be executed in the [details view](#details-view).
+Adds a lesson to the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -226,7 +226,7 @@ Example:
 
 #### Adding an exam: `add exam`
 
-Adds an exam to the ModBook. This command can be executed in the [details view](#details-view).
+Adds an exam to the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -301,6 +301,7 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModBook home folder.
 
 ## Day, Date and Time Formats
+
 The following formats are valid for entering day values:
 
 | Day of Week | Format                             |
@@ -312,22 +313,6 @@ The following formats are valid for entering day values:
 | Friday      | `Friday`, `Fri`                    |
 | Saturday    | `Saturday`, `Sat`                  |
 | Sunday      | `Sunday`, `Sun`                    |
-
-The following formats are valid for entering time values:
-
-| Format   | Examples             |
-| -------- | -------------------- |
-| `HH:mm`  | `09:00`, `14:30`     |
-| `HH.mm`  | `09.00`, `14.30`     |
-| `HHmm`   | `0900`, `1430`       |
-| `ha`     | `9AM`, `2pm`         |
-| `hha`    | `09AM`, `11pm`       |
-| `h:mma`  | `9:00AM`, `2:30pm`   |
-| `hh:mma` | `09:00AM`, `11:30pm` |
-| `h.mma`  | `9.00AM`, `2.30pm`   |
-| `hh.mma` | `09.00AM`, `11.30pm` |
-
-The input for `AM/PM` is case insensitive, e.g. both `10AM` and `10am` are valid.
 
 The following formats are valid for entering date values:
 
@@ -355,6 +340,22 @@ The meaning of the symbols in the formats specified are in the table below:
 | M      | Month as number                         |
 | y      | Year                                    |
 | d      | day of month                            |
+
+The following formats are valid for entering time values:
+
+| Format   | Examples             |
+| -------- | -------------------- |
+| `HH:mm`  | `09:00`, `14:30`     |
+| `HH.mm`  | `09.00`, `14.30`     |
+| `HHmm`   | `0900`, `1430`       |
+| `ha`     | `9AM`, `2pm`         |
+| `hha`    | `09AM`, `11pm`       |
+| `h:mma`  | `9:00AM`, `2:30pm`   |
+| `hh:mma` | `09:00AM`, `11:30pm` |
+| `h.mma`  | `9.00AM`, `2.30pm`   |
+| `hh.mma` | `09.00AM`, `11.30pm` |
+
+The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid.
 
 ## Command Summary
 
