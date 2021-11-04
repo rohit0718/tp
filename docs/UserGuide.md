@@ -91,7 +91,9 @@ See all the exams of all modules. Use the [list exam](#listing-all-exams--list-e
 
 ## Features
 
-### Notes about Commands
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Commands<a name="notes-about-commands">**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you.
   - E.g. In add `c/CODE`, `CODE` is a parameter which can be used as `add mod c/CS2103T`.
@@ -111,6 +113,8 @@ See all the exams of all modules. Use the [list exam](#listing-all-exams--list-e
   - If you specify `delete lesson 1 3 a b`, only `3` will be taken as the index.
   - Note that this effectively means that even if your last integer is invalid, it will be taken to be the index. E.g. if you specify `delete lesson 1 2 -1`, the invalid integer `-1` will be taken as the index.
 - Some commands such as `delete` and `edit` can only be executed from certain screens. These requirements will be further explained in the descriptions of the commands below.
+
+</div>
 
 ### Modules
 
