@@ -356,24 +356,24 @@ The meaning of the symbols in the formats specified are in the table below:
 
 ### Command Summary by Action
 
-| Action | Object | Format                                                                                                                                     | View    |
-| ------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| Add    | Module | [`add mod c/CODE [n/NAME]`](#adding-a-module-add-mod)                                                                                                | Modules |
-|        | Lesson | [`add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-a-lesson-add-lesson)                                          | Details |
-|        | Exam   | [`add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-an-exam-add-exam)                                                      | Details |
-| List   | Module | [`list mod`](#listing-all-modules--list-mod)                                                                                                         | Any     |
-|        | Lesson | [`list lesson`](#listing-all-lessons--list-lesson)                                                                                                   | Any     |
-|        | Exam   | [`list exam`](#listing-all-exams--list-exam)                                                                                                         | Any     |
-| Detail | Module | [`detail c/CODE`](#show-details-of-a-module-detail)                                                                                                  | Any     |
-| Delete | Module | [`delete mod INDEX`](#delete-a-module-delete-mod)                                                                                                    | Modules |
-|        | Lesson | [`delete lesson INDEX`](#deleting-a-lesson-delete-lesson)                                                                                            | Details |
-|        | Exam   | [`delete exam INDEX`](#deleting-an-exam--delete-exam)                                                                                                | Details |
-| Edit   | Module | [`edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`](#editing-a-module-edit-mod)                                                                             | Modules |
-|        | Lesson | [`edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-a-lesson-edit-lesson) | Details |
-|        | Exam   | [`edit exam INDEX [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-an-exam-edit-exam)             | Details |
-| Help   |        | [`help`](#viewing-help--help)                                                                                                                        | Any     |
-| Clear  |        | [`clear`](#clearing-all-entries--clear)                                                                                                              | Any     |
-| Exit   |        | [`exit`](#exiting-the-program--exit)                                                                                                                 | Any     |
+| Action | Object | Format                                                                                                                                                                                                      | View    |
+|--------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| Add    | Module | [`add mod c/CODE [n/NAME]`](#adding-a-module-add-mod) <br> e.g. `add mod c/CS2103T n/Software Engineering`                                                                                                  | Modules |
+|        | Lesson | [`add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-a-lesson-add-lesson) <br> e.g. `add lesson n/Weekly Lab d/Monday s/1000 e/1100 l/zoom.com/cs2103t`                   | Details |
+|        | Exam   | [`add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-an-exam-add-exam) <br> e.g. `add exam n/Final Exam d/31/12/2022 s/2100 e/2200 v/MPSH`                                         | Details |
+| List   | Module | [`list mod`](#listing-all-modules--list-mod)                                                                                                                                                                | Any     |
+|        | Lesson | [`list lesson`](#listing-all-lessons--list-lesson)                                                                                                                                                          | Any     |
+|        | Exam   | [`list exam`](#listing-all-exams--list-exam)                                                                                                                                                                | Any     |
+| Detail | Module | [`detail c/CODE`](#show-details-of-a-module-detail) <br> e.g. `detail c/CS2103T`                                                                                                                            | Any     |
+| Delete | Module | [`delete mod INDEX`](#delete-a-module-delete-mod)                                                                                                                                                           | Modules |
+|        | Lesson | [`delete lesson INDEX`](#deleting-a-lesson-delete-lesson)                                                                                                                                                   | Details |
+|        | Exam   | [`delete exam INDEX`](#deleting-an-exam--delete-exam)                                                                                                                                                       | Details |
+| Edit   | Module | [`edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`](#editing-a-module-edit-mod) <br> e.g. `edit mod 1 c/CS2040 n/Data Structures`                                                                                  | Modules |
+|        | Lesson | [`edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-a-lesson-edit-lesson) <br> e.g. `edit lesson 2 l/www.zoom.com/newlessonlink` | Details |
+|        | Exam   | [`edit exam INDEX [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-an-exam-edit-exam) <br> e.g. `edit exam 4 n/Final d/31/12/2022 s/2000 e/2100`         | Details |
+| Help   |        | [`help`](#viewing-help--help)                                                                                                                                                                               | Any     |
+| Clear  |        | [`clear`](#clearing-all-entries--clear)                                                                                                                                                                     | Any     |
+| Exit   |        | [`exit`](#exiting-the-program--exit)                                                                                                                                                                        | Any     |
 
 ### Command Summary by Object
 
