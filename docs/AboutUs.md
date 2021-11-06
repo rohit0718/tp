@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Documentation
 
-### TAN JUN RONG, BENJAMIN
+### Tan Jun Rong, Benjamin
 
 <img src="images/bentanjunrong.png" width="200px">
 
