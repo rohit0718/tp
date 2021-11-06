@@ -7,7 +7,6 @@ import static seedu.address.commons.util.DateTimeUtil.buildFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 
 /**
  * Represents a date in the ModBook.
@@ -66,7 +65,7 @@ public class ModBookDate implements Comparable<ModBookDate> {
         LocalDate result = null;
         for (DateTimeFormatter f : PARSE_FORMATTERS) {
             try {
-                result = LocalDate.parse(test, f.withResolverStyle(ResolverStyle.STRICT));
+                result = LocalDate.parse(test, f);
                 break; // short circuit once valid formatter is found
             } catch (DateTimeParseException e) {
                 // do nothing
