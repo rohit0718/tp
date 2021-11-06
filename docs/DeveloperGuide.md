@@ -537,13 +537,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all module using the `list` command. Multiple module in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete mod 1`<br>
       Expected: First module is deleted from the list. Details of the deleted module shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete mod 0`<br>
       Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete 1`, `delete mod x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
