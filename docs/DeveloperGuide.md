@@ -87,7 +87,7 @@ The `UI` component,
 - keeps a reference to the current screen state as a `GuiState` in order to restrict some commands to certain screens (more on this under `Restricting Commands based on GUI state` in the `Implementation` section below).
 - changes the screen based on the return value of CommandResult.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: How to change UI screen based on the command**
 
