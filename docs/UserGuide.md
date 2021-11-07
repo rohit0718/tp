@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 NUS ModBook is a **desktop app for NUS students to manage modules, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ModBook can help you organise modules faster than traditional GUI apps.
 
 If this is your first time here, head over to the [Quick Start](#quick-start) to begin!
