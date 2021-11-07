@@ -538,7 +538,7 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect `delete` commands to try:
       1. `delete`, `delete 1` <br>
          Expected: Similar to previous.
-      2. `delete mod x` (where x is not within the list size) <br>
+      2. `delete mod x` (where x is greater than the list size) <br>
          Expected: No module is found at the provided index.
 
 ### Editing a Module
@@ -555,5 +555,5 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect `edit` commands to try:
       1. `edit`, `edit 1` <br>
          Expected: Similar to previous.
-      2. `edit mod x c/CS1010X n/Programming Methodology` (where x is not within the list size) <br>
+      2. `edit mod x c/CS1010X n/Programming Methodology` (where x is greater than the list size) <br>
          Expected: No module is found at the provided index.
