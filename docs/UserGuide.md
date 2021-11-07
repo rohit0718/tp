@@ -37,21 +37,21 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
-- [Date and Time Formats](#date-and-time-formats)
+- [Day, Date and Time Formats](#day-date-and-time-formats)
 - [Command Summary](#command-summary)
   - [Command Summary by Action](#command-summary-by-action)
   - [Command Summary by Object](#command-summary-by-object)
 
 ## Quick Start
 
-1. Ensure you have `Java 11` or above installed in your Computer.
-2. Download the latest modbook.jar from here.
+1. Ensure you have Java `11` or above installed in your Computer.
+2. Download the latest `modbook.jar` from [here](https://github.com/AY2122S1-CS2103T-T13-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your ModBook.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
 ![QuickStartView](images/QuickStartView.png)
 
-5. Try out some example commands:
+5. Try out some example commands by typing it in the command box and pressing Enter:
 
 - `list mod`: Lists all modules.
 - `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
@@ -63,35 +63,37 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
 
 ## Screen Views
 
-The following are the **screen views** available in NUS ModBook.
+The following are the screen views available in NUS ModBook.
 
 ### Modules View
 
-See all the modules with the next lesson and exam for each module.
+See all the modules with the next lesson and exam for each module. Use the [list mod](#listing-all-modules--list-mod) command to access this view.
 
 ![ModulesView](images/ModulesView.png)
 
 ### Details View
 
-See all the lessons and modules for a given module.
+See all the lessons and modules for a given module. Use the [detail](#show-details-of-a-module-detail) command to access this view.
 
 ![DetailsView](images/DetailsView.png)
 
 ### Lessons View
 
-See all the lessons of all modules.
+See all the lessons of all modules. Use the [list lesson](#listing-all-lessons--list-lesson) command to access this view.
 
 ![LessonsView](images/LessonsView.png)
 
 ### Exams View
 
-See all the exams of all modules.
+See all the exams of all modules. Use the [list exam](#listing-all-exams--list-exam) command to access this view.
 
 ![ExamsView](images/ExamsView.png)
 
 ## Features
 
-### Notes about Commands
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about Commands<a name="notes-about-commands">**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you.
   - E.g. In add `c/CODE`, `CODE` is a parameter which can be used as `add mod c/CS2103T`.
@@ -112,11 +114,13 @@ See all the exams of all modules.
   - Note that this effectively means that even if your last integer is invalid, it will be taken to be the index. E.g. if you specify `delete lesson 1 2 -1`, the invalid integer `-1` will be taken as the index.
 - Some commands such as `delete` and `edit` can only be executed from certain screens. These requirements will be further explained in the descriptions of the commands below.
 
+</div>
+
 ### Modules
 
 #### Adding a module: `add mod`
 
-Adds a module to the ModBook. This command can be executed in the **modules** view.
+Adds a module to the ModBook. This command can be executed in the [modules view](#modules-view).
 
 Format: `add mod c/CODE [n/NAME]`
 
@@ -125,7 +129,7 @@ Examples:
 - `add mod c/CS2103T n/Software Engineering` : Adds a module with code CS2103T, named Software Engineering.
 - `add mod c/CS2040S` : Adds a module with code CS2040S, without a given name.
 
-#### Listing all modules : `list mod`
+#### Listing all modules: `list mod`
 
 Shows a list of all modules in the ModBook. This command can be executed in any view.
 
@@ -143,7 +147,7 @@ Example:
 
 #### Editing a module: `edit mod`
 
-Edits an existing module in the ModBook. This command can only be executed in the **modules** view.
+Edits an existing module in the ModBook. This command can only be executed in the [modules view](#modules-view).
 
 Format: `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`
 
@@ -158,7 +162,7 @@ Examples:
 
 #### Delete a module: `delete mod`
 
-Deletes a module from the ModBook. This command can only be executed in the **modules** view.
+Deletes a module from the ModBook. This command can only be executed in the [modules view](#modules-view).
 
 Format: `delete mod INDEX`
 
@@ -174,7 +178,7 @@ Example:
 
 #### Adding a lesson: `add lesson`
 
-Adds a lesson to the ModBook. This command can be executed in the **details** view.
+Adds a lesson to the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -183,7 +187,7 @@ Examples:
 - `add lesson n/Weekly Tutorial d/Monday s/1000 e/1100 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Adds a lesson to the CS2103T module with a specified link.
 - `add lesson n/Weekly Lab d/Monday s/1000 e/1100`: Adds a lesson to the CS2103T module without a specified link.
 
-#### Listing all lessons : `list lesson`
+#### Listing all lessons: `list lesson`
 
 Shows a list of all lessons in the ModBook. This command can be executed in any view.
 
@@ -191,7 +195,7 @@ Format: `list lesson`
 
 #### Editing a lesson: `edit lesson`
 
-Edits an existing lesson in the ModBook. This command can only be executed in the **details** view.
+Edits an existing lesson in the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
@@ -206,9 +210,9 @@ Examples:
 
 #### Deleting a lesson: `delete lesson`
 
-Deletes a lesson from the ModBook. This command can only be executed in the **details** view.
+Deletes a lesson from the ModBook. This command can only be executed in the [details view](#details-view).
 
-Format: `delete lesson`
+Format: `delete lesson INDEX`
 
 - Deletes the lesson at the specified INDEX.
 - The index refers to the index number shown in the displayed lesson list.
@@ -222,7 +226,7 @@ Example:
 
 #### Adding an exam: `add exam`
 
-Adds an exam to the ModBook. This command can be executed in the **details** view.
+Adds an exam to the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -231,7 +235,7 @@ Examples:
 - `add exam n/Final Exam d/31/12/2022 s/2100 e/2200 v/MPSH`: Adds an exam to the current module with a specified venue.
 - `add exam n/Midterms d/04/01/2021 s/2000 e/2200` Adds an exam to the current module.
 
-#### Listing all Exams : `list exam`
+#### Listing all Exams: `list exam`
 
 Shows a list of all lessons in the ModBook. This command can be executed in any view.
 
@@ -239,7 +243,7 @@ Format: `list exam`
 
 #### Editing an Exam: `edit exam`
 
-Edits an existing exam in the ModBook. This command can only be executed in the **details** view.
+Edits an existing exam in the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `edit exam 3 [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
@@ -252,9 +256,9 @@ Examples:
 - `edit exam 3 n/Final Exam d/31/12/2022 s/2100 e/2200 l/https://www.latlmes.com/breaking/click-this-link-for-exam-link-1`: Edits the 3rd exam of the CS2103T module.
 - `edit exam 4 n/Final d/31/12/2022 s/2000 e/2100`: Edits the 4th exam of CS2100 module.
 
-#### Deleting an Exam : `delete exam`
+#### Deleting an Exam: `delete exam`
 
-Deletes the specified Exam from the ModBook. This command can only be executed in the **details** view.
+Deletes the specified Exam from the ModBook. This command can only be executed in the [details view](#details-view).
 
 Format: `delete exam INDEX`
 
@@ -268,15 +272,15 @@ Example:
 
 ### Miscellaneous
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaining how to access the help page. Format: `help`
 
-#### Clearing all entries : `clear`
+#### Clearing all entries: `clear`
 
 Clears all entries from the ModBook. Format: `clear`
 
-#### Exiting the program : `exit`
+#### Exiting the program: `exit`
 
 Exits the program. Format: `exit`
 
@@ -296,23 +300,34 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ModBook home folder.
 
-## Date and Time Formats
+## Day, Date and Time Formats
 
-The following formats are valid for entering time values:
+The following formats are valid for entering day values:
 
-| Format   | Examples             |
-| -------- | -------------------- |
-| `HH:mm`  | `09:00`, `14:30`     |
-| `HH.mm`  | `09.00`, `14.30`     |
-| `HHmm`   | `0900`, `1430`       |
-| `ha`     | `9AM`, `2pm`         |
-| `hha`    | `09AM`, `11pm`       |
-| `h:mma`  | `9:00AM`, `2:30pm`   |
-| `hh:mma` | `09:00AM`, `11:30pm` |
-| `h.mma`  | `9.00AM`, `2.30pm`   |
-| `hh.mma` | `09.00AM`, `11.30pm` |
+| Day of Week | Format                             |
+|-------------|------------------------------------|
+| Monday      | `Monday`, `Mon`                    |
+| Tuesday     | `Tuesday`, `Tues`, `Tue`           |
+| Wednesday   | `Wednesday`, `Wed`                 |
+| Thursday    | `Thursday`, `Thurs`, `Thur`, `Thu` |
+| Friday      | `Friday`, `Fri`                    |
+| Saturday    | `Saturday`, `Sat`                  |
+| Sunday      | `Sunday`, `Sun`                    |
 
-The input for `AM/PM` is case insensitive, e.g. both `10AM` and `10am` are valid.
+The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
+
+The date and time formats accepted by ModBook use the symbols in the table below:
+
+| Symbol | Meaning                                 |
+| ------ | --------------------------------------- |
+| H      | Hour of 24-hour time. Goes from 0 to 23 |
+| h      | Hour of 12-hour time. Goes from 1 to 12 |
+| m      | Minute                                  |
+| a      | AM/PM indicator                         |
+| L      | Month as text                           |
+| M      | Month as number                         |
+| y      | Year                                    |
+| d      | day of month                            |
 
 The following formats are valid for entering date values:
 
@@ -328,41 +343,44 @@ The following formats are valid for entering date values:
 | `d LLLL yyyy`  | `2 february 1999`  |
 | `d LLL yyyy`   | `2 feb 1999`       |
 
-The meaning of the symbols in the formats specified are in the table below:
+The following formats are valid for entering time values:
 
-| Symbol | Meaning                                 |
-| ------ | --------------------------------------- |
-| H      | Hour of 24-hour time. Goes from 0 to 23 |
-| h      | Hour of 12-hour time. Goes from 1 to 12 |
-| m      | Minute                                  |
-| a      | AM/PM indicator                         |
-| L      | Month as text                           |
-| M      | Month as number                         |
-| y      | Year                                    |
-| d      | day of month                            |
+| Format   | Examples             |
+| -------- | -------------------- |
+| `HH:mm`  | `09:00`, `14:30`     |
+| `HH.mm`  | `09.00`, `14.30`     |
+| `HHmm`   | `0900`, `1430`       |
+| `ha`     | `9AM`, `2pm`         |
+| `hha`    | `09AM`, `11pm`       |
+| `h:mma`  | `9:00AM`, `2:30pm`   |
+| `hh:mma` | `09:00AM`, `11:30pm` |
+| `h.mma`  | `9.00AM`, `2.30pm`   |
+| `hh.mma` | `09.00AM`, `11.30pm` |
+
+The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid. Also, note that `2400` (i.e. midnight of the next day) is not a valid input.
 
 ## Command Summary
 
 ### Command Summary by Action
 
-| Action | Object | Format                                                                                                                                     | View    |
-| ------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| Add    | Module | [`add mod c/CODE [n/NAME]`](#adding-a-module-add-mod)                                                                                                | Modules |
-|        | Lesson | [`add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-a-lesson-add-lesson)                                          | Details |
-|        | Exam   | [`add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-an-exam-add-exam)                                                      | Details |
-| List   | Module | [`list mod`](#listing-all-modules--list-mod)                                                                                                         | Any     |
-|        | Lesson | [`list lesson`](#listing-all-lessons--list-lesson)                                                                                                   | Any     |
-|        | Exam   | [`list exam`](#listing-all-exams--list-exam)                                                                                                         | Any     |
-| Detail | Module | [`detail c/CODE`](#show-details-of-a-module-detail)                                                                                                  | Any     |
-| Delete | Module | [`delete mod INDEX`](#delete-a-module-delete-mod)                                                                                                    | Modules |
-|        | Lesson | [`delete lesson INDEX`](#deleting-a-lesson-delete-lesson)                                                                                            | Details |
-|        | Exam   | [`delete exam INDEX`](#deleting-an-exam--delete-exam)                                                                                                | Details |
-| Edit   | Module | [`edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`](#editing-a-module-edit-mod)                                                                             | Modules |
-|        | Lesson | [`edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-a-lesson-edit-lesson) | Details |
-|        | Exam   | [`edit exam INDEX [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-an-exam-edit-exam)             | Details |
-| Help   |        | [`help`](#viewing-help--help)                                                                                                                        | Any     |
-| Clear  |        | [`clear`](#clearing-all-entries--clear)                                                                                                              | Any     |
-| Exit   |        | [`exit`](#exiting-the-program--exit)                                                                                                                 | Any     |
+| Action | Object | Format                                                                                                                                                                                                      | View    |
+|--------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| Add    | Module | [`add mod c/CODE [n/NAME]`](#adding-a-module-add-mod) <br> e.g. `add mod c/CS2103T n/Software Engineering`                                                                                                  | Modules |
+|        | Lesson | [`add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-a-lesson-add-lesson) <br> e.g. `add lesson n/Weekly Lab d/Monday s/1000 e/1100 l/zoom.com/cs2103t`                   | Details |
+|        | Exam   | [`add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`](#adding-an-exam-add-exam) <br> e.g. `add exam n/Final Exam d/31/12/2022 s/2100 e/2200 v/MPSH`                                         | Details |
+| List   | Module | [`list mod`](#listing-all-modules--list-mod)                                                                                                                                                                | Any     |
+|        | Lesson | [`list lesson`](#listing-all-lessons--list-lesson)                                                                                                                                                          | Any     |
+|        | Exam   | [`list exam`](#listing-all-exams--list-exam)                                                                                                                                                                | Any     |
+| Detail | Module | [`detail c/CODE`](#show-details-of-a-module-detail) <br> e.g. `detail c/CS2103T`                                                                                                                            | Any     |
+| Delete | Module | [`delete mod INDEX`](#delete-a-module-delete-mod)                                                                                                                                                           | Modules |
+|        | Lesson | [`delete lesson INDEX`](#deleting-a-lesson-delete-lesson)                                                                                                                                                   | Details |
+|        | Exam   | [`delete exam INDEX`](#deleting-an-exam--delete-exam)                                                                                                                                                       | Details |
+| Edit   | Module | [`edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`](#editing-a-module-edit-mod) <br> e.g. `edit mod 1 c/CS2040 n/Data Structures`                                                                                  | Modules |
+|        | Lesson | [`edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-a-lesson-edit-lesson) <br> e.g. `edit lesson 2 l/www.zoom.com/newlessonlink` | Details |
+|        | Exam   | [`edit exam INDEX [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`](#editing-an-exam-edit-exam) <br> e.g. `edit exam 4 n/Final d/31/12/2022 s/2000 e/2100`         | Details |
+| Help   |        | [`help`](#viewing-help--help)                                                                                                                                                                               | Any     |
+| Clear  |        | [`clear`](#clearing-all-entries--clear)                                                                                                                                                                     | Any     |
+| Exit   |        | [`exit`](#exiting-the-program--exit)                                                                                                                                                                        | Any     |
 
 ### Command Summary by Object
 
