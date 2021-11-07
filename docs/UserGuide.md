@@ -8,7 +8,7 @@ NUS ModBook is a **desktop app for NUS students to manage modules, optimized for
 If this is your first time here, head over to the [Quick Start](#quick-start) to begin!
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ## Quick Start
 
