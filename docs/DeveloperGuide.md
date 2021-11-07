@@ -29,7 +29,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-![ArchitectureDiagram.png](images/ArchitectureDiagram.png)
+<img src="images/ArchitectureDiagram.png" width="280" />
 
 The **_Architecture Diagram_** given above explains the high-level design of the App.
 
@@ -55,7 +55,7 @@ The rest of the App consists of four components.
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -64,7 +64,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-![ComponentManagersDiagram](images/ComponentManagers.png)
+<img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
@@ -104,7 +104,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-![LogicClassDiagram](images/LogicClassDiagram.png)
+<img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 
@@ -122,7 +122,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-![ParserClassesDiagram](images/ParserClasses.png)
+<img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
 
@@ -134,7 +134,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-![ModelClassDiagram](images/ModelClassDiagram.png)
+<img src="images/ModelClassDiagram.png" width="450" />
 
 The `Model` component,
 
@@ -162,7 +162,7 @@ The sequence diagram of how this works for an `add lesson` command is found belo
 
 When storing the `ModBook`, the respective `JsonAdaptedObject` classes will create adaptations of objects in the `Model`, allowing `JsonUtil` to store the objects and save them to the `filePath` specified in `UserPrefs`.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: How to save components of Modules (Lesson / Exam / Timeslot / ModBookTime / ModBookDate):**
 
@@ -210,7 +210,7 @@ The sequence diagram of how this works for a `delete` command is found below. Th
 When parsing, the respective `Parser` will check the current `GuiState` with the allowed `GuiState`s. If the `GuiState` is valid, it will proceed with parsing the command.
 Otherwise, it will throw a `GuiStateException`.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: How to implement edit/delete lessons/exams:**
 
@@ -225,11 +225,11 @@ Otherwise, it will throw a `GuiStateException`.
 
 ## **Documentation, Logging, Testing, Configuration, DevOps**
 
-- [Documentation guide](Documentation.md)
-- [Testing guide](Testing.md)
-- [Logging guide](Logging.md)
-- [Configuration guide](Configuration.md)
-- [DevOps guide](DevOps.md)
+- [Documentation Guide](Documentation.md)
+- [Testing Guide](Testing.md)
+- [Logging Guide](Logging.md)
+- [Configuration Guide](Configuration.md)
+- [DevOps Guide](DevOps.md)
 
 ---
 
@@ -488,7 +488,7 @@ Use case ends.
 **Extensions**  
 1a. User types in a wrong parameter  
 &nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
-&nbsp;&nbsp;&nbsp; 1a2. User enters new data
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
 &nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1
 
 Use case ends.
@@ -520,7 +520,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
+   2. Double-click the jar file 
+      Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -535,15 +536,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a module while all module are being shown
 
-   1. Prerequisites: List all module using the `list` command. Multiple module in the list.
+   1. Prerequisites: List all module using the `list mod` command. You must have at least one module in ModBook.
 
    1. Test case: `delete mod 1`<br>
-      Expected: First module is deleted from the list. Details of the deleted module shown in the status message. Timestamp in the status bar is updated.
+      Expected: First module is deleted from the list. Details of the deleted module shown in the status message.
 
    1. Test case: `delete mod 0`<br>
       Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete 1`, `delete mod x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete 1`, `delete mod x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
