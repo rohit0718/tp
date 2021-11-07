@@ -38,3 +38,6 @@ Given below are my contributions to the project.
 
 * **Reviewing/Mentoring contributions**:
     * PRs reviewed (with non-trivial review comments): [#68](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/68), [#72](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/72), [#101](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/101), [#120](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/120), [#162](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/162)
+
+* **Contributions beyond the project team**:
+    * Reported bugs for other teams as part of Mock PE ([link](https://github.com/shezadhassan22/ped/issues))
