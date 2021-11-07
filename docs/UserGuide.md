@@ -290,7 +290,7 @@ ModBook data is saved in the hard disk automatically after you execute any comma
 
 #### Editing the data file
 
-ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Advanced users are welcome to update data directly by editing that data file once the application is closed. Note that the `modbook.json` file is only created once a valid command is entered.
 
 > :warning: **Caution**: If your changes to the data file make the format invalid, ModBook will discard all data and start with an empty data file at the next run.
 

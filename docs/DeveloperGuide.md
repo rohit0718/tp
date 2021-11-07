@@ -520,17 +520,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file 
+   2. Double-click the jar file <br>
       Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file. <br>
       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a Module
 
@@ -538,21 +536,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all module using the `list mod` command. You must have at least one module in ModBook.
 
-   1. Test case: `delete mod 1`<br>
+   2. Test case: `delete mod 1` <br>
       Expected: First module is deleted from the list. Details of the deleted module shown in the status message.
 
-   1. Test case: `delete mod 0`<br>
+   3. Test case: `delete mod 0` <br>
       Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete 1`, `delete mod x` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete 1`, `delete mod x` (where x is larger than the list size) <br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving Data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
