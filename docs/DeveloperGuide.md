@@ -2,8 +2,9 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+- Table of Contents
+  {:toc}
 
 ---
 
@@ -495,8 +496,8 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has **`Java 11`** or above installed.
-1. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
-1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
@@ -516,32 +517,24 @@ testers are expected to do more *exploratory* testing.
 ### Launch and Shutdown
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
-
    2. Double-click the jar file <br>
       Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
-
 1. Saving window preferences
-
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
    2. Re-launch the app by double-clicking the jar file. <br>
       Expected: The most recent window size and location is retained.
 
 ### Deleting a Module
 
 1. Deleting a module while all modules are being shown.
-
    1. Prerequisites:
       1. You must have at least one module in ModBook.
       2. List all modules using the `list mod` command.
    2. Test case: `delete mod 1` <br>
       Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
-
    3. Test case: `delete mod 0` <br>
       Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
-
    4. Other incorrect `delete` commands to try:
       1. `delete`, `delete 1` <br>
          Expected: Similar to previous.
@@ -551,17 +544,14 @@ testers are expected to do more *exploratory* testing.
 ### Editing a Module
 
 1. Editing a module while that module's details are being shown.
-
    1. Prerequisites:
       1. You must have at least one module in ModBook.
       2. List all modules using the `list mod` command.
       3. For testing purposes, we assume the first module in the list does not have code **CS10101X** or name **Programming Methodology**. This should be the case with the default data loaded into the application.
    2. Test case: `edit mod 1 c/CS1010X n/Programming Methodology` <br>
       Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
-
    3. Test case: `edit mod 1` <br>
       Expected: No module is edited. Error details shown in the status message, with correct command format provided.
-
    4. Other incorrect `edit` commands to try:
       1. `edit`, `edit 1` <br>
          Expected: Similar to previous.
