@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-### Isaac Lee
+### Lee Xiong Jie, Isaac
 
 <img src="images/luminousleek.png" width="200px">
 
@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team Lead
 
-### Shezad Hassan
+### Shezad Sulyman Imran Hassan
 
 <img src="images/shezadhassan22.png" width="200px">
 
@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Documentation
 
-### Benjamin Tan
+### TAN JUN RONG, BENJAMIN
 
 <img src="images/bentanjunrong.png" width="200px">
 
