@@ -18,3 +18,4 @@ NUS ModBook is a **desktop app for NUS students to manage modules, optimized for
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* This project was adapted from [AddressBook-3](https://github.com/se-edu/addressbook-level3), as **part of the se-education.org** initiative. 
