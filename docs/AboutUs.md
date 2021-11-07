@@ -5,47 +5,50 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+## Project Team
 
-## Project team
-
-### Isaac Lee
+### Lee Xiong Jie, Isaac
 
 <img src="images/luminousleek.png" width="200px">
 
-[[github](https://github.com/luminousleek)]
+Role: Team Lead
 
-* Role: Team Lead
+* [GitHub](https://github.com/luminousleek)
+* [Project Portfolio Page](team/luminousleek.html)
 
-### Shezad Hassan
+### Shezad Sulyman Imran Hassan
 
 <img src="images/shezadhassan22.png" width="200px">
 
-[[github](https://github.com/shezadhassan22)]
+Role: Testing
 
-* Role: Testing
+* [GitHub](https://github.com/shezadhassan22)
+* [Project Portfolio Page](team/shezadhassan22.html)
 
 ### Rohit Rajesh Bhat
 
 <img src="images/rohit0718.png" width="200px">
 
-[[github](https://github.com/rohit0718)]
+Role: Documentation
 
-* Role: Documentation
+* [GitHub](https://github.com/rohit0718)
+* [Project Portfolio Page](team/rohit0718.html)
 
 ### TAN JUN RONG, BENJAMIN
 
 <img src="images/bentanjunrong.png" width="200px">
 
-[[github](https://github.com/bentanjunrong)]
+Role: Code Quality
 
-* Role: Code Quality
+* [GitHub](https://github.com/bentanjunrong)
+* [Project Portfolio Page](team/bentanjunrong.html)
 
 ### Benjamin Lim
 
 <img src="images/itzblim.png" width="200px">
 
-[[github](https://github.com/itzblim)]
+Role: Deliverables and Deadlines
 
-* Role: Deliverables and deadlines
+* [GitHub](https://github.com/itzblim)
+* [Project Portfolio Page](team/itzblim.html)
 

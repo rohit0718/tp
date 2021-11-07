@@ -1,46 +1,14 @@
-# User Guide
+---
+layout: page
+title: User Guide
+---
 
 NUS ModBook is a **desktop app for NUS students to manage modules, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ModBook can help you organise modules faster than traditional GUI apps.
 
 If this is your first time here, head over to the [Quick Start](#quick-start) to begin!
 
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Screen Views](#screen-views)
-  - [Modules View](#modules-view)
-  - [Details View](#details-view)
-  - [Lessons View](#lessons-view)
-  - [Exams View](#exams-view)
-- [Features](#features)
-  - [Notes about Commands](#notes-about-commands)
-  - [Modules](#modules)
-    - [Adding a module: `add mod`](#adding-a-module-add-mod)
-    - [Listing all modules : `list mod`](#listing-all-modules--list-mod)
-    - [Show details of a module: `detail`](#show-details-of-a-module-detail)
-    - [Editing a module: `edit mod`](#editing-a-module-edit-mod)
-    - [Delete a module: `delete mod`](#delete-a-module-delete-mod)
-  - [Lessons](#lessons)
-    - [Adding a lesson: `add lesson`](#adding-a-lesson-add-lesson)
-    - [Listing all lessons : `list lesson`](#listing-all-lessons--list-lesson)
-    - [Editing a lesson: `edit lesson`](#editing-a-lesson-edit-lesson)
-    - [Deleting a lesson: `delete lesson`](#deleting-a-lesson-delete-lesson)
-  - [Exams](#exams)
-    - [Adding an exam: `add exam`](#adding-an-exam-add-exam)
-    - [Listing all Exams : `list exam`](#listing-all-exams--list-exam)
-    - [Editing an Exam: `edit exam`](#editing-an-exam-edit-exam)
-    - [Deleting an Exam : `delete exam`](#deleting-an-exam--delete-exam)
-  - [Miscellaneous](#miscellaneous)
-    - [Viewing help : `help`](#viewing-help--help)
-    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    - [Exiting the program : `exit`](#exiting-the-program--exit)
-    - [Saving the data](#saving-the-data)
-    - [Editing the data file](#editing-the-data-file)
-- [FAQ](#faq)
-- [Day, Date and Time Formats](#day-date-and-time-formats)
-- [Command Summary](#command-summary)
-  - [Command Summary by Action](#command-summary-by-action)
-  - [Command Summary by Object](#command-summary-by-object)
+* Table of Contents
+{:toc}
 
 ## Quick Start
 
@@ -93,7 +61,7 @@ See all the exams of all modules. Use the [list exam](#listing-all-exams--list-e
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about Commands<a name="notes-about-commands">**<br>
+:information_source: **Notes about Commands**<a name="notes-about-commands"><br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you.
   - E.g. In add `c/CODE`, `CODE` is a parameter which can be used as `add mod c/CS2103T`.
@@ -290,7 +258,7 @@ ModBook data is saved in the hard disk automatically after you execute any comma
 
 #### Editing the data file
 
-ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Advanced users are welcome to update data directly by editing that data file once the application is closed. Note that the `modbook.json` file is only created once a valid command is entered.
 
 > :warning: **Caution**: If your changes to the data file make the format invalid, ModBook will discard all data and start with an empty data file at the next run.
 
