@@ -1,5 +1,3 @@
-# User Guide
-
 NUS ModBook is a **desktop app for NUS students to manage modules, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ModBook can help you organise modules faster than traditional GUI apps.
 
 If this is your first time here, head over to the [Quick Start](#quick-start) to begin!
@@ -93,7 +91,7 @@ See all the exams of all modules. Use the [list exam](#listing-all-exams--list-e
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about Commands<a name="notes-about-commands">**<br>
+:information_source: **Notes about Commands**<a name="notes-about-commands"><br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you.
   - E.g. In add `c/CODE`, `CODE` is a parameter which can be used as `add mod c/CS2103T`.
