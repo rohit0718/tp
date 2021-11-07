@@ -9,13 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Link {
 
-    public static final String MESSAGE_CONSTRAINTS = "Link can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "A link should not be empty and should minimally take the form" +
+            " {website name}.{website domain}.\nUse of 'www' and 'http/https' tags are optional.\n" +
+            "For example, 'youtube.com' and 'https://youtube.com/help' are valid links.";
 
-    /*
-     * The first character of the link must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\."
+    public static final String VALIDATION_REGEX = "(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\."
             + "[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
 
     public final String link;
