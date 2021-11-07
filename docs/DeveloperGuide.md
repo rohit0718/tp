@@ -532,15 +532,39 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a Module
 
-1. Deleting a module while all module are being shown
+1. Deleting a module while all modules are being shown.
 
-   1. Prerequisites: List all module using the `list mod` command. You must have at least one module in ModBook.
-
+    1. Prerequisites:
+        1. You must have at least one module in ModBook.
+        2. List all modules using the `list mod` command.
    2. Test case: `delete mod 1` <br>
-      Expected: First module is deleted from the list. Details of the deleted module shown in the status message.
+      Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
 
    3. Test case: `delete mod 0` <br>
-      Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
 
-   4. Other incorrect delete commands to try: `delete`, `delete 1`, `delete mod x` (where x is larger than the list size) <br>
-      Expected: Similar to previous.
+   4. Other incorrect `delete` commands to try: 
+      1. `delete`, `delete 1` <br>
+         Expected: Similar to previous.
+      2. `delete mod x` (where x is not within the list size) <br>
+         Expected: No module is found at the provided index.
+      
+### Editing a Module
+
+1. Editing a module while that module's details are being shown.
+
+    1. Prerequisites:
+       1. You must have at least one module in ModBook.
+       2. List all modules using the `list mod` command.
+       3. For testing purposes, we assume the first module in the list does not have code **CS10101X** or name **Programming Methodology**. This should be the case with the default data loaded into the application.
+    2. Test case: `edit mod 1 c/CS1010X n/Programming Methodology` <br>
+       Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
+
+    3. Test case: `edit mod 1` <br>
+       Expected: No module is edited. Error details shown in the status message, with correct command format provided.
+
+    4. Other incorrect `edit` commands to try:
+        1. `edit`, `edit 1` <br>
+           Expected: Similar to previous.
+        2. `edit mod x c/CS1010X n/Programming Methodology` (where x is not within the list size) <br>
+           Expected: No module is found at the provided index.
