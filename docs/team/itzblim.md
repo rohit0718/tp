@@ -6,7 +6,7 @@ title: Benjamin Lim's Project Portfolio Page
 ### Project: NUS ModBook
 
 NUS ModBook is a desktop application for NUS students to manage modules, optimized for use via a Command Line Interface.
-I was in charge of the back-end development of this project.
+I was in charge of the deliverables and deadlines for this project.
 
 Given below are my contributions to the project.
 
@@ -50,3 +50,6 @@ Given below are my contributions to the project.
 * **Reviewing/Mentoring contributions**:
     * PRs reviewed: [\#57](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/57), [\#78](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/78), [\#80](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/80), [\#108](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/108)
     * Reported various bugs: [\#93](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/93), [\#107](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/107), [\#123](https://github.com/AY2122S1-CS2103T-T13-1/tp/pull/123)
+
+* **Contributions beyond the project team**:
+    * Reported bugs for other teams as part of Mock PE ([examples](https://github.com/itzblim/ped/issues))
