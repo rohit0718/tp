@@ -741,6 +741,7 @@ Testing the validity of commands based on the GUI view of ModBook
     - Expected: The Lessons view is shown.
 5. Test case: `add mod c/AB1234C n/test`<br>
     - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+
 ## **Appendix: Effort**
 
 ### Rewriting entity types
