@@ -519,10 +519,12 @@ testers are expected to do more *exploratory* testing.
     1. Download the jar file and copy into an empty folder
     2. Double-click the jar file <br>
        Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
-1. Saving window preferences
+2. Saving window preferences
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
     2. Re-launch the app by double-clicking the jar file. <br>
        Expected: The most recent window size and location is retained.
+3. Shutdown
+    1. Either use the `exit` command or close the window to execute a shutdown.
 
 ### Listing all modules
 
@@ -569,7 +571,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites:
     - You must have at least one module in ModBook.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
     - List the details of added module using the `detail c/CODE` command.
 2. Test case: `add exam n/Final d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
     - Expected: First exam is added to the list. Details of the added exam are shown in the status message.
@@ -587,7 +589,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites:
     - You must have at least one module in ModBook.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
 2. Test case: `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
     - Expected: First lesson is added to the list. Details of the added lesson are shown in the status message.
 3. Test case: `add lesson d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
@@ -617,10 +619,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting an Exam
 
-Deleting an Exam while module details view is shown.
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one exam.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
 2. Test case: `delete exam 1` <br>
     - Expected: First exam is deleted from the list. Details of the deleted exam are shown in the status message.
 3. Test case: `delete exam 0` <br>
@@ -633,10 +634,9 @@ Deleting an Exam while module details view is shown.
 
 ### Deleting a Lesson
 
-Deleting a Lesson while module details view is shown.
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one lesson.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
 2. Test case: `delete lesson 1` <br>
     - Expected: First lesson is deleted from the list. Details of the deleted lesson are shown in the status message.
 3. Test case: `delete lesson 0` <br>
@@ -666,7 +666,7 @@ Deleting a Lesson while module details view is shown.
 
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one lesson.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
     - For testing purposes, we assume the first lesson in the list does not have the name **Weekly Tutorial**.
 2. Test case: `edit lesson 1 n/Weekly Tutorial` <br>
     - Expected: First lesson in the module is edited to have name **Weekly Tutorial**. Details of the edited lesson are shown in the status message.
@@ -682,7 +682,7 @@ Deleting a Lesson while module details view is shown.
 
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one exam.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
     - For testing purposes, we assume the first exam in the list does not have venue **MPSH2**.
 2. Test case: `edit exam 1 v/MPSH2` <br>
     - Expected: First exam in the module is edited to have venue MPSH2. Details of the edited exam are shown in the status message.
