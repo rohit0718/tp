@@ -270,7 +270,7 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 ## Day, Date and Time Formats
 
-### Valid formats for entering day values:
+### Valid formats for entering day values
 
 | Day of Week | Format                             |
 |-------------|------------------------------------|
@@ -282,9 +282,9 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 | Saturday    | `Saturday`, `Sat`                  |
 | Sunday      | `Sunday`, `Sun`                    |
 
-The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
+- The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
 
-### Valid formats for entering date values:
+### Valid formats for entering date values
 
 | Format         | Examples           |
 | -------------- | ------------------ |
@@ -298,7 +298,7 @@ The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
 | `d LLLL yyyy`  | `2 february 1999`  |
 | `d LLL yyyy`   | `2 feb 1999`       |
 
-Refer to the table below for clarification of the symbols used.
+- Refer to the table below for clarification of the symbols used:
 
 | Symbol | Meaning                                 |
 | ------ | --------------------------------------- |
@@ -307,7 +307,7 @@ Refer to the table below for clarification of the symbols used.
 | y      | Year                                    |
 | d      | day of month                            |
 
-### Valid formats for entering time values:
+### Valid formats for entering time values
 
 | Format   | Examples             |
 | -------- | -------------------- |
@@ -321,7 +321,8 @@ Refer to the table below for clarification of the symbols used.
 | `h.mma`  | `9.00AM`, `2.30pm`   |
 | `hh.mma` | `09.00AM`, `11.30pm` |
 
-Refer to the table below for clarification of the symbols used.
+- The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid. Also, note that `2400` (i.e. midnight of the next day) is not a valid input.
+- Refer to the table below for clarification of the symbols used:
 
 | Symbol | Meaning                                 |
 | ------ | --------------------------------------- |
@@ -330,7 +331,7 @@ Refer to the table below for clarification of the symbols used.
 | m      | Minute                                  |
 | a      | AM/PM indicator                         |
 
-The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid. Also, note that `2400` (i.e. midnight of the next day) is not a valid input.
+
 
 ## Command Summary
 
