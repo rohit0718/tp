@@ -18,11 +18,11 @@ This guide will give you an overview of all the features of ModBook, as well as 
 4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data. <br> ![QuickStartView](images/QuickStartView.png)
 5. Try out some example commands by typing it in the command box and pressing Enter:
 
-- `list mod`: Lists all modules.
-- `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
-- `delete mod 1`: Deletes the 1st module shown in the module list.
-- `clear`: Deletes all modules.
-- `exit`: Exits the app.
+   - `list mod`: Lists all modules.
+   - `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
+   - `delete mod 1`: Deletes the 1st module shown in the module list.
+   - `clear`: Deletes all modules.
+   - `exit`: Exits the app.
 
 6. Refer to the guides below for details of each command.
 
