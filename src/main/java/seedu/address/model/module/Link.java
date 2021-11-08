@@ -13,8 +13,11 @@ public class Link {
             + " {website name}.{website domain}.\nUse of 'www' and 'http/https' tags are optional.\n"
             + "For example, 'youtube.com' and 'https://youtube.com/help' are valid links.";
 
+    //@@author shezadhassan22-reused
+    //Reused from https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url
     public static final String VALIDATION_REGEX = "(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\."
             + "[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)";
+    //@@author
 
     public final String link;
 
