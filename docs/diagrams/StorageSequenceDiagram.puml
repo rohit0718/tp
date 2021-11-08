@@ -9,8 +9,6 @@ box Storage STORAGE_COLOR_T1
 participant ":StorageManager" as StorageManager STORAGE_COLOR
 participant ":JsonModBookStorage" as JsonModBookStorage STORAGE_COLOR
 participant ":JsonSerializableModBook" as JsonSerializableModBook STORAGE_COLOR
-participant ":JsonAdaptedModule" as JsonAdaptedModule STORAGE_COLOR
-participant ":JsonAdaptedLesson" as JsonAdaptedLesson STORAGE_COLOR
 participant ":JsonUtil" as JsonUtil STORAGE_COLOR
 end box
 
@@ -26,20 +24,6 @@ activate JsonModBookStorage
 create JsonSerializableModBook
 JsonModBookStorage -> JsonSerializableModBook : new JsonSerializableModBook(modBook)
 activate JsonSerializableModBook
-
-create JsonAdaptedModule
-JsonSerializableModBook -> JsonAdaptedModule : new JsonAdaptedModule(module)
-activate JsonAdaptedModule
-
-create JsonAdaptedLesson
-JsonAdaptedModule -> JsonAdaptedLesson : new JsonAdaptedLesson(lesson)
-activate JsonAdaptedLesson
-
-JsonAdaptedLesson --> JsonAdaptedModule : json lesson
-deactivate JsonAdaptedLesson
-
-JsonAdaptedModule --> JsonSerializableModBook : json module
-deactivate JsonAdaptedModule
 
 JsonSerializableModBook --> JsonModBookStorage : json modbook
 deactivate JsonSerializableModBook

@@ -53,7 +53,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete mod 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -92,11 +92,11 @@ The `UI` component,
 **Aspect: How to change UI screen based on the command**
 
 - **Alternative 1 (current choice)**: Create card classes for each type of screen and change rendered card based on return value of CommandResult.
-  - Pros: Readability is enhanced, easily extendable.
-  - Cons: Coupling of UI component is reduced; logic needs to be added to CommandResult to change the current screen.
+    - Pros: Readability is enhanced, easily extendable.
+    - Cons: Coupling of UI component is reduced; logic needs to be added to CommandResult to change the current screen.
 - **Alternative 2**: Have a single rendered ModuleCard that changes text based on the type of the object in the ObservableList.
-  - Pros: Easier to implement.
-  - Cons: Harder to extend; can lead to a monolithic ModuleCard that handles all views.
+    - Pros: Easier to implement.
+    - Cons: Harder to extend; can lead to a monolithic ModuleCard that handles all views.
 
 ### Logic Component
 
@@ -138,7 +138,7 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
+- stores the ModBook data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
 - stores the currently 'selected' `Module` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -151,7 +151,7 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both module data and user preference data in json format, and read them back into corresponding objects.
+- can save both module data and user preference data in `JSON` format, and read them back into corresponding objects.
 - inherits from both `ModBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -166,15 +166,15 @@ When storing the `ModBook`, the respective `JsonAdaptedObject` classes will crea
 **Aspect: How to save components of Modules (Lesson / Exam / Timeslot / ModBookTime / ModBookDate):**
 
 - **Alternative 1 (current choice)**: Create respective `JsonAdaptedObject` classes for each type of object.
-  - Pros: Greatly increases the readability of the JSON storage file
-  - Cons: Many objects must be created when a Lesson or Exam is being stored.
+    - Pros: Greatly increases the readability of the JSON storage file
+    - Cons: Many objects must be created when a Lesson or Exam is being stored.
 - **Alternative 2**: Encode `Lesson`, `Exam` and other components into `String` objects to be stored as properties of a `JsonAdaptedModule`.
-  - Pros: Easier to implement the writing of JSON files.
-  - Cons: Difficult to parse JSON output - have to figure out how to decode `String` objects to `Lesson`, `Exam` and other objects in the `Model`.
+    - Pros: Easier to implement the writing of JSON files.
+    - Cons: Difficult to parse JSON output - have to figure out how to decode `String` objects to `Lesson`, `Exam` and other objects in the `Model`.
 
 ### Common Classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
 
@@ -187,7 +187,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Rationale
 
 Some commands, e.g. `delete lesson` and `edit exam` should not be used in the view where the `Modules` are listed.
-This is because the `delete` and `edit` commands are indexed based, and in the `Modules` view, there are multiple `Lesson`s or `Exam`s displayed with the same index.
+This is because the `delete` and `edit` commands are indexed based, and in the `Modules` view, there are multiple `Lessons` or `Exams` displayed with the same index.
 Hence, there is a need to restrict these commands to the Module Details view, so that there is no ambiguity about which `Lesson` or `Exam` to delete.
 
 Thus, before commands are executed, the GUI state of the application needs to be checked to see if it is valid.
@@ -214,11 +214,11 @@ Otherwise, it will throw a `GuiStateException`.
 **Aspect: How to implement edit/delete lessons/exams:**
 
 - **Alternative 1 (current choice)**: Limits these two commands to the Module Details view.
-  - Pros: Easier to implement.
-  - Cons: Requires passing `GuiState` from the `UI` component to the `Logic` component, reducing cohesion.
+    - Pros: Easier to implement.
+    - Cons: Requires passing `GuiState` from the `UI` component to the `Logic` component, reducing cohesion.
 - **Alternative 2**: Combine the lists of lessons and exams into one central list in the List Lessons or Exams view respectively.
-  - Pros: Does not require `MainWindow` to keep track of its current `GuiState`.
-  - Cons: Difficult to implement - have to figure out how to map the `Lesson` or `Exam` from the central list to its original module.
+    - Pros: Does not require `MainWindow` to keep track of its current `GuiState`.
+    - Cons: Difficult to implement - have to figure out how to map the `Lesson` or `Exam` from the central list to its original module.
 
 ---
 
@@ -516,43 +516,254 @@ testers are expected to do more *exploratory* testing.
 ### Launch and Shutdown
 
 1. Initial launch
-   1. Download the jar file and copy into an empty folder
-   2. Double-click the jar file <br>
-      Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
-1. Saving window preferences
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   2. Re-launch the app by double-clicking the jar file. <br>
-      Expected: The most recent window size and location is retained.
+    1. Download the jar file and copy into an empty folder
+    2. Double-click the jar file <br>
+       Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
+2. Saving window preferences
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. Re-launch the app by double-clicking the jar file. <br>
+       Expected: The most recent window size and location is retained.
+3. Shutdown
+    1. Either use the `exit` command or close the window to execute a shutdown.
 
-### Deleting a Module
+### Commands
 
-1. Deleting a module while all modules are being shown.
-   1. Prerequisites:
-      1. You must have at least one module in ModBook.
-      2. List all modules using the `list mod` command.
-   2. Test case: `delete mod 1` <br>
-      Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
-   3. Test case: `delete mod 0` <br>
-      Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
-   4. Other incorrect `delete` commands to try:
-      1. `delete`, `delete 1` <br>
-         Expected: Similar to previous.
-      2. `delete mod x` (where x is greater than the list size) <br>
-         Expected: No module is found at the provided index.
+#### Adding a module
 
-### Editing a Module
+1. Prerequisites:
+   - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
+2. Test case: `add mod c/CS1231` <br>
+   - Expected: First module is added to the list. Details of the added module are shown in the status message.
+3. Test case: `add mod m/CS1231` <br>
+   - Expected: No module is added. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `add` commands to try:
+    - `add CS1231` <br>
+        - Expected: No module is added as code prefix is not included.
+    - `add`<br>
+        - Expected: No module is added as `mod` is not specified after command.
 
-1. Editing a module while that module's details are being shown.
-   1. Prerequisites:
-      1. You must have at least one module in ModBook.
-      2. List all modules using the `list mod` command.
-      3. For testing purposes, we assume the first module in the list does not have code **CS10101X** or name **Programming Methodology**. This should be the case with the default data loaded into the application.
-   2. Test case: `edit mod 1 c/CS1010X n/Programming Methodology` <br>
-      Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
-   3. Test case: `edit mod 1` <br>
-      Expected: No module is edited. Error details shown in the status message, with correct command format provided.
-   4. Other incorrect `edit` commands to try:
-      1. `edit`, `edit 1` <br>
-         Expected: Similar to previous.
-      2. `edit mod x c/CS1010X n/Programming Methodology` (where x is greater than the list size) <br>
-         Expected: No module is found at the provided index.
+#### Adding a lesson
+
+1. Prerequisites:
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+2. Test case: `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+    - Expected: First lesson is added to the list. Details of the added lesson are shown in the status message.
+3. Test case: `add lesson d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+    - Expected: No lesson is added. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `add` commands to try:
+    - `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/ v/COM1 `<br>
+        - Expected: No lesson is added as link field is empty.
+    - `add lesson n/Tutorial s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+        - Expected: No lesson is added as day is not specified.
+    - `add n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+        - Expected: No lesson is added as `lesson` is not specified after add command
+
+#### Adding an exam
+
+1. Prerequisites:
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+    - List the details of added module using the `detail c/CODE` command.
+2. Test case: `add exam n/Final d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
+    - Expected: First exam is added to the list. Details of the added exam are shown in the status message.
+3. Test case: `add exam d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
+    - Expected: No exam is added. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `add` commands to try:
+    - `add exam n/Final d/02/02/1999 s/10:00 e/11:00 l/ v/Field`<br>
+       - Expected: No exam is added as link field is empty.
+    -  `add exam n/Final s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
+        - Expected: No exam is added as date is not specified.
+    3. `add n/Final d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
+        - Expected: No exam is added as `exam` is not specified after add command.
+
+#### Listing all modules
+
+1. Prerequisites:
+    - Can be executed from any view.
+2. Test case: `list mod` <br>
+    - Expected: All modules are displayed, with their next lessons and next exams (if available)
+3. Test case: `list` <br>
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Listing all lessons
+
+1. Prerequisites:
+    - Can be executed from any view.
+2. Test case: `list lesson` <br>
+    - Expected: Each module's lesson lists are displayed.
+3. Test case: `list` <br>
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Listing all exams
+
+1. Prerequisites:
+    - Can be executed from any view.
+2. Test case: `list exam` <br>
+    - Expected: Each module's exam lists are displayed.
+3. Test case: `list` <br>
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Showing details of a module
+
+1. Prerequisites:
+    - Can be executed from any view.
+    - For testing purposes, assume there is a module with code `CS2040S`.
+2. Test case: `detail c\CS2040S`
+    - Expected: A list of all Lessons and Exams of the specified Module is printed.
+3. Test case: `detail`
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Deleting a module
+
+1. Prerequisites:
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
+2. Test case: `delete mod 1` <br>
+    - Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
+3. Test case: `delete mod 0` <br>
+    - Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `delete` commands to try:
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete mod x` (where x is greater than the list size) <br>
+        - Expected: No module is found at the provided index.
+
+#### Deleting a Lesson
+
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one lesson.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+2. Test case: `delete lesson 1` <br>
+    - Expected: First lesson is deleted from the list. Details of the deleted lesson are shown in the status message.
+3. Test case: `delete lesson 0` <br>
+    - Expected: No lesson is deleted. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `delete` commands to try:
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete lesson x` (where x is greater than the list size) <br>
+        - Expected: No lesson is found at the provided index.
+
+#### Deleting an Exam
+
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one exam.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+2. Test case: `delete exam 1` <br>
+    - Expected: First exam is deleted from the list. Details of the deleted exam are shown in the status message.
+3. Test case: `delete exam 0` <br>
+    - Expected: No exam is deleted. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `delete` commands to try:
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete exam x` (where x is greater than the list size) <br>
+        - Expected: No exam is found at the provided index.
+
+#### Editing a Module
+1. Prerequisites:
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
+    - For testing purposes, we assume the first module in the list does not have code **CS1010S** or name **Programming Methodology**.
+2. Test case: `edit mod 1 c/CS1010S n/Programming Methodology` <br>
+    - Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
+3. Test case: `edit mod 1` <br>
+    - Expected: No module is edited. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `edit` commands to try:
+    - `edit`, `edit 1` <br>
+        - Expected: Similar to previous.
+    - `edit mod X c/CS1010S n/Programming Methodology` (where X is greater than the list size) <br>
+        - Expected: No module is found at the provided index.
+
+#### Editing a Lesson
+
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one lesson.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+    - For testing purposes, we assume the first lesson in the list does not have the name **Weekly Tutorial**.
+2. Test case: `edit lesson 1 n/Weekly Tutorial` <br>
+    - Expected: First lesson in the module is edited to have name **Weekly Tutorial**. Details of the edited lesson are shown in the status message.
+3. Test case: `edit lesson 1` <br>
+    - Expected: No lesson is edited. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `edit` commands to try:
+    - `edit`, `edit 1` <br>
+        - Expected: Similar to previous.
+    - `edit lesson x n/Weekly Tutorial` (where x is greater than the list size) <br>
+        - Expected: No lesson is found at the provided index.
+
+#### Editing an Exam
+
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one exam.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+    - For testing purposes, we assume the first exam in the list does not have venue **MPSH2**.
+2. Test case: `edit exam 1 v/MPSH2` <br>
+    - Expected: First exam in the module is edited to have venue MPSH2. Details of the edited exam are shown in the status message.
+3. Test case: `edit exam 1` <br>
+    - Expected: No exam is edited. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `edit` commands to try:
+    - `edit`, `edit 1` <br>
+        - Expected: Similar to previous.
+    - `edit exam x v/MPSH2` (where x is greater than the list size) <br>
+        - Expected: No exam is found at the provided index.
+
+### Testing Commands based on GUI view
+
+Testing the validity of commands based on the GUI view of ModBook
+
+#### Modules View
+1. Prerequisite:
+    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
+2. For testing purposes, we assume there is no module in the list with code **CS1010S** or name **Programming Methodology**. This should be the case with the default data loaded into the application.
+3. Test case: `add mod c/CS1010S n/Programming Methodology` <br>
+    - Expected: A module with code `CS1010S` and name `Programming Methodology` is added to the list.
+4. Test case: `list lesson`<br>
+    - Expected: The Lesson view is shown.
+5. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
+    - Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
+
+#### Lessons View
+1. Prerequisite:
+    - ModBook should be in the Lessons view. If ModBook is not in the Lessons view, use the `list lesson` command
+2. Test case: `list mod`<br>
+    - Expected: The Modules view is shown.
+3. Test case: `edit mod 1 n/test`<br>
+    - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+4. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
+    - Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
+
+#### Exams View
+1. Prerequisite:
+    - ModBook should be in the Exams view. If ModBook is not in the Lessons view, use the `list exam` command
+2. Test case: `list mod`<br>
+    - Expected: The Modules view is shown.
+3. Test case: `edit mod 1 n/test`<br>
+    - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+4. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
+    - Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
+
+#### Details View
+1. Prerequisites:
+    - You must have at least one module in ModBook
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the `detail` command with one of the modules already in ModBook
+2. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
+    - Expected: A lesson with name "test", day "Monday" and timeslot "10:00 - 11:00" is added to the module
+3. Test case: `add exam n/test d/01/01/2022 s/10am e/11am`<br>
+    - Expected: An exam with name "test", date "01/01/2022" and timeslot "10:00 - 11:00" is added to the module
+4. Test case: `list lesson`<br>
+    - Expected: The Lessons view is shown.
+5. Test case: `add mod c/AB1234C n/test`<br>
+    - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+
+## **Appendix: Effort**
+
+### Rewriting entity types
+As ModBook uses completely different entity types than AB3 (e.g. Module, Lesson), we had to write our entity classes from scratch, and implement custom methods that were required for the classes to function well. In addition to rewriting classes in `Model`, we also had to rewrite the classes in `Storage` to ensure that our entities could be written to and read in JSON.
+
+### Implementing showing next Lesson
+ModBook displays the next lesson of a module based on the system’s day and time. We implemented the lesson `Day` as an enumeration so that we did not have to worry about wrong inputs, but then we realised that Java enumerations do not allow the `compareTo` method to be overridden. Hence, we had to implement a custom `Comparator` for `Day` which offset the `Day` ordinal value by the current system day, and performed modulo arithmetic to make sure everything worked properly.
+
+### Implementing `Edit` command
+Edit was certainly the most time consuming feature to do, and also the feature that is most vulnerable to bugs. It effectively has the complexity of both deleting and adding a new object, while considering some additional complications from having optional fields such as requiring both start and end timings in order to modify a timeslot. As such, we had to ensure our test cases were rigorous.
+
+### Graphical User Interface (GUI)
+For the GUI, we made three additional GUI screens to display different information, and we also had to work out how to get the view to change based on the command that was executed. This was a challenge as we only allowed for certain commands to be executed in certain views. Weighing the pros and cons of different implementations, we decided to go with updating the `CommandResult` to return a value which changes the current screen view.
