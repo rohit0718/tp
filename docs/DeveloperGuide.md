@@ -526,34 +526,9 @@ testers are expected to do more *exploratory* testing.
 3. Shutdown
     1. Either use the `exit` command or close the window to execute a shutdown.
 
-### Listing all modules
+### Commands
 
-1. Prerequisites:
-    - Can be executed from any view.
-2. Test case: `list mod` <br>
-   - Expected: All modules are displayed, with their next lessons and next exams (if available)
-3. Test case: `list` <br>
-   - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
-
-### Listing all lessons
-
-1. Prerequisites:
-    - Can be executed from any view.
-2. Test case: `list lesson` <br>
-   - Expected: Each module's lesson lists are displayed.
-3. Test case: `list` <br>
-   - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
-
-### Listing all exams
-
-1. Prerequisites:
-   - Can be executed from any view.
-2. Test case: `list exam` <br>
-   - Expected: Each module's exam lists are displayed.
-3. Test case: `list` <br>
-   - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
-
-### Adding a Module
+#### Adding a module
 
 1. Prerequisites:
    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
@@ -567,7 +542,24 @@ testers are expected to do more *exploratory* testing.
     - `add`<br>
         - Expected: No module is added as `mod` is not specified after command.
 
-### Adding an Exam
+#### Adding a lesson
+
+1. Prerequisites:
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+2. Test case: `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+    - Expected: First lesson is added to the list. Details of the added lesson are shown in the status message.
+3. Test case: `add lesson d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+    - Expected: No lesson is added. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `add` commands to try:
+    - `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/ v/COM1 `<br>
+        - Expected: No lesson is added as link field is empty.
+    - `add lesson n/Tutorial s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+        - Expected: No lesson is added as day is not specified.
+    - `add n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+        - Expected: No lesson is added as `lesson` is not specified after add command
+
+#### Adding an exam
 
 1. Prerequisites:
     - You must have at least one module in ModBook.
@@ -585,24 +577,44 @@ testers are expected to do more *exploratory* testing.
     3. `add n/Final d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
         - Expected: No exam is added as `exam` is not specified after add command.
 
-### Adding a Lesson
+#### Listing all modules
 
 1. Prerequisites:
-    - You must have at least one module in ModBook.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
-2. Test case: `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-    - Expected: First lesson is added to the list. Details of the added lesson are shown in the status message.
-3. Test case: `add lesson d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-    - Expected: No lesson is added. Error details shown in the status message, with correct command format provided.
-4. Other incorrect `add` commands to try:
-    - `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/ v/COM1 `<br>
-        - Expected: No lesson is added as link field is empty.
-    - `add lesson n/Tutorial s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-        - Expected: No lesson is added as day is not specified.
-    - `add n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-        - Expected: No lesson is added as `lesson` is not specified after add command
+    - Can be executed from any view.
+2. Test case: `list mod` <br>
+    - Expected: All modules are displayed, with their next lessons and next exams (if available)
+3. Test case: `list` <br>
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
 
-### Deleting a Module
+#### Listing all lessons
+
+1. Prerequisites:
+    - Can be executed from any view.
+2. Test case: `list lesson` <br>
+    - Expected: Each module's lesson lists are displayed.
+3. Test case: `list` <br>
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Listing all exams
+
+1. Prerequisites:
+    - Can be executed from any view.
+2. Test case: `list exam` <br>
+    - Expected: Each module's exam lists are displayed.
+3. Test case: `list` <br>
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Showing details of a module
+
+1. Prerequisites:
+    - Can be executed from any view.
+    - For testing purposes, assume there is a module with code `CS2040S`.
+2. Test case: `detail c\CS2040S`
+    - Expected: A list of all Lessons and Exams of the specified Module is printed.
+3. Test case: `detail`
+    - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+
+#### Deleting a module
 
 1. Prerequisites:
     - You must have at least one module in ModBook.
@@ -617,22 +629,7 @@ testers are expected to do more *exploratory* testing.
     - `delete mod x` (where x is greater than the list size) <br>
         - Expected: No module is found at the provided index.
 
-### Deleting an Exam
-
-1. Prerequisites:
-    - You must have at least one module in ModBook, which contains at least one exam.
-    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
-2. Test case: `delete exam 1` <br>
-    - Expected: First exam is deleted from the list. Details of the deleted exam are shown in the status message.
-3. Test case: `delete exam 0` <br>
-    - Expected: No exam is deleted. Error details shown in the status message, with correct command format provided.
-4. Other incorrect `delete` commands to try:
-    - `delete`, `delete 1` <br>
-        - Expected: Similar to previous.
-    - `delete exam x` (where x is greater than the list size) <br>
-        - Expected: No exam is found at the provided index.
-
-### Deleting a Lesson
+#### Deleting a Lesson
 
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one lesson.
@@ -647,7 +644,22 @@ testers are expected to do more *exploratory* testing.
     - `delete lesson x` (where x is greater than the list size) <br>
         - Expected: No lesson is found at the provided index.
 
-### Editing a Module
+#### Deleting an Exam
+
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one exam.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`).
+2. Test case: `delete exam 1` <br>
+    - Expected: First exam is deleted from the list. Details of the deleted exam are shown in the status message.
+3. Test case: `delete exam 0` <br>
+    - Expected: No exam is deleted. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `delete` commands to try:
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete exam x` (where x is greater than the list size) <br>
+        - Expected: No exam is found at the provided index.
+
+#### Editing a Module
 1. Prerequisites:
     - You must have at least one module in ModBook.
     - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
@@ -662,7 +674,7 @@ testers are expected to do more *exploratory* testing.
     - `edit mod X c/CS1010S n/Programming Methodology` (where X is greater than the list size) <br>
         - Expected: No module is found at the provided index.
 
-### Editing a Lesson
+#### Editing a Lesson
 
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one lesson.
@@ -678,7 +690,7 @@ testers are expected to do more *exploratory* testing.
     - `edit lesson x n/Weekly Tutorial` (where x is greater than the list size) <br>
         - Expected: No lesson is found at the provided index.
 
-### Editing an Exam
+#### Editing an Exam
 
 1. Prerequisites:
     - You must have at least one module in ModBook, which contains at least one exam.
