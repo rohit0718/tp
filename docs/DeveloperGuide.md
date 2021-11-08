@@ -53,7 +53,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete mod 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -138,7 +138,7 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
+- stores the ModBook data i.e., all `Module` objects (which are contained in a `UniqueModuleList` object).
 - stores the currently 'selected' `Module` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -174,7 +174,7 @@ When storing the `ModBook`, the respective `JsonAdaptedObject` classes will crea
 
 ### Common Classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
 
@@ -187,7 +187,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Rationale
 
 Some commands, e.g. `delete lesson` and `edit exam` should not be used in the view where the `Modules` are listed.
-This is because the `delete` and `edit` commands are indexed based, and in the `Modules` view, there are multiple `Lesson`s or `Exam`s displayed with the same index.
+This is because the `delete` and `edit` commands are indexed based, and in the `Modules` view, there are multiple `Lessons` or `Exams` displayed with the same index.
 Hence, there is a need to restrict these commands to the Module Details view, so that there is no ambiguity about which `Lesson` or `Exam` to delete.
 
 Thus, before commands are executed, the GUI state of the application needs to be checked to see if it is valid.
@@ -762,7 +762,7 @@ As ModBook uses completely different entity types than AB3 (e.g. Module, Lesson)
 ### Implementing showing next Lesson
 ModBook displays the next lesson of a module based on the system’s day and time. We implemented the lesson `Day` as an enumeration so that we did not have to worry about wrong inputs, but then we realised that Java enumerations do not allow the `compareTo` method to be overridden. Hence, we had to implement a custom `Comparator` for `Day` which offset the `Day` ordinal value by the current system day, and performed modulo arithmetic to make sure everything worked properly.
 
-### Implementing ‘Edit’ command
+### Implementing `Edit` command
 Edit was certainly the most time consuming feature to do, and also the feature that is most vulnerable to bugs. It effectively has the complexity of both deleting and adding a new object, while considering some additional complications from having optional fields such as requiring both start and end timings in order to modify a timeslot. As such, we had to ensure our test cases were rigorous.
 
 ### Graphical User Interface (GUI)
