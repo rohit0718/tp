@@ -5,7 +5,7 @@ title: User Guide
 
 NUS ModBook is a **desktop app for NUS students to manage modules, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ModBook can help you organise modules faster than traditional GUI apps.
 
-If this is your first time here, head over to the [Quick Start](#quick-start) to begin!
+This guide will give you an overview of all the features of ModBook, as well as details regarding each command. If this is your first time here, head over to the [Quick Start](#quick-start) section to begin!
 
 * Table of Contents
 {:toc}
@@ -15,17 +15,17 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `modbook.jar` from [here](https://github.com/AY2122S1-CS2103T-T13-1/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your ModBook.
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 
-![QuickStartView](images/QuickStartView.png)
+  ![QuickStartView](images/QuickStartView.png)
 
 5. Try out some example commands by typing it in the command box and pressing Enter:
 
-- `list mod`: Lists all modules.
-- `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
-- `delete mod 1`: Deletes the 1st module shown in the module list.
-- `clear`: Deletes all modules.
-- `exit`: Exits the app.
+   - `list mod`: Lists all modules.
+   - `add mod c/CS2103T n/Software Engineering`: Adds a module with code CS2103T, named Software Engineering.
+   - `delete mod 1`: Deletes the 1st module shown in the module list.
+   - `clear`: Deletes all modules.
+   - `exit`: Exits the app.
 
 6. Refer to the guides below for details of each command.
 
@@ -88,7 +88,7 @@ See all the exams of all modules. Use the [list exam](#listing-all-exams-list-ex
 
 #### Adding a module: `add mod`
 
-Adds a module to the ModBook. This command can be executed in the [modules view](#modules-view).
+Adds a module to the ModBook. You can only execute this command in the [modules view](#modules-view).
 
 Format: `add mod c/CODE [n/NAME]`
 
@@ -99,13 +99,13 @@ Examples:
 
 #### Listing all modules: `list mod`
 
-Shows a list of all modules in the ModBook. This command can be executed in any view.
+Shows a list of all modules in the ModBook. You can execute this command in any view.
 
 Format: `list mod`
 
-#### Show details of a module: `detail`
+#### Showing details of a module: `detail`
 
-Show details of an existing module in the ModBook. A list of all Lessons and Exams of the specified Module is printed. This command can be executed in any view.
+Show details of an existing module in the ModBook. A list of all Lessons and Exams of the specified Module is printed. You can execute this command in any view.
 
 Format: `detail c/CODE`
 
@@ -115,7 +115,7 @@ Example:
 
 #### Editing a module: `edit mod`
 
-Edits an existing module in the ModBook. This command can only be executed in the [modules view](#modules-view).
+Edits an existing module in the ModBook. You can only execute this command in the [modules view](#modules-view).
 
 Format: `edit mod INDEX [c/NEW_CODE] [n/NEW_NAME]`
 
@@ -128,9 +128,9 @@ Examples:
 - `edit mod 1 n/Computer Networks` : Edits the name of the first module to Computer Networks
 - `edit mod 1 c/CS2106` : Edits the code of the first module to CS2106
 
-#### Delete a module: `delete mod`
+#### Deleting a module: `delete mod`
 
-Deletes a module from the ModBook. This command can only be executed in the [modules view](#modules-view).
+Deletes a module from the ModBook. You can only execute this command in the [modules view](#modules-view).
 
 Format: `delete mod INDEX`
 
@@ -146,7 +146,7 @@ Example:
 
 #### Adding a lesson: `add lesson`
 
-Adds a lesson to the ModBook. This command can only be executed in the [details view](#details-view).
+Adds a lesson to the ModBook. You can only execute this command in the [details view](#details-view).
 
 Format: `add lesson n/NAME d/DAY_OF_WEEK s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -157,13 +157,13 @@ Examples:
 
 #### Listing all lessons: `list lesson`
 
-Shows a list of all lessons in the ModBook. This command can be executed in any view.
+Shows a list of all lessons in the ModBook. You can execute this command in any view.
 
 Format: `list lesson`
 
 #### Editing a lesson: `edit lesson`
 
-Edits an existing lesson in the ModBook. This command can only be executed in the [details view](#details-view).
+Edits an existing lesson in the ModBook. You can only execute this command in the [details view](#details-view).
 
 Format: `edit lesson INDEX [n/NEW_NAME] [d/NEW_DAY_OF_WEEK] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
@@ -178,7 +178,7 @@ Examples:
 
 #### Deleting a lesson: `delete lesson`
 
-Deletes a lesson from the ModBook. This command can only be executed in the [details view](#details-view).
+Deletes a lesson from the ModBook. You can only execute this command in the [details view](#details-view).
 
 Format: `delete lesson INDEX`
 
@@ -194,7 +194,7 @@ Example:
 
 #### Adding an exam: `add exam`
 
-Adds an exam to the ModBook. This command can only be executed in the [details view](#details-view).
+Adds an exam to the ModBook. You can only execute this command in the [details view](#details-view).
 
 Format: `add exam n/NAME d/DATE s/START_TIME e/END_TIME [l/LINK] [v/VENUE]`
 
@@ -205,13 +205,13 @@ Examples:
 
 #### Listing all Exams: `list exam`
 
-Shows a list of all lessons in the ModBook. This command can be executed in any view.
+Shows a list of all lessons in the ModBook. You can execute this command in any view.
 
 Format: `list exam`
 
 #### Editing an Exam: `edit exam`
 
-Edits an existing exam in the ModBook. This command can only be executed in the [details view](#details-view).
+Edits an existing exam in the ModBook. You can only execute this command in the [details view](#details-view).
 
 Format: `edit exam 3 [n/NEW_NAME] [d/NEW_DATE] [s/NEW_START_TIME] [e/NEW_END_TIME] [l/NEW_LINK] [v/NEW_VENUE]`
 
@@ -226,7 +226,7 @@ Examples:
 
 #### Deleting an Exam: `delete exam`
 
-Deletes the specified Exam from the ModBook. This command can only be executed in the [details view](#details-view).
+Deletes the specified Exam from the ModBook. You can only execute this command in the [details view](#details-view).
 
 Format: `delete exam INDEX`
 
@@ -239,6 +239,8 @@ Example:
 - `delete exam 3` : Deletes the 3rd exam of the module that is currently displayed.
 
 ### Miscellaneous
+
+You can execute the following commands in any view.
 
 #### Viewing help: `help`
 
@@ -270,6 +272,9 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 ## Day, Date and Time Formats
 
+This section contains details on the valid format for Days, Dates and Times in ModBook. Note that all the formats are case-insensitive. 
+For example, both `Monday` and `monday` are valid inputs for Days. 
+
 ### Valid formats for entering day values
 
 | Day of Week | Format                             |
@@ -281,8 +286,6 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 | Friday      | `Friday`, `Fri`                    |
 | Saturday    | `Saturday`, `Sat`                  |
 | Sunday      | `Sunday`, `Sun`                    |
-
-- The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
 
 ### Valid formats for entering date values
 
@@ -321,7 +324,7 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 | `h.mma`  | `9.00AM`, `2.30pm`   |
 | `hh.mma` | `09.00AM`, `11.30pm` |
 
-- The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid. Also, note that `2400` (i.e. midnight of the next day) is not a valid input.
+- Note that `2400` (i.e. midnight of the next day) is not a valid input.
 - Refer to the table below for clarification of the symbols used:
 
 | Symbol | Meaning                                 |
@@ -334,6 +337,9 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 
 ## Command Summary
+
+This section consolidates all the commands and their respective formats for your reference. 
+The two tables below have the same commands, but the first one is organised by the actions that are available for you to take, and the second is organised by the objects (i.e. Modules, Lessons and Exams) in ModBook.
 
 ### Command Summary by Action
 
