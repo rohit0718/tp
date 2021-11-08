@@ -31,7 +31,7 @@ If this is your first time here, head over to the [Quick Start](#quick-start) to
 
 ## Screen Views
 
-The following are the screen views available in NUS ModBook.
+The following are the four screen views available in NUS ModBook. You can switch between them to view different information.
 
 ### Modules View
 
