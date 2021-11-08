@@ -13,7 +13,7 @@ title: Developer Guide
 
 ---
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -68,7 +68,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -87,18 +87,18 @@ The `UI` component,
 - keeps a reference to the current screen state as a `GuiState` in order to restrict some commands to certain screens (more on this under `Restricting Commands based on GUI state` in the `Implementation` section below).
 - changes the screen based on the return value of CommandResult.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How to change UI screen based on the command**
 
-* **Alternative 1 (current choice)**: Create card classes for each type of screen and change rendered card based on return value of CommandResult.
-    * Pros: Readability is enhanced, easily extendable.
-    * Cons: Coupling of UI component is reduced; logic needs to be added to CommandResult to change the current screen.
-* **Alternative 2**: Have a single rendered ModuleCard that changes text based on the type of the object in the ObservableList.
-    * Pros: Easier to implement.
-    * Cons: Harder to extend; can lead to a monolithic ModuleCard that handles all views.
+- **Alternative 1 (current choice)**: Create card classes for each type of screen and change rendered card based on return value of CommandResult.
+  - Pros: Readability is enhanced, easily extendable.
+  - Cons: Coupling of UI component is reduced; logic needs to be added to CommandResult to change the current screen.
+- **Alternative 2**: Have a single rendered ModuleCard that changes text based on the type of the object in the ObservableList.
+  - Pros: Easier to implement.
+  - Cons: Harder to extend; can lead to a monolithic ModuleCard that handles all views.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -127,10 +127,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 - When called upon to parse a user command, the `ModBookParser` class creates a `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `DeleteCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `DetailCommand`) which the `ModBookParser` returns back as a `Command` object.
-- The name of the `Command` Object may also include the type of object the command is acting on. For example, `delete mod` command returns  a `deleteModCommand` object, `delete lesson` command returns a `deleteLessonCommand` object and `delete exam` command returns a `deleteExamCommand` object.
+- The name of the `Command` Object may also include the type of object the command is acting on. For example, `delete mod` command returns a `deleteModCommand` object, `delete lesson` command returns a `deleteLessonCommand` object and `delete exam` command returns a `deleteExamCommand` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -143,18 +143,17 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
-
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 
-* can save both module data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `ModBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+- can save both module data and user preference data in json format, and read them back into corresponding objects.
+- inherits from both `ModBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 The sequence diagram of how this works for an `add lesson` command is found below. The objects in `Model` and `UI`, as well as time-related objects, are omitted for simplicity.
 
@@ -162,18 +161,18 @@ The sequence diagram of how this works for an `add lesson` command is found belo
 
 When storing the `ModBook`, the respective `JsonAdaptedObject` classes will create adaptations of objects in the `Model`, allowing `JsonUtil` to store the objects and save them to the `filePath` specified in `UserPrefs`.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How to save components of Modules (Lesson / Exam / Timeslot / ModBookTime / ModBookDate):**
 
-* **Alternative 1 (current choice)**: Create respective `JsonAdaptedObject` classes for each type of object.
-    * Pros: Greatly increases the readability of the JSON storage file
-    * Cons: Many objects must be created when a Lesson or Exam is being stored.
-* **Alternative 2**: Encode `Lesson`, `Exam` and other components into `String` objects to be stored as properties of a `JsonAdaptedModule`.
-    * Pros: Easier to implement the writing of JSON files.
-    * Cons: Difficult to parse JSON output - have to figure out how to decode `String` objects to `Lesson`, `Exam` and other objects in the `Model`.
+- **Alternative 1 (current choice)**: Create respective `JsonAdaptedObject` classes for each type of object.
+  - Pros: Greatly increases the readability of the JSON storage file
+  - Cons: Many objects must be created when a Lesson or Exam is being stored.
+- **Alternative 2**: Encode `Lesson`, `Exam` and other components into `String` objects to be stored as properties of a `JsonAdaptedModule`.
+  - Pros: Easier to implement the writing of JSON files.
+  - Cons: Difficult to parse JSON output - have to figure out how to decode `String` objects to `Lesson`, `Exam` and other objects in the `Model`.
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -210,7 +209,7 @@ The sequence diagram of how this works for a `delete` command is found below. Th
 When parsing, the respective `Parser` will check the current `GuiState` with the allowed `GuiState`s. If the `GuiState` is valid, it will proceed with parsing the command.
 Otherwise, it will throw a `GuiStateException`.
 
-#### Design considerations:
+#### Design Considerations
 
 **Aspect: How to implement edit/delete lessons/exams:**
 
@@ -220,22 +219,22 @@ Otherwise, it will throw a `GuiStateException`.
 - **Alternative 2**: Combine the lists of lessons and exams into one central list in the List Lessons or Exams view respectively.
   - Pros: Does not require `MainWindow` to keep track of its current `GuiState`.
   - Cons: Difficult to implement - have to figure out how to map the `Lesson` or `Exam` from the central list to its original module.
-  
+
 ---
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, DevOps**
 
-- [Documentation guide](Documentation.md)
-- [Testing guide](Testing.md)
-- [Logging guide](Logging.md)
-- [Configuration guide](Configuration.md)
-- [DevOps guide](DevOps.md)
+- [Documentation Guide](Documentation.md)
+- [Testing Guide](Testing.md)
+- [Logging Guide](Logging.md)
+- [Configuration Guide](Configuration.md)
+- [DevOps Guide](DevOps.md)
 
 ---
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile:**
 
@@ -247,7 +246,7 @@ Otherwise, it will throw a `GuiStateException`.
 
 **Value proposition**: manage modules faster NUSMods
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
@@ -267,7 +266,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `***`    | NUS student | delete my examinations                 | update if any examinations are cancelled               |
 | `***`    | NUS student | see a list of upcoming examinations    | plan my revision nearing the examination period        |
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `ModBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -488,7 +487,7 @@ Use case ends.
 **Extensions**  
 1a. User types in a wrong parameter  
 &nbsp;&nbsp;&nbsp; 1a1. ModBook outputs error message indicating parameter which has an error  
-&nbsp;&nbsp;&nbsp; 1a2. User enters new data
+&nbsp;&nbsp;&nbsp; 1a2. User enters new data  
 &nbsp;&nbsp;&nbsp; 1a3. Use case resumes from step 1
 
 Use case ends.
@@ -496,8 +495,8 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has **`Java 11`** or above installed.
-1. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
-1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
@@ -505,7 +504,7 @@ Use case ends.
 
 ---
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -514,44 +513,46 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
-
+   2. Double-click the jar file <br>
+      Expected: Shows the GUI with a set of sample modules. The window size may not be optimum.
 1. Saving window preferences
-
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file. <br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Deleting a Module
 
-### Deleting a module
+1. Deleting a module while all modules are being shown.
+   1. Prerequisites:
+      1. You must have at least one module in ModBook.
+      2. List all modules using the `list mod` command.
+   2. Test case: `delete mod 1` <br>
+      Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
+   3. Test case: `delete mod 0` <br>
+      Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
+   4. Other incorrect `delete` commands to try:
+      1. `delete`, `delete 1` <br>
+         Expected: Similar to previous.
+      2. `delete mod x` (where x is greater than the list size) <br>
+         Expected: No module is found at the provided index.
 
-1. Deleting a module while all module are being shown
+### Editing a Module
 
-   1. Prerequisites: List all module using the `list` command. Multiple module in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First module is deleted from the list. Details of the deleted module shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+1. Editing a module while that module's details are being shown.
+   1. Prerequisites:
+      1. You must have at least one module in ModBook.
+      2. List all modules using the `list mod` command.
+      3. For testing purposes, we assume the first module in the list does not have code **CS10101X** or name **Programming Methodology**. This should be the case with the default data loaded into the application.
+   2. Test case: `edit mod 1 c/CS1010X n/Programming Methodology` <br>
+      Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
+   3. Test case: `edit mod 1` <br>
+      Expected: No module is edited. Error details shown in the status message, with correct command format provided.
+   4. Other incorrect `edit` commands to try:
+      1. `edit`, `edit 1` <br>
+         Expected: Similar to previous.
+      2. `edit mod x c/CS1010X n/Programming Methodology` (where x is greater than the list size) <br>
+         Expected: No module is found at the provided index.

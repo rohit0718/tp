@@ -39,7 +39,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 ModBook *--> "1" UniqueModuleList
 UniqueModuleList --> "~* all" Module
-Module *--> ModuleCode
+Module *--> "1" ModuleCode
 Module *--> "0..1" ModuleName
 Module *--> "*" Exam
 Module *--> "*" Lesson
