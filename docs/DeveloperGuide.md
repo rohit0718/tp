@@ -526,183 +526,173 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing all modules
 
-Display all modules in the ModBook.
 1. Prerequisites:
-    - Can be executed from any screen.
+    - Can be executed from any view.
 2. Test case: `list mod` <br>
-   Expected: All modules are displayed, with their next lessons and next exams (if available)
+   - Expected: All modules are displayed, with their next lessons and next exams (if available)
 3. Test case: `list` <br>
-   Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+   - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
 
 ### Listing all lessons
 
-Display all lessons in the ModBook.
 1. Prerequisites:
-    - Can be executed from any screen.
+    - Can be executed from any view.
 2. Test case: `list lesson` <br>
-   Expected: Each module's lesson lists are displayed.
+   - Expected: Each module's lesson lists are displayed.
 3. Test case: `list` <br>
-   Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+   - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
 
 ### Listing all exams
 
-Display all exams in the ModBook.
 1. Prerequisites:
-    - Can be executed from any screen.
+   - Can be executed from any view.
 2. Test case: `list exam` <br>
-   Expected: Each module's exam lists are displayed.
+   - Expected: Each module's exam lists are displayed.
 3. Test case: `list` <br>
-   Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
+   - Expected: Missing parameters so nothing happens. Error details shown in the status message, with correct command format provided.
 
 ### Adding a Module
 
-Adding a module while all modules are being shown.
 1. Prerequisites:
-   List all modules using the `list mod` command.
+   - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
 2. Test case: `add mod c/CS1231` <br>
-   Expected: First module is added to the list. Details of the added module are shown in the status message.
+   - Expected: First module is added to the list. Details of the added module are shown in the status message.
 3. Test case: `add mod m/CS1231` <br>
-   Expected: No module is added. Error details shown in the status message, with correct command format provided.
+   - Expected: No module is added. Error details shown in the status message, with correct command format provided.
 4. Other incorrect `add` commands to try:
-    1. `add CS1231` <br>
-       Expected: No module is added as code prefix is not included.
-    2. `add`<br>
-       Expected: No module is added as `mod` is not specified after command.
+    - `add CS1231` <br>
+        - Expected: No module is added as code prefix is not included.
+    - `add`<br>
+        - Expected: No module is added as `mod` is not specified after command.
 
 ### Adding an Exam
 
-Adding an exam while while module details view is shown.
 1. Prerequisites:
-    1. You must have at least one module in ModBook.
-    2. List the details of added module using the `detail c/CODE` command.
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - List the details of added module using the `detail c/CODE` command.
 2. Test case: `add exam n/Final d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
-   Expected: First exam is added to the list. Details of the added exam are shown in the status message.
+    - Expected: First exam is added to the list. Details of the added exam are shown in the status message.
 3. Test case: `add exam d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
-   Expected: No exam is added. Error details shown in the status message, with correct command format provided.
+    - Expected: No exam is added. Error details shown in the status message, with correct command format provided.
 4. Other incorrect `add` commands to try:
-    1. `add exam n/Final d/02/02/1999 s/10:00 e/11:00 l/ v/Field`<br>
-       Expected: No exam is added as link field is empty.
-    2. `add exam n/Final s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
-       Expected: No exam is added as date is not specified.
+    - `add exam n/Final d/02/02/1999 s/10:00 e/11:00 l/ v/Field`<br>
+       - Expected: No exam is added as link field is empty.
+    -  `add exam n/Final s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
+        - Expected: No exam is added as date is not specified.
     3. `add n/Final d/02/02/1999 s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/Field` <br>
-       Expected: No exam is added as `exam` is not specified after add command.
+        - Expected: No exam is added as `exam` is not specified after add command.
 
 ### Adding a Lesson
 
-Adding a lesson while while module details view is shown.
 1. Prerequisites:
-    1. You must have at least one module in ModBook.
-    2. List the details of added module using the `detail c/CODE` command.
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
 2. Test case: `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-   Expected: First lesson is added to the list. Details of the added lesson are shown in the status message.
+    - Expected: First lesson is added to the list. Details of the added lesson are shown in the status message.
 3. Test case: `add lesson d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-   Expected: No lesson is added. Error details shown in the status message, with correct command format provided.
+    - Expected: No lesson is added. Error details shown in the status message, with correct command format provided.
 4. Other incorrect `add` commands to try:
-    1. `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/ v/COM1 `<br>
-       Expected: No lesson is added as link field is empty.
-    2. `add lesson n/Tutorial s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-       Expected: No lesson is added as day is not specified.
-    3. `add n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
-       Expected: No lesson is added as `lesson` is not specified after add command
+    - `add lesson n/Tutorial d/Monday s/10:00 e/11:00 l/ v/COM1 `<br>
+        - Expected: No lesson is added as link field is empty.
+    - `add lesson n/Tutorial s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+        - Expected: No lesson is added as day is not specified.
+    - `add n/Tutorial d/Monday s/10:00 e/11:00 l/https://www.youtube.com/watch?v=8mL3L9hN2l4 v/COM1 ` <br>
+        - Expected: No lesson is added as `lesson` is not specified after add command
 
 ### Deleting a Module
 
-Deleting a module while all modules are being shown.
 1. Prerequisites:
-    1. You must have at least one module in ModBook.
-    2. List all modules using the `list mod` command.
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
 2. Test case: `delete mod 1` <br>
-   Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
+    - Expected: First module is deleted from the list. Details of the deleted module are shown in the status message.
 3. Test case: `delete mod 0` <br>
-   Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
+    - Expected: No module is deleted. Error details shown in the status message, with correct command format provided.
 4. Other incorrect `delete` commands to try:
-    1. `delete`, `delete 1` <br>
-       Expected: Similar to previous.
-    2. `delete mod x` (where x is greater than the list size) <br>
-       Expected: No module is found at the provided index.
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete mod x` (where x is greater than the list size) <br>
+        - Expected: No module is found at the provided index.
 
 ### Deleting an Exam
 
 Deleting an Exam while module details view is shown.
 1. Prerequisites:
-    1. You must have at least one module in ModBook, which contains at least one exam.
-    2. List the details of the module using the `detail c/CODE` command.
+    - You must have at least one module in ModBook, which contains at least one exam.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
 2. Test case: `delete exam 1` <br>
-   Expected: First exam is deleted from the list. Details of the deleted exam are shown in the status message.
+    - Expected: First exam is deleted from the list. Details of the deleted exam are shown in the status message.
 3. Test case: `delete exam 0` <br>
-   Expected: No exam is deleted. Error details shown in the status message, with correct command format provided.
+    - Expected: No exam is deleted. Error details shown in the status message, with correct command format provided.
 4. Other incorrect `delete` commands to try:
-    1. `delete`, `delete 1` <br>
-       Expected: Similar to previous.
-    2. `delete exam x` (where x is greater than the list size) <br>
-       Expected: No exam is found at the provided index.
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete exam x` (where x is greater than the list size) <br>
+        - Expected: No exam is found at the provided index.
 
 ### Deleting a Lesson
 
 Deleting a Lesson while module details view is shown.
 1. Prerequisites:
-    1. You must have at least one module in ModBook, which contains at least one lesson.
-    2. List the details of the module using the `detail c/CODE` command.
+    - You must have at least one module in ModBook, which contains at least one lesson.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
 2. Test case: `delete lesson 1` <br>
-   Expected: First lesson is deleted from the list. Details of the deleted lesson are shown in the status message.
+    - Expected: First lesson is deleted from the list. Details of the deleted lesson are shown in the status message.
 3. Test case: `delete lesson 0` <br>
-   Expected: No lesson is deleted. Error details shown in the status message, with correct command format provided.
+    - Expected: No lesson is deleted. Error details shown in the status message, with correct command format provided.
 4. Other incorrect `delete` commands to try:
-    1. `delete`, `delete 1` <br>
-       Expected: Similar to previous.
-    2. `delete lesson x` (where x is greater than the list size) <br>
-       Expected: No lesson is found at the provided index.
+    - `delete`, `delete 1` <br>
+        - Expected: Similar to previous.
+    - `delete lesson x` (where x is greater than the list size) <br>
+        - Expected: No lesson is found at the provided index.
 
 ### Editing a Module
-
-1. Editing a module while all modules are being shown.
-    1. Prerequisites:
-        1. You must have at least one module in ModBook.
-        2. List all modules using the `list mod` command.
-        3. For testing purposes, we assume the first module in the list does not have code **CS1010S** or name **Programming Methodology**.
-    2. Test case: `edit mod 1 c/CS1010S n/Programming Methodology` <br>
-       Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
-    3. Test case: `edit mod 1` <br>
-       Expected: No module is edited. Error details shown in the status message, with correct command format provided.
-    4. Other incorrect `edit` commands to try:
-        1. `edit`, `edit 1` <br>
-           Expected: Similar to previous.
-        2. `edit mod X c/CS1010S n/Programming Methodology` (where X is greater than the list size) <br>
-           Expected: No module is found at the provided index.
+1. Prerequisites:
+    - You must have at least one module in ModBook.
+    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
+    - For testing purposes, we assume the first module in the list does not have code **CS1010S** or name **Programming Methodology**.
+2. Test case: `edit mod 1 c/CS1010S n/Programming Methodology` <br>
+    - Expected: First module in the list is edited to have code **CS10101X** and name **Programming Methodology**. Details of the edited module are shown in the status message.
+3. Test case: `edit mod 1` <br>
+    - Expected: No module is edited. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `edit` commands to try:
+    - `edit`, `edit 1` <br>
+        - Expected: Similar to previous.
+    - `edit mod X c/CS1010S n/Programming Methodology` (where X is greater than the list size) <br>
+        - Expected: No module is found at the provided index.
 
 ### Editing a Lesson
 
-1. Editing a lesson while that module's details are being shown.
-    1. Prerequisites:
-        1. You must have at least one module in ModBook, which contains at least one lesson.
-        2. List the details of the module using the `detail c/CODE` command.
-        3. For testing purposes, we assume the first lesson in the list does not have name **Weekly Tutorial**.
-    2. Test case: `edit lesson 1 n/Weekly Tutorial` <br>
-       Expected: First lesson in the module is edited to have name **Weekly Tutorial**. Details of the edited lesson are shown in the status message.
-    3. Test case: `edit lesson 1` <br>
-       Expected: No lesson is edited. Error details shown in the status message, with correct command format provided.
-    4. Other incorrect `edit` commands to try:
-        1. `edit`, `edit 1` <br>
-           Expected: Similar to previous.
-        2. `edit lesson x n/Weekly Tutorial` (where x is greater than the list size) <br>
-           Expected: No lesson is found at the provided index.
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one lesson.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - For testing purposes, we assume the first lesson in the list does not have the name **Weekly Tutorial**.
+2. Test case: `edit lesson 1 n/Weekly Tutorial` <br>
+    - Expected: First lesson in the module is edited to have name **Weekly Tutorial**. Details of the edited lesson are shown in the status message.
+3. Test case: `edit lesson 1` <br>
+    - Expected: No lesson is edited. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `edit` commands to try:
+    - `edit`, `edit 1` <br>
+        - Expected: Similar to previous.
+    - `edit lesson x n/Weekly Tutorial` (where x is greater than the list size) <br>
+        - Expected: No lesson is found at the provided index.
 
 ### Editing an Exam
 
-1. Editing an exam while that module's details are being shown.
-    1. Prerequisites:
-        1. You must have at least one module in ModBook, which contains at least one exam.
-        2. List the details of added module using the `detail c/CODE` command.
-        3. For testing purposes, we assume the first exam in the list does not have venue **MPSH2**.
-    2. Test case: `edit exam 1 v/MPSH2` <br>
-       Expected: First exam in the module is edited to have venue MPSH2. Details of the edited exam are shown in the status message.
-    3. Test case: `edit exam 1` <br>
-       Expected: No exam is edited. Error details shown in the status message, with correct command format provided.
-    4. Other incorrect `edit` commands to try:
-        1. `edit`, `edit 1` <br>
-           Expected: Similar to previous.
-        2. `edit exam x v/MPSH2` (where x is greater than the list size) <br>
-           Expected: No exam is found at the provided index.
+1. Prerequisites:
+    - You must have at least one module in ModBook, which contains at least one exam.
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the detail command with one of the modules already in ModBook (`detail c/CODE`)
+    - For testing purposes, we assume the first exam in the list does not have venue **MPSH2**.
+2. Test case: `edit exam 1 v/MPSH2` <br>
+    - Expected: First exam in the module is edited to have venue MPSH2. Details of the edited exam are shown in the status message.
+3. Test case: `edit exam 1` <br>
+    - Expected: No exam is edited. Error details shown in the status message, with correct command format provided.
+4. Other incorrect `edit` commands to try:
+    - `edit`, `edit 1` <br>
+        - Expected: Similar to previous.
+    - `edit exam x v/MPSH2` (where x is greater than the list size) <br>
+        - Expected: No exam is found at the provided index.
 
 ### Testing Commands based on GUI view
 
@@ -710,47 +700,47 @@ Testing the validity of commands based on the GUI view of ModBook
 
 #### Modules View
 1. Prerequisite:
-    1. ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
+    - ModBook should be in the Modules view. If ModBook is not in the Modules view, use the `list mod` command.
 2. For testing purposes, we assume there is no module in the list with code **CS1010S** or name **Programming Methodology**. This should be the case with the default data loaded into the application.
 3. Test case: `add mod c/CS1010S n/Programming Methodology` <br>
-   Expected: A module with code `CS1010S` and name `Programming Methodology` is added to the list.
+    - Expected: A module with code `CS1010S` and name `Programming Methodology` is added to the list.
 4. Test case: `list lesson`<br>
-   Expected: The Lesson view is shown.
+    - Expected: The Lesson view is shown.
 5. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
-   Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
+    - Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
 
 #### Lessons View
 1. Prerequisite:
-    1. ModBook should be in the Lessons view. If ModBook is not in the Lessons view, use the `list lesson` command
+    - ModBook should be in the Lessons view. If ModBook is not in the Lessons view, use the `list lesson` command
 2. Test case: `list mod`<br>
-   Expected: The Modules view is shown.
+    - Expected: The Modules view is shown.
 3. Test case: `edit mod 1 n/test`<br>
-   Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+    - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
 4. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
-   Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
+    - Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
 
 #### Exams View
 1. Prerequisite:
-    1. ModBook should be in the Exams view. If ModBook is not in the Lessons view, use the `list exam` command
+    - ModBook should be in the Exams view. If ModBook is not in the Lessons view, use the `list exam` command
 2. Test case: `list mod`<br>
-   Expected: The Modules view is shown.
+    - Expected: The Modules view is shown.
 3. Test case: `edit mod 1 n/test`<br>
-   Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+    - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
 4. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
-   Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
+    - Expected: No lesson added. Error details shown in the status message, prompting users to use the `detail` command.
 
 #### Details View
 1. Prerequisites:
-    1. You must have at least one module in ModBook
-    2. ModBook should be in the Details view. If ModBook is not in the Details view, use the `detail` command with one of the modules already in ModBook
+    - You must have at least one module in ModBook
+    - ModBook should be in the Details view. If ModBook is not in the Details view, use the `detail` command with one of the modules already in ModBook
 2. Test case: `add lesson n/test d/monday s/10am e/11am`<br>
-   Expected: A lesson with name "test", day "Monday" and timeslot "10:00 - 11:00" is added to the module
+    - Expected: A lesson with name "test", day "Monday" and timeslot "10:00 - 11:00" is added to the module
 3. Test case: `add exam n/test d/01/01/2022 s/10am e/11am`<br>
-   Expected: An exam with name "test", date "01/01/2022" and timeslot "10:00 - 11:00" is added to the module
+    - Expected: An exam with name "test", date "01/01/2022" and timeslot "10:00 - 11:00" is added to the module
 4. Test case: `list lesson`<br>
-   Expected: The Lessons view is shown.
+    - Expected: The Lessons view is shown.
 5. Test case: `add mod c/AB1234C n/test`<br>
-   Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
+    - Expected: No module edited. Error details shown in the status message, prompting users to use the `list mod` command.
 ## **Appendix: Effort**
 
 ### Rewriting entity types
