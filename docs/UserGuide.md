@@ -270,7 +270,7 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 ## Day, Date and Time Formats
 
-The following formats are valid for entering day values:
+### Valid formats for entering day values:
 
 | Day of Week | Format                             |
 |-------------|------------------------------------|
@@ -284,20 +284,7 @@ The following formats are valid for entering day values:
 
 The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
 
-The date and time formats accepted by ModBook use the symbols in the table below:
-
-| Symbol | Meaning                                 |
-| ------ | --------------------------------------- |
-| H      | Hour of 24-hour time. Goes from 0 to 23 |
-| h      | Hour of 12-hour time. Goes from 1 to 12 |
-| m      | Minute                                  |
-| a      | AM/PM indicator                         |
-| L      | Month as text                           |
-| M      | Month as number                         |
-| y      | Year                                    |
-| d      | day of month                            |
-
-The following formats are valid for entering date values:
+### Valid formats for entering date values:
 
 | Format         | Examples           |
 | -------------- | ------------------ |
@@ -311,7 +298,16 @@ The following formats are valid for entering date values:
 | `d LLLL yyyy`  | `2 february 1999`  |
 | `d LLL yyyy`   | `2 feb 1999`       |
 
-The following formats are valid for entering time values:
+Refer to the table below for clarification of the symbols used.
+
+| Symbol | Meaning                                 |
+| ------ | --------------------------------------- |
+| L      | Month as text                           |
+| M      | Month as number                         |
+| y      | Year                                    |
+| d      | day of month                            |
+
+### Valid formats for entering time values:
 
 | Format   | Examples             |
 | -------- | -------------------- |
@@ -324,6 +320,15 @@ The following formats are valid for entering time values:
 | `hh:mma` | `09:00AM`, `11:30pm` |
 | `h.mma`  | `9.00AM`, `2.30pm`   |
 | `hh.mma` | `09.00AM`, `11.30pm` |
+
+Refer to the table below for clarification of the symbols used.
+
+| Symbol | Meaning                                 |
+| ------ | --------------------------------------- |
+| H      | Hour of 24-hour time. Goes from 0 to 23 |
+| h      | Hour of 12-hour time. Goes from 1 to 12 |
+| m      | Minute                                  |
+| a      | AM/PM indicator                         |
 
 The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid. Also, note that `2400` (i.e. midnight of the next day) is not a valid input.
 
