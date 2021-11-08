@@ -103,7 +103,7 @@ Shows a list of all modules in the ModBook. You can execute this command in any 
 
 Format: `list mod`
 
-#### Show details of a module: `detail`
+#### Showing details of a module: `detail`
 
 Show details of an existing module in the ModBook. A list of all Lessons and Exams of the specified Module is printed. You can execute this command in any view.
 
@@ -128,7 +128,7 @@ Examples:
 - `edit mod 1 n/Computer Networks` : Edits the name of the first module to Computer Networks
 - `edit mod 1 c/CS2106` : Edits the code of the first module to CS2106
 
-#### Delete a module: `delete mod`
+#### Deleting a module: `delete mod`
 
 Deletes a module from the ModBook. You can only execute this command in the [modules view](#modules-view).
 
