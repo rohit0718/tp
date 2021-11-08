@@ -272,6 +272,9 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 ## Day, Date and Time Formats
 
+This section contains details on the valid format for Days, Dates and Times in ModBook. Note that all the formats are case-insensitive. 
+For example, both `Monday` and `monday` are valid inputs for Days. 
+
 ### Valid formats for entering day values
 
 | Day of Week | Format                             |
@@ -283,8 +286,6 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 | Friday      | `Friday`, `Fri`                    |
 | Saturday    | `Saturday`, `Sat`                  |
 | Sunday      | `Sunday`, `Sun`                    |
-
-- The formats are case-insensitive, i.e. both `Monday` and `mon` are valid.
 
 ### Valid formats for entering date values
 
@@ -323,7 +324,7 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 | `h.mma`  | `9.00AM`, `2.30pm`   |
 | `hh.mma` | `09.00AM`, `11.30pm` |
 
-- The input for `AM/PM` is case-insensitive, e.g. both `10AM` and `10am` are valid. Also, note that `2400` (i.e. midnight of the next day) is not a valid input.
+- Note that `2400` (i.e. midnight of the next day) is not a valid input.
 - Refer to the table below for clarification of the symbols used:
 
 | Symbol | Meaning                                 |
@@ -336,6 +337,9 @@ ModBook data is saved as a JSON file `[JAR file location]/data/modbook.json`. Ad
 
 
 ## Command Summary
+
+This section consolidates all the commands and their respective formats for your reference. 
+The two tables below have the same commands, but the first one is organised by the actions that are available for you to take, and the second is organised by the objects (i.e. Modules, Lessons and Exams) in ModBook.
 
 ### Command Summary by Action
 
